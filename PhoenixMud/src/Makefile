@@ -177,6 +177,7 @@ wld2html:
 	$(CC) $(CFLAGS) -o ../../circle/bin/wld2html util/wld2html.c
 
 ../compile/circle : $(OBJFILES)
+	mkdir -p ../../circle/compile ../../circle/bin
 	$(CC) -m32 -g -o ../../circle/compile/circle -lnsl -lcrypt $(PROFILE) $(OBJFILES)
 	cp ../../circle/compile/circle ../../circle/bin
 clean:
