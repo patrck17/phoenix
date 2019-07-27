@@ -1,6 +1,6 @@
 build:
     before_script:
-        - apt update && apt install gcc-multilib
+        - apt update && apt install -y gcc-multilib make
     image: "ubuntu"
     script:
     - make -C PhoenixMud/src
