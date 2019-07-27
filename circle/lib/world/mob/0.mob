@@ -1,0 +1,296 @@
+@Version: 2
+#1
+Puff dragon fractal~
+Puff~
+Puff the Fractal Dragon is here, contemplating a higher reality.
+~
+Is that some type of differntial curve involving some strange, and
+unknown calculus that she seems to be made out of?
+~
+dno 0 dy 1000 E 0 23
+52 2 0 8d9+920 2d6+14
+910 286956
+11 11 2
+Immune: a cdefghiklm b
+E
+#2
+goblin small infantry~
+a small goblin~
+A small goblin awaits orders from the master who summoned it.
+~
+   This small goblin looks quite ratty.  His clothes are ragged, and in some
+places, nonexistent.  He does not look like a very effective fighter, but when
+several of these guys get together in a group, the effects can by very deadly
+to the enemy.    
+~
+d 0 0 -200 E 0 32
+4 18 18 2d6+28 1d3+0
+10 260
+11 11 1
+Immune: 0 ems ghi
+E
+T 1290
+T 1291
+#3
+horse steed mount stallion~
+a loyal steed~
+A powerful stallion flicks its tail, waiting for its owner.
+~
+   Bred from the finest stock of stallions in the New Thalos stables, this
+trusty steed is able to travel long distances without rest.  It's coat is
+black and velvet-like to the touch.  The horse stomps at the ground in
+frustration, you can tell that he would rather be running at full gallop.
+~
+bduz 0 k 0 E 19 24
+6 18 17 2d8+50 2d4+0
+20 521
+11 11 1
+BareHandAttack: 11
+E
+T 1207
+T 1290
+T 1291
+#10
+zombie clone~
+the unfinished mob~
+An unfinished mob stands here.
+~
+   This is the spitting image of its creator.  Not much of an improvement.  
+Let's just hope there aren't more of these wandering loose.
+~
+d 0 0 -1000 E 0 0
+10 16 16 3d4+95 3d4+0
+0 1043
+11 11 0
+E
+T 1290
+T 1291
+#30
+animated corpse rotted~
+a slightly rotted but animated corpse~
+A rotted corpse stands here.
+~
+It looks as if magic created it.  It glares at you with dead eyes.
+~
+d 0 0 0 E 0 16
+10 16 16 3d4+95 3d4+0
+0 1043
+11 11 0
+Immune: cn bd at
+E
+T 1290
+T 1291
+#31
+skeleton corpse~
+a skeleton~
+A skeleton is standing here.
+~
+Meek and unintimidating, this skeleton seems to be barely staying together.  
+
+~
+d 0 0 0 E 0 16
+10 16 16 3d4+95 3d4+0
+0 1043
+11 11 0
+BareHandAttack: 14
+Immune: cn bdu at
+E
+T 1290
+T 1291
+#32
+zombie corpse~
+a zombie~
+A zombie is standing here.
+~
+Decrepit and vile, this being seems to be rotting away in front of you.    
+~
+d 0 0 0 E 0 16
+10 16 16 3d4+95 3d4+0
+0 1043
+11 11 0
+BareHandAttack: 14
+Immune: cn bdu at
+E
+T 1290
+T 1291
+#33
+skeleton warrior~
+a skeleton warrior~
+A skeleton is here, carrying a shield and sword.
+~
+   Wearing rusted armor, and carrying a rusted sword, this skeleton could pose
+a threat to many an enemy.    
+~
+d 0 0 0 E 0 16
+25 11 10 4d9+250 3d6+7
+200 10
+11 11 0
+BareHandAttack: 3
+Immune: cin bdu at
+E
+#34
+ghoul~
+a ghoul is here.~
+A ghoul is here.
+~
+   This being seems extremely awkward, but it can move with an unnatural
+speed.    
+~
+d 0 0 0 E 0 16
+35 8 6 6d9+350 3d6+10
+400 10
+11 11 0
+BareHandAttack: 14
+Immune: cin bdu at
+E
+#35
+skeleton mage~
+a skeleton mage~
+A skeleton mage is here.
+~
+   This being glows with an unnatural aura as if magic courses through every
+bit of its existence.    
+~
+d 0 0 0 E 3 16
+45 5 2 7d9+450 3d6+15
+700 10
+11 11 0
+Immune: cin bdu at
+E
+#36
+ghost~
+a ghost~
+A ghost is here.
+~
+   This transparent humanoid being doesn't look pleased at being in this
+world.    
+~
+d 0 0 0 E 0 40
+55 1 -2 8d9+550 3d6+18
+1000 10
+11 11 0
+Immune: hin efg m
+E
+#37
+wraith~
+a wraith~
+A wraith is here.
+~
+   A large corporeal being, it seems to not care about anything that is around
+it.    
+~
+d 0 0 0 E 0 40
+65 -2 -6 9d9+650 3d6+25
+1275 10
+11 11 0
+Immune: hin efg m
+E
+#38
+spectre~
+a spectre~
+A spectre is here.
+~
+   A spinning effergy of corporeal energy, this being emanates a powerful
+magic.    
+~
+d 0 0 0 E 0 40
+75 -5 -10 10d9+750 4d6+25
+1525 10
+11 11 0
+Immune: hin efg m
+E
+#39
+Mummy~
+a mummy~
+A mummy is here.
+~
+   Covered in bandages, this being seems to have an unnatural speed and power
+about it.    
+~
+d 0 0 0 E 0 16
+85 -9 -14 11d9+850 4d6+27
+1775 10
+11 11 0
+BareHandAttack: 11
+Immune: cin bdu at
+E
+#40
+greater mummy~
+a greater mummy~
+A greater mummy is here.
+~
+   Covered in bandages, this extremely large and powerful being with razor
+sharp limbs looks as though it's the story of nightmares.    
+~
+ad 0 0 0 E 0 16
+95 -12 -18 12d9+950 5d7+29
+2025 10
+11 11 0
+Special: breath_lightning
+SpecVal: 0 0 0 0 0 0 0 0 0 0
+BareHandAttack: 3
+Immune: cin bdu at
+E
+#41
+death knight~
+a death knight~
+A death knight is here.
+~
+   Covered in an unholy armor, this being seems to draw its power from the
+very life force of the dead around it.    
+~
+d 0 0 0 E 13 16
+100 -14 -20 13d9+1000 5d8+32
+2150 10
+11 11 0
+Immune: cin bdu at
+E
+#42
+vampire~
+a vampire~
+A vampire is here.
+~
+   Cloaked in an unholy darkness, this being grins as it considers who will be
+its next meal.    
+~
+d 0 0 0 E 14 16
+108 -24 -20 21d9+1080 7d9+35
+5000 7434782
+11 11 0
+BareHandAttack: 8
+Immune: cin bdu at
+E
+#43
+vampire lord~
+a vampire lord~
+A vampire lord is here.
+~
+   An extremely large and powerful vampire, it's dark cloak covers all but the
+top of its face.    
+~
+ad 0 0 0 E 14 16
+112 -32 -20 25d9+1120 8d9+40
+15000 7826087
+11 11 0
+Special: breath_lightning
+SpecVal: 0 0 0 0 0 0 0 0 0 0
+BareHandAttack: 8
+Immune: cin bdu at
+E
+#99
+death reaper~
+Death~
+Death, the Grim Reaper, is observing you silently from empty eye sockets.
+~
+The dark-robed skeletal figure radiates an unendurable coldness.
+~
+abdelno 0 dhp 0 E 14 42
+120 -32 -20 25d9+15000 2d2+50
+15000 7826088
+11 11 0
+Special: executioner
+SpecVal: 0 0 0 0 0 0 0 0 0 0
+Immune: bi adefg u
+E
+T 1281
+$

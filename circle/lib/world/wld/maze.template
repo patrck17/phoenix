@@ -1,0 +1,2042 @@
+@Version: 1
+#26400
+a room~
+You are in an unfinished room.
+~
+264 0 0
+D1
+~
+~
+0 0 26401
+D2
+~
+~
+0 0 26410
+S
+#26401
+a room~
+You are in an unfinished room.
+~
+264 0 0
+D1
+~
+~
+0 0 26402
+D2
+~
+~
+0 0 26411
+D3
+~
+~
+0 0 26400
+S
+#26402
+a room~
+You are in an unfinished room.
+~
+264 0 0
+D1
+~
+~
+0 0 26403
+D2
+~
+~
+0 0 26412
+D3
+~
+~
+0 0 26401
+S
+#26403
+a room~
+You are in an unfinished room.
+~
+264 0 0
+D1
+~
+~
+0 0 26404
+D2
+~
+~
+0 0 26413
+D3
+~
+~
+0 0 26402
+S
+#26404
+a room~
+You are in an unfinished room.
+~
+264 0 0
+D1
+~
+~
+0 0 26405
+D2
+~
+~
+0 0 26414
+D3
+~
+~
+0 0 26403
+S
+#26405
+a room~
+You are in an unfinished room.
+~
+264 0 0
+D1
+~
+~
+0 0 26406
+D2
+~
+~
+0 0 26415
+D3
+~
+~
+0 0 26404
+S
+#26406
+a room~
+You are in an unfinished room.
+~
+264 0 0
+D1
+~
+~
+0 0 26407
+D2
+~
+~
+0 0 26416
+D3
+~
+~
+0 0 26405
+S
+#26407
+a room~
+You are in an unfinished room.
+~
+264 0 0
+D1
+~
+~
+0 0 26408
+D2
+~
+~
+0 0 26417
+D3
+~
+~
+0 0 26406
+S
+#26408
+a room~
+You are in an unfinished room.
+~
+264 0 0
+D1
+~
+~
+0 0 26409
+D2
+~
+~
+0 0 26418
+D3
+~
+~
+0 0 26407
+S
+#26409
+a room~
+You are in an unfinished room.
+~
+264 0 0
+D2
+~
+~
+0 0 26419
+D3
+~
+~
+0 0 26408
+S
+#26410
+a room~
+You are in an unfinished room.
+~
+264 0 0
+D0
+~
+~
+0 0 26400
+D1
+~
+~
+0 0 26411
+D2
+~
+~
+0 0 26420
+S
+#26411
+a room~
+You are in an unfinished room.
+~
+264 0 0
+D0
+~
+~
+0 0 26401
+D1
+~
+~
+0 0 26412
+D2
+~
+~
+0 0 26421
+D3
+~
+~
+0 0 26410
+S
+#26412
+a room~
+You are in an unfinished room.
+~
+264 0 0
+D0
+~
+~
+0 0 26402
+D1
+~
+~
+0 0 26413
+D2
+~
+~
+0 0 26422
+D3
+~
+~
+0 0 26411
+S
+#26413
+a room~
+You are in an unfinished room.
+~
+264 0 0
+D0
+~
+~
+0 0 26403
+D1
+~
+~
+0 0 26414
+D2
+~
+~
+0 0 26423
+D3
+~
+~
+0 0 26412
+S
+#26414
+a room~
+You are in an unfinished room.
+~
+264 0 0
+D0
+~
+~
+0 0 26404
+D1
+~
+~
+0 0 26415
+D2
+~
+~
+0 0 26424
+D3
+~
+~
+0 0 26413
+S
+#26415
+a room~
+You are in an unfinished room.
+~
+264 0 0
+D0
+~
+~
+0 0 26405
+D1
+~
+~
+0 0 26416
+D2
+~
+~
+0 0 26425
+D3
+~
+~
+0 0 26414
+S
+#26416
+a room~
+You are in an unfinished room.
+~
+264 0 0
+D0
+~
+~
+0 0 26406
+D1
+~
+~
+0 0 26417
+D2
+~
+~
+0 0 26426
+D3
+~
+~
+0 0 26415
+S
+#26417
+a room~
+You are in an unfinished room.
+~
+264 0 0
+D0
+~
+~
+0 0 26407
+D1
+~
+~
+0 0 26418
+D2
+~
+~
+0 0 26427
+D3
+~
+~
+0 0 26416
+S
+#26418
+a room~
+You are in an unfinished room.
+~
+264 0 0
+D0
+~
+~
+0 0 26408
+D1
+~
+~
+0 0 26419
+D2
+~
+~
+0 0 26428
+D3
+~
+~
+0 0 26417
+S
+#26419
+a room~
+You are in an unfinished room.
+~
+264 0 0
+D0
+~
+~
+0 0 26409
+D2
+~
+~
+0 0 26429
+D3
+~
+~
+0 0 26418
+S
+#26420
+a room~
+You are in an unfinished room.
+~
+264 0 0
+D0
+~
+~
+0 0 26410
+D1
+~
+~
+0 0 26421
+D2
+~
+~
+0 0 26430
+S
+#26421
+a room~
+You are in an unfinished room.
+~
+264 0 0
+D0
+~
+~
+0 0 26411
+D1
+~
+~
+0 0 26422
+D2
+~
+~
+0 0 26431
+D3
+~
+~
+0 0 26420
+S
+#26422
+a room~
+You are in an unfinished room.
+~
+264 0 0
+D0
+~
+~
+0 0 26412
+D1
+~
+~
+0 0 26423
+D2
+~
+~
+0 0 26432
+D3
+~
+~
+0 0 26421
+S
+#26423
+a room~
+You are in an unfinished room.
+~
+264 0 0
+D0
+~
+~
+0 0 26413
+D1
+~
+~
+0 0 26424
+D2
+~
+~
+0 0 26433
+D3
+~
+~
+0 0 26422
+S
+#26424
+a room~
+You are in an unfinished room.
+~
+264 0 0
+D0
+~
+~
+0 0 26414
+D1
+~
+~
+0 0 26425
+D2
+~
+~
+0 0 26434
+D3
+~
+~
+0 0 26423
+S
+#26425
+a room~
+You are in an unfinished room.
+~
+264 0 0
+D0
+~
+~
+0 0 26415
+D1
+~
+~
+0 0 26426
+D2
+~
+~
+0 0 26435
+D3
+~
+~
+0 0 26424
+S
+#26426
+a room~
+You are in an unfinished room.
+~
+264 0 0
+D0
+~
+~
+0 0 26416
+D1
+~
+~
+0 0 26427
+D2
+~
+~
+0 0 26436
+D3
+~
+~
+0 0 26425
+S
+#26427
+a room~
+You are in an unfinished room.
+~
+264 0 0
+D0
+~
+~
+0 0 26417
+D1
+~
+~
+0 0 26428
+D2
+~
+~
+0 0 26437
+D3
+~
+~
+0 0 26426
+S
+#26428
+a room~
+You are in an unfinished room.
+~
+264 0 0
+D0
+~
+~
+0 0 26418
+D1
+~
+~
+0 0 26429
+D2
+~
+~
+0 0 26438
+D3
+~
+~
+0 0 26427
+S
+#26429
+a room~
+You are in an unfinished room.
+~
+264 0 0
+D0
+~
+~
+0 0 26419
+D2
+~
+~
+0 0 26439
+D3
+~
+~
+0 0 26428
+S
+#26430
+a room~
+You are in an unfinished room.
+~
+264 0 0
+D0
+~
+~
+0 0 26420
+D1
+~
+~
+0 0 26431
+D2
+~
+~
+0 0 26440
+S
+#26431
+a room~
+You are in an unfinished room.
+~
+264 0 0
+D0
+~
+~
+0 0 26421
+D1
+~
+~
+0 0 26432
+D2
+~
+~
+0 0 26441
+D3
+~
+~
+0 0 26430
+S
+#26432
+a room~
+You are in an unfinished room.
+~
+264 0 0
+D0
+~
+~
+0 0 26422
+D1
+~
+~
+0 0 26433
+D2
+~
+~
+0 0 26442
+D3
+~
+~
+0 0 26431
+S
+#26433
+a room~
+You are in an unfinished room.
+~
+264 0 0
+D0
+~
+~
+0 0 26423
+D1
+~
+~
+0 0 26434
+D2
+~
+~
+0 0 26443
+D3
+~
+~
+0 0 26432
+S
+#26434
+a room~
+You are in an unfinished room.
+~
+264 0 0
+D0
+~
+~
+0 0 26424
+D1
+~
+~
+0 0 26435
+D2
+~
+~
+0 0 26444
+D3
+~
+~
+0 0 26433
+S
+#26435
+a room~
+You are in an unfinished room.
+~
+264 0 0
+D0
+~
+~
+0 0 26425
+D1
+~
+~
+0 0 26436
+D2
+~
+~
+0 0 26445
+D3
+~
+~
+0 0 26434
+S
+#26436
+a room~
+You are in an unfinished room.
+~
+264 0 0
+D0
+~
+~
+0 0 26426
+D1
+~
+~
+0 0 26437
+D2
+~
+~
+0 0 26446
+D3
+~
+~
+0 0 26435
+S
+#26437
+a room~
+You are in an unfinished room.
+~
+264 0 0
+D0
+~
+~
+0 0 26427
+D1
+~
+~
+0 0 26438
+D2
+~
+~
+0 0 26447
+D3
+~
+~
+0 0 26436
+S
+#26438
+a room~
+You are in an unfinished room.
+~
+264 0 0
+D0
+~
+~
+0 0 26428
+D1
+~
+~
+0 0 26439
+D2
+~
+~
+0 0 26448
+D3
+~
+~
+0 0 26437
+S
+#26439
+a room~
+You are in an unfinished room.
+~
+264 0 0
+D0
+~
+~
+0 0 26429
+D2
+~
+~
+0 0 26449
+D3
+~
+~
+0 0 26438
+S
+#26440
+a room~
+You are in an unfinished room.
+~
+264 0 0
+D0
+~
+~
+0 0 26430
+D1
+~
+~
+0 0 26441
+D2
+~
+~
+0 0 26450
+S
+#26441
+a room~
+You are in an unfinished room.
+~
+264 0 0
+D0
+~
+~
+0 0 26431
+D1
+~
+~
+0 0 26442
+D2
+~
+~
+0 0 26451
+D3
+~
+~
+0 0 26440
+S
+#26442
+a room~
+You are in an unfinished room.
+~
+264 0 0
+D0
+~
+~
+0 0 26432
+D1
+~
+~
+0 0 26443
+D2
+~
+~
+0 0 26452
+D3
+~
+~
+0 0 26441
+S
+#26443
+a room~
+You are in an unfinished room.
+~
+264 0 0
+D0
+~
+~
+0 0 26433
+D1
+~
+~
+0 0 26444
+D2
+~
+~
+0 0 26453
+D3
+~
+~
+0 0 26442
+S
+#26444
+a room~
+You are in an unfinished room.
+~
+264 0 0
+D0
+~
+~
+0 0 26434
+D1
+~
+~
+0 0 26445
+D2
+~
+~
+0 0 26454
+D3
+~
+~
+0 0 26443
+S
+#26445
+a room~
+You are in an unfinished room.
+~
+264 0 0
+D0
+~
+~
+0 0 26435
+D1
+~
+~
+0 0 26446
+D2
+~
+~
+0 0 26455
+D3
+~
+~
+0 0 26444
+S
+#26446
+a room~
+You are in an unfinished room.
+~
+264 0 0
+D0
+~
+~
+0 0 26436
+D1
+~
+~
+0 0 26447
+D2
+~
+~
+0 0 26456
+D3
+~
+~
+0 0 26445
+S
+#26447
+a room~
+You are in an unfinished room.
+~
+264 0 0
+D0
+~
+~
+0 0 26437
+D1
+~
+~
+0 0 26448
+D2
+~
+~
+0 0 26457
+D3
+~
+~
+0 0 26446
+S
+#26448
+a room~
+You are in an unfinished room.
+~
+264 0 0
+D0
+~
+~
+0 0 26438
+D1
+~
+~
+0 0 26449
+D2
+~
+~
+0 0 26458
+D3
+~
+~
+0 0 26447
+S
+#26449
+a room~
+You are in an unfinished room.
+~
+264 0 0
+D0
+~
+~
+0 0 26439
+D2
+~
+~
+0 0 26459
+D3
+~
+~
+0 0 26448
+S
+#26450
+a room~
+You are in an unfinished room.
+~
+264 0 0
+D0
+~
+~
+0 0 26440
+D1
+~
+~
+0 0 26451
+D2
+~
+~
+0 0 26460
+S
+#26451
+a room~
+You are in an unfinished room.
+~
+264 0 0
+D0
+~
+~
+0 0 26441
+D1
+~
+~
+0 0 26452
+D2
+~
+~
+0 0 26461
+D3
+~
+~
+0 0 26450
+S
+#26452
+a room~
+You are in an unfinished room.
+~
+264 0 0
+D0
+~
+~
+0 0 26442
+D1
+~
+~
+0 0 26453
+D2
+~
+~
+0 0 26462
+D3
+~
+~
+0 0 26451
+S
+#26453
+a room~
+You are in an unfinished room.
+~
+264 0 0
+D0
+~
+~
+0 0 26443
+D1
+~
+~
+0 0 26454
+D2
+~
+~
+0 0 26463
+D3
+~
+~
+0 0 26452
+S
+#26454
+a room~
+You are in an unfinished room.
+~
+264 0 0
+D0
+~
+~
+0 0 26444
+D1
+~
+~
+0 0 26455
+D2
+~
+~
+0 0 26464
+D3
+~
+~
+0 0 26453
+S
+#26455
+a room~
+You are in an unfinished room.
+~
+264 0 0
+D0
+~
+~
+0 0 26445
+D1
+~
+~
+0 0 26456
+D2
+~
+~
+0 0 26465
+D3
+~
+~
+0 0 26454
+S
+#26456
+a room~
+You are in an unfinished room.
+~
+264 0 0
+D0
+~
+~
+0 0 26446
+D1
+~
+~
+0 0 26457
+D2
+~
+~
+0 0 26466
+D3
+~
+~
+0 0 26455
+S
+#26457
+a room~
+You are in an unfinished room.
+~
+264 0 0
+D0
+~
+~
+0 0 26447
+D1
+~
+~
+0 0 26458
+D2
+~
+~
+0 0 26467
+D3
+~
+~
+0 0 26456
+S
+#26458
+a room~
+You are in an unfinished room.
+~
+264 0 0
+D0
+~
+~
+0 0 26448
+D1
+~
+~
+0 0 26459
+D2
+~
+~
+0 0 26468
+D3
+~
+~
+0 0 26457
+S
+#26459
+a room~
+You are in an unfinished room.
+~
+264 0 0
+D0
+~
+~
+0 0 26449
+D2
+~
+~
+0 0 26469
+D3
+~
+~
+0 0 26458
+S
+#26460
+a room~
+You are in an unfinished room.
+~
+264 0 0
+D0
+~
+~
+0 0 26450
+D1
+~
+~
+0 0 26461
+D2
+~
+~
+0 0 26470
+S
+#26461
+a room~
+You are in an unfinished room.
+~
+264 0 0
+D0
+~
+~
+0 0 26451
+D1
+~
+~
+0 0 26462
+D2
+~
+~
+0 0 26471
+D3
+~
+~
+0 0 26460
+S
+#26462
+a room~
+You are in an unfinished room.
+~
+264 0 0
+D0
+~
+~
+0 0 26452
+D1
+~
+~
+0 0 26463
+D2
+~
+~
+0 0 26472
+D3
+~
+~
+0 0 26461
+S
+#26463
+a room~
+You are in an unfinished room.
+~
+264 0 0
+D0
+~
+~
+0 0 26453
+D1
+~
+~
+0 0 26464
+D2
+~
+~
+0 0 26473
+D3
+~
+~
+0 0 26462
+S
+#26464
+a room~
+You are in an unfinished room.
+~
+264 0 0
+D0
+~
+~
+0 0 26454
+D1
+~
+~
+0 0 26465
+D2
+~
+~
+0 0 26474
+D3
+~
+~
+0 0 26463
+S
+#26465
+a room~
+You are in an unfinished room.
+~
+264 0 0
+D0
+~
+~
+0 0 26455
+D1
+~
+~
+0 0 26466
+D2
+~
+~
+0 0 26475
+D3
+~
+~
+0 0 26464
+S
+#26466
+a room~
+You are in an unfinished room.
+~
+264 0 0
+D0
+~
+~
+0 0 26456
+D1
+~
+~
+0 0 26467
+D2
+~
+~
+0 0 26476
+D3
+~
+~
+0 0 26465
+S
+#26467
+a room~
+You are in an unfinished room.
+~
+264 0 0
+D0
+~
+~
+0 0 26457
+D1
+~
+~
+0 0 26468
+D2
+~
+~
+0 0 26477
+D3
+~
+~
+0 0 26466
+S
+#26468
+a room~
+You are in an unfinished room.
+~
+264 0 0
+D0
+~
+~
+0 0 26458
+D1
+~
+~
+0 0 26469
+D2
+~
+~
+0 0 26478
+D3
+~
+~
+0 0 26467
+S
+#26469
+a room~
+You are in an unfinished room.
+~
+264 0 0
+D0
+~
+~
+0 0 26459
+D2
+~
+~
+0 0 26479
+D3
+~
+~
+0 0 26468
+S
+#26470
+a room~
+You are in an unfinished room.
+~
+264 0 0
+D0
+~
+~
+0 0 26460
+D1
+~
+~
+0 0 26460
+D2
+~
+~
+0 0 26480
+S
+#26471
+a room~
+You are in an unfinished room.
+~
+264 0 0
+D0
+~
+~
+0 0 26461
+D1
+~
+~
+0 0 26472
+D2
+~
+~
+0 0 26481
+D3
+~
+~
+0 0 26470
+S
+#26472
+a room~
+You are in an unfinished room.
+~
+264 0 0
+D0
+~
+~
+0 0 26462
+D1
+~
+~
+0 0 26473
+D2
+~
+~
+0 0 26482
+D3
+~
+~
+0 0 26471
+S
+#26473
+a room~
+You are in an unfinished room.
+~
+264 0 0
+D0
+~
+~
+0 0 26463
+D1
+~
+~
+0 0 26474
+D2
+~
+~
+0 0 26483
+D3
+~
+~
+0 0 26472
+S
+#26474
+a room~
+You are in an unfinished room.
+~
+264 0 0
+D0
+~
+~
+0 0 26464
+D1
+~
+~
+0 0 26475
+D2
+~
+~
+0 0 26484
+D3
+~
+~
+0 0 26473
+S
+#26475
+a room~
+You are in an unfinished room.
+~
+264 0 0
+D0
+~
+~
+0 0 26465
+D1
+~
+~
+0 0 26476
+D2
+~
+~
+0 0 26485
+D3
+~
+~
+0 0 26474
+S
+#26476
+a room~
+You are in an unfinished room.
+~
+264 0 0
+D0
+~
+~
+0 0 26466
+D1
+~
+~
+0 0 26477
+D2
+~
+~
+0 0 26486
+D3
+~
+~
+0 0 26475
+S
+#26477
+a room~
+You are in an unfinished room.
+~
+264 0 0
+D0
+~
+~
+0 0 26467
+D1
+~
+~
+0 0 26478
+D2
+~
+~
+0 0 26487
+D3
+~
+~
+0 0 26476
+S
+#26478
+a room~
+You are in an unfinished room.
+~
+264 0 0
+D0
+~
+~
+0 0 26468
+D1
+~
+~
+0 0 26479
+D2
+~
+~
+0 0 26488
+D3
+~
+~
+0 0 26477
+S
+#26479
+a room~
+You are in an unfinished room.
+~
+264 0 0
+D0
+~
+~
+0 0 26469
+D2
+~
+~
+0 0 26489
+D3
+~
+~
+0 0 26478
+S
+#26480
+a room~
+You are in an unfinished room.
+~
+264 0 0
+D0
+~
+~
+0 0 26470
+D1
+~
+~
+0 0 26481
+D2
+~
+~
+0 0 26490
+S
+#26481
+a room~
+You are in an unfinished room.
+~
+264 0 0
+D0
+~
+~
+0 0 26471
+D1
+~
+~
+0 0 26482
+D2
+~
+~
+0 0 26491
+D3
+~
+~
+0 0 26480
+S
+#26482
+a room~
+You are in an unfinished room.
+~
+264 0 0
+D0
+~
+~
+0 0 26472
+D1
+~
+~
+0 0 26483
+D2
+~
+~
+0 0 26492
+D3
+~
+~
+0 0 26481
+S
+#26483
+a room~
+You are in an unfinished room.
+~
+264 0 0
+D0
+~
+~
+0 0 26473
+D1
+~
+~
+0 0 26484
+D2
+~
+~
+0 0 26493
+D3
+~
+~
+0 0 26482
+S
+#26484
+a room~
+You are in an unfinished room.
+~
+264 0 0
+D0
+~
+~
+0 0 26474
+D1
+~
+~
+0 0 26485
+D2
+~
+~
+0 0 26494
+D3
+~
+~
+0 0 26483
+S
+#26485
+a room~
+You are in an unfinished room.
+~
+264 0 0
+D0
+~
+~
+0 0 26475
+D1
+~
+~
+0 0 26486
+D2
+~
+~
+0 0 26495
+D3
+~
+~
+0 0 26484
+S
+#26486
+a room~
+You are in an unfinished room.
+~
+264 0 0
+D0
+~
+~
+0 0 26476
+D1
+~
+~
+0 0 26487
+D2
+~
+~
+0 0 26496
+D3
+~
+~
+0 0 26485
+S
+#26487
+a room~
+You are in an unfinished room.
+~
+264 0 0
+D0
+~
+~
+0 0 26477
+D1
+~
+~
+0 0 26488
+D2
+~
+~
+0 0 26497
+D3
+~
+~
+0 0 26486
+S
+#26488
+a room~
+You are in an unfinished room.
+~
+264 0 0
+D0
+~
+~
+0 0 26478
+D1
+~
+~
+0 0 26489
+D2
+~
+~
+0 0 26498
+D3
+~
+~
+0 0 26487
+S
+#26489
+a room~
+You are in an unfinished room.
+~
+264 0 0
+D0
+~
+~
+0 0 26479
+D2
+~
+~
+0 0 26499
+D3
+~
+~
+0 0 26488
+S
+#26490
+a room~
+You are in an unfinished room.
+~
+264 0 0
+D0
+~
+~
+0 0 26480
+D1
+~
+~
+0 0 26491
+S
+#26491
+a room~
+You are in an unfinished room.
+~
+264 0 0
+D0
+~
+~
+0 0 26481
+D1
+~
+~
+0 0 26492
+D3
+~
+~
+0 0 26490
+S
+#26492
+a room~
+You are in an unfinished room.
+~
+264 0 0
+D0
+~
+~
+0 0 26482
+D1
+~
+~
+0 0 26493
+D3
+~
+~
+0 0 26491
+S
+#26493
+a room~
+You are in an unfinished room.
+~
+264 0 0
+D0
+~
+~
+0 0 26483
+D1
+~
+~
+0 0 26494
+D3
+~
+~
+0 0 26492
+S
+#26494
+a room~
+You are in an unfinished room.
+~
+264 0 0
+D0
+~
+~
+0 0 26484
+D1
+~
+~
+0 0 26495
+D3
+~
+~
+0 0 26493
+S
+#26495
+a room~
+You are in an unfinished room.
+~
+264 0 0
+D0
+~
+~
+0 0 26485
+D1
+~
+~
+0 0 26496
+D3
+~
+~
+0 0 26494
+S
+#26496
+a room~
+You are in an unfinished room.
+~
+264 0 0
+D0
+~
+~
+0 0 26486
+D1
+~
+~
+0 0 26497
+D3
+~
+~
+0 0 26495
+S
+#26497
+a room~
+You are in an unfinished room.
+~
+264 0 0
+D0
+~
+~
+0 0 26487
+D1
+~
+~
+0 0 26498
+D3
+~
+~
+0 0 26496
+S
+#26498
+a room~
+You are in an unfinished room.
+~
+264 0 0
+D0
+~
+~
+0 0 26488
+D1
+~
+~
+0 0 26499
+D3
+~
+~
+0 0 26497
+S
+#26499
+a room~
+You are in an unfinished room.
+~
+264 0 0
+D0
+~
+~
+0 0 26489
+D3
+~
+~
+0 0 26498
+S
+$~

@@ -1,0 +1,1246 @@
+@Version: 1
+*#1
+*armor~
+*30 10 2 10 b 0 b
+*30 10 2 10 b 0 b
+* 0 8 0 10 0 12 0 0 0 15 15 0 0 15 8 9 4 0 0
+*0 8 10 0 12 0 0 0 15 15 0 0 15 8 9 4 0 0
+*1 5
+*1 5
+#0
+!RESERVED!~
+0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0
+!RESERVED!~
+#1
+armor~
+30 10 2 10 b 0 b
+0 8 0 10 0 12 0 0 0 15 15 0 0 15 8 9 4 0 0
+1 5
+You feel less protected.~
+#2
+teleport~
+80 50 3 11 fb 0 k
+0 0 0 62 0 0 0 0 0 0 0 0 0 0 0 43 0 0 0
+1 5
+!Teleport!~
+#3
+bless~
+30 10 2 11 bh 0 be
+0 2 0 0 0 0 15 0 0 18 0 10 0 0 0 0 2 0 0
+1 5
+You feel less righteous.~
+#4
+blindness~
+30 10 2 11 bg 0 b
+0 0 0 32 0 0 0 0 0 0 38 0 0 0 29 25 0 0 0
+1 5
+You feel a cloak of blindness dissolve.~
+#5
+burning hands~
+30 10 2 10 be 1 a
+0 0 0 14 0 16 22 0 0 0 0 0 0 0 11 11 0 0 0
+1 5
+!Burning Hands!~
+#6
+call lightning~
+40 20 2 10 be 1 al
+0 46 0 0 0 0 0 0 0 0 0 35 0 0 0 0 0 0 0
+1 5
+!Call Lightning~
+#7
+charm person~
+75 50 2 10 bg 1 k
+0 0 0 45 0 55 0 0 0 0 0 0 0 0 0 35 45 0 0
+1 5
+You feel more self-confident.~
+#8
+chill touch~
+30 10 2 10 be 1 ab
+0 0 0 7 0 15 0 0 0 0 20 0 0 0 21 5 0 0 0
+1 5
+You feel your strength return.~
+#9
+clone~
+80 65 5 11 bf 0 i
+0 0 0 73 0 0 0 0 0 0 0 0 0 0 0 60 0 0 0
+1 5
+!Clone!~
+#10
+color spray~
+30 10 2 10 be 1 a
+0 0 0 35 0 0 0 0 0 0 0 0 0 0 31 0 0 0 0
+1 5
+!Color Spray!~
+#11
+control weather~
+75 25 5 11 a 0 k
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 5
+!Control Weather!~
+#12
+create food~
+30 5 4 11 a 0 j
+0 10 0 0 10 0 6 0 0 0 0 5 0 0 0 0 8 0 0
+1 5
+!Create Food!~
+#13
+create water~
+30 5 4 11 a 0 j
+0 10 0 0 12 0 6 0 0 0 0 5 0 0 0 0 8 0 0
+1 5
+!Create Water!~
+#14
+cure blind~
+30 5 2 11 b 0 c
+0 23 0 0 0 0 0 0 0 0 0 0 0 0 0 0 17 0 0
+1 5
+!Cure Blind!~
+#15
+cure critic~
+50 30 2 10 b 0 d
+0 35 0 0 0 0 45 0 0 0 0 59 0 0 0 0 30 0 0
+1 5
+!Cure Critic!~
+#16
+cure light~
+30 10 2 10 b 0 d
+0 1 0 0 40 0 10 0 0 9 19 18 0 21 0 0 1 0 0
+1 5
+!Cure Light!~
+#17
+curse~
+80 50 2 11 bhi 1 be
+0 0 0 47 0 0 0 0 0 0 0 0 0 0 0 36 0 0 0
+1 5
+You feel more optimistic.~
+#18
+detect alignment~
+20 10 2 11 bf 0 b
+0 27 0 0 0 0 9 0 0 17 17 8 0 0 0 0 12 0 0
+1 5
+You feel less aware.~
+#19
+detect invisibility~
+20 10 2 11 b 0 b
+0 0 0 8 0 10 0 0 0 0 0 9 0 0 10 4 0 0 0
+1 5
+Your eyes stop tingling.~
+#20
+detect magic~
+20 10 2 11 bf 0 b
+0 0 0 6 0 8 0 0 0 0 0 0 0 0 0 3 0 0 0
+1 5
+The detect magic wears off.~
+#21
+detect poison~
+15 5 1 11 bhi 0 k
+0 24 0 0 30 0 0 0 0 20 0 11 0 0 0 0 11 0 0
+1 5
+The detect poison wears off.~
+#22
+dispel evil~
+40 25 3 10 be 1 a
+0 34 0 0 0 0 0 0 0 52 0 25 0 0 0 0 19 0 0
+1 5
+!Dispel Evil!~
+#23
+earthquake~
+40 25 3 10 a 1 h
+0 31 0 0 0 0 0 0 0 0 0 0 0 0 0 0 25 0 0
+1 5
+!Earthquake!~
+#24
+enchant weapon~
+150 100 10 11 hi 0 k
+0 0 0 23 0 0 0 0 0 0 0 0 0 0 0 12 18 0 0
+1 15
+!Enchant Weapon!~
+#25
+energy drain~
+40 25 1 10 be 1 k
+0 0 0 42 0 0 0 0 0 0 46 0 0 0 0 27 0 0 0
+1 5
+!Energy Drain!~
+#26
+fireball~
+30 10 2 10 be 1 a
+0 0 0 46 0 0 0 0 0 0 0 0 0 0 41 33 0 0 0
+1 5
+!Fireball!~
+#27
+harm~
+75 45 3 10 be 1 a
+0 0 0 0 0 0 0 0 0 0 76 0 0 0 0 0 0 0 0
+1 5
+!Harm!~
+#28
+heal~
+60 40 3 10 b 0 dc
+0 48 0 0 0 0 0 0 0 0 0 0 0 0 0 0 36 0 0
+1 5
+!Heal!~
+#29
+invisibility~
+35 25 1 11 bhi 0 be
+0 0 0 12 0 14 0 0 0 0 0 19 0 0 0 9 0 0 0
+1 5
+You feel yourself exposed.~
+#30
+lightning bolt~
+30 10 2 10 be 1 a
+0 0 0 28 0 0 0 0 0 0 0 0 0 0 0 15 0 0 0
+1 5
+!Lightning Bolt!~
+#31
+locate object~
+25 20 1 11 j 0 k
+0 38 0 18 0 0 0 0 0 0 0 0 0 0 0 14 29 0 0
+1 5
+!Locate object!~
+#32
+magic missile~
+20 10 1 10 be 1 a
+0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0
+1 5
+!Magic Missile!~
+#33
+poison~
+50 20 3 11 bgh 1 be
+0 0 0 0 0 0 0 0 0 0 40 0 0 0 0 0 0 0 0
+1 5
+You feel less sick.~
+#34
+ward evil~
+40 10 3 11 bf 0 b
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 33 0 0
+1 5
+Your natural aura returns.~
+#35
+remove curse~
+45 25 5 11 bhk 0 ce
+0 47 0 0 0 0 0 0 0 55 0 0 0 0 0 0 35 0 0
+1 5
+!Remove Curse!~
+#36
+sanctuary~
+110 85 5 11 b 0 b
+0 54 0 0 0 71 88 0 0 0 0 0 0 0 0 0 44 0 0
+1 5
+The white aura around your body fades.~
+#37
+shocking grasp~
+30 15 3 10 be 1 a
+0 0 0 21 0 23 32 0 0 0 0 0 0 0 0 16 0 0 0
+1 5
+!Shocking Grasp!~
+#38
+sleep~
+40 25 5 11 b 1 b
+0 0 0 43 0 0 0 0 0 0 0 0 0 0 0 35 0 0 0
+1 5
+You feel less tired.~
+#39
+strength~
+35 30 1 11 b 0 b
+0 0 0 20 0 25 0 0 0 0 0 0 0 0 0 16 0 0 0
+1 5
+You feel weaker.~
+#40
+summon~
+50 20 6 11 cg 0 k
+0 30 0 40 0 0 0 0 0 0 0 0 0 0 0 30 20 0 0
+1 5
+!Summon!~
+#41
+ventriloquate~
+0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 5
+!Ventriloquate!~
+#42
+word of recall~
+20 10 2 10 b 0 k
+0 17 0 48 0 0 0 0 0 0 0 17 0 0 0 27 17 0 0
+1 5
+!Word of Recall!~
+#43
+remove poison~
+40 8 4 11 bhi 0 ce
+0 36 0 0 0 0 0 0 0 23 0 0 0 0 0 0 24 0 0
+1 5
+!Remove Poison!~
+#44
+sense life~
+20 10 2 11 bf 0 b
+0 28 0 0 35 0 0 0 0 0 0 30 0 0 10 0 19 0 0
+1 5
+You feel less aware of your surroundings.~
+#45
+animate dead~
+70 20 6 11 i 0 il
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 17 0 0 0
+1 5
+!ANIMATE DEAD!~
+#46
+dispel good~
+40 25 3 10 be 1 a
+0 0 0 0 0 0 0 0 0 0 60 29 0 0 0 0 0 0 0
+1 5
+!DISPEL GOOD!~
+#47
+group armor~
+50 30 2 11 a 0 f
+0 60 0 36 0 0 0 0 0 0 0 0 0 0 0 24 50 0 0
+1 8
+!GROUP ARMOR!~
+#48
+group heal~
+80 60 5 10 a 0 f
+0 65 0 0 0 0 0 0 0 0 0 0 0 0 0 0 55 0 0
+1 8
+!GROUP HEAL!~
+#49
+group recall~
+50 20 5 11 a 0 f
+0 61 0 0 0 0 0 0 0 0 0 0 0 0 0 0 48 0 0
+1 8
+!GROUP RECALL!~
+#50
+infravision~
+25 10 1 11 bf 0 b
+0 0 0 30 0 0 0 0 0 0 0 0 0 0 0 17 14 0 0
+1 5
+Your night vision seems to fade.~
+#51
+waterwalk~
+60 40 4 11 b 0 b
+0 29 0 4 0 0 0 0 0 0 0 25 0 0 0 5 18 0 0
+1 5
+Your feet seem less buoyant.~
+#52
+haste~
+80 30 2 11 b 0 b
+0 0 0 56 0 0 0 0 0 0 0 0 0 0 0 41 0 0 0
+1 5
+You feel slower.~
+#53
+fern~
+0 0 0 10 b 0 bl
+120 120 120 120 120 120 120 120 120 120 120 120 120 120 120 120 120 120 120
+1 5
+The fern dissipates.~
+#54
+slow~
+60 20 2 10 be 1 b
+0 0 0 35 55 0 0 0 0 0 0 0 0 0 0 27 25 0 0
+1 5
+Your lethargy passes.~
+#55
+acid blast~
+60 40 2 10 be 1 a
+0 0 0 58 0 0 0 0 0 0 0 0 0 0 0 38 0 0 0
+1 5
+!ACID BLAST!~
+#56
+fire breath~
+0 0 0 10 a 1 h
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+1 5
+!FIRE BREATH!~
+#57
+gas breath~
+0 0 0 10 a 1 h
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+1 5
+!GAS BREATH!~
+#58
+frost breath~
+0 0 0 10 a 1 h
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+1 5
+!FROST BREATH!~
+#59
+acid breath~
+0 0 0 10 a 1 h
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+1 5
+!ACID BREATH!~
+#60
+lightning breath~
+0 0 0 10 a 1 a
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+1 5
+!LIGHTNING BREATH!~
+#61
+group infravision~
+50 30 2 11 a 0 f
+0 0 0 44 0 0 0 0 0 0 0 0 0 0 0 31 0 0 0
+1 8
+!GROUP INFRA!~
+#62
+shield~
+70 40 2 11 b 0 b
+0 0 0 42 0 0 0 0 0 0 0 0 0 45 38 28 0 0 0
+1 5
+The force field around you fades.~
+#63
+stone skin~
+80 40 2 11 b 0 bl
+0 0 0 0 55 0 0 0 0 0 0 40 0 0 0 0 0 0 0
+1 5
+Your skin softens.~
+#64
+flame strike~
+60 20 2 10 be 1 a
+0 56 0 0 0 0 0 0 0 0 0 67 0 0 0 0 45 0 0
+1 5
+!FLAME STRIKE!~
+#65
+levitate~
+60 20 5 11 b 0 b
+0 0 0 26 0 27 28 0 0 0 0 0 0 0 0 18 0 0 0
+1 5
+You begin to fall to the ground.~
+#66
+dispel magic~
+80 40 2 11 bg 0 b
+0 0 0 34 0 47 0 0 0 0 0 0 0 0 0 22 0 0 0
+1 5
+Your magic has been dispelled.~
+#67
+dragon~
+60 20 2 10 b 0 bl
+0 0 0 75 0 86 0 0 0 0 0 0 0 0 0 65 0 0 0
+1 5
+You feel like yourself again.~
+#68
+pixie dust~
+60 20 2 10 be 0 b
+0 0 0 39 0 0 0 0 0 0 0 29 0 0 0 29 0 0 0
+1 5
+You feel like yourself again.~
+#69
+inspire~
+60 20 2 10 b 0 bl
+0 0 0 0 0 57 0 0 0 0 0 0 0 0 0 0 0 0 0
+1 5
+You dont feel inspired anymore.~
+#70
+dream sight~
+60 20 2 11 b 0 b
+0 0 0 15 0 35 0 0 0 0 0 32 0 0 0 9 0 0 0
+1 5
+You do not feel as aware of your surroundings.~
+#71
+enchant armor~
+150 100 5 11 hi 0 k
+0 0 0 26 0 0 0 0 0 0 0 0 0 0 0 14 19 0 0
+1 15
+!ENCHANT ARMOR!~
+#72
+group refresh~
+40 20 4 11 a 0 f
+0 55 0 0 0 0 0 0 0 0 0 0 0 0 0 0 42 0 0
+1 8
+!GROUP REFRESH!~
+#73
+refresh~
+30 10 2 10 b 0 d
+0 18 0 0 0 0 23 0 0 40 57 0 0 0 0 0 10 0 0
+1 5
+!REFRESH!~
+#74
+give life~
+0 0 0 10 b 0 d
+0 80 0 0 0 0 70 0 0 65 0 0 0 0 0 0 62 0 0
+1 5
+!GIVE LIFE!~
+#75
+bark skin~
+80 40 5 11 b 0 bl
+0 0 0 0 25 0 0 0 0 0 0 15 0 0 0 0 0 0 0
+1 5
+Your skin feels soft again.~
+#76
+depression~
+50 30 2 10 be 1 b
+0 0 0 0 0 50 0 0 0 0 0 0 0 0 0 0 0 0 0
+1 5
+You don't feel depressed anymore.~
+#77
+lullaby~
+50 20 2 11 b 1 b
+0 0 0 0 0 6 0 0 0 0 0 0 0 0 0 0 0 0 0
+1 5
+Boy is it morning already??~
+#78
+blur~
+60 40 2 11 b 0 b
+0 0 0 0 0 0 43 0 0 0 0 0 0 0 0 0 0 0 0
+1 5
+You stop moving rapidly.~
+#79
+eagle claw~
+80 20 2 10 b 0 bl
+0 0 0 0 65 0 0 0 0 0 0 55 0 0 0 0 0 0 0
+1 5
+You feel like yourself again.~
+#80
+enfeeble~
+60 20 2 10 be 1 a
+0 0 0 0 0 58 0 0 0 0 0 0 0 0 0 0 0 0 0
+1 5
+!ENFEEBLE!~
+#81
+fire song~
+60 40 2 10 be 1 a
+0 0 0 0 0 33 0 0 0 0 0 0 0 0 0 0 0 0 0
+1 5
+!FIRESONG!~
+#82
+wrath of god~
+80 40 2 10 be 1 a
+0 75 0 0 0 0 90 0 0 85 0 0 0 0 0 0 66 0 0
+1 5
+!WRATH OF GOD!~
+#83
+wither~
+60 40 2 10 be 1 b
+0 0 0 0 0 0 48 0 0 0 0 0 0 0 0 0 64 0 0
+1 5
+You can move at a normal speed again.~
+#84
+purify~
+60 20 2 11 bh 0 c
+0 0 0 0 0 40 36 0 0 0 0 0 0 0 0 0 27 0 0
+1 5
+!PURIFY!~
+#85
+water breathe~
+60 40 2 11 b 0 b
+0 32 0 29 28 0 0 0 0 0 0 26 0 0 0 15 21 0 0
+1 5
+Your gills begin to disappear.~
+#86
+enhanced strength~
+60 20 2 11 b 0 b
+0 0 0 53 0 72 0 0 0 0 0 0 0 0 0 40 0 0 0
+1 5
+Your new found strength begins to fade.~
+#87
+gate~
+60 40 5 11 gc 0 k
+0 60 0 0 0 0 0 0 0 0 0 0 0 0 50 0 52 0 0
+1 5
+!GATE!~
+#88
+gas blast~
+60 40 2 10 be 1 a
+0 0 0 66 0 0 0 0 0 0 0 0 0 0 0 45 0 0 0
+1 5
+!GAS BLAST!~
+#89
+frost blast~
+60 40 2 10 be 1 a
+0 0 0 54 0 0 0 0 0 0 0 0 0 0 0 35 0 0 0
+1 5
+!FROST BLAST!~
+#90
+plague~
+20 10 1 10 bg 0 b
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+1 5
+The disease seems to subside..For now.~
+#91
+pass door~
+0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 5
+You fade back into existence.~
+#92
+calm~
+0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 5
+!CALM!~
+#93
+meteor storm~
+70 40 2 10 a 1 h
+0 0 0 50 0 0 0 0 0 0 0 0 0 0 0 39 0 0 0
+1 5
+!METEOR STORM!~
+#94
+ice storm~
+90 60 2 10 a 1 h
+0 0 0 72 0 0 0 0 0 0 0 0 0 0 0 51 0 0 0
+1 5
+!ICE STORM!~
+#95
+change sex~
+0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 5
+!CHANGE SEX!~
+#96
+cure plague~
+30 5 2 11 b 0 c
+0 0 0 0 0 0 65 0 0 0 0 0 0 0 0 0 46 0 0
+1 5
+!CURE PLAGUE~
+#97
+sunburn~
+0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 5
+!SUNBURN!~
+#98
+cure serious~
+50 20 2 10 b 0 d
+0 29 0 0 0 0 30 0 0 29 0 38 0 58 0 0 14 0 0
+1 5
+!CURE SERIOUS!~
+#99
+energy regeneration~
+50 20 3 10 b 0 d
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+1 5
+!ENERGY!~
+#100
+group sanctuary~
+120 90 5 11 a 0 f
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 80 0 0
+1 8
+!GROUP SANC!~
+#101
+group levitate~
+60 40 5 11 a 0 f
+0 0 0 45 0 62 0 0 0 0 0 0 0 0 0 32 0 0 0
+1 8
+!GROUP LEVI!~
+#102
+create light~
+30 10 3 11 a 0 j
+0 15 0 1 0 2 0 0 0 0 0 12 0 0 0 1 12 0 0
+1 5
+!CREATE LIGHT!~
+#103
+continual light~
+50 10 5 11 a 0 j
+0 39 0 37 0 60 0 0 0 0 0 0 0 0 0 28 28 0 0
+1 5
+!CONTINUAL LIGHT!~
+#104
+portal~
+130 70 5 11 cg 0 k
+0 0 0 60 0 0 0 0 0 0 0 0 0 0 0 40 0 0 0
+1 10
+!PORTAL!~
+#105
+identify~
+70 20 5 11 bhi 0 k
+0 0 0 47 0 0 0 0 0 0 0 0 0 0 0 29 0 0 0
+1 5
+!IDENTIFY!~
+#106
+backstab~
+0 0 0 0 0 0 0
+0 0 3 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0
+2 0
+!BACKSTAB!~
+#107
+bash~
+0 0 0 0 0 0 0
+5 0 0 0 0 0 0 0 3 0 0 0 0 0 0 0 0 0 0
+2 0
+!BASH!~
+#108
+hide~
+0 0 0 0 0 0 0
+0 0 4 0 0 0 30 0 0 0 0 0 0 0 2 0 0 0 0
+2 0
+!HIDE!~
+#109
+kick~
+0 0 0 0 0 0 0
+1 0 0 0 1 8 1 0 1 5 2 0 0 1 0 0 0 0 0
+2 0
+!KICK!~
+#110
+pick lock~
+0 0 0 0 0 0 0
+0 0 4 0 0 0 0 0 0 0 0 0 0 0 4 0 0 0 0
+2 0
+!PICK!~
+#111
+punch~
+0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+2 0
+!PUNCH!~
+#112
+rescue~
+0 0 0 0 0 0 0
+17 0 0 0 19 0 0 0 20 15 19 0 0 14 0 0 0 0 0
+2 0
+!RESCUE!~
+#113
+sneak~
+0 0 0 0 0 0 0
+0 0 1 0 0 23 0 0 0 0 0 0 0 0 1 0 0 0 0
+2 0
+~
+#114
+steal~
+0 0 0 0 0 0 0
+0 0 7 0 0 26 0 0 0 0 0 0 0 0 7 0 0 0 0
+2 0
+!STEAL!~
+#115
+track~
+0 0 0 0 0 0 0
+0 0 0 0 14 0 0 0 0 0 0 36 0 0 50 0 0 0 0
+2 0
+!TRACK!~
+#116
+mount~
+0 0 0 0 0 0 0
+13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13
+2 0
+!MOUNT!~
+#117
+riding~
+0 0 0 0 0 0 0
+13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13 13
+2 0
+!RIDING!~
+#118
+tame~
+0 0 0 0 0 0 0
+0 0 0 0 19 0 0 0 0 0 0 11 0 0 0 0 18 0 0
+2 0
+!TAME!~
+#119
+second attack~
+0 0 0 0 0 0 0
+25 35 30 40 28 30 25 35 28 25 25 35 0 20 30 40 30 0 0
+2 0
+!2NDATTACK!~
+#120
+third attack~
+0 0 0 0 0 0 0
+50 65 55 0 53 55 50 65 53 50 50 65 0 40 55 0 60 0 0
+2 0
+!3RDATTACK!~
+#121
+fourth attack~
+0 0 0 0 0 0 0
+75 0 95 0 78 0 0 0 78 75 75 0 0 60 85 0 0 0 0
+2 0
+!4THATTACK!~
+#122
+rage~
+0 0 0 0 0 0 0
+0 0 0 0 0 0 0 29 0 0 0 0 0 62 0 0 0 0 0
+2 0
+~
+#123
+throw~
+0 0 0 0 0 0 0
+3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+2 0
+!THROW!~
+#124
+bow~
+0 0 0 0 0 0 0
+15 0 10 0 1 30 0 0 12 0 0 0 0 10 8 0 0 0 0
+2 0
+!BOW!~
+#125
+sling~
+0 0 0 0 0 0 0
+0 0 1 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0
+2 0
+!SLING!~
+#126
+crossbow~
+0 0 0 0 0 0 0
+30 0 20 0 25 15 0 0 0 0 35 0 0 15 20 0 0 0 0
+2 0
+!CROSSBOW!~
+#127
+dual wield~
+0 0 0 0 0 0 0
+35 0 15 0 43 52 0 0 66 48 41 0 0 28 14 0 0 0 0
+2 0
+!2XWIELD!~
+#128
+repair~
+0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+2 0
+!REPAIR!~
+#129
+fly~
+60 20 2 11 b 0 b
+0 0 0 29 0 0 0 0 0 0 0 33 0 0 0 19 0 0 0
+1 5
+Your wings disappear!~
+#130
+fisticuffs~
+0 0 0 0 0 0 0
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+2 5
+!FISTICUFF!~
+#131
+sword~
+0 0 0 0 0 0 0
+1 0 1 0 1 1 0 0 1 1 1 0 0 1 1 3 3 3 3
+2 5
+!SWORD!~
+#132
+two handed sword~
+0 0 0 0 0 0 0
+4 0 0 0 4 4 0 0 4 4 4 0 0 2 0 0 0 0 0
+2 5
+!2HSWORD!~
+#133
+dagger~
+0 0 0 0 0 0 0
+1 0 1 1 1 1 0 1 1 1 1 0 0 1 1 1 1 1 1
+2 5
+!DAGGER!~
+#134
+club~
+0 0 0 0 0 0 0
+1 1 1 1 1 1 0 1 1 1 1 1 1 1 1 1 1 1 1
+2 5
+!CLUB!~
+#135
+two handed club~
+0 0 0 0 0 0 0
+4 4 4 4 4 4 0 4 4 4 4 4 0 2 2 2 2 0 0
+2 5
+!2HCLUB!~
+#136
+hammer~
+0 0 0 0 0 0 0
+1 1 1 1 1 1 0 1 1 1 1 1 1 1 1 1 1 0 0
+2 5
+!HAMMER!~
+#137
+two handed hammer~
+0 0 0 0 0 0 0
+4 4 4 4 4 4 0 4 4 4 4 4 0 2 2 2 2 0 0
+2 5
+!2HHAMMER!~
+#138
+axe~
+0 0 0 0 0 0 0
+1 0 0 0 1 1 0 0 1 1 1 0 0 1 0 0 0 0 0
+2 5
+!AXE!~
+#139
+two handed axe~
+0 0 0 0 0 0 0
+4 0 0 0 4 4 0 0 4 4 4 0 0 2 0 0 0 0 0
+2 5
+!2HAXE!~
+#140
+spear~
+0 0 0 0 0 0 0
+1 0 1 0 1 1 0 0 1 1 1 0 0 1 1 0 0 0 0
+2 5
+!SPEAR!~
+#141
+whip~
+0 0 0 0 0 0 0
+1 1 1 1 1 1 0 0 1 1 1 1 1 1 1 1 1 0 0
+2 5
+!WHIP!~
+#142
+claw~
+0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+2 5
+!CLAW!~
+#143
+brew~
+0 0 0 0 0 0 0
+0 29 0 27 0 34 0 0 0 0 0 29 0 0 0 24 24 0 0
+2 5
+!BREW!~
+#144
+scribe~
+0 0 0 0 0 0 0
+0 29 0 27 0 34 0 0 0 0 0 29 0 0 0 24 24 0 0
+2 5
+!SCRIBE!~
+#145
+knock~
+60 20 2 11 l 0 k
+0 0 0 33 0 0 0 0 0 0 0 0 0 0 0 22 0 0 0
+1 5
+!KNOCK!~
+#146
+wizard lock~
+60 20 2 11 l 0 k
+0 0 0 34 0 46 0 0 0 0 0 0 0 0 0 0 0 0 0
+1 5
+!WIZARDLOCK!~
+#147
+ambush~
+0 0 0 0 0 0 0
+0 0 40 0 65 0 0 0 65 0 0 0 0 0 20 0 0 0 0
+2 0
+!AMBUSH!~
+#148
+trip~
+0 0 0 0 0 0 0
+0 0 42 0 0 0 0 0 44 0 45 0 0 0 0 0 0 0 0
+2 0
+!TRIP!~
+#149
+sweep~
+0 0 0 0 0 0 0
+43 0 0 0 48 0 0 0 0 45 0 0 0 41 0 0 0 0 0
+2 0
+!SWEEP!~
+#150
+quivering palm~
+0 0 0 0 0 0 0
+0 0 0 0 0 0 57 0 0 0 0 0 0 0 0 0 0 0 0
+2 0
+!QUIVERINGPALM!~
+#151
+stomp~
+0 0 0 0 0 0 0
+15 0 0 0 17 0 0 0 16 0 0 0 0 14 0 0 0 0 0
+2 0
+!STOMP!~
+#152
+headbutt~
+0 0 0 0 0 0 0
+10 0 0 0 15 0 0 0 8 0 15 0 0 7 0 0 0 0 0
+2 0
+!HEADBUTT!~
+#153
+disarm~
+0 0 0 0 0 0 0
+28 0 0 0 0 0 0 0 0 0 0 0 0 25 30 0 0 0 0
+2 0
+!DISARM!~
+#154
+berserk~
+0 0 0 0 0 0 0
+40 0 0 0 0 0 0 55 35 0 0 0 0 0 0 0 0 0 0
+2 0
+!BERSERK!~
+#155
+circle~
+0 0 0 0 0 0 0
+0 0 38 0 0 0 0 0 0 0 0 0 0 0 33 0 0 0 0
+2 0
+!CIRCLE!~
+#156
+unused~
+0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0
+!SHOCK!~
+#157
+stun~
+0 0 0 0 0 0 0
+0 0 0 0 0 0 51 0 0 0 0 0 0 0 47 0 0 0 0
+2 0
+!STUN!~
+#158
+shadow~
+0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+2 0
+You find you are no longer hidden in the shadows.~
+#159
+camouflage~
+0 0 0 0 0 0 0
+0 0 0 0 11 0 0 0 23 0 0 17 0 0 0 0 0 0 0
+2 0
+!CAMOUFLAGE!~
+#160
+palm~
+0 0 0 0 0 0 0
+0 0 12 0 0 0 0 0 0 0 0 0 0 0 7 0 0 0 0
+2 0
+!PALM!~
+#161
+lay hands~
+0 0 0 0 0 0 0
+0 0 0 0 0 0 22 0 0 33 0 0 0 0 0 0 42 0 0
+2 0
+!LAYHANDS!~
+#162
+bandage~
+0 0 0 0 0 0 0
+30 0 45 0 32 35 0 0 40 28 32 0 0 20 45 0 0 0 0
+2 0
+!BANDAGE!~
+#163
+darken~
+0 0 0 0 0 0 0
+0 0 51 0 0 0 35 0 0 0 45 0 0 0 46 40 0 0 0
+2 0
+!DARKEN!~
+#164
+lighten~
+0 0 0 0 0 0 0
+0 37 0 0 0 0 35 0 0 40 0 0 0 0 0 0 30 0 0
+2 0
+!LIGHTEN!~
+#165
+chant~
+0 0 0 0 0 0 0
+0 40 0 0 0 0 0 0 0 0 0 40 0 0 0 0 36 0 0
+2 0
+!CHANT!~
+#166
+meditate~
+0 0 0 0 0 0 0
+0 0 0 40 0 50 25 0 0 0 0 0 0 0 0 36 0 0 0
+2 0
+!MEDITATE!~
+#167
+dodge~
+0 0 0 0 0 0 0
+0 42 17 42 0 26 18 0 0 0 0 42 0 0 17 38 38 0 0
+2 0
+!DODGE!~
+#168
+block~
+0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 21 21 0 0 0 0 0 0 0 0
+2 0
+!BLOCK!~
+#169
+parry~
+0 0 0 0 0 0 0
+21 0 0 0 21 0 0 0 27 0 0 0 0 21 0 0 0 0 0
+2 0
+!PARRY!~
+#170
+conjure infantry~
+70 20 5 11 a 0 i
+0 0 0 38 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+1 5
+!CONJURE INFANTRY!~
+#171
+web~
+60 20 2 10 be 1 bl
+0 0 0 55 0 0 0 0 0 0 0 0 0 0 0 46 0 0 0
+1 5
+The web dissapates.~
+#172
+gore~
+0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+2 0
+!GORE!~
+#173
+faerie fire~
+30 10 2 10 be 1 b
+0 0 0 2 20 13 0 0 0 0 0 0 0 0 0 2 0 0 0
+1 5
+You stop glowing.~
+#174
+ward fire~
+30 5 2 11 b 0 b
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 54 0 0
+1 5
+You feel warmer.~
+#175
+ward cold~
+30 5 2 11 b 0 b
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 47 0 0
+1 5
+You feel cooler.~
+#176
+ward electricity~
+30 5 2 11 b 0 b
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 59 0 0
+1 5
+You no longer feel grounded.~
+#177
+ward energy~
+30 5 2 11 b 0 b
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 64 0 0
+1 5
+You shine no longer.~
+#178
+ward acid~
+30 5 2 11 b 0 b
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 74 0 0
+1 5
+Your skin loses its yellow tinge.~
+#179
+ward poison~
+30 5 2 11 b 0 b
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 41 0 0
+1 5
+Your skin loses its green tinge.~
+#180
+ward drain~
+30 5 2 11 b 0 b
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 63 0 0
+1 5
+A dark shadow passes before your eyes.~
+#181
+ward good~
+40 10 3 11 bf 0 b
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 59 0 0 0
+1 5
+Your natural aura returns.~
+#182
+sunray~
+60 40 3 10 be 1 a
+0 0 0 0 0 0 0 0 0 0 0 65 0 0 0 0 0 0 0
+1 5
+!SUNRAY!~
+#183
+redirect~
+0 0 0 0 0 0 0
+22 0 0 0 27 48 48 0 36 25 25 0 0 19 0 0 0 0 0
+2 0
+!REDIRECT!~
+#184
+cause light~
+40 25 3 10 be 1 a
+0 4 0 0 0 0 0 0 0 0 8 0 0 0 0 0 3 0 0
+1 5
+!CAUSE LIGHT!~
+#185
+cause serious~
+40 25 3 10 be 1 a
+0 23 0 0 0 0 0 0 0 0 25 0 0 0 0 0 18 0 0
+1 5
+!CAUSE SERIOUS!~
+#186
+cause critic~
+40 25 3 10 be 1 a
+0 0 0 0 0 0 0 0 0 0 54 0 0 0 0 0 40 0 0
+1 5
+!CAUSE CRITIC!~
+#187
+atonement~
+50 20 3 10 bg 0 dl
+0 43 0 0 0 0 50 0 0 45 45 48 0 0 0 40 25 0 0
+1 5
+!ATONEMENT!~
+#188
+summon mount~
+35 10 3 11 a 0 i
+0 0 0 0 48 0 0 0 0 64 81 52 0 0 0 0 0 0 0
+1 5
+!SUMMON MOUNT!~
+#189
+goodberry~
+30 10 3 11 a 0 jl
+0 0 0 0 0 0 0 0 0 0 0 13 0 0 0 0 0 0 0
+1 5
+!GOODBERRY!~
+#190
+read magic~
+0 0 0 0 0 0 0
+1 1 1 1 1 1 1 3 1 1 1 1 0 1 1 1 1 0 0
+2 0
+!READMAGIC!~
+#191
+clan recall~
+20 10 2 10 b 0 k
+0 17 0 48 0 0 0 0 0 0 0 17 0 0 0 27 17 0 0
+1 5
+!CLANRECALL!~
+#192
+entangle~
+60 20 2 10 be 1 b
+0 0 0 0 80 0 0 0 0 0 0 57 0 0 0 0 45 0 0
+1 5
+The vines wither and die.~
+#193
+grant peace~
+60 50 1 10 be 1 al
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 10 0 0
+1 10
+!GRANTPEACE!~
+#194
+dig~
+0 0 0 0 0 0 0
+5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5
+2 0
+!DIG!~
+#195
+skin~
+0 0 0 0 0 0 0
+5 0 5 5 5 5 0 5 5 5 5 0 5 5 5 5 5 5 5
+2 0
+!SKIN!~
+#196
+fire shield~
+80 40 2 11 b 0 bl
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+1 7
+The shield of fire cools and dissipates.~
+#197
+drown~
+0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 5
+!DROWN!~
+#198
+enliven~
+80 50 3 10 a 1 h
+0 0 0 0 0 0 0 0 0 0 0 72 0 0 0 0 0 0 0
+1 5
+The vines entrapping you wither and die.~
+#199
+fear~
+80 50 2 10 be 0 n
+0 0 0 65 0 0 0 0 0 0 50 0 0 0 0 0 0 0 0
+1 5
+!FEAR!~
+#200
+mounted attack~
+0 0 0 0 0 0 0
+0 0 0 0 51 0 0 0 0 30 30 0 0 0 0 0 0 0 0
+2 0
+!MOUNTED ATTACK!~
+#201
+fishing~
+0 0 0 0 0 0 0
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+2 0
+!FISHING!~
+#202
+group summon~
+50 20 2 11 a 0 f
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 63 0 0
+1 10
+!GROUP SUMMON!~
+#203
+rove~
+0 0 0 0 0 0 0
+0 0 0 0 20 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+2 0
+~
+#204
+peck~
+0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+2 0
+!PECK!~
+#205
+guard~
+0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+2 0
+!GUARD!~
+$~

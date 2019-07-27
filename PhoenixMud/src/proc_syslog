@@ -1,0 +1,39 @@
+#!/bin/sh
+#
+# I added this scripts so that I can change what is being captured to the logs
+# without having to worry about restarting autorun.
+
+  tail -60 syslog > syslog.CRASH
+
+ # fgrep "self-delete" syslog >> log/delete
+ # fgrep "death trap" syslog >> log/dts
+ # fgrep "killed" syslog >> log/rip
+ # fgrep "Running" syslog >> log/restarts
+ # fgrep "advanced" syslog >> log/levels
+ # fgrep "equipment lost" syslog >> log/rentgone
+ # fgrep "usage" syslog >> log/usage
+ # fgrep "new player" syslog >> log/newplayers
+ # fgrep "SYSERR" syslog >> log/errors
+ # fgrep "(GC)" syslog >> log/godcmds
+ # fgrep "Bad PW" syslog >> log/badpws
+ # fgrep "OLC" syslog >> log/OLC
+ # fgrep "BUF" syslog >> log/BUF
+ # fgrep "HELP" syslog >> log/help
+ # fgrep "ALERT" syslog >> log/bigrent
+ # fgrep "siteban" syslog >> log/ban
+ # fgrep "FIGHT" syslog >> log/god.fight
+ # fgrep "GOLD" syslog >> log/gold
+ # fgrep "CORPSE" syslog >> log/corpse
+ # fgrep "SCRIPT ERR:" syslog >> log/scripterr
+ # fgrep "LOCATE_OBJ:" syslog >> log/locateobj
+ # fgrep "OBJ-SCRAP:" syslog >> log/objscrap
+  
+  rm log/syslog.1
+  mv log/syslog.2 log/syslog.1
+  mv log/syslog.3 log/syslog.2
+  mv log/syslog.4 log/syslog.3
+  mv log/syslog.5 log/syslog.4
+  mv log/syslog.6 log/syslog.5
+  mv syslog       log/syslog.6
+  touch syslog
+  webscript/genWebImmortal.pl lib/text/wizlist lib/text/immlist webscript/immortal.tpl ~phoweb/public_html/immortal_`whoami`.html

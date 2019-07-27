@@ -1,0 +1,655 @@
+Thief|0|steal|80
+Thief|0|pick lock|80
+Thief|0|darken|60
+Thief|0|sneak|80
+Thief|0|hide|80
+Thief|0|palm|80
+Paladin|0|give life|8
+Paladin|0|wrath of god|10
+Paladin|0|rescue|70
+Paladin|0|atonement|9
+Paladin|0|dispel evil|9
+Paladin|0|mounted attack|95
+Anti-Paladin|0|harm|10
+Anti-Paladin|0|fear|9
+Anti-Paladin|0|poison|8
+Anti-Paladin|0|mounted attack|95
+Anti-Paladin|0|blindness|9
+Anti-Paladin|0|dispel good|9
+Druid|0|track|95
+Druid|0|tame|50
+Druid|0|cure critic|10
+Druid|0|goodberry|10
+Druid|0|bless|10
+Druid|0|entangle|9
+Cleric|0|bless|10
+Cleric|0|cure blind|9
+Cleric|0|wrath of god|10
+Cleric|0|refresh|9
+Cleric|0|heal|10
+Cleric|0|sanctuary|10
+Ranger|0|track|95
+Ranger|0|camouflage|70
+Ranger|0|summon mount|10
+Ranger|0|mounted attack|95
+Ranger|0|rescue|65
+Ranger|0|eagle claw|10
+Bard|0|inspire|10
+Bard|0|charm person|8
+Bard|0|steal|60
+Bard|0|enfeeble|10
+Bard|0|lullaby|8
+Bard|0|sneak|70
+Monk|0|fisticuffs|95
+Monk|0|quivering palm|95
+Monk|0|stun|95
+Monk|0|cure plague|8
+Monk|0|wrath of god|9
+Monk|0|wither|9
+Warrior|0|sweep|95
+Warrior|0|dual wield|95
+Warrior|0|disarm|70
+Warrior|0|rescue|50
+Warrior|0|redirect|70
+Warrior|0|bash|80
+Barbarian|0|trip|95
+Barbarian|0|dual wield|95
+Barbarian|0|berserk|70
+Barbarian|0|ambush|80
+Barbarian|0|camouflage|85
+Barbarian|0|headbutt|70
+Magic User|0|fly|10
+Magic User|0|invisibility|10
+Magic User|0|strength|10
+Magic User|0|portal|10
+Magic User|0|brew|75
+Magic User|0|web|10
+Kensai|1|axe|70
+Kensai|1|bandage|70
+Kensai|1|bow|70
+Kensai|1|club|70
+Kensai|1|crossbow|70
+Kensai|1|dagger|70
+Kensai|1|dig|70
+Kensai|1|disarm|70
+Kensai|1|dual wield|70
+Kensai|1|fisticuffs|70
+Kensai|1|fourth attack|70
+Kensai|1|hammer|70
+Kensai|1|headbutt|70
+Kensai|1|kick|70
+Kensai|1|parry|70
+Kensai|1|rage|70
+Kensai|1|read magic|70
+Kensai|1|redirect|70
+Kensai|1|rescue|70
+Kensai|1|second attack|70
+Kensai|1|skin|70
+Kensai|1|spear|70
+Kensai|1|stomp|70
+Kensai|1|sweep|70
+Kensai|1|sword|70
+Kensai|1|third attack|70
+Kensai|1|throw|70
+Kensai|1|two handed axe|70
+Kensai|1|two handed club|70
+Kensai|1|two handed hammer|70
+Kensai|1|two handed sword|70
+Kensai|1|whip|70
+Kensai|2|axe|95
+Kensai|2|bandage|95
+Kensai|2|bow|95
+Kensai|2|club|95
+Kensai|2|crossbow|95
+Kensai|2|dagger|95
+Kensai|2|dig|95
+Kensai|2|disarm|95
+Kensai|2|dual wield|95
+Kensai|2|fisticuffs|95
+Kensai|2|fourth attack|95
+Kensai|2|hammer|95
+Kensai|2|headbutt|95
+Kensai|2|kick|95
+Kensai|2|parry|95
+Kensai|2|rage|95
+Kensai|2|read magic|95
+Kensai|2|redirect|95
+Kensai|2|rescue|95
+Kensai|2|second attack|95
+Kensai|2|skin|95
+Kensai|2|spear|95
+Kensai|2|stomp|95
+Kensai|2|sweep|95
+Kensai|2|sword|95
+Kensai|2|third attack|95
+Kensai|2|throw|95
+Kensai|2|two handed axe|95
+Kensai|2|two handed club|95
+Kensai|2|two handed hammer|95
+Kensai|2|two handed sword|95
+Kensai|2|whip|95
+Assassin|1|ambush|70
+Assassin|1|backstab|70
+Assassin|1|bandage|70
+Assassin|1|bow|70
+Assassin|1|circle|70
+Assassin|1|club|70
+Assassin|1|crossbow|70
+Assassin|1|dagger|70
+Assassin|1|darken|70
+Assassin|1|dig|70
+Assassin|1|disarm|70
+Assassin|1|dodge|70
+Assassin|1|dual wield|70
+Assassin|1|fisticuffs|70
+Assassin|1|fourth attack|70
+Assassin|1|hammer|70
+Assassin|1|hide|70
+Assassin|1|palm|70
+Assassin|1|pick lock|70
+Assassin|1|read magic|70
+Assassin|1|second attack|70
+Assassin|1|skin|70
+Assassin|1|sling|70
+Assassin|1|sneak|70
+Assassin|1|spear|70
+Assassin|1|steal|70
+Assassin|1|stun|70
+Assassin|1|sword|70
+Assassin|1|third attack|70
+Assassin|1|throw|70
+Assassin|1|track|70
+Assassin|1|two handed club|70
+Assassin|1|two handed hammer|70
+Assassin|1|whip|70
+Assassin|2|ambush|95
+Assassin|2|backstab|95
+Assassin|2|bandage|95
+Assassin|2|bow|95
+Assassin|2|circle|95
+Assassin|2|club|95
+Assassin|2|crossbow|95
+Assassin|2|dagger|95
+Assassin|2|darken|95
+Assassin|2|dig|95
+Assassin|2|disarm|95
+Assassin|2|dodge|95
+Assassin|2|dual wield|95
+Assassin|2|fisticuffs|95
+Assassin|2|fourth attack|95
+Assassin|2|hammer|95
+Assassin|2|hide|95
+Assassin|2|palm|95
+Assassin|2|pick lock|95
+Assassin|2|read magic|95
+Assassin|2|second attack|95
+Assassin|2|skin|95
+Assassin|2|sling|95
+Assassin|2|sneak|95
+Assassin|2|spear|95
+Assassin|2|steal|95
+Assassin|2|stun|95
+Assassin|2|sword|95
+Assassin|2|third attack|95
+Assassin|2|throw|95
+Assassin|2|track|95
+Assassin|2|two handed club|95
+Assassin|2|two handed hammer|95
+Assassin|2|whip|95
+Deva|1|brew|70
+Deva|1|chant|70
+Deva|1|club|70
+Deva|1|dagger|70
+Deva|1|dig|70
+Deva|1|dodge|70
+Deva|1|fisticuffs|70
+Deva|1|hammer|70
+Deva|1|lay hands|70
+Deva|1|lighten|70
+Deva|1|read magic|70
+Deva|1|scribe|70
+Deva|1|second attack|70
+Deva|1|skin|70
+Deva|1|sword|70
+Deva|1|tame|70
+Deva|1|third attack|70
+Deva|1|throw|70
+Deva|1|two handed club|70
+Deva|1|two handed hammer|70
+Deva|1|whip|70
+Deva|2|brew|95
+Deva|2|chant|95
+Deva|2|club|95
+Deva|2|dagger|95
+Deva|2|dig|95
+Deva|2|dodge|95
+Deva|2|fisticuffs|95
+Deva|2|hammer|95
+Deva|2|lay hands|95
+Deva|2|lighten|95
+Deva|2|read magic|95
+Deva|2|scribe|95
+Deva|2|second attack|95
+Deva|2|skin|95
+Deva|2|sword|95
+Deva|2|tame|95
+Deva|2|third attack|95
+Deva|2|throw|95
+Deva|2|two handed club|95
+Deva|2|two handed hammer|95
+Deva|2|whip|95
+Necromancer|1|brew|70
+Necromancer|1|club|70
+Necromancer|1|dagger|70
+Necromancer|1|darken|70
+Necromancer|1|dig|70
+Necromancer|1|dodge|70
+Necromancer|1|fisticuffs|70
+Necromancer|1|hammer|70
+Necromancer|1|meditate|70
+Necromancer|1|read magic|70
+Necromancer|1|scribe|70
+Necromancer|1|second attack|70
+Necromancer|1|skin|70
+Necromancer|1|sword|70
+Necromancer|1|throw|70
+Necromancer|1|two handed club|70
+Necromancer|1|two handed hammer|70
+Necromancer|1|whip|70
+Necromancer|2|brew|95
+Necromancer|2|club|95
+Necromancer|2|dagger|95
+Necromancer|2|darken|95
+Necromancer|2|dig|95
+Necromancer|2|dodge|95
+Necromancer|2|fisticuffs|95
+Necromancer|2|hammer|95
+Necromancer|2|meditate|95
+Necromancer|2|read magic|95
+Necromancer|2|scribe|95
+Necromancer|2|second attack|95
+Necromancer|2|skin|95
+Necromancer|2|sword|95
+Necromancer|2|throw|95
+Necromancer|2|two handed club|95
+Necromancer|2|two handed hammer|95
+Necromancer|2|whip|95
+Kensai|1|armor|7
+Kensai|1|cure light|7
+Kensai|1|cure serious|7
+Kensai|1|shield|7
+Kensai|2|armor|10
+Kensai|2|cure light|10
+Kensai|2|cure serious|10
+Kensai|2|shield|10
+Assassin|1|armor|7
+Assassin|1|blindness|7
+Assassin|1|burning hands|7
+Assassin|1|chill touch|7
+Assassin|1|color spray|7
+Assassin|1|detect invisibility|7
+Assassin|1|fireball|7
+Assassin|1|gate|7
+Assassin|1|sense life|7
+Assassin|1|shield|7
+Assassin|2|armor|10
+Assassin|2|blindness|10
+Assassin|2|burning hands|10
+Assassin|2|chill touch|10
+Assassin|2|color spray|10
+Assassin|2|detect invisibility|10
+Assassin|2|fireball|10
+Assassin|2|gate|10
+Assassin|2|sense life|10
+Assassin|2|shield|10
+Necromancer|1|acid blast|7
+Necromancer|1|animate dead|7
+Necromancer|1|armor|7
+Necromancer|1|atonement|7
+Necromancer|1|blindness|7
+Necromancer|1|burning hands|7
+Necromancer|1|charm person|7
+Necromancer|1|chill touch|7
+Necromancer|1|clone|7
+Necromancer|1|continual light|7
+Necromancer|1|create light|7
+Necromancer|1|curse|7
+Necromancer|1|detect invisibility|7
+Necromancer|1|detect magic|7
+Necromancer|1|dispel magic|7
+Necromancer|1|dragon|7
+Necromancer|1|dream sight|7
+Necromancer|1|enchant armor|7
+Necromancer|1|enchant weapon|7
+Necromancer|1|energy drain|7
+Necromancer|1|enhanced strength|7
+Necromancer|1|faerie fire|7
+Necromancer|1|fireball|7
+Necromancer|1|fly|7
+Necromancer|1|frost blast|7
+Necromancer|1|gas blast|7
+Necromancer|1|group armor|7
+Necromancer|1|group infravision|7
+Necromancer|1|group levitate|7
+Necromancer|1|haste|7
+Necromancer|1|ice storm|7
+Necromancer|1|identify|7
+Necromancer|1|infravision|7
+Necromancer|1|invisibility|7
+Necromancer|1|knock|7
+Necromancer|1|levitate|7
+Necromancer|1|lightning bolt|7
+Necromancer|1|locate object|7
+Necromancer|1|magic missile|7
+Necromancer|1|meteor storm|7
+Necromancer|1|pixie dust|7
+Necromancer|1|portal|7
+Necromancer|1|shield|7
+Necromancer|1|shocking grasp|7
+Necromancer|1|sleep|7
+Necromancer|1|slow|7
+Necromancer|1|strength|7
+Necromancer|1|summon|7
+Necromancer|1|teleport|7
+Necromancer|1|ward good|7
+Necromancer|1|water breathe|7
+Necromancer|1|waterwalk|7
+Necromancer|1|web|7
+Necromancer|1|word of recall|7
+Necromancer|2|acid blast|10
+Necromancer|2|animate dead|10
+Necromancer|2|armor|10
+Necromancer|2|atonement|10
+Necromancer|2|blindness|10
+Necromancer|2|burning hands|10
+Necromancer|2|charm person|10
+Necromancer|2|chill touch|10
+Necromancer|2|clone|10
+Necromancer|2|continual light|10
+Necromancer|2|create light|10
+Necromancer|2|curse|10
+Necromancer|2|detect invisibility|10
+Necromancer|2|detect magic|10
+Necromancer|2|dispel magic|10
+Necromancer|2|dragon|10
+Necromancer|2|dream sight|10
+Necromancer|2|enchant armor|10
+Necromancer|2|enchant weapon|10
+Necromancer|2|energy drain|10
+Necromancer|2|enhanced strength|10
+Necromancer|2|faerie fire|10
+Necromancer|2|fireball|10
+Necromancer|2|fly|10
+Necromancer|2|frost blast|10
+Necromancer|2|gas blast|10
+Necromancer|2|group armor|10
+Necromancer|2|group infravision|10
+Necromancer|2|group levitate|10
+Necromancer|2|haste|10
+Necromancer|2|ice storm|10
+Necromancer|2|identify|10
+Necromancer|2|infravision|10
+Necromancer|2|invisibility|10
+Necromancer|2|knock|10
+Necromancer|2|levitate|10
+Necromancer|2|lightning bolt|10
+Necromancer|2|locate object|10
+Necromancer|2|magic missile|10
+Necromancer|2|meteor storm|10
+Necromancer|2|pixie dust|10
+Necromancer|2|portal|10
+Necromancer|2|shield|10
+Necromancer|2|shocking grasp|10
+Necromancer|2|sleep|10
+Necromancer|2|slow|10
+Necromancer|2|strength|10
+Necromancer|2|summon|10
+Necromancer|2|teleport|10
+Necromancer|2|ward good|10
+Necromancer|2|water breathe|10
+Necromancer|2|waterwalk|10
+Necromancer|2|web|10
+Necromancer|2|word of recall|10
+Deva|1|armor|7
+Deva|1|atonement|7
+Deva|1|bless|7
+Deva|1|cause critic|7
+Deva|1|cause light|7
+Deva|1|cause serious|7
+Deva|1|charm person|7
+Deva|1|continual light|7
+Deva|1|create food|7
+Deva|1|create light|7
+Deva|1|create water|7
+Deva|1|cure blind|7
+Deva|1|cure critic|7
+Deva|1|cure light|7
+Deva|1|cure plague|7
+Deva|1|cure serious|7
+Deva|1|detect alignment|7
+Deva|1|detect poison|7
+Deva|1|dispel evil|7
+Deva|1|earthquake|7
+Deva|1|enchant armor|7
+Deva|1|enchant weapon|7
+Deva|1|entangle|7
+Deva|1|flame strike|7
+Deva|1|gate|7
+Deva|1|give life|7
+Deva|1|grant peace|7
+Deva|1|group armor|7
+Deva|1|group heal|7
+Deva|1|group recall|7
+Deva|1|group refresh|7
+Deva|1|group sanctuary|7
+Deva|1|group summon|7
+Deva|1|heal|7
+Deva|1|infravision|7
+Deva|1|locate object|7
+Deva|1|purify|7
+Deva|1|refresh|7
+Deva|1|remove curse|7
+Deva|1|remove poison|7
+Deva|1|sanctuary|7
+Deva|1|sense life|7
+Deva|1|slow|7
+Deva|1|summon|7
+Deva|1|ward acid|7
+Deva|1|ward cold|7
+Deva|1|ward drain|7
+Deva|1|ward electricity|7
+Deva|1|ward energy|7
+Deva|1|ward evil|7
+Deva|1|ward fire|7
+Deva|1|ward poison|7
+Deva|1|water breathe|7
+Deva|1|waterwalk|7
+Deva|1|wither|7
+Deva|1|word of recall|7
+Deva|1|wrath of god|7
+Deva|2|armor|10
+Deva|2|atonement|10
+Deva|2|bless|10
+Deva|2|cause critic|10
+Deva|2|cause light|10
+Deva|2|cause serious|10
+Deva|2|charm person|10
+Deva|2|continual light|10
+Deva|2|create food|10
+Deva|2|create light|10
+Deva|2|create water|10
+Deva|2|cure blind|10
+Deva|2|cure critic|10
+Deva|2|cure light|10
+Deva|2|cure plague|10
+Deva|2|cure serious|10
+Deva|2|detect alignment|10
+Deva|2|detect poison|10
+Deva|2|dispel evil|10
+Deva|2|earthquake|10
+Deva|2|enchant armor|10
+Deva|2|enchant weapon|10
+Deva|2|entangle|10
+Deva|2|flame strike|10
+Deva|2|gate|10
+Deva|2|give life|10
+Deva|2|grant peace|10
+Deva|2|group armor|10
+Deva|2|group heal|10
+Deva|2|group recall|10
+Deva|2|group refresh|10
+Deva|2|group sanctuary|10
+Deva|2|group summon|10
+Deva|2|heal|10
+Deva|2|infravision|10
+Deva|2|locate object|10
+Deva|2|purify|10
+Deva|2|refresh|10
+Deva|2|remove curse|10
+Deva|2|remove poison|10
+Deva|2|sanctuary|10
+Deva|2|sense life|10
+Deva|2|slow|10
+Deva|2|summon|10
+Deva|2|ward acid|10
+Deva|2|ward cold|10
+Deva|2|ward drain|10
+Deva|2|ward electricity|10
+Deva|2|ward energy|10
+Deva|2|ward evil|10
+Deva|2|ward fire|10
+Deva|2|ward poison|10
+Deva|2|water breathe|10
+Deva|2|waterwalk|10
+Deva|2|wither|10
+Deva|2|word of recall|10
+Deva|2|wrath of god|10
+Monk|1|darken|70
+Monk|1|dig|70
+Monk|1|dodge|70
+Monk|1|fisticuffs|70
+Monk|1|hide|70
+Monk|1|kick|70
+Monk|1|layhands|70
+Monk|1|lighten|70
+Monk|1|meditate|70
+Monk|1|quivering palm|70
+Monk|1|read magic|70
+Monk|1|redirect|70
+Monk|1|second attack|70
+Monk|1|stun|70
+Monk|1|third attack|70
+Monk|1|atonement|7
+Monk|1|bless|7
+Monk|1|blur|7
+Monk|1|burning hands|7
+Monk|1|create food|7
+Monk|1|create water|7
+Monk|1|cure critic|7
+Monk|1|cure light|7
+Monk|1|cure plague|7
+Monk|1|cure serious|7
+Monk|1|detect alignment|7
+Monk|1|give life|7
+Monk|1|levitate|7
+Monk|1|purify|7
+Monk|1|refresh|7
+Monk|1|sanctuary|7
+Monk|1|shocking grasp|7
+Monk|1|wither|7
+Monk|1|wrath of god|7
+Druid|1|brew|70
+Druid|1|camouflage|70
+Druid|1|chant|70
+Druid|1|club|70
+Druid|1|dig|70
+Druid|1|dodge|70
+Druid|1|fisticuffs|70
+Druid|1|hammer|70
+Druid|1|read magic|70
+Druid|1|scribe|70
+Druid|1|second attack|70
+Druid|1|tame|70
+Druid|1|third attack|70
+Druid|1|throw|70
+Druid|1|track|70
+Druid|1|two handed club|70
+Druid|1|two handed hammer|70
+Druid|1|whip|70
+Druid|1|atonement|7
+Druid|1|bark skin|7
+Druid|1|bless|7
+Druid|1|call lightning|7
+Druid|1|create food|7
+Druid|1|create light|7
+Druid|1|create water|7
+Druid|1|cure critic|7
+Druid|1|cure light|7
+Druid|1|cure serious|7
+Druid|1|detect alignment|7
+Druid|1|detect invisibility|7
+Druid|1|detect poison|7
+Druid|1|dispel evil|7
+Druid|1|dispel good|7
+Druid|1|dream sight|7
+Druid|1|eagle claw|7
+Druid|1|enliven|7
+Druid|1|entangle|7
+Druid|1|flame strike|7
+Druid|1|fly|7
+Druid|1|goodberry|7
+Druid|1|invisibility|7
+Druid|1|pixie dust|7
+Druid|1|sense life|7
+Druid|1|stone skin|7
+Druid|1|summon mount|7
+Druid|1|sunray|7
+Druid|1|water breathe|7
+Druid|1|waterwalk|7
+Druid|1|word of recall|7
+Anti-Paladin|1|axe|70
+Anti-Paladin|1|bandage|70
+Anti-Paladin|1|block|70
+Anti-Paladin|1|club|70
+Anti-Paladin|1|crossbow|70
+Anti-Paladin|1|dagger|70
+Anti-Paladin|1|darken|70
+Anti-Paladin|1|dig|70
+Anti-Paladin|1|dual wield|70
+Anti-Paladin|1|fisticuffs|70
+Anti-Paladin|1|fourth attack|70
+Anti-Paladin|1|hammer|70
+Anti-Paladin|1|headbutt|70
+Anti-Paladin|1|kick|70
+Anti-Paladin|1|mounted attack|70
+Anti-Paladin|1|read magic|70
+Anti-Paladin|1|redirect|70
+Anti-Paladin|1|rescue|70
+Anti-Paladin|1|second attack|70
+Anti-Paladin|1|skin|70
+Anti-Paladin|1|spear|70
+Anti-Paladin|1|sword|70
+Anti-Paladin|1|third attack|70
+Anti-Paladin|1|throw|70
+Anti-Paladin|1|trip|70
+Anti-Paladin|1|two handed axe|70
+Anti-Paladin|1|two handed club|70
+Anti-Paladin|1|two handed hammer|70
+Anti-Paladin|1|two handed sword|70
+Anti-Paladin|1|whip|70
+Anti-Paladin|1|armor|7
+Anti-Paladin|1|atonement|7
+Anti-Paladin|1|blindness|7
+Anti-Paladin|1|cause critic|7
+Anti-Paladin|1|cause light|7
+Anti-Paladin|1|cause serious|7
+Anti-Paladin|1|chill touch|7
+Anti-Paladin|1|cure light|7
+Anti-Paladin|1|detect alignment|7
+Anti-Paladin|1|dispel good|7
+Anti-Paladin|1|energy drain|7
+Anti-Paladin|1|fear|7
+Anti-Paladin|1|harm|7
+Anti-Paladin|1|poison|7
+Anti-Paladin|1|refresh|7
+Anti-Paladin|1|summon mount|7

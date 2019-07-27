@@ -1,0 +1,359 @@
+CircleMUD v3.0 Shop File~
+#3000~
+3050
+3051
+3052
+2561
+3053
+3054
+-1
+1.10
+0.10
+2
+3
+4
+10
+11pelt|hide
+-1
+%s Sorry, I haven't got exactly that item.~
+%s You don't seem to have that.~
+%s I don't buy such items.~
+%s That is too expensive for me!~
+%s You can't afford it!~
+%s That'll be %d coins, please.~
+%s You'll get %d coins for it!~
+0
+2
+3000
+0
+3033
+-1
+0
+28
+0
+0
+#3001~
+3009
+3010
+3011
+2504
+1026
+1017
+-1
+1.10
+0.80
+-1
+%s Haven't got that on storage - try list!~
+%s I don't buy!~
+%s I don't buy!~
+%s I don't buy!~
+%s If you have no money, you'll have to go!~
+%s That'll be %d coins.~
+%s Oops - %d a minor bug - please report!~
+0
+2
+3001
+0
+3009
+-1
+0
+28
+0
+0
+#3002~
+3018
+3019
+3026
+3030
+3031
+3032
+3033
+3013
+3014
+6027
+7216
+16581
+-1
+1.50
+0.40
+1
+8
+15
+21
+24
+17
+12
+-1
+%s Haven't got that on storage - try list!~
+%s You don't seem to have that.~
+%s I don't buy THAT... Try another shop.~
+%s I can't afford such a treasure.~
+%s You can't afford it!~
+%s That'll be %d coins, please.~
+%s You'll get %d coins for it!~
+0
+2
+3002
+0
+3010
+-1
+0
+28
+0
+0
+#3003~
+3020
+3021
+3022
+3023
+3024
+3025
+-1
+1.30
+0.40
+5
+26
+-1
+%s I haven't got that kind of a weapon!~
+%s You don't carry that weapon!~
+%s I only buy weapons.~
+%s I can't afford such a great weapon!~
+%s sorry, but NO CREDIT!~
+%s That costs just %d coins.~
+%s Here, you can have %d coins for that.~
+0
+2
+3003
+0
+3011
+-1
+0
+28
+0
+0
+#3004~
+3040
+3041
+3042
+3043
+3044
+3045
+3046
+3070
+3071
+3075
+3076
+3080
+3081
+3085
+3086
+-1
+1.00
+0.50
+9
+-1
+%s Haven't got that on storage - try list!~
+%s You don't seem to have that.~
+%s I only buy armors.. Go away!~
+%s That is too expensive for me - Try a wizard!~
+%s You can't afford it!~
+%s That'll be %d coins, please.~
+%s You'll get %d coins for it!~
+0
+2
+3004
+0
+3020
+-1
+0
+28
+0
+0
+#3006~
+3060
+3061
+-1
+1.20
+0.80
+22
+-1
+%s Sorry pal, I have not got that kind of ship.~
+%s Ok, but let me see it first.~
+%s I only trade ships.~
+%s I can't afford such a nice ship.~
+%s This ship is too expensive for you.~
+%s Here is your ship, I'll take %d gold coins.~
+%s What a fine deal, you get %d gold coins.~
+0
+2
+3006
+0
+3049
+-1
+6
+22
+0
+0
+#3009~
+-1
+1.00
+0.50
+8pelt|hide|skin
+-1
+%s Sorry, I don't stock that item.~
+%s I don't think I heard you correctly, try again.~
+%s No thanks, I've no use for it.~
+%s I have no more money until this next shipment goes out.~
+%s You are too poor!~
+%s That is worth about %d coins to me, thanks.~
+%s I'll give you %d coins for that.~
+0
+6
+3009
+0
+3066
+-1
+0
+28
+0
+0
+#3040~
+3000
+3001
+3002
+3003
+3004
+-1
+1.10
+0.80
+-1
+%s It's very noisy in here, what did you say you wanted to buy?~
+%s I don't buy!~
+%s I don't buy!~
+%s I don't buy!~
+%s Are you drunk or what?? - NO CREDIT!~
+%s That'll be - say %d coins.~
+%s Oops - %d a minor bug - please report!~
+0
+2
+3040
+0
+3007
+-1
+0
+28
+0
+0
+#3046~
+3004
+3003
+-1
+1.00
+0.80
+-1
+%s It's very noisy in here, what did you say you wanted to buy?~
+%s I don't buy!~
+%s I don't buy!~
+%s I don't buy!~
+%s Oh, bugger off, NO CREDIT!~
+%s That'll be - say %d coins.~
+%s Oops - %d a minor bug - please report!~
+0
+2
+3046
+0
+3048
+-1
+0
+28
+0
+0
+#3047~
+11
+8507
+2800
+2855
+2856
+-1
+1.10
+0.80
+-1
+%s Haven't got that on storage - try list!~
+%s I don't buy!~
+%s I don't buy!~
+%s I don't buy!~
+%s If you have no money, you'll have to go!~
+%s That'll be %d coins.~
+%s Oops - %d a minor bug - please report!~
+0
+2
+3099
+0
+3084
+-1
+0
+28
+0
+0
+#3081~
+3077
+3078
+3079
+-1
+1.25
+0.50
+-1
+%s Sorry, I don't stock that item.~
+%s You don't seem to have that.~
+%s I don't trade in such items.~
+%s I can't afford that!~
+%s You are too poor!~
+%s That'll be %d coins, now take this to the kid in the Brush and Bridle room and exchange it.~
+%s I'll give you %d coins for that.~
+0
+2
+3081
+0
+3092
+-1
+1
+28
+0
+0
+#3089~
+3088
+3089
+3090
+3091
+3092
+3093
+3094
+3095
+3096
+3097
+3098
+3099
+-1
+1.20
+0.80
+8
+11
+-1
+%s Sorry, I don't stock that item.~
+%s You don't seem to have that.~
+%s I don't trade in such items.~
+%s I can't afford that!~
+%s You are too poor!~
+%s That'll be %d coins, thanks.~
+%s I'll give you %d coins for that.~
+0
+2
+3089
+0
+3089
+-1
+5
+14
+15
+25
+$~

@@ -1,0 +1,410 @@
+/**************************************************************************
+*  File: dg_misc.c                                                        *
+*  Usage: contains general functions for script usage.                    *
+*                                                                         *
+*                                                                         *
+**************************************************************************/
+
+#include "../localHeader/conf.h"
+#include "../localHeader/sysdep.h"
+
+ 
+#include "structs.h"
+#include "dg_scripts.h"
+#include "utils.h"
+#include "comm.h"
+#include "interpreter.h"
+#include "handler.h"
+#include "dg_event.h"
+#include "db.h"
+#include "screen.h"
+#include "spells.h"
+#include "buffer.h"
+
+/* external vars */
+extern struct index_data **trig_index;
+extern struct room_data *world;
+extern const char *item_types[];
+extern struct spell_info_type *spells;
+extern char *apply_types[];
+extern char *affected_bits[];
+
+/* MANWE_DG_AFFECT: Added prototype for get_char_dg() */
+struct char_data *get_char_dg(char *name);
+
+
+/* copied from spell_parser.c: */
+#define SINFO spells[spellnum]
+
+
+/* cast a spell; can be called by mobiles, objects and rooms, and no   */
+/* level check is required. Note that mobs should generally use the    */
+/* normal 'cast' command (which must be patched to allow mobs to cast  */
+/* spells) as the spell system is designed to have a character caster, */
+/* and this cast routine may overlook certain issues.                  */
+/* LIMITATION: a target MUST exist for the spell unless the spell is   */
+/* set to TAR_IGNORE. Also, group spells are not permitted             */
+/* code borrowed from do_cast() */
+void do_dg_cast(void *go, struct script_data *sc, trig_data *trig,
+		int type, char *cmd)
+{
+   char *buf2=get_buffer(1024);
+   struct char_data *caster = NULL;
+   struct char_data *tch = NULL;
+   struct obj_data *tobj = NULL;
+   struct room_data *caster_room = NULL;
+   char *s, *t;
+   int spellnum, target = 0;
+   int iBaseLevel;
+   char cnum[4];
+
+  /* need to get the caster or the room of the temporary caster */
+   switch (type) 
+      {
+       case MOB_TRIGGER:
+	  caster = (struct char_data *)go;
+          if (IS_CASTING(caster))
+             {
+             release_buffer(buf2);
+             return;
+             }
+	  iBaseLevel=MIN(10,MAX(1,GET_LEVEL(caster)/11));
+	  break;
+       case WLD_TRIGGER:
+	  caster_room = (struct room_data *)go;
+	  iBaseLevel=5;
+	  break;
+       case OBJ_TRIGGER:
+	  caster_room = dg_room_of_obj((struct obj_data *)go);
+	  if (!caster_room)
+	     {
+	     script_log("dg_do_cast: unknown room for object-caster!");
+	     release_buffer(buf2);
+	     return;
+	     }
+	  iBaseLevel=5;
+	  break;
+       default:
+	  script_log("dg_do_cast: unknown trigger type!");
+	  release_buffer(buf2);
+	  return;
+      }
+
+   skip_spaces(&cmd);
+  /* get:  spell level, spell name, target name */
+   if(isdigit((int)cmd[8]))
+      {
+      cnum[0]=cmd[8];
+      if(isdigit((int)cmd[9]))
+	 {
+	 cnum[1]=cmd[9];
+	 cnum[2]='\0';
+	 }
+      else
+	 cnum[1]='\0';
+      iBaseLevel=MAX(1,MIN(10,atoi(cnum)));
+      }
+   s = strtok(cmd, "'");
+
+   if (s == NULL)
+      {
+      sprintf(buf2, "Trigger: %s, VNum %ld. dg_cast needs spell name.",
+	      GET_TRIG_NAME(trig), GET_TRIG_VNUM(trig));
+      script_log(buf2);
+      release_buffer(buf2);
+      return;
+      }
+   s = strtok(NULL, "'");
+   if (s == NULL)
+      {
+      sprintf(buf2, "Trigger: %s, VNum %ld. dg_cast needs spell name in `'s.",
+	      GET_TRIG_NAME(trig), GET_TRIG_VNUM(trig));
+      script_log(buf2);
+      release_buffer(buf2);
+      return;
+      }
+   t = strtok(NULL, "\0");
+
+  /* spellnum = search_block(s, spells, 0); */
+   spellnum = find_skill_num(s);
+   if ((spellnum < 1) || (spellnum > MAX_SPELLS)) 
+      {
+      sprintf(buf2, "Trigger: %s, VNum %ld. dg_cast: invalid spell name (%s)",
+	      GET_TRIG_NAME(trig), GET_TRIG_VNUM(trig), s);
+      script_log(buf2);
+      release_buffer(buf2);
+      return;
+      }
+
+  /* Find the target */
+   if (t != NULL) 
+      {
+      one_argument(strcpy(buf2, t), t);
+      skip_spaces(&t);
+      }
+   if (IS_SET(SINFO.targets, TAR_IGNORE))
+      {
+      target = TRUE;
+      } 
+   else if (t != NULL && *t)
+      {
+      if (!target &&
+          (IS_SET(SINFO.targets, TAR_CHAR_ROOM) ||
+           IS_SET(SINFO.targets, TAR_CHAR_WORLD)))
+	 {
+	 if ((tch = get_char(t)) != NULL)
+	    target = TRUE; 
+	 }
+
+      if (!target &&
+          (IS_SET(SINFO.targets, TAR_OBJ_INV) ||
+           IS_SET(SINFO.targets, TAR_OBJ_EQUIP) ||
+           IS_SET(SINFO.targets, TAR_OBJ_ROOM) ||
+           IS_SET(SINFO.targets, TAR_OBJ_WORLD)))
+	 {
+	 if ((tobj = get_obj(t)) != NULL)
+	    target = TRUE; 
+	 }
+
+      if (!target)
+	 {
+	 sprintf(buf2, "Trigger: %s, VNum %ld. dg_cast: target not found (%s)",
+		 GET_TRIG_NAME(trig), GET_TRIG_VNUM(trig), cmd);
+	 script_log(buf2);
+	 release_buffer(buf2);
+	 return;
+	 }
+      }
+   if (!target && !SINFO.violent)
+      {
+      tch = caster;
+      }
+
+   if (IS_SET(SINFO.routines, MAG_GROUPS)) 
+      {
+      sprintf(buf2,
+	      "Trigger: %s, VNum %ld. dg_cast: group spells not permitted(%s)",
+	      GET_TRIG_NAME(trig), GET_TRIG_VNUM(trig), cmd);
+      script_log(buf2);
+      release_buffer(buf2);
+      return;
+      }
+
+   if (!caster) 
+      {
+      caster = read_mobile(DG_CASTER_PROXY, VIRTUAL);
+      if (!caster) 
+	 {
+	 script_log("dg_cast: Cannot load the caster mob!");
+	 release_buffer(buf2);
+	 return;
+	 }
+     /* set the caster's name to that of the object, or the gods.... */
+     /* take select pieces from char_to_room(); */
+      if (type==OBJ_TRIGGER)
+	 caster->player.short_descr=str_dup(((struct obj_data *)go)->short_description);
+      else if (type==WLD_TRIGGER)
+	 caster->player.short_descr = str_dup("The gods");
+      caster->next_in_room = caster_room->people;
+      caster_room->people = caster;
+      caster->in_room = real_room(caster_room->number);
+      call_magic(caster, tch, tobj, NULL,NULL,spellnum, iBaseLevel,CAST_SPELL);
+      extract_char(caster);
+      }
+   else
+      cast_spell(caster, tch, tobj, NULL,NULL,spellnum, iBaseLevel);
+   release_buffer(buf2);
+}
+
+
+/* modify an affection on the target. affections can be of the AFF_x  */
+/* variety or APPLY_x type. APPLY_x's have an integer value for them  */
+/* while AFF_x's have boolean values. In any case, the duration MUST  */
+/* be non-zero.                                                       */
+/* usage:  apply <target> <property> <value> <duration>               */
+#define APPLY_TYPE	1
+#define AFFECT_TYPE	2
+void do_dg_affect(void *go, struct script_data *sc, trig_data *trig,
+		  int script_type, char *cmd)
+{
+   struct char_data *ch = NULL;
+   int value=0, duration=0;
+   char *junk=get_buffer(MAX_INPUT_LENGTH); /* will be set to "dg_affect" */
+   char *charname=get_buffer(MAX_INPUT_LENGTH);
+   char *property=get_buffer(MAX_INPUT_LENGTH);
+   char *value_p=get_buffer(MAX_INPUT_LENGTH);
+   char *duration_p=get_buffer(MAX_INPUT_LENGTH);
+   int tindex=0, type=0;
+   char *buf2=get_buffer(1024);
+   struct affected_type af;
+   int change_val;   /* MANWE_DG_AFFECT: need to remember the index of the *
+		      * applied change (apply or affect */
+
+
+   half_chop(cmd, junk, cmd);
+   half_chop(cmd, charname, cmd);
+   half_chop(cmd, property, cmd);
+   half_chop(cmd, value_p, duration_p);
+
+  /* make sure all parameters are present */
+   if (!charname || !*charname || !property || !*property ||
+       !value_p || !*value_p || !duration_p || !*duration_p) 
+      {
+      sprintf(buf2, "Trigger: %s, VNum %ld. dg_affect usage: <target> <property> <value> <duration>",
+	      GET_TRIG_NAME(trig), GET_TRIG_VNUM(trig));
+      script_log(buf2);
+      release_buffer(buf2);
+      release_buffer(duration_p);
+      release_buffer(value_p);
+      release_buffer(property);
+      release_buffer(charname);
+      release_buffer(junk);
+      return;
+      }
+
+   value = atoi(value_p);
+   duration = atoi(duration_p);
+   if (duration <= 0)
+      {
+      sprintf(buf2, "Trigger: %s, VNum %ld. dg_affect: need positive duration!",
+	      GET_TRIG_NAME(trig), GET_TRIG_VNUM(trig));
+      script_log(buf2);
+      release_buffer(buf2);
+      release_buffer(duration_p);
+      release_buffer(value_p);
+      release_buffer(property);
+      release_buffer(charname);
+      release_buffer(junk);
+      return;
+      }
+
+  /* find the property -- first search apply_types */
+   tindex = 0;
+   while (*apply_types[tindex]!= '\n')
+      {
+      if (!str_cmp(apply_types[tindex], property))
+	 {
+	 type=APPLY_TYPE;
+         /* MANWE_DG_AFFECT: Record the index into the apply table */
+         change_val = tindex;
+	 break;
+	 }
+      tindex++;
+      }
+
+   if (!type)
+      { /* search affect_types now */
+      tindex = 0;
+      while (*affected_bits[tindex]!='\n')
+	 {
+	 if (!str_cmp(affected_bits[tindex], property)) 
+	    {
+	    type=AFFECT_TYPE;
+	   /* MANWE_DG_AFFECT: Record the index into the apply table */
+	    change_val = tindex;
+	    break;
+	    }
+	 tindex++;
+	 }
+      }
+
+   if (!type) 
+      { /* property not found */
+      sprintf(buf2, "Trigger: %s, VNum %ld. dg_affect: unknown property '%s'!",
+	      GET_TRIG_NAME(trig), GET_TRIG_VNUM(trig), property);
+      script_log(buf2);
+      release_buffer(buf2);
+      release_buffer(duration_p);
+      release_buffer(value_p);
+      release_buffer(property);
+      release_buffer(charname);
+      release_buffer(junk);
+      return;
+      }
+
+   /** If the mob name starts with #, make it UID instead.*/
+   log("charname-->%s<--", charname);
+   if (charname[0] == '#') {
+     charname[0] = '\x1b';
+   }
+   log("newchar-->%s<--", charname);
+
+  /* locate the target */
+  /* MANWE_DG_AFFECT: call the right procedure to see if the char is valid */
+   ch = get_char_dg(charname);
+
+   log("ch=%p\n", ch);
+
+   if (!ch) 
+      {
+      sprintf(buf2, "Trigger: %s, VNum %ld. dg_affect: cannot locate target!",
+	      GET_TRIG_NAME(trig), GET_TRIG_VNUM(trig));
+      script_log(buf2);
+      release_buffer(buf2);
+      release_buffer(duration_p);
+      release_buffer(value_p);
+      release_buffer(property);
+      release_buffer(charname);
+      release_buffer(junk);
+      return;
+      }
+
+/*    sprintf(buf2, "dg_affect: %s %c%d to %s for %d ticks!", */
+/* 	   GET_NAME(ch), (value>0)?'+':'\0', value, property, duration); */
+/*    script_log(buf2); */
+  /* add the affect */
+   af.type = 0;
+   af.duration = duration;
+   af.modifier = value;
+  /* MANWE_DG_AFFECT: Changed to properly setup the fields */
+   if (type == APPLY_TYPE)
+      {
+      af.location = change_val;
+      af.bitvector = 0;
+      }
+   else
+      {
+      af.location = 0;
+      af.bitvector = (1<<change_val);
+      }
+   affect_to_char(ch, &af);
+
+
+   release_buffer(buf2);
+   release_buffer(duration_p);
+   release_buffer(value_p);
+   release_buffer(property);
+   release_buffer(charname);
+   release_buffer(junk);
+}
+
+
+void do_dg_unaffect(struct char_data *ch, struct trig_data *trig, char *name)
+{
+   struct char_data *victim = NULL;
+
+   if (*name == UID_CHAR)  
+      {
+      if (!(victim = get_char_dg(name)))
+         {
+         char *buf=get_buffer(MAX_STRING_LENGTH);
+         sprintf(buf, "Trigger: %s, VNum %ld. dg_unaffect: victim (%s) not found",
+              GET_TRIG_NAME(trig), GET_TRIG_VNUM(trig), name);
+         script_log(buf);
+         release_buffer(buf);
+         return;
+         }
+      }
+   else if (!(victim = get_char_room_vis(ch, name)))
+      {
+      char *buf=get_buffer(MAX_STRING_LENGTH);
+      sprintf(buf, "Trigger: %s, VNum %ld. dg_unaffect: victim (%s) not found",
+              GET_TRIG_NAME(trig), GET_TRIG_VNUM(trig), name);
+      script_log(buf);
+      release_buffer(buf);
+      return;
+      }
+
+   while (victim->affected)
+      affect_remove(victim, victim->affected);
+}

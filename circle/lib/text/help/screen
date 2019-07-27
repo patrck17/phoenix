@@ -1,0 +1,51 @@
+-------------------------------------------------------------------------------
+Movement:                          | Communication:
+NORTH SOUTH EAST WEST UP DOWN      | SAY SHOUT HOLLER TELL ASK WHISPER OOC
+LOOK SCAN EXITS ENTER LEAVE        | MAIL RECEIVE CHECK GOSSIP GRATS NOOC
+LOCK UNLOCK OPEN CLOSE             | NOTELL NOSHOUT NOGOSSIP NOGRATS EMOTE
+LAND FLY RECALL                    | COMMUNE BOARD AUCTION BID NOAUCTION
+				   | NOINFO
+-------------------------------------------------------------------------------
+Food and Rest:			   | Levels and experience:
+SLEEP WAKE REST SIT STAND	   | SCORE LEVELS PRACTICE GAIN SKILLS SPELLS
+EAT DRINK TASTE SIP POUR	   | LEARN
+-------------------------------------------------------------------------------
+Group-related commands:		   | "Auto" Commands:
+GROUP GREPORT GSAY UNGROUP SPLIT   | AUTOEXIT AUTOLOOT AUTOSPLIT AUTOGOLD
+FOLLOW GWHO			   | AUTOASSIST AUTOSACRIFICE
+-------------------------------------------------------------------------------
+Manipulating Objects:              | Player Information: 
+GET DROP JUNK DONATE PUT GIVE WEAR | WHO WHERE WHOIS REPORT TIME WEATHER
+GRAB INVENTORY EQUIPMENT REMOVE    | WIZLIST IMMLIST PROMPT DISPLAY 
+EXAMINE REFUEL SACRIFICE FIX       | COUNT AFK HOMETOWN
+-------------------------------------------------------------------------------
+Ranged Combat:			   | Remorts:
+THROW PULL SHOOT RANGED		   | REMORT! REMORTNET CRECALL
+-------------------------------------------------------------------------------
+Exiting the Game:		   | Clans:
+CAMP CAMP! RENT OFFER INNS SAVE	   | CLANS ADDMEMBER DELMEMBER PRICES CRECALL
+				   | CSAY CDONATE CWITHDRAW CBALANCE CDEPOSIT
+-------------------------------------------------------------------------------
+General Information:		   | Magic Items and Abilities:
+ABBREVIATIONS LIGHT CREDITS SHOPS  | QUAFF USE RECITE SWALLOW
+EDITOR LINK MOOD HOUSES FLAGS      | POTION WAND STAFF SCROLL PILL
+EXPERIENCE HANDEDNESS OBJECTS      | INVISIBLE VISIBLE AFFECTS
+-------------------------------------------------------------------------------
+Races:				   | Classes:
+RACES HUMAN ELF H_ELF DARK_ELF     | CLASSES MAGIC-USER WARRIOR CLERIC THIEF
+DWARF HALFLING SPRITE MINOTAUR     | BARBARIAN BARD PALADIN ANTI-PALADIN 
+AVIAN H_OGRE H_ORC AESIR TITAN     | DRUID RANGER MONK DEVA ASSASSIN KENSAI
+SHADOW DRACONIAN RACESKILLS	   | NECROMANCER
+------------------------------------B-------------------------------------------
+Combat:                            | Utility:
+KILL WIELD FLEE ASSIST TRACK       | ^ ! BUG IDEA TYPO QUIT SAVE BRIEF COMPACT
+CONSIDER DIAGNOSE		   | HELP INDEX INFO TOGGLE NEWS AREAS RESIZE
+(KICK BASH RESCUE BACKSTAB CAST)   | TITLE NOSUMMON COMMANDS SOCIALS MOVE
+NOFIGHT				   |
+-------------------------------------------------------------------------------
+Battlefield:			   |
+NOBATTLE			   |
+-------------------------------------------------------------------------------
+Further information is available by typing HELP <keyword>, where <keyword> is one
+of the items listed above.
+-------------------------------------------------------------------------------

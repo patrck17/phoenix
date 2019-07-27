@@ -1,0 +1,764 @@
+@Version: 2
+#0
+bug~
+a bug~
+This bug is what is left of a piece of mudmail which was on a person while the game crashed.  Not much of a big deal if you ask me.~
+~
+13 0 0 0 0 0
+0 0 0 0 0 0 0 0
+0 0 0 1 1
+E
+bug~
+Yups, a bug.
+~
+#1
+mushroom magic food~
+a magic mushroom~
+A tasty-looking magic mushroom sits here.~
+~
+19 gn 0 0 a 0
+18 0 0 0 0 0 0 0
+1 0 0 40 40
+M
+27
+E
+mushroom magic~
+   A mushroom of shimmering existence, these morsels are called into being
+from pure magic.  The cap is a delicate lavender color, full and firm, the
+underside packed with dense gills.  A thick, meaty stem attaches at the
+center.  Despite their otherworldly nature, the mushrooms are filling and
+fairly tasty, if terribly monotonous when eaten over weeks on end.    
+~
+#2
+sparkling diamond object earring~
+a sparkling diamond earring~
+A small sparkling object lies next to your foot.~
+~
+9 a 0 0 ar 0
+10 0 0 0 100 0 0 0
+1 1000 0 150 150
+M
+18
+E
+diamond earring~
+   An immense diamond cradles within a nest of golden fingers holding it
+tightly.  It gleams and sparkles in the available light and magnifies it!    
+~
+A
+13 20
+#3
+diamond shinplates~
+diamond studded platinum shinplates~
+A glimmering pair of metal plates shines brilliantly.~
+~
+9 ags 0 0 af 0
+10 0 0 0 0 0 0 0
+5 0 0 150 150
+M
+18
+E
+plates shinplates diamond~
+   These shin guards are truly a tribute to the crafter.  They are made of
+highly polished platinum plate and cover each shin from ankle to knee and held
+there by platinum mesh belts.  Each guard has countless pea-sized, faceted
+diamonds embedded in a swirling pattern that makes you dizzy to look at but
+captures and reflects all available light.
+~
+A
+19 5
+A
+2 3
+A
+18 5
+#4
+potion yellowish red~
+a yellowish-red potion~
+A small vial filled with a yellowish-red liquid lies on the ground here.~
+~
+10 gh 0 0 ao 0
+8 54 -1 -1 0 0 0 0
+1 45 0 40 40
+M
+9
+E
+vial yellow~
+A wispy steam circulates above the vile looking liquid.
+~
+#5
+strange mask~
+a strange mask~
+A mask is lying on the ground here.~
+~
+9 b 0 0 as 0
+10 0 0 0 0 0 0 0
+2 1200 0 125 125
+M
+24
+E
+mask~
+   Swirls and patterns constantly in motion defy anyone to actually describe
+this item, suffice to say it covers the whole face regardless of the size of
+the nose.    
+~
+A
+12 25
+#6
+potion reddish yellow~
+a reddish-yellow potion~
+A small vial filled with reddish-yellow liquid lies on the ground here.~
+~
+10 g 0 0 ao 0
+8 52 -1 -1 0 0 0 0
+1 350 0 40 40
+M
+9
+E
+vial reddish~
+A wispy steam circulates above the vile looking liquid.
+~
+#7
+potion foul black~
+a foul smelling black potion~
+Smoke rises from a foul smelling black potion on the ground.~
+~
+10 0 0 0 ao 0
+10 28 28 28 0 0 0 0
+1 1000 0 40 40
+M
+9
+E
+potion glass black~
+Thick and tarry, the solution in this glass is black as night and smells awful.
+~
+#8
+diamond plate~
+diamond plate mail~
+A beautiful suit of armor made from diamonds glitters in the light here.~
+~
+9 agiklnos 0 0 ad m
+16 0 0 0 0 0 0 0
+20 0 0 150 150
+M
+18
+E
+diamond plate mail~
+   Thin strips of platinum hold millions of tiny diamonds with little metallic
+fingers.  The mail covers the entire torso and shows numerous joints for the
+best flexibility.  The gleam of the diamonds catching the light is blinding in
+its intensity!    
+~
+A
+4 5
+#9
+dragon shield~
+the Dragon Shield~
+A shield with the emblem of a dragon on it rests here.~
+~
+9 agnos 0 0 aj dfm
+16 0 0 0 0 0 0 0
+18 0 0 140 140
+M
+35
+E
+shield dragon~
+   A single huge shield created from a single chest scale of the hugest
+dragon, this shield is truly mighty.  Four golden bolts hold the adamantium
+handhold to the center.    
+~
+A
+5 2
+A
+1 1
+#10
+diamond bracers~
+a pair of diamond bracers~
+A pair of sparkling diamond bracers glitter here.~
+~
+9 agiklnos 0 0 ai m
+10 0 0 0 0 0 0 0
+15 0 0 150 150
+M
+18
+E
+bracers diamond~
+   A pair of exquisitely jeweled forearm guards, these bracers are literally
+smothered in fine, sparkling diamonds.    
+~
+A
+3 2
+A
+12 25
+#11
+map paper Heliopolis~
+a map of Heliopolis~
+A small mud stained piece of paper is here.~
+~
+13 0 0 0 a 0
+0 0 0 0 0 0 0 0
+1 50 0 1 1
+E
+map paper Heliopolis~
+			MOUNTAINS
+			     |
+              		     |
+                [Ant Hill]---+---[NEWBIE ZONE]
+                             |
+		             |                       
+    +----TRAIL---------------+------------TRAIL--------------------+
+[Druid]		[Temple]    			       [Welmar's]  |[Barbarian]
+    |           [Halls ]--[Temple]---[Donation]        [ Castle ]  |       
+    |                        |                             |       |
+    |         [Clerics]---[Temple]---[Inn-Bards]    [Maps]-K       |
+    |                     [Plaza ]                  [Bank]-I       |
+    |  [Magic]  [Bakery]     |      [Store]   [Weapons]    N       |     
+    |     |        |         |         |          |        G       |
+  <=+=====+==HIGH==+=====[ MARKET ]====+==STREET==+========S=======+=>
+    T     |        |     [ PLACE  ]    |          |        |    
+    A  [Mages]  [Armory]     |       [Pets]   [Warriors]   R   
+    L    [Barracks] [Monks]  |    [Tanner] [Rangers]       D
+    O         |        |     |       |        |            |  
+  @=N=====ASH=STREET===+==[Meeting]==+==ASH=STREET======+==+
+    |                  |  [Square ]  |        |         |     
+    A                [Inn]   |    [AntiPal][Levee] [Warehouse]
+    V		   [Thieves] |	              |
+    E             [Paladins] |                |
+    |                 |      |                |
+    +===FLAME=STREET==+======|--[Dump]        | 
+                             |		   [RIVER]
+                            \ / 
+                             v
+                   Residential Heliopolis
+~
+#15
+bottomless cup~
+a cup of water~
+A cup of water sits here sloshing around as it gets kicked.~
+~
+23 gs 0 0 a 0
+999999 999999 0 0 0 0 0 0
+1000004 0 0 45 45
+M
+37
+E
+cup tin~
+It's just a cup, but the gods have blessed this one to never be empty.
+~
+#16
+ball light~
+a ball of light~
+A small ball of light glows warmly here.~
+~
+1 gns 0 0 ao 0
+0 0 12 0 0 0 0 0
+1 0 0 125 125
+M
+24
+E
+ball light~
+Small and circular, this light is cool to the touch.
+~
+#17
+staff continual light~
+a glowing staff~
+A staff glows with a warm light here.~
+~
+1 agns 0 0 ao 0
+0 0 -1 0 0 0 0 0
+3 0 0 40 40
+M
+8
+E
+staff glowing~
+   An old wood, perhaps seasoned maple with burls, there are runes on top of
+the staff that appear ancient elvish and glow with a warm, bright light.    
+~
+#18
+head severed proto prototypical low~
+a prototypical low-levelled head~
+A non-identifiable, severed head lies here.~
+~
+13 mns 0 0 ao 0
+0 0 0 0 0 0 0 0
+10 0 0 40 40
+M
+32
+E
+head~
+Cleanly severed at the neck, the head is frozen in a look of surprise.
+~
+A
+25 -4
+#19
+head severed proto prototypical mid~
+a prototypical mid-levelled head~
+A non-identifiable, severed head lies here.~
+~
+13 mns 0 0 ao 0
+0 0 0 0 0 0 0 0
+10 0 0 1 1
+A
+18 1
+A
+19 1
+A
+25 -2
+#20
+head severed proto prototypical high~
+a prototypical high-levelled head~
+A non-identifiable, severed head lies here.~
+~
+13 mns 0 0 ao 0
+0 0 0 0 0 0 0 0
+10 0 0 1 1
+A
+18 2
+A
+19 2
+A
+25 -1
+#21
+katana beautiful exquisite sword japanese~
+a beautiful katana~
+An exquisitely crafted Japanese sword inspires you with its beauty.~
+~
+5 abgnps 0 0 an bdfhi
+0 3 10 3 100 0 0 0
+10 0 0 100 100
+M
+13
+E
+katana sword~
+   Extremely sharp, the blade arches in a delicate curve of steel.  The hilt
+is ebony black with inlaid mother-of-pearl crysanthemum and lotus flowers as
+adornment.    
+~
+A
+18 5
+A
+25 2
+#22
+sword Grayswandir~
+Grayswandir~
+An intricately etched, silver blade catches your eye.~
+~
+5 aginps 0 0 an bdfhi
+0 3 10 3 120 0 0 0
+12 0 0 1 1
+A
+18 5
+A
+25 2
+#23
+phoenix eye~
+the Eye of the Phoenix~
+The legendary Phoenix Eye is here.~
+~
+8 a 0 0 as 0
+0 0 0 0 0 0 0 0
+1 0 0 1 1
+E
+world small~
+When you try to see what is inside the eye you get drawn into the eye.
+You seem to be flying above a huge forest.
+Looking down you see several Phoenixes flying in groups.
+The forest has ended and you are now looking down on the plains.
+You can see humanoid forms walking there and harvesting the land.
+They don't seem to notice you.
+You are now flying over the mountains towards a cave.
+You start to descend and land in the cave.
+In the cave you see a large Phoenix nursing a small Phoenix.
+Suddenly you hear footsteps and shouting coming from outside.
+A group of barbarians enter the cave.
+One of them points to the Phoenixes and shouts something unrecognizable.
+The barbarians run towards the Phoenixes and start throwing their spears.
+The large Phoenix quickly defends her young and folds her wings over it.
+The spears hit the mother and it screams a horrible high sound and dies..
+The leader quickly takes out his dagger and cuts out the mother's eye.
+The barbarians climb out of the cave, leaving the young phoenix behind..
+The corpse of the mother quickly disintegrates and leaves the young phoenix
+covered with ash. The young phoenix then stands up and flies out of the cave.
+Your vision starts fading when the young phoenix flies away over the mountains.
+The last thing you hear is the scream of the phoenix.
+~
+E
+phoenix eye~
+You look at the legendary Eye of the Phoenix.
+The eye is diamond shaped and seems to burn from inside.
+When you look at it more carefully you notice a small world inside the eye.
+~
+A
+18 5
+A
+19 5
+A
+14 20
+#24
+potions potionbox box~
+a box labeled 'Potions'~
+A box with strange writing on the side of it lies here.~
+~
+15 st 0 0 ao 0
+2000 0 0 0 0 0 0 0
+0 0 0 1 1
+E
+potions potionbox box~
+	It says 'Potions' in elven script.
+~
+#25
+eq eqbox box~
+a box labeled 'Equipment'~
+A box with strange writing on the side of it lies here.~
+~
+15 st 0 0 ao 0
+2000 0 0 0 0 0 0 0
+0 0 0 1 1
+E
+eq eqbox box~
+	It says 'Equipment' in elven script.
+~
+#26
+wands staves wandbox staffbox box~
+a box labeled 'Wands & Staves'~
+A box with strange writing on the side of it lies here.~
+~
+15 ghnpstvx 0 0 ao 0
+2000 0 0 0 0 0 0 0
+0 0 0 175 175
+M
+14
+E
+wands staves wandbox staffbox box~
+	It says 'Wands and Staves' in elven script.
+~
+#27
+weapons weaponbox box~
+a box labeled 'Weapons'~
+A box with strange writing on the side of it lies here.~
+~
+15 st 0 0 ao 0
+2000 0 0 0 0 0 0 0
+0 0 0 1 1
+E
+weapons weaponbox box~
+	It says 'Weapons' in elven script.
+~
+#29
+horns ancalador~
+the Horns of Ancalador~
+A pair of golden dragon horns set into a helmet is lying here.~
+~
+9 abgns 0 0 ae 0
+10 0 0 0 0 0 0 0
+0 0 0 125 125
+M
+24
+E
+horns ancalador~
+These giant golden horns were certainly wrested from a great dragon.  Small
+worn runes are inscribed on the inside in the common language.  After some
+studying you read the word, "Ancalador".
+~
+A
+18 5
+A
+19 5
+A
+12 40
+A
+13 15
+A
+1 2
+#31
+old slaver whip~
+the Slaver's whip~
+A long dangerous looking whip waits to used against a slave~
+~
+5 bchnpsv 0 0 an 0
+0 4 10 5 0 0 0 0
+4 0 0 140 140
+M
+35
+E
+whip slaver~
+   Intricate layering of dragonscales has been linked and tied by thin strands
+of silver wire into this 12 foot long whip.  The base is a wound leather
+wrapping that protects your hands from the sharp scales.    
+~
+A
+5 -1
+A
+18 -4
+A
+19 5
+#32
+old collar spiked~
+a spiked collar~
+A small spiked collar is here.~
+~
+9 g 0 0 ac 0
+0 0 0 0 50 0 0 0
+9 970 0 40 40
+M
+28
+A
+17 -2
+A
+19 3
+#33
+band wedding ring~
+a stunning gold wedding band~
+A beautiful golden ring with an inscription is lying here.~
+~
+11 0 0 0 ab 0
+0 0 0 0 0 0 0 0
+2 0 0 75 75
+M
+15
+E
+band ring inscription~
+An inscription read, "For the love of my life."
+~
+A
+19 1
+A
+18 2
+A
+17 -10
+#35
+portal gate~
+a misty portal~
+A misty portal floats here, beckoning you to enter, if you dare!~
+~
+13 0 0 0 0 0
+0 0 0 0 0 0 0 0
+1000 0 0 1 1
+#36
+talons phoenix~
+the talons of the Phoenix~
+A set of fiery red and orange talons lies here.~
+~
+5 agsv 0 0 an bdefgjlpq
+0 5 6 2 70 0 0 0
+2 10000 1000 175 175
+M
+14
+E
+talons phoenix~
+The Talons glow with an unnatural light.  They look almost as if they were on fire,
+even though they have been removed from the fiery statue of the Phoenix.
+~
+A
+18 3
+A
+19 2
+C
+s
+S
+30 6 10
+S
+16 5 5
+#37
+medallion appreciation~
+a medallion of appreciation~
+A small white gold medallion lies here.~
+~
+11 agi 0 0 ac 0
+0 0 0 0 0 0 0 0
+0 0 0 95 95
+M
+17
+E
+medallion appreciation~
+   Just a small medallion of gold dangling from a golden chain, the honor and
+prestige of earning this is well worth the effort.  Few, have impressed the
+immortals this much and are blessed with the charm of their actions.    
+~
+A
+25 10
+#38
+trophy corpse kitten~
+Manok's Kitten Corpse~
+Stuffed standing on two legs with front legs pawing, Manok's kitten is still cute.~
+~
+0 abgp 0 0 a 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0
+T 38
+E
+trophy corpse kitten~
+   Silky black fur streaked with grey stripes adorns this kitten and you
+almost can't see the black collar with a bell and little tag around her neck.
+She looks up at you, expecting a to be petted or get a treat at the least.  
+Her glass eyes glow in the dark, cutting straight to your soul.  She yawns
+with a fixed open gape forever frozen in that look of surprise when Iluvatar
+pierced her heart after a fierce battle.    
+
+A large button sticks out prominently on the neck waiting for a push.
+~
+#40
+berry berries bunch food~
+a bunch of berries~
+A delicious looking bunch of berries lies on the ground.~
+~
+19 g 0 0 a 0
+18 0 0 0 0 0 0 0
+1 0 0 40 40
+M
+27
+#41
+wand magenta~
+a magenta wand~
+A magenta wand hovers here a few inches off the floor.~
+Purple dust fills the room as $n waves a magenta wand around $s head.~
+3 0 0 0 ao 0
+5 5 5 39 0 0 0 0
+0 0 0 0 0
+#43
+earring kindness~
+an earring of kindness~
+A small glittering disk is half hidden by the dirt.~
+~
+9 aginstv 0 0 ar 0
+8 0 0 0 25 0 0 0
+2 4000 0 150 150
+M
+18
+A
+4 2
+A
+12 35
+A
+13 25
+A
+19 2
+#44
+wedding band~
+a Golden Wedding Band~
+A beautiful golden band lays here waiting for its owner.~
+~
+8 apv 0 0 ab 0
+0 0 0 0 0 0 0 0
+0 0 0 75 75
+M
+15
+E
+wedding band~
+   A beautiful golden ring, crafted and blessed by the gods, it indicates the
+uniting of two souls.    
+~
+A
+18 2
+A
+19 1
+A
+17 -10
+A
+12 20
+#45
+robes universe xenorak hoarde~
+the Robes of the Universe~
+Ethereal robes emenating great power lay here waiting for their owner.~
+~
+9 ap 0 0 ak 0
+400 0 0 0 0 0 0 0
+1 1000000 0 0 0
+M
+24
+E
+robes universe~
+   If you have these, and you are a mortal that isn't Xenorak, you will be
+purged and/or deleted.    
+~
+A
+27 2097039
+A
+28 112
+A
+19 20
+A
+2 25
+A
+5 10
+A
+1 25
+C
+cdfhsxz
+#46
+staff ages xenorak hoarde~
+the Staff of Ages~
+A staff of unbelievable power hovers here waiting for its master.~
+~
+5 abp 0 0 an CDEF
+0 10 10 11 102 0 0 0
+1 1000000 0 0 0
+M
+15
+E
+staff ages~
+   If you have these, and you are a mortal that isn't Xenorak, you will be
+purged and/or deleted.    
+~
+S
+88 10 90
+S
+28 10 40
+S
+99 10 40
+#50
+medal adf~
+a Medal of the ADF~
+A golden medal with purple ribbons signifies a hero of the ADF~
+~
+9 st 0 0 ac 0
+10 0 0 0 0 0 0 0
+1 0 0 75 75
+M
+15
+E
+adf medal~
+   A circlet of pure gold, engraved with the symbol of the ADF.  Purple
+ribbons are attached to the medal, and a gold chain allows it to be worn about
+the neck.    
+~
+A
+18 2
+A
+19 2
+A
+12 30
+A
+13 20
+#51
+medal hoarde~
+a Hoarde Commander Medal~
+A small silver sword tied with red ribbons, signifies a commander in the hoarde.~
+~
+9 st 0 0 ac 0
+10 0 0 0 0 0 0 0
+1 0 0 90 90
+M
+16
+E
+medal hoarde~
+   The small silver replica sword, is wrapped in red ribbons and can be
+fastend upon the lapel of a uniform at the neck.    
+~
+A
+18 2
+A
+19 2
+A
+12 30
+A
+13 20
+#52
+imm_light~
+an immortal light~
+~
+~
+1 afgjklpst d 0 0 0
+0 0 0 0 104 0 0 0
+0 0 0 0 0
+A
+26 200
+$~

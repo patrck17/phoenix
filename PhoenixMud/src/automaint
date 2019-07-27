@@ -1,0 +1,25 @@
+#!/bin/sh
+
+echo "Purging playerfile, please wait..."
+cd lib/etc
+echo `date` >> DELETED
+../../bin/purgeplay players >> DELETED
+
+if [ ! -z players.new ]; then
+   mv players players.old
+   mv players.new players
+fi
+echo "Done."
+
+echo "Purging objects, please wait..."
+cd ../plrobjs
+./purgeobjs
+echo "Done."
+
+echo "Purging aliases, please wait..."
+cd ../plralias
+./purgealias
+cd ../..
+echo "Done."
+
+exit

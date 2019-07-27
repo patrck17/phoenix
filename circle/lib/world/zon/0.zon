@@ -1,0 +1,27 @@
+@Version: 5
+#0
+MUD Internals  ~
+PhoenixMUD Staff~
+None~
+None~
+975913137 975913137 1300417642
+Lucas - obj~
+None~
+None~
+None~
+None~
+99 45 3 4 0 6
+0 0
+*             arg1       arg2      arg3            arg4
+* M (Mobile)  Mob-Vnum   Wld-Max   Room-Vnum         --  
+* O (Object)  Obj-Vnum   Wld-Max   Room-Vnum       %load
+* G (Give)    Obj-Vnum   Wld-Max   %load            --  
+* E (Equip)   Obj-Vnum   Wld-Max   EQ-Position     %load
+* P (Put)     Obj-Vnum   Wld-Max   Target-Obj-Vnum %load
+* D (Door)    Room-Vnum  Door-Dir  Door-State        --  
+* R (Remove)  Room-Vnum  Obj-Vnum    --              --  
+* T (Trigger) Trig-Type  Trig-Vnum Unused
+* V (Variable)Trig-Type  Context   Room#  Varname Value
+* F (Force)   String Arg
+S
+$

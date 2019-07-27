@@ -1,0 +1,1261 @@
+@Version: 2
+#3000
+beer barrel~
+a barrel~
+An old beer barrel rests here.~
+~
+17 0 0 0 a 0
+50 50 1 0 0 0 0 0
+65 0 0 40 40
+M
+8
+E
+barrel~
+   A large wooden barrel with metal bands that wrap all the way around its
+circumference.    
+~
+#3001
+beer bottle~
+a bottle~
+A beer bottle has been left here.~
+~
+17 0 0 0 ao 0
+8 8 1 0 0 0 0 0
+10 2 0 40 40
+M
+9
+E
+bottle beer~
+A brownish tinted bottle with some foaming bubbly liquid looks tempting.
+~
+#3002
+ale bottle dark~
+a bottle~
+A dark bottle of ale has been left here.~
+~
+17 0 0 0 a 0
+8 8 3 0 0 0 0 0
+10 2 0 40 40
+M
+9
+E
+bottle~
+The bottle is dark amber glass as is the liquid inside.
+~
+#3003
+liquor firebreather bottle~
+a firebreather~
+A firebreather has been left here.~
+~
+17 0 0 0 ao 0
+8 8 7 0 0 0 0 0
+10 3 0 40 40
+M
+9
+E
+bottle firebreather~
+This is a dark amber bottle filled with a noxious smelling liquid.
+A label on the side of the bottle depicts a red dragon's head with
+flames shooting out of his mouth.
+
+A small note under the dragon's head reads:
+"Firebreather Ale is a product of Rot Gut Brewery"
+~
+#3004
+local bottle~
+a bottle~
+A dark bottle has been left here.~
+~
+17 0 0 0 a 0
+8 8 8 0 0 0 0 0
+10 2 0 40 40
+M
+9
+E
+bottle~
+This is a clear glass bottle, but whatever is in it is really dark colored.
+~
+#3006
+candy cane~
+a candy cane~
+A delicious-looking candy cane is here.~
+~
+19 a 0 0 ao 0
+5 0 0 0 0 0 0 0
+1 0 0 40 40
+M
+27
+E
+candy cane~
+This candy cane smells like peppermint, and makes you think of good times
+you had opening packages on Christmas morning when you were a small
+child.
+~
+#3007
+tall christmas tree pine~
+a very tall Christmas tree~
+A very tall Christmas tree sparkles with lights and festive decorations here.~
+~
+15 ag 0 0 0 0
+1000 5 -1 0 0 0 0 0
+500 0 0 40 40
+M
+8
+E
+tall christmas tree pine~
+Seemingly from out of nowhere, a VERY tall pine tree suddenly grew here!
+You stare in awe at the beauty of the decorations gracing its branches.
+There are ornaments that look just like bubbles which never pop, glowing
+and swirling in light given off from within each one.  Each branch is
+adorned with sparkling icicles hanging down which appear to be just a
+little bit wet, but they never drip or melt.  The tree is encircled with
+a garland of strung dewdrops which have captured the subtle light of
+moonbeams on the night of a full moon.  The entire tree is touched by a
+thin layer of glittering frost which appears to dance in the light given
+off by the ornaments.  As you look upwards you see bright star light at
+the very top of the tree which illuminates the whole room.
+~
+E
+ornament bubble light~
+You reach out to touch one of the ornaments and are surprised at its
+delicacy.  It seemingly floats there in front of your eyes.  As your hand
+gets closer, a glowing tendril of light extends towards you, leaving a
+slight tingling sensation in your fingertips.
+~
+E
+ice icicle~
+Each icicle looks and feels wet and cold to the touch.  You wonder why
+they don't just melt away.  It must be magic!
+~
+E
+garland dew dewdrops~
+This is really amazing!  How in the world did someone manage to string
+dewdrops into such a delicate garland?  You can't even see the string!
+The drops don't evaporate, drip, or run together, but they feel wet to
+the touch.  As you pull your fingers away, you realize you are completely
+dry!
+~
+E
+star light~
+At the pinnacle of the tree you see starlight from the heavens dancing
+just above the very top branch.  How in the world did it fall from the
+sky to rest here?
+~
+#3009
+waybread bread~
+a waybread~
+Some waybread has been left here.~
+~
+19 0 0 0 a 0
+25 0 0 0 0 0 0 0
+3 15 0 40 40
+M
+27
+E
+waybread bread~
+The waybread is the traditional feed of elves when travelling, they
+call it lembas.  It is said to refresh the weary traveler greatly.
+~
+#3010
+bread loaf~
+a small bread~
+A loaf of bread has been left here.~
+~
+19 0 0 0 a 0
+5 0 0 0 0 0 0 0
+1 24 0 40 40
+M
+27
+E
+bread loaf~
+   Oblong like a large cigar, there are three slits in the browned top where
+butter was drizzled in during the baking process.  The odor makes your stomach
+growl.    
+~
+#3011
+danish pastry~
+a danish pastry~
+A nice looking delicious danish pastry has been placed here.~
+~
+19 0 0 0 a 0
+5 0 0 0 0 0 0 0
+1 41 0 40 40
+M
+27
+E
+pastry danish~
+   This one has a rounded oblong shape with slits cut into the top showing
+some baked apple filling.  Someone has considerately drizzled a white sugary
+glaze over the top.    
+~
+#3012
+phoenix feather mantle~
+a Phoenix Feather Mantle~
+A magnificent mantle made from the holy feathers of the Phoenix lies here.~
+~
+11 gpv 0 0 at 0
+0 0 0 0 0 0 0 0
+3 0 0 40 40
+M
+34
+T 3020
+E
+phoenix feather mantle cloak~
+   The bright red cloak is made from the holy feathers of the Phoenix.  It has
+a silk lining, soft suede outer shell, and brilliant feathers interwoven into
+the fabric such that when the wearer raising his/her arms under the cloak, it
+appears a phoenix is rising.    
+~
+#3013
+paper parchment note~
+a piece of parchment~
+A piece of paper flutters on the ground.~
+~
+16 0 0 0 a 0
+0 0 0 0 0 0 0 0
+1 50 0 40 40
+M
+7
+E
+paper parchment note~
+Just a plain ole piece of parchment.  Looks like any other.
+~
+#3014
+quill pen feather~
+a feathered quill pen~
+A bird's quill flips about over the ground, dribbling a bit of ink from the tip.~
+~
+21 0 0 0 ao 0
+0 0 0 0 0 0 0 0
+1 60 0 50 50
+M
+5
+E
+quill pen feather~
+A plain looking feathered quill.  Not too much remarkable about it.
+~
+#3015
+meat chunk~
+a piece of meat~
+A rather dubious looking piece of meat is on the ground here.~
+~
+19 0 c 0 a 0
+14 0 0 0 0 0 0 0
+5 3 0 40 40
+M
+27
+E
+meat chunk~
+It isn't so much that the meat looks poisoned or anything, but that you
+just are not sure of its origins.  You doubt that a hunter would drop a
+side of venison or rabbit meat... what in the world could this meat have
+come from, you wonder...
+~
+#3016
+tea cup drink~
+a dainty cup~
+A cup has been set here.~
+~
+17 0 0 0 a 0
+8 8 11 0 0 0 0 0
+13 1 0 100 100
+M
+13
+E
+cup~
+It is a small simple cup.
+~
+#3017
+coffee cup drink~
+a hefty mug~
+A cup has been set here.~
+~
+17 0 0 0 a 0
+8 8 12 0 0 0 0 0
+13 1 0 100 100
+M
+13
+E
+cup~
+It is a small simple cup.
+~
+#3018
+drink cup~
+a cup~
+A cup has been set here.~
+~
+17 0 0 0 a 0
+12 12 15 0 0 0 0 0
+17 1 0 100 100
+M
+13
+E
+cup~
+It is a large simple cup.
+~
+#3019
+water bottle drink~
+a bottle~
+A bottle of Evian natural spring water is here.~
+~
+17 ns 0 0 a 0
+24 24 15 0 0 0 0 0
+29 6 0 40 40
+M
+9
+E
+bottle~
+A clear glass bottle full of a clear liquid.
+~
+#3020
+dagger~
+a dagger~
+A dagger with a long thin blade is here.~
+~
+5 0 0 0 an 0
+0 2 4 2 0 0 0 0
+1 45 0 80 80
+M
+11
+E
+dagger steel thin~
+   A thin blade of about eight inches tops this stiletto shaped dagger.  It's
+pretty formidable in close quarters.    
+~
+#3021
+sword short~
+a short sword~
+A short sword lies here.~
+~
+5 0 0 0 an 0
+0 1 6 3 0 0 0 0
+3 80 0 100 100
+M
+13
+E
+sword short~
+The short sword seems to have an inscription of some sort...
+~
+E
+inscription~
+It says: 'May this sword be a good companion.'
+~
+#3022
+sword long~
+a long sword~
+A long sword has been left here.~
+~
+5 0 0 0 an 0
+0 1 8 3 0 0 0 0
+8 120 0 100 100
+M
+13
+E
+sword long~
+   A basic sword about two and half arm lengths long, it's not very sharp nor
+sturdy.    
+~
+#3023
+club wooden~
+a wooden club~
+A simple looking wooden club is here.~
+~
+5 0 0 0 an 0
+0 1 3 1 0 0 0 0
+3 20 0 40 40
+M
+8
+E
+club wooden~
+   One end is fat, the part you hold is thin, it's made of pine and called a
+club.    
+~
+#3024
+warhammer hammer~
+a warhammer~
+A medium sized warhammer is here.~
+~
+5 0 0 0 an 0
+0 1 7 11 0 0 0 0
+6 50 0 80 80
+M
+6
+E
+hammer warhammer stone~
+A plain stone hammer, nothing more.
+~
+#3025
+flail large~
+a flail~
+A large flail is here.~
+~
+5 0 0 0 an 0
+0 2 4 11 0 0 0 0
+6 65 0 80 80
+M
+11
+E
+flail~
+   A plain set of iron bars connected by a long chain.  You hold one end and
+whip the other on whatever you decide to beat.    
+~
+#3026
+water canteen drink~
+a canteen~
+A canteen has been set on the ground here.~
+~
+17 0 0 0 a 0
+80 80 15 0 0 0 0 0
+85 10 0 100 100
+M
+13
+E
+canteen~
+It is a fairly big canteen.  Looks like it can hold a lot of liquid.
+~
+#3030
+torch~
+a torch~
+A large torch.~
+~
+1 0 0 0 ao 0
+0 0 12 0 0 0 0 0
+1 5 0 40 40
+M
+8
+E
+torch light~
+A simple stick of wood that has a fire on top, what did you expect?
+~
+#3031
+lantern brass~
+a brass lantern~
+A brass lantern is here.~
+~
+1 0 0 0 aq 0
+0 0 96 0 0 0 0 0
+1 30 0 65 65
+M
+38
+E
+lantern brass~
+   A wax candle of some substance is inside this frame of brass.  There is a
+circular handle to hold it by and somewhat resembles Aladdin's lamp with a
+hat.    
+~
+#3032
+bag~
+a bag~
+A small bag is here.~
+~
+15 0 0 0 ao 0
+50 0 0 0 0 0 0 0
+2 10 0 40 40
+M
+7
+E
+bag paper~
+A plain paper bag or sack that holds stuff.
+~
+#3033
+box~
+a box~
+A small box is here.~
+~
+15 0 0 0 ao 0
+10 0 0 0 0 0 0 0
+5 2 0 40 40
+M
+8
+E
+box wooden~
+This is just a square pine box to hold stuff in.
+~
+#3034
+teller bank woman~
+a bank teller~
+&YA polite young woman waits to assist you.&n~
+The woman behind the counter asks, 'May I help you?'~
+12 pw 0 0 0 0
+0 0 0 0 0 0 0 0
+0 0 0 1 1
+E
+teller woman~
+   You can't see much of her, as she's hidden behind the bars of the teller's
+window.  She appears to be in her early twenties, and reasonably attractive.
+~
+#3035
+fountain water~
+the large fountain~
+A large fountain of blue-streaked marble stands nearby, bubbling merrily.~
+The fountain burbles and bubbles.~
+23 ow 0 0 0 0
+999999 999999 15 0 0 0 0 0
+1000004 0 0 80 80
+M
+6
+E
+marble blue streaked fountain water~
+   Here, before you, stands a well-crafted fountain, carved from a single
+block of beautiful, white marble shot through with streaks of electric blue
+that look like dancing lightning bolts.  It appears to be enchanted in some
+manner, as no matter how much use it sees, the water never level never
+diminishes.
+~
+#3036
+hanging sign~
+a hanging sign~
+A sign hangs on the eastern wall.~
+~
+16 0 0 0 0 0
+0 0 0 0 0 0 0 0
+30 0 0 40 40
+M
+8
+E
+sign hanging~
+
+The sign reads:
+
+  Use 'List' to see the available pets.
+  Use 'Buy <pet>' to purchase a pet.
+
+  Instructions for pet ownership:
+
+  Use 'order <pet> <instructions>' to order your pets around.
+  If you abuse your pet, it will no longer regard you as its master.
+  If you own several pets use 'order followers <instructions>'
+
+  You can name your pet using: 'buy <pet> <name>'
+
+               Kindest regards,
+
+               The Shopkeeper
+
+~
+#3040
+plate breast~
+a breast plate~
+A breast plate is lying on the ground.~
+~
+9 0 0 0 ad 0
+6 0 0 0 0 0 0 0
+10 500 0 100 100
+M
+13
+E
+plate breastplate steel~
+   Simple and somewhat form fitting, this breastplate is held on by leather
+lashings that go over the shoulders and around the back.    
+~
+#3041
+shirt chain mail~
+a chain mail shirt~
+A chain mail shirt is lying on the ground.~
+~
+9 0 0 0 ad 0
+4 0 0 0 0 0 0 0
+5 200 0 100 100
+M
+13
+E
+shirt chainmail mail~
+   Fine steel links are woven into a shirt that fits most sizes.  The links
+are small though and protect little from spikes.    
+~
+#3042
+shield wooden small~
+a small wooden shield~
+A small wooden shield is lying on the ground.~
+~
+9 0 0 0 aj 0
+3 0 0 0 0 0 0 0
+3 200 0 40 40
+M
+8
+E
+shield wooden~
+   It's really too small and flimsy to seriously protect you, but it just
+might deflect a deathblow someday.    
+~
+#3043
+jacket soft leather~
+a leather jacket~
+A soft leather jacket is lying on the ground.~
+~
+9 0 0 0 ad 0
+2 0 0 0 0 0 0 0
+7 75 0 40 40
+M
+28
+E
+jacket leather~
+   Waist length and long sleeved, this jacket is a soft brown color and
+buttons up tightly around the neck in cold weather.    
+~
+#3044
+jacket studded leather~
+a studded leather jacket~
+A studded leather jacket is lying on the ground.~
+~
+9 0 0 0 ad 0
+2 0 0 0 0 0 0 0
+12 100 0 40 40
+M
+28
+E
+jacket leather studded~
+   Waist length and long sleeved, this jacket is a soft brown color and
+buttons up tightly around the neck in cold weather.  Silver metal studs have
+been strategically placed over all the wear points so it will last longer.  
+~
+A
+17 -2
+#3045
+jacket scale mail~
+a scale mail jacket~
+A scale mail jacket is lying on the ground.~
+~
+9 0 0 0 ad 0
+3 0 0 0 0 0 0 0
+15 150 0 100 100
+M
+13
+E
+jacket scale mail~
+   Overlapping plates of steel that look like fish scales are sewn onto the
+leather of this jacket and offer a good measure of protection.  They shine
+though and reflect the light so somewhat gaudy.    
+~
+#3046
+plate bronze breast~
+a bronze breast plate~
+A bronze breast plate is lying on the ground.~
+~
+9 0 0 0 ad 0
+5 0 0 0 0 0 0 0
+20 250 0 60 60
+M
+12
+E
+plate bronze breastplate~
+   Simple and somewhat form fitting, this breastplate is held on by leather
+lashings that go over the shoulders and around the back.    
+~
+#3047
+heart noob ~
+the heart of a noob~
+A heart made from solid gold lies here.~
+~
+8 ainov d 0 u 0
+0 0 0 0 0 0 0 0
+0 10000 0 0 0
+M
+15
+T 3047
+A
+31 -3
+A
+18 5
+A
+19 5
+A
+28 8192
+A
+17 -20
+A
+26 10
+C
+yC
+#3050
+scroll identify~
+a scroll of identify~
+A scroll has carelessly been left here.~
+~
+2 g 0 0 ao 0
+1 105 -1 -1 0 0 0 0
+1 42 0 40 40
+M
+7
+E
+scroll identify~
+The scroll has a magic formula drawn upon it:
+
+     ???
+    ?   ?
+       ?
+      ?
+      ?
+      *
+
+~
+#3051
+potion yellow~
+a yellow potion of see invisible~
+A small yellow potion has carelessly been left here.~
+~
+10 g 0 0 ao 0
+3 19 -1 -1 0 0 0 0
+1 15 0 40 40
+M
+9
+E
+potion yellow~
+The potion has a small label 'Detect The Invisible'.
+~
+#3052
+scroll recall~
+a scroll of recall~
+A scroll has carelessly been left here.~
+~
+2 g 0 0 ao 0
+1 42 -1 -1 0 0 0 0
+4 20 0 40 40
+M
+7
+E
+scroll recall~
+The scroll has written a formulae of 'Word of Recall' upon it.
+~
+#3053
+wand grey~
+a grey wand of invisibility~
+A grey wand has carelessly been left here.~
+~
+3 g 0 0 ao 0
+1 2 2 29 0 0 0 0
+2 50 0 80 80
+M
+11
+E
+wand grey~
+The wand is an old dark grey stick.  You notice a small symbol etched at
+the base of the wand.  It looks like this:
+
+     \ /
+    - O -
+     / \
+
+~
+#3054
+staff gnarled~
+a gnarled staff~
+A gnarled staff has carelessly been left here.~
+~
+4 g 0 0 ao 0
+2 1 1 38 0 0 0 0
+17 740 0 40 40
+M
+8
+E
+staff gnarled~
+The staff is made of old oak, and is around five feet long. It fits
+perfectly into your hand. You notice a small symbol etched at the
+base of the staff, it looks like:
+
+  ZZZZZ
+     Z
+    Z
+   Z
+  ZZZZZ  z   z
+
+~
+#3055
+staff metal~
+a metal staff~
+A metal staff has carelessly been left here.~
+~
+4 g 0 0 ao 0
+2 3 3 15 0 0 0 0
+7 50 0 100 100
+M
+13
+E
+staff metal~
+The staff is made of metals unknown to you.
+~
+#3060
+raft~
+a raft~
+A raft has been left here.~
+~
+22 0 0 0 a 0
+0 0 0 0 0 0 0 0
+75 15 0 40 40
+M
+8
+E
+raft~
+The raft looks very primitive.
+~
+#3061
+canoe~
+a canoe~
+A canoe has been left here.~
+~
+22 0 0 0 a 0
+0 0 0 0 0 0 0 0
+32 30 0 40 40
+M
+8
+E
+canoe~
+The canoe is fairly light.
+~
+#3062
+hero policy~
+the Hero Policy~
+The HERO policy is here (read HERO).~
+~
+12 p 0 0 0 0
+0 0 0 0 0 0 0 0
+0 0 0 40 40
+M
+7
+E
+hero~
+   To all who would be Heroes.  The Hero quest is now the domain of S & M Inc.
+If your profession be Bard, Ranger, Mage, Cleric, Monk or Druid you must seek Manok in
+order to have your mettle tested.  If you are a Warrior, Barbarian, Paladin,
+Anti-paladin or Thief then you must seek Sturm.  No part of your test may be
+discussed with anyone.  Any who break this rule will be dealt with swiftly and
+severely.  Multis are also required to take the test.  The first attempt is
+free, subsequent attempts are 500k and a suitable waiting period.  There is
+only one piece of information we, in our mercy, will divulge.  Be prepared.  
+And be afraid.  Be very afraid.    
+
+- S & M Inc. Productions
+~
+#3070
+gauntlets bronze~
+a pair of bronze gauntlets~
+A pair of bronze gauntlets is lying on the ground.~
+~
+9 0 0 0 ah 0
+5 0 0 0 0 0 0 0
+8 250 0 60 60
+M
+12
+E
+gauntlets bronze~
+   Plates of brass are sewn onto tanned orange leather to make these, they are
+pretty soft but fit well.    
+~
+#3071
+gloves leather~
+a pair of leather gloves~
+A pair of leather gloves is lying on the ground.~
+~
+9 0 0 0 ah 0
+2 0 0 0 0 0 0 0
+3 75 0 40 40
+M
+28
+E
+gloves leather~
+A soft fawn color, these supple leather gloves are comfortable to wear.
+~
+#3075
+helmet bronze~
+a bronze helmet~
+A bronze helmet is lying on the ground.~
+~
+9 0 0 0 ae 0
+5 0 0 0 0 0 0 0
+8 250 0 60 60
+M
+12
+E
+helmet bronze~
+   Thick bronze, this helmet covers the head, ears and has wings that extend
+over the cheeks.  Most of the face is not protected.    
+~
+#3076
+cap leather~
+a leather cap~
+A leather cap is lying on the ground.~
+~
+9 0 0 0 ae 0
+2 0 0 0 0 0 0 0
+3 75 0 40 40
+M
+28
+E
+cap leather~
+   Thin, light brown and a small brim are the best ways to describe this
+simple cap.    
+~
+#3077
+chit ticket burro~
+a chit for one Burro~
+A odd receipt is laying here.~
+~
+37 0 0 0 a 0
+3082 0 0 0 0 0 0 0
+0 200 0 0 0
+E
+ticket chit ~
+This ticket may be exchanged at any stable in the realm for One Burro.
+~
+#3078
+chit ticket Pony~
+a chit for one Pony~
+An odd receipt has been left here.~
+~
+37 0 0 0 a 0
+3083 0 0 0 0 0 0 0
+0 800 0 0 0
+E
+chit ticket~
+This ticket may be exchanged at any stable in the realm for One Pony.
+~
+#3079
+chit ticket Horse~
+a chit of one Horse~
+An odd receipt lies forgotten here.~
+~
+37 0 0 0 a 0
+3084 0 0 0 0 0 0 0
+0 1500 0 0 0
+E
+chit ticket~
+This ticket may be exchanged at any stable in the realm for One Horse.
+~
+#3080
+leggings bronze~
+a pair of bronze leggings~
+A pair of bronze leggings is lying on the ground.~
+~
+9 0 0 0 af 0
+5 0 0 0 0 0 0 0
+8 250 0 60 60
+M
+12
+E
+leggings bronze~
+   Plates of brass are sewn onto tanned orange leather to make these, they are
+pretty soft but fit well.    
+~
+#3081
+pants leather~
+a pair of leather pants~
+A pair of leather pants is lying on the ground.~
+~
+9 0 0 0 af 0
+2 0 0 0 0 0 0 0
+8 75 0 40 40
+M
+28
+E
+pants leather~
+   Fawn brown except for the worn places where the color is more human flesh
+toned, these pants are a tight fit especially after worn in the rain.    
+~
+#3082
+rottweiler fur skin~
+some fur from a pet rottweiler~
+Tough looking brown and black fur has been dropped.~
+~
+8 0 0 0 a 0
+0 0 0 0 0 0 0 0
+4 10 0 40 40
+M
+2
+E
+rottweiler fur pelt~
+   This black and brown bit of pelt was carefully skun from a dog!  This
+bristled bunch of hair used to be someone's pet.  How rude!    
+~
+#3083
+wolf fur coat skin~
+a wolf coat~
+A luxurious piece of wolf fur has been discarded.~
+~
+8 nt 0 0 a 0
+0 0 0 0 0 0 0 0
+4 10 0 40 40
+M
+2
+E
+pelt wolf fur~
+   This sleek, grey pelt bears silver streaks that are common among the wolf
+family.  The markings on this piece of fur are as remarkable as the luxurious
+feel.  This wolf must have been a well cared for animal.    
+~
+#3084
+matted fur hair skin~
+a matted piece of fur~
+A very ugly pile of fur has been dropped here.~
+~
+8 nt 0 0 a 0
+0 0 0 0 0 0 0 0
+4 3 0 40 40
+M
+2
+E
+pelt matted fur hair~
+   This pile of nasty smelling fur does not look to hold much value.  The
+matted fur is a tangle of knots and, upon closer examination, is crawling with
+fleas!    
+~
+#3085
+sleeves bronze~
+a pair of bronze sleeves~
+A pair of bronze sleeves is lying on the ground.~
+~
+9 0 0 0 ai 0
+5 0 0 0 0 0 0 0
+8 250 0 60 60
+M
+12
+E
+sleeves bronze~
+Simple and unadorned bronze, they lace to the forearms by leather lashings.
+~
+#3086
+sleeves leather~
+a pair of leather sleeves~
+A pair of leather sleeves is lying on the ground.~
+~
+9 0 0 0 ai 0
+2 0 0 0 0 0 0 0
+4 75 0 40 40
+M
+28
+E
+sleeves leather~
+Simple and unadorned leather, they lace to the forearms by leather lashings.
+~
+#3087
+crumb pastry~
+a pastry crumb~
+A small pastry crumb is cooling rapidly~
+~
+19 0 0 0 a 0
+1 0 0 0 0 0 0 0
+0 0 0 40 40
+M
+27
+E
+crumb pastry~
+Probably broken off the edge of the pastry, it still smells yummy.
+~
+#3088
+simple red dress~
+a simple red dress~
+A pile of red cloth is sitting in a corner.~
+~
+11 0 0 0 ad 0
+0 0 0 0 0 0 0 0
+2 175 0 40 40
+M
+4
+E
+dress red~
+   Simple and unassuming, this red dress is missing darts under the arms and
+has no waist hem.    
+~
+A
+17 -2
+A
+25 1
+#3089
+white button-up shirt~
+a white button-up shirt~
+A shirt is laying on the ground.~
+~
+11 0 0 0 ad 0
+0 0 0 0 0 0 0 0
+3 200 0 40 40
+M
+4
+E
+white button up shirt~
+The shirt is simple without any extra frilly things such as ribbons or
+flowers.  It is made from strong white cotton thread which makes the shirt
+feel a little stiff.  It has eight little brown buttons up the front of it.  
+
+~
+A
+17 -2
+#3090
+a pair of khaki pants~
+a pair of khaki pants~
+A pair of pants have been left laying on the ground.~
+~
+9 0 0 0 af 0
+2 0 0 0 0 0 0 0
+3 300 0 40 40
+M
+4
+E
+pair khaki pants~
+This pair of light tan trousers has been carefully designed so that any person
+of any size could easily fit into them.  They have an elastic waistband and
+lacing long to sides so that the legs back be made wider or smaller.    
+~
+A
+14 5
+#3091
+a pair of hose~
+a pair of hose~
+A pair of hose has been left on the ground.~
+Nothing.~
+11 0 0 0 af 0
+0 0 0 0 0 0 0 0
+1 550 0 40 40
+M
+4
+E
+pair hose~
+These are a pair of lady's hosiery.  The hoses are a skin tone color and would looks natural on any one who was not to pale or to dark skinned.  They are made from nylon woven together to give them an elastic quality. 
+~
+A
+17 -2
+A
+14 -3
+#3092
+A long blue skirt~
+a long blue skirt~
+A peice of blue fabric is on the ground.~
+~
+11 0 0 0 afl 0
+0 0 0 0 0 0 0 0
+4 550 0 40 40
+M
+4
+E
+long blue skirt~
+The skirt is made from a soft rayon threads oven together in a twill pattern.
+The weave gives the skirt a shiny look to it.  The skirt has a string of
+buttons running down it that are coral colored.    
+~
+A
+14 -5
+A
+25 1
+#3093
+a rainbow vest~
+a rainbow vest~
+A cloth of many colors is resting on the ground.~
+~
+9 0 0 0 adk 0
+1 0 0 0 0 0 0 0
+3 650 0 40 40
+M
+4
+E
+rainbow vest~
+The vest is made from raw wool that has been dyed a rainbow of colors, spin
+into at thread that has small bumps in it and then woven into a jacket.  The
+result is a magnificent jacket that is rich in both color and texture.    
+~
+A
+13 4
+A
+17 -3
+#3094
+a teal bonnet~
+a teal bonnet~
+A small piece of teal cloth is laying here.~
+~
+11 0 0 0 ae 0
+0 0 0 0 0 0 0 0
+1 200 0 40 40
+M
+4
+E
+teal bonnet~
+The bonnet is basically piece of cloth that has ruffles along the edge of it
+and a gathered base with a string running thorough the base to tie it.  The
+cloth is bright teal with little blue flower along the edge.    
+~
+A
+11 2
+#3095
+a pair of sensible shoes~
+a pair of sensible shoes~
+A pair of shoes are waiting here for some feet.~
+~
+9 0 0 0 ag 0
+1 0 0 0 0 0 0 0
+4 1000 0 40 40
+M
+28
+E
+pair sensible shoes~
+The shoes are made from leather and have a thick rubber sole.  They look very comfortable.
+~
+A
+14 8
+A
+10 1
+#3096
+a pretty blouse~
+a pretty blouse~
+A blouse has been left on the floor.~
+~
+11 0 0 0 ad 0
+0 0 0 0 0 0 0 0
+2 350 0 40 40
+M
+4
+E
+pretty blouse~
+The blouse is white with little pink flowers sew on the collar.  It has been hand sew so it will last a long time.
+~
+#3097
+a fur coat~
+a fur coat~
+Someone has left a pile of fur on the floor.~
+~
+9 0 0 0 adk 0
+2 0 0 0 0 0 0 0
+5 1100 0 40 40
+M
+2
+E
+fur coat~
+The coat is made up from the fur of minks.  It has six large buttons on the front of the jacket. The fur is soft, thick and a ranges in hue from a light brown to black.  
+~
+A
+28 2
+A
+17 -5
+A
+2 -1
+#3098
+a pair of work gloves~
+a pair of work gloves~
+A pair of gloves are half buried under some junk.~
+~
+9 0 0 0 ah 0
+1 0 0 0 0 0 0 0
+1 300 0 40 40
+M
+28
+E
+work gloves~
+The gloves are made out of cloth with leather over the palm and fingers.  
+They will serve to keep hands warm and protect them from harm.    
+~
+A
+18 1
+A
+17 -2
+#3099
+a wool scarf~
+a wool scarf~
+A long red piece of clothes has been left on the ground.~
+~
+11 0 0 0 ac 0
+0 0 0 0 0 0 0 0
+1 150 0 40 40
+M
+4
+E
+wool red scarf~
+The scarf has been hand made from a rich red wool.  It is about three feet
+long and 8 inches wide.    
+~
+$~

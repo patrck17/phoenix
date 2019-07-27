@@ -1,0 +1,1047 @@
+@Version: 2
+#3000
+madoal wizard~
+Madoal, the Wizard~
+Madoal the Wizard stands here, mumbling to himself.
+~
+   The wizard looks old and senile, and yet he looks like a very powerful
+wizard.  Draped in fine clothing, he wears many rings and bracelets.
+~
+bdlpq 0 d 900 E 3 0
+89 -10 -15 11d9+1700 2d6+19
+1875 1030434
+11 11 1
+E
+#3001
+atlon baker~
+Atlon the baker~
+A large, plump man wipes flour onto his apron as you enter.
+~
+A fat, nice looking baker. But you can see that he has many scars on his
+body.
+~
+bdlpqz 0 d 900 E 12 0
+89 -10 -15 11d9+1700 2d6+19
+1875 1030434
+11 11 1
+BareHandAttack: 14
+E
+T 3001
+T 3008
+T 3009
+#3002
+trin grocer~
+Trin the Grocer~
+Trin, purveyor of fine goods, stands here impatiently waiting for you to 
+buy something.
+~
+A tall grocer, who moves two 200 pounds bag of flour around on his shoulders.
+~
+bdlpq 0 d 900 E 12 0
+89 -10 -15 11d9+1700 2d6+19
+1875 1030434
+11 11 1
+E
+#3003
+reteo weaponsmith~
+Reteo the Weaponsmith~
+Reteo the weaponsmith stands here, eager to sell you his latest weapon 
+acquisitions.
+~
+He's a young weaponsmith, who still has lots to learn.
+~
+bdlpq 0 d 900 E 12 0
+89 -10 -15 11d9+1700 2d6+19
+1875 1030434
+11 11 1
+E
+#3004
+geofrec armorer~
+Geofrec the Armorer~
+Geofrec the armorer proudly displays his new and used armors.
+~
+An old but very strong armorer.  He has made more armors in his life than you
+have ever seen.
+~
+bdlpq 0 d 900 E 12 0
+89 -10 -15 11d9+1700 2d6+19
+1875 1030434
+11 11 1
+E
+#3005
+receptionist~
+the Receptionist~
+A receptionist is standing behind the counter here, smiling at you.
+~
+You notice a tired look in her face.  Since she now has to deal with 
+these damn players for free!!! She isn't paid well enough to put up with 
+any crap from mud players with attitudes.
+~
+bdl 0 0 900 E 19 0
+89 -10 -15 11d9+1700 2d6+19
+1875 1030434
+11 11 2
+E
+#3006
+captain~
+the Captain~
+A retired Captain stands here, selling boats.
+~
+This Captain has eaten more sharks than you have killed peas.
+~
+bdlpq 0 d 900 E 0 0
+89 -10 -15 11d9+1700 2d6+19
+1875 1030434
+11 11 1
+E
+#3007
+hometown receptionist woman~
+the receptionist~
+An older woman sits at a desk, eager to rent rooms to newcomers.
+~
+   This woman is most likely the wife of the innkeeper.  She sits here,
+waiting for customers who wish to use the inn or folks who wish to move to
+Heliopolis.  She can arrange for all the papers which are necessary when one
+decides to switch hometowns.  Valid commands are 'cost', 'show', and of
+course, 'move'.    
+~
+abdgqrw 0 0 600 E 19 0
+80 -7 -12 10d9+1480 2d6+18
+1650 913043
+9 9 2
+Special: home(1/town)
+SpecVal: 0 3001 100 0 0 0 0 0 0 0
+E
+#3008
+Aristotle~
+Aristotle~
+I'm Aristotle, guide to new adventurers! Please read, and heed my words.
+~
+   This wizened, old thinker defies the very laws of space and time to be here
+helping new players.  He leans gently on his walking stick, a twisted shaft of
+wizardwood, fingering his grey beard as he considers the vast complexities of
+the universe.  He lives to teach new players, eagerly assisting those in
+search of knowledge.  &Y(say help)&n
+~
+bdertz 0 dfy 0 E 17 0
+103 -17 -20 16d9+2600 2d6+20
+2400 6782608
+11 11 1
+BareHandAttack: 10
+E
+T 3000
+T 3002
+T 3003
+T 3004
+T 3005
+T 3006
+T 3007
+#3009
+marcus tanner man~
+Marcus, the tanner~
+Marcus has stopped packaging his pelts, wondering what you might want.
+~
+   Many years of curing pelts, and stretching and softening leather have given
+Marcus hands that look like they could crush stone.  His dusty blond hair
+seems insistant upon falling forward into his eyes at the most annoying times,
+causing Marcus no small amount of frustration as he casually tries to brush it
+back into place.  Marcus' friendly smile and easy going personality have won
+him many friends since he moved to Heliopolis.    
+~
+bdegpqvx 0 cdfy 0 E 12 0
+104 -18 -20 17d9+3000 2d6+20
+2700 6913043
+11 11 1
+E
+#3010
+postmaster master~
+the Postmaster~
+The head Postmaster is standing here, waiting to help you with your mail.
+~
+   The Postmaster seems like a happy old man, though a bit sluggish.  He
+worries about the reputation of the HMS (Heliopolis Mail Service), as many
+people seem to think that it's slow.  Perhaps if he were to brush the cobwebs
+from his uniform it would help to make a better impression.    
+~
+abdl 0 d 300 E 19 0
+89 -10 -15 11d9+1700 2d6+19
+1875 1030434
+11 11 1
+Special: postmaster
+SpecVal: 0 0 0 0 0 0 0 0 0 0
+E
+#3011
+old man malebolge~
+Malebolge~
+An ancient man hovers in mid-air, playing chess with a demon.
+~
+   Malebolge is ancient beyond the count of years.  He chooses to appear on
+this plane of existence as a wrinkled old man with a stooped back.  Aside from
+his glowing red eyes and the fact that he is levitating in mid-air, he appears
+as any other old human male would.  Malebolge is one of the most powerful of
+gods, representing death, decay, disease, and chaotic evil.  He is the patron
+god of Assassins and the chaotic evil alignment.    
+~
+abdelqrstz 0 dfhpuyC -1000 E 18 22
+125 -32 -20 25d9+9700 8d8+31
+0 7826093
+11 11 1
+Special: battle_master
+SpecVal: 0 0 0 0 0 0 0 0 0 0
+Immune: abdfhijtu eg 0
+E
+T 3012
+#3012
+shadowy demon~
+the shadowy demon~
+A shadowy demon levitates here, playing chess with Malebolge.
+~
+Malebolge's opponent is a demon of undetermined shape.  He is roughly
+humanoid, but is covered in a shroud of darkness that is constantly
+twisting and moving.  Faces can be seen screaming in terror in the
+shadowed depths of the demon's body!
+~
+bdlmno 0 dh -1000 E 0 22
+89 -10 -15 11d9+1700 2d6+19
+0 1030434
+11 11 1
+BareHandAttack: 8
+Immune: ai bdefg tu
+E
+#3020
+mage guild master guildmaster~
+the Mage Guildmaster~
+The Mage Guildmaster stands before you.
+~
+Even though your guildmaster looks old and tired, you can clearly see the
+vast amount of knowledge she possesses.  She is wearing fine magic clothing,
+and you notice that she is surrounded by a blue shimmering aura.
+~
+bdlq 0 dh 0 E 3 0
+100 -14 -20 13d9+2000 2d6+20
+2150 3913043
+11 11 2
+E
+T 13153
+T 3016
+#3021
+cleric guild master guildmaster~
+the Cleric Guildmaster~
+The Cleric Guildmaster stands before you.
+~
+You are in no doubt that this guildmaster is truly close to your god; he has
+a peaceful, loving look.  You notice that he is surrounded by a white aura.
+~
+bdlq 0 dh 1000 E 1 0
+100 -14 -20 13d9+2000 2d6+20
+2150 3913043
+11 11 1
+E
+T 3016
+#3022
+thief guildmasterO master~
+the Thief Guildmaster~
+The Thief Guildmaster stands before you.
+~
+You realize that whenever your guildmaster moves, you fail to notice it -
+the way of the true thief.  She is to be dressed in poor clothing, having
+the appearance of a beggar.
+~
+bdelq 0 dhy 0 E 19 0
+100 -14 -20 13d9+2000 2d6+20
+2150 3913043
+11 11 2
+E
+T 13152
+T 3016
+#3023
+warrior guild master guildmaster~
+the Warrior Guildmaster~
+The Warrior Guildmaster stands before you.
+~
+This is your master.  Big and strong with bulging muscles.  Several scars
+across his body proves that he was using arms before you were born.  He has a
+calm look on his face.  If you wish to battle perhaps you should ask him about
+it.
+~
+bdlq 0 dfhy 0 E 0 0
+100 -14 -20 13d9+2000 2d6+20
+2150 3913043
+11 11 1
+E
+T 13150
+T 3024
+T 3025
+T 3026
+T 3016
+#3024
+sorcerer guildguard~
+the Sorcerer~
+A sorcerer is guarding the entrance.
+~
+He is an experienced mage who has specialized in the field of Combat Magic.
+He is here to guard the Mage's Guild and his superior knowledge of offensive as
+well as defensive spells make him a deadly opponent.
+~
+abdl 0 dh 500 E 3 0
+100 -14 -20 13d9+2000 2d6+20
+2150 3913043
+11 11 1
+Special: magic_user
+SpecVal: 0 0 0 0 0 0 0 0 0 0
+E
+T 3019
+#3025
+knight templar guildg~
+the Knight Templar~
+A knight templar is guarding the entrance.
+~
+   He is a specially trained warrior belonging to the military order of the
+Faith.  His duty is to protect the faithful from persecution and infidel
+attacks and his religious devotion combined with his superior skill makes him
+a deadly opponent.    
+~
+bdl 0 dh 800 E 9 0
+100 -14 -20 13d9+2000 2d6+20
+50 3913043
+11 11 1
+E
+T 3019
+#3026
+assassin guildg Velcenti~
+the Assassin~
+An assassin is guarding the entrance.
+~
+He is a thief who has specialized in killing others as effectively as possible,
+using all sorts of weapons.  His superior knowledge of how and where to use
+them combined with his extraordinary stealth makes him a deadly opponent.
+~
+bdl 0 bdht 400 E 14 0
+100 -14 -20 13d9+2000 2d6+20
+2150 3913043
+11 11 1
+E
+#3027
+knight guildg~
+the Knight~
+A knight guards the entrance.
+~
+   He is an expert warrior who has attained knighthood through countless
+chivalrous deeds.  His duty is to protect the Guild of Swordsmen and his
+extreme skill combined with his experience in warfare makes him a deadly
+opponent.
+~
+bdlp 0 dh 800 E 0 0
+100 -14 -20 13d9+2000 2d6+20
+2150 3913043
+11 11 1
+E
+#3028
+merchant guild master guildmaster~
+the Merchant Guildmaster~
+The Merchant Guildmaster stands before you.
+~
+   The merchant is obviously very well-to-do.  Having accumulated vast riches
+over the duration of his long and prosperous career, he has decided to share
+his knowledge with other merchants of the realm.    
+~
+bdq 0 dh 0 E 12 0
+100 -14 -20 13d9+2000 2d6+20
+1000 10000
+11 11 1
+E
+#3029
+anti paladin guild master guildmaster~
+the Anti-Paladin Guildmaster~
+The Anti-Paladin Guildmaster stands before you.
+~
+   The Anti-Paladin Guildmaster stares unblinking in your direction.  You can
+almost feel the waves of evil emanating from his being.  Never before have you
+seen a man so dedicated to furthering the cause of evil.  He willingly shares
+his knowledge in hopes of gathering more people to join his cause.    
+~
+bdqz 0 dh -1000 E 10 0
+100 -14 -20 13d9+2000 2d6+20
+2150 3913043
+11 11 1
+E
+T 3016
+#3030
+barbarian guild master guildmaster~
+the Barbarian Guildmaster~
+The Barbarian Guildmaster stands before you.
+~
+   The Barbarian Guildmaster busies himself with the tasks that he must do to
+sustain life for himself and his tribe.  He moves with a simplistic,
+practical, and efficient grace, never wasting a movement.  His way of life is
+a harsh one, not for everyone.  But he is willing to teach those who wish to
+learn.    
+~
+bdqz 0 dhy 0 E 8 0
+100 -14 -20 13d9+2000 2d6+20
+2150 3913043
+11 11 1
+E
+T 13151
+T 3016
+#3031
+druid guild master guildmaster~
+the Druid Guildmaster~
+The Druid Guildmaster stands before you.
+~
+   A small man in brown robes returns your stare.  A smile appears under the
+thick white beard that covers not only his face, but most of his upper chest
+as well.  This wizened old man appears as if he could teach you a great many
+things, if you had the patience and desire to learn.    
+~
+bdq 0 dh 0 E 11 0
+100 -14 -20 13d9+2000 2d6+20
+2150 3913043
+11 11 1
+E
+T 3016
+#3032
+kensai guildmaster~
+the Kensai Guildmaster~
+The Kensai Guildmaster stands before you.
+~
+   Not a particularly overbearing individual, his face has the look of total
+dedication to his art.  His breathtaking skills with his blade seem to more
+than compensate for his apparent lack of armor, and he seems quite willing to
+instruct those who also perform his ancient art.    
+~
+bdepqrtz 0 dfhy 0 E 13 0
+100 -14 -20 13d9+2000 2d6+20
+2150 3913043
+11 11 1
+E
+#3033
+necromancer guildmaster~
+the Necromancer Guildmaster~
+The Necromancer Guildmaster stands before you.
+~
+   Cloaked in mystery, nothing but this man's dark face is visible, a black
+robe and hood covering all else.  Surrounded by death and Decay, his nature
+seems to be that of hatred towards you, and perhaps all things living, however
+his mutterings seem to indiciate he is willing to teach those who choose to
+also follow his dark path.    
+~
+bdpqrtz 0 dfhuyz -1000 E 15 0
+100 -14 -20 13d9+2000 2d6+20
+2150 3913043
+11 11 1
+E
+#3034
+deva guildmaster~
+the Deva Guildmaster~
+The Deva Guildmaster stands before you.
+~
+   Clad in a white robe, this person seems to radiate an aura of pure
+holyness.  With a bright smile on her face, she seems willing to help whoever
+is in need.  Her teaching abilities also seem to be equal to her healing
+abilities, as she instructs others of her order in the arts required of them.
+~
+bdepqrtx 0 dfhmy 1000 E 16 0
+100 -14 -20 13d9+2000 2d6+20
+2150 3913043
+11 11 2
+E
+#3040
+bartender~
+the Bartender~
+A Bartender watches you calmly, while he skillfully mixes a drink.
+~
+A tired looking Bartender who hates trouble in his bar.
+~
+bdpq 0 0 900 E 19 0
+89 -10 -15 11d9+1700 2d6+19
+1875 1030434
+11 11 1
+E
+#3046
+rekken~
+Rekken, Proprietor of the Death's Dagger Inn~
+Rekken stands behind the bar, serving drinks and keeping a watchful eye.
+~
+   Rekken is the proprietor of the Death's Dagger Inn, one of the less
+reputable establishments of Heliopolis.  As barkeep, Rekken learns a lot about
+what goes on in the city as well as in the surrounding lands.  This makes him
+very valuable to certain organizations.  In fact, Rekken is a known spy for
+both the Chaos Guild and the Cult of the Dragon.  These connections make him a
+very dangerous man.    
+~
+bdglwz 0 d -600 E 19 0
+68 -3 -7 9d9+1240 3d4+16
+1350 704347
+11 11 1
+E
+#3047
+guildmaster master bard~
+the Bard Guildmaster~
+An old bard sits here strumming tunes on his harp.
+~
+   The old bard's face is tough as leather, and looks as if it hasn't been
+shaved in a few days.  Beer stains his tunic and his boots have holes in them.
+Despite this, however, his voice is still true and his songs are among the
+best in the land.    
+~
+bdlq 0 dh 500 E 5 0
+100 -14 -20 13d9+2000 2d6+20
+2150 3913043
+11 11 1
+E
+T 3011
+T 3016
+#3048
+guildmaster master assassin~
+the Assassin Guildmaster~
+The Assassin Guildmaster holds a dagger to your throat.
+~
+   His nature seems to be hidden in the shadows surrounding him, for his
+ability to blend in makes it impossible for you to discern any true details
+about this man.    
+~
+bdelpqrtz 0 cdfhy 0 E 14 0
+100 -14 -20 13d9+2000 2d6+20
+2150 3913043
+11 11 1
+E
+#3049
+guildmaster master barbarian~
+the Barbarian Guildmaster~
+The barbarian guildmaster is standing here.
+~
+You cannot discern any details through the light that your
+guildmaster emits.
+~
+bdl 0 dh 0 E 8 0
+89 -10 -15 11d9+1700 2d6+19
+1875 1030434
+11 11 1
+E
+T 13151
+#3050
+guildmaster master paladin~
+the Paladin Guildmaster~
+The Paladin Guildmaster stands silently, in prayer to his god.
+~
+   It's impossible to discern any details through the brilliant light that the
+guildmaster emits.
+~
+bdlq 0 dh 1000 E 9 0
+100 -14 -20 13d9+2000 2d6+20
+2150 3913043
+11 11 1
+E
+T 3016
+#3051
+guildmaster master monk~
+the Monk Guildmaster~
+The Monk Guildmaster is here training you in the secret ways of the monastary.
+~
+   You cannot discern any details through the light that your guildmaster
+emits.    
+~
+bdlq 0 dh 0 E 6 0
+100 -14 -20 13d9+2000 2d6+20
+2150 3913043
+11 11 1
+E
+T 3016
+#3052
+guildmaster master ranger~
+the Ranger Guildmaster~
+The Ranger Guildmaster stands here, training you in the ways of nature.
+~
+You cannot discern any details through the light that your
+guildmaster emits.
+~
+bdlq 0 dh 800 E 4 0
+100 -14 -20 13d9+2000 2d6+20
+2150 3913043
+11 11 1
+E
+T 3016
+#3053
+bridge guard~
+the Bridge Guard~
+A guard paces back and forth, keeping watch over the bridge.
+~
+   The guards of Heliopolis take their jobs very seriously.  Grim and strong,
+they perform their duties well.  Dressed in chain mail armor to allow for some
+mobility, the guards are well armored, and well armed.  Definitely a force to
+be reckoned with.
+~
+abdglwz 0 0 350 E 0 0
+35 8 6 6d9+580 2d6+10
+400 67826
+11 11 1
+Special: cityguard
+SpecVal: 0 0 0 0 0 0 0 0 0 0
+E
+#3059
+royale guard~
+the Guard Royale~
+A Guard Royale patrols the streets, looking for trouble.
+~
+   The corps of Guard Royales are the elite guards of Heliopolis.  Chosen from
+the best of the regular guard corps, the Guard Royale will give their lives to
+save the city and its king.  They answer to no one, save the King and his
+closest advisors.    
+~
+adlwzE 0 0 500 E 0 0
+50 3 0 7d9+880 3d4+13
+250 260869
+11 11 1
+Special: cityguard
+SpecVal: 0 0 0 0 0 0 0 0 0 0
+E
+#3060
+cityguard guard~
+the cityguard~
+A cityguard patrols the area, looking for troublemakers.
+~
+   The guards of Heliopolis take their jobs very seriously.  Grim and strong,
+they perform their duties well.  Dressed in chain mail armor to allow for some
+mobility, the guards are well armored, and well armed.  Definitely a force to
+be reckoned with.    
+~
+adlwzE 0 d 350 E 0 0
+35 8 6 6d9+580 2d6+10
+200 67826
+11 11 1
+Special: cityguard
+SpecVal: 0 0 0 0 0 0 0 0 0 0
+E
+#3061
+janitor~
+the janitor~
+A janitor walks around, keeping the city streets clean.
+~
+   This old man is paid by the King to make sure the city streets stay clean.
+This helps to attract more visitors to the city as well as to ward off rats
+and other vermin.  For some reason, though, the city still has a major problem
+with stray dogs.  The janitor carries a push broom and a small metal box on a
+handle to push garbage into.    
+~
+adlE 0 0 0 E 19 0
+4 18 18 2d6+28 1d3+0
+10 260
+11 11 1
+Special: janitor
+SpecVal: 0 0 0 0 0 0 0 0 0 0
+E
+#3062
+mutt dog scruffy fido~
+a scruffy mutt~
+A scruffy mutt mucks through the garbage, looking for scraps.
+~
+   The small mongrel is an obvious scavenger creature, boasting a foul smell
+and pieces of rotted meat hanging from between the grimed teeth.  This one is
+an unassuming shade of brown, flecked with black speckles that may or may not
+be an actual part of his coat.
+~
+acdhE 0 0 0 E 19 17
+1 19 19 2d3+8 1d2+0
+0 65
+11 11 1
+Special: fido
+SpecVal: 0 0 0 0 0 0 0 0 0 0
+BareHandAttack: 8
+Skin: 3084
+Immune: 0 e i
+E
+#3063
+warrior mercenary~
+a mercenary warrior~
+A mercenary warrior wanders the streets, looking for work.
+~
+   The warrior looks pretty skilled with a weapon.  His armor is dented and
+split from many battles.  A scar on his cheek makes the warrior look grim and
+mean.  You would imagine that he would do anything to make a buck.    
+~
+cdlE 0 0 -100 E 0 0
+6 18 17 2d8+50 2d4+0
+20 521
+11 11 1
+E
+#3064
+man drunk~
+the drunk~
+A man wanders around, bouncing off of walls, obviously drunk.
+~
+   The man looks like he has a bit too much to drink.  Bouncing off of walls,
+it is just a matter of time before he gets picked up by the guards and thrown
+into jail to sober up.    
+~
+bd 0 0 400 E 19 0
+2 19 19 2d4+12 1d2+0
+5 130
+11 11 1
+E
+>greet_prog                                                                                                                                                      50~
+look $n
+if isgood($n)
+        smile $n
+        say Howdy mate, have a beer!
+endif
+~
+|
+#3065
+beggar man~
+a beggar~
+A disheveled old man sits here, begging for a few coins.
+~
+   Unshaven and unkempt, this man reeks of alcohol and bodily wastes.  He
+passes his days begging for a some money so he can buy a few more drinks at the
+Death's Dagger.  Every once in a while he gets thrown in jail by the guards for
+causing a public health threat.    
+~
+bdy 0 0 400 E 19 0
+1 19 19 2d3+8 1d2+0
+3 65
+9 9 1
+E
+#3066
+mongrel dog vicious~
+a vicious mongrel~
+A mongrel slinks past, searching for food scraps.
+~
+   Trotting nervously down the shadowy borders of the street, the mongrel
+appears intent upon avoiding contact with anyone as he scavenges the side
+streets in search of food scraps.  He snarls low and bares his fangs at your
+approach, his mottled brown fur bristling along the scruff of his neck.    
+~
+adfhE 0 0 -500 E 19 17
+1 19 19 2d3+8 1d2+0
+0 65
+11 11 1
+Special: fido
+SpecVal: 0 0 0 0 0 0 0 0 0 0
+BareHandAttack: 8
+Skin: 3084
+Immune: 0 e i
+E
+#3067
+gate guard~
+the Gate Guard~
+A guard stands his watch over the city gates.
+~
+   The guards of Heliopolis take their jobs very seriously.  Grim and strong,
+they perform their duties well.  Dressed in chain mail armor to allow
+mobility, the guards are well armored, and well armed - definitely a force to
+be reckoned with.
+~
+abdlwz 0 0 350 E 0 0
+35 8 6 6d9+580 2d6+10
+200 67826
+11 11 1
+Special: cityguard
+SpecVal: 0 0 0 0 0 0 0 0 0 0
+E
+#3068
+street sweeper streetsweeper~
+the streetsweeper~
+A streetsweeper is here picking up all your trash.
+~
+   The streetsweepers work unendingly to keep Heliopolis clean and sparkling,
+as befitting its station as the center-city of Caledon.  His broom worn across
+his back at the moment like a child's toy sword, he busies himself collecting
+the loose junk from gutters of the streets.  The sweepers are a temperamental
+group of folk, harried, and in bad need of a vacation.    
+~
+dhlzE 0 d 0 E 19 0
+4 18 18 2d6+28 1d3+0
+10 260
+11 11 0
+E
+#3069
+repair man~
+the repair man~
+The repair man wanders around, looking for things to fix.
+~
+   The repair man is an older man who has made his living in Heliopolis by
+fixing other people's weapons and armor.  He wanders about the city with his
+cart of tools, waiting for people to approach him.  To use his services, type
+'fix' while in front of him.  Be warned, the services of a master repair man
+are never free.    
+~
+adE 0 d 200 E 19 0
+80 -7 -12 10d9+1480 2d6+18
+1650 913043
+11 11 1
+Special: repair_guy
+SpecVal: 0 0 0 0 0 0 0 0 0 0
+E
+#3070
+quest master~
+the quest master~
+The Quest Master is here, waiting for you to turn in your quest points.
+~
+The quest master allows you to turn in your hard-earned quest points for
+stat, hit point, movement or energy increases. Type 'reward' for more 
+information.
+~
+adg 0 d 350 E 0 0
+89 -10 -15 11d9+1700 2d6+19
+1875 1030434
+11 11 1
+Special: questmob(rare)
+SpecVal: 0 0 0 0 0 0 0 0 0 0
+E
+#3080
+velvet groom lad stable girl~
+Velvet, the Groom~
+A perky, young lad with deep, blue eyes is busy with chores.
+~
+   This is not a young lad at all, but a beautiful, young girl with dimpled
+cheeks, deep, blue eyes and dark, wispy hair.  When she gets a bit bigger she
+will be quite a beauty...  Unless she gets...  Bigger.
+~
+abdqx 0 y 0 E 19 0
+20 13 12 4d6+280 2d6+5
+150 7826
+11 11 2
+Special: stable_master
+SpecVal: 0 0 0 0 0 0 0 0 0 0
+E
+#3081
+Burdick old grizzled man~
+Old Burdick, the groom~
+A grizzled, but sturdy, old man sits here braiding a rawhide whip.
+~
+   Old Burdick, the groom, looks as if he has run this shop for years on end.
+The wrinkles around his eyes and mouth are due to the ever present smile he
+carries when discussing his favorite topic.  Horses!
+~
+abdq 0 y 0 E 4 0
+80 -7 -12 10d9+1480 2d6+18
+1650 913043
+11 11 1
+Special: shop_keeper(DONT SET)
+SpecVal: 0 0 0 0 0 0 0 0 0 0
+E
+#3082
+burro~
+a trusty burro~
+A cute little burro is wanting to be helpful.
+~
+   This little burro looks very sturdy and just might do the trick.  A bristly
+light brown coat covers her small frame, but do not underestimate her
+abilities.  Burros are known for their agile traveling through tough terrain.
+~
+bdu 0 0 0 E 0 24
+12 16 15 4d6+125 3d4+1
+0 1304
+11 11 2
+E
+#3083
+pony~
+the pony~
+A rugged pony nickers anxiously, ready to get on the way.
+~
+   This stout little pony stands a mere 12 hands high.  Though you'd swear he
+only looked four feet tall.  Its thick, fuzzy black mane and brushy tail make
+it look even thicker and broader than it actually is.  The smooth brown hairs
+on its coat feel almost silken to the touch, yet the hard muscles beneath the
+coat leave no doubt that this isn't just a cuddle pony, but a hard working
+animal able to carry heavy loads far.
+~
+bdu 0 0 0 E 0 24
+30 10 8 4d9+480 3d4+8
+0 41739
+11 11 0
+E
+#3084
+saddle horse~
+a riding horse~
+A horse is standing, ears perked and eyes looking alert and ready to ride.
+~
+   Slender white legs blend into the rich chestnut body of this small horse.
+His broad chest and well-defined muscles speak of power and speed, while his
+soft brown eyes sparkle with personality and intelligence.  He sees you and
+utters a deep, friendly nicker in greeting.
+~
+bdu 0 0 0 E 0 24
+50 3 0 7d9+880 3d4+13
+0 260869
+11 11 1
+E
+#3085
+Coachman sundhavencoachman~
+the Sundhaven Post Coachman~
+The Sundhaven Post Coachman is here with his Coach and Six
+~
+The Coachman has been around for quite awhile, he may actually have been a sailor once.
+~
+bde 0 dfy 0 E 0 0
+105 -19 -20 18d9+3500 2d6+20
+3000 7043478
+11 11 1
+E
+T 3095
+#3088
+narakan portalmaster~
+the Narakan Portalmaster~
+The portalmaster to Naraka stands here, arms folded.
+~
+   An old wizened wizard, he guards the portal collecting tolls from
+travelers.  Simply ask for a portal, and he'll tell you your fee.
+~
+bdegpqrst be 0 0 E 0 0
+105 -19 -20 18d9+3500 2d6+20
+3000 7043478
+11 11 1
+E
+T 3093
+T 3094
+#3089
+mira~
+Mira~
+A slight woman stands here, looking at you expectantly.
+~
+   This attractive, young brunette could only be Trin's daughter.  She wears a
+finely sewn work shift , is obviously something she created herself.  An apron
+of fine linen with several pockets along the hemline covers her dress,
+sporting a myriad of pins and threaded needles anchored along the belt.
+~
+bdgpqwxz 0 0 1000 E 0 0
+67 -3 -6 9d9+1220 2d6+16
+1325 665217
+11 11 2
+E
+#3090
+kitten~
+the kitten~
+A small, cuddly kitten is here.
+~
+The kitten looks like a cute, little, fierce fighter.
+~
+bcd 0 0 200 E 19 17
+1 19 19 2d3+8 1d2+0
+0 65
+11 11 0
+Immune: 0 e i
+E
+T 3090
+#3091
+puppy~
+the puppy~
+A small, loyal puppy is here.
+~
+The puppy looks like a cute, little, fierce fighter.
+~
+bcd 0 0 100 E 19 17
+1 19 19 2d3+8 1d2+0
+0 65
+11 11 0
+Immune: 0 e i
+E
+#3092
+beagle~
+the beagle~
+A quick, loyal beagle is here.
+~
+The beagle looks like a fierce fighter.
+~
+bcd 0 0 50 E 19 17
+2 19 19 2d4+12 1d2+0
+0 130
+11 11 0
+Immune: 0 e i
+E
+#3093
+rottweiler~
+the rottweiler~
+A large, loyal rottweiler is here.
+~
+The rottweiler looks like a strong, fierce fighter.
+~
+bcd 0 0 -200 E 0 17
+3 19 18 2d5+18 1d3+0
+0 195
+11 11 0
+Skin: 3082
+Immune: 0 e i
+E
+#3094
+wolf~
+the wolf~
+A large, trained wolf is here.
+~
+The wolf looks like a strong, fearless fighter.
+~
+bcdu 0 0 -200 E 0 17
+4 18 18 2d6+28 1d3+0
+0 260
+11 11 0
+Skin: 3083
+Immune: 0 e i
+E
+#3096
+statue phoenix~
+the &RPhoenix&n~
+The likeness of a fiery, red Phoenix rises above the center of the plaza.
+~
+   This grand statue appears to be worshipped as a goddess in these realms.  
+Its brightly colored wings outspread, each feather lashing brilliant flames
+from its end, the Phoenix stands high above the assembly.  Several humble
+peasants prostrate themselves before its talons, while others lovingly place
+bouquets of fragrant, colorful flowers upon its broad pedestal.  The Phoenix
+nobly surveys the scene, the living visage of flame with flashing, red eyes.
+~
+bdlpqrstwz 0 dfhxyz 1000 E 17 25
+122 -32 -20 12d12+19700 3d4+50
+15000 7826089
+11 11 2
+Immune: i aefg b
+E
+T 3023
+#3097
+butch executioner~
+the executioner~
+Butch, the black-hooded executioner, searches for Player Killers. 
+~
+   Butch is a huge seven-foot tall giant with arms of steel, and hands the
+size of frying pans.  He wears old work boots, a black hood, a black and grey
+checked, flannel shirt, and a ripped pair of black levis.  You'd better not
+player kill.  HE HATES PLAYER KILLERS!!!
+~
+adlnzE 0 dhopyz 800 E 0 0
+115 -32 -20 25d9+9700 2d6+21
+15000 7826087
+11 11 1
+Special: executioner
+SpecVal: 0 0 0 0 0 0 0 0 0 0
+E
+#3098
+healer~
+the healer~
+An old man is here, waiting to heal players in exchange for a small fee.
+~
+The healer offers heals to all for a fee. He cures the sick and the lame.
+Thank him for his services, since they are cheap and from the goodness of
+his heart. 
+~
+abdgpqrt 0 d 1000 E 1 0
+89 -10 -15 11d9+1700 2d6+19
+1875 1030434
+11 11 1
+Special: healer(rare)
+SpecVal: 0 0 0 0 0 0 0 0 0 0
+E
+#3099
+cartographer~
+the Cartographer~
+The Cartographer looks busy trying to help people find the right maps.
+~
+This tall man looks weary from many years of drawing precise maps for his 
+demanding customers. He knows that if he makes an error in one of his 
+maps, someone might fall into a deathtrap and die from his mistake.
+~
+bdlpq 0 d 900 E 12 0
+89 -10 -15 11d9+1700 2d6+19
+1875 1030434
+11 11 1
+E
+$

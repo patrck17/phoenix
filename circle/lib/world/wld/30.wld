@@ -1,0 +1,2342 @@
+@Version: 2
+#3000
+The Meditation Chamber~
+   This solemn, simple room lies neary vacant, but for a few, simple wooden
+benches.  Priests and monks come and go frequently, intent upon their humble
+chores and prayers, some humming softly to themselves as they pass, wrapt in
+meditation.  To the east arises the hustle and bustle of the Temple of the
+Phoenix.  A short hallway extends to the north, bypassing several doorways
+deeper within the temple.
+~
+30 cdhq 0 0
+D0
+A narrow hallway extends deeper into the Temple of the Phoenix.
+~
+~
+0 0 101 0
+D1
+The Temple of the Phoenix lies through the open doorway.
+~
+door oak~
+1 0 3001 0
+E
+benches~
+   The benches are occupied now and then by passing monks, as well as the
+occasional priest.
+~
+S
+#3001
+The Temple of the Phoenix~
+   This lavish temple stands proudly, constructed from massive slabs of white
+marble.  Ancient tapestries line the walls, each devoted to a single theme -
+the coming of the Phoenix to Heliopolis.  Priests and monks pass, chanting
+softly to themselves.  Worshippers make their way through the temple, moving
+toward the altar to the north, the meditation chamber to the west, or the
+temple forge to the east.  Southward a high, bronze gate marks the entrance.
+Beyond the gates, fine marble steps descend to the temple plaza.
+~
+30 cdhq 0 0
+D0
+At the northern end of the temple hall is a statue and a huge altar.
+~
+~
+0 0 3054 0
+D1
+A small room marked "The Temple Forge" lies in this direction.
+~
+~
+0 0 3063 0
+D2
+The temple plaza is below, down the huge stone steps.
+~
+~
+0 0 3005 0
+D3
+The meditation chambers are through a small oak door.
+~
+door oak~
+3 0 3000 0
+S
+T 3010
+#3002
+The Clerics' Sanctum~
+   This rather sparse room well befits the austere tenets of the al Guild of
+Clerics.  Hard, wooden benches line the walls, where aspirants await training
+by the High Priest.  A small altar stands at the northern end of the room,
+where several clerics kneel in solemn worship.  A beautiful tapestry of the
+Phoenix adorns the western wall.  The entrance to the Cleric's Guild lies to
+the south.
+~
+30 cdq 0 0
+D2
+The exit to the Clerics' Guild is to the south.
+~
+~
+0 0 3004 0
+E
+tapestry phoenix~
+   This tapestry looks ancient.  It is nearly threadbare from exposure over the
+years.  The tapestry shows a rendering of the Phoenix descending to the earth 
+on wings of fire.  People on the ground are prostrate in worship of the 
+mighty bird.
+~
+S
+#3003
+Smoke Lane~
+   The road continues its northerly path, through the flat plains and later
+climbing into the the rocky foothills of the Eastern Mountains.  Whispering
+pine trees line the sides road, their needles gently caressed by the wind.  
+Though hard-packed, the dirt road churns up clouds of billowing dust as you
+pass.  Awaying southward stand the high outer walls of Heliopolis.  This road
+intersects another large road outside of the eastern gates of the city.
+~
+30 w 0 2
+D0
+Smoke Lane continues to the north towards the Eastern Mountains.
+~
+~
+0 -1 5120 0
+D2
+Smoke Lane continues southwards towards the city of Heliopolis.
+~
+~
+0 -1 3008 0
+S
+#3004
+The Entrance To The Clerics' Guild~
+   This rather bare room, reflects the modesty of the clerical order.  The
+room is furnished in a very sparse fashion, save for two hardwood benches
+resting against the southern and western walls.  The open doorway to the north
+leads to the inner sanctum of the guild, where the Guildmaster instructs
+aspirants in the art of prayer and devotion to the gods.  The exit to the east
+leads to the Temple Plaza.
+~
+30 d 0 0
+D0
+The inner sanctum of the guild can be seen.
+~
+~
+0 0 3002 0
+D1
+The Temple Plaza is to the east.
+~
+~
+0 0 3005 0
+S
+#3005
+The Temple Plaza~
+   The view from this locale is breathtaking.  To the north, wide, marble
+stairs and a grand, bronze gate lead up to the grandiose monument, the Temple
+of the Phoenix.  Streams of people flow endlessly across this central plaze,
+making their way to and from the temple.  To the west lies the entrance to the
+guild of clerics, while the Inn of the Flames lies to the east.  To the south,
+the din of the Marketplace can be heard.
+~
+30 0 0 1
+D0
+The magnificent Temple of the Phoenix can be seen.
+~
+~
+0 0 3001 0
+D1
+The Inn of Flames lies unassuming to the east.
+~
+~
+0 0 3006 0
+D2
+The Marketplace is thick with traffic and business.
+~
+~
+0 0 3014 0
+D3
+The entrance to the Clerics' Guild can be seen.
+~
+~
+0 0 3004 0
+S
+#3006
+The Entrance Hall of the Inn of the Flames~
+   One of the oldest and most respected establishments on this continent, the
+Inn of the Flames, is rivaled only by the Dancing Daemon Inn of New Thalos,
+The entrance hall is warm and inviting, and many pegs line the walls for
+patrons to hang their travelling cloaks and hoods.  The sound of hearty
+laughter and the aroma of stout ale waft through the doorway to the east.  
+The post office has taken up semi-permanent residence to the north, while a
+small staircase leads upstairs to the inn's guest rooms.
+~
+30 d 0 0
+D0
+The Post Office has it's headquarters to the north.
+~
+~
+0 0 3062 0
+D1
+The common room is busy with song and ale-induced merriment.    
+~
+~
+0 0 3007 0
+D3
+The Clerics' Guild can be seen past the Temple Plaza.
+~
+~
+0 0 3005 0
+D4
+A small staircase leads up to the second floor of the inn.
+~
+~
+0 0 3039 0
+S
+#3007
+The Common Room~
+   Filled with the sounds of drinking and laughter, this is evidently a very
+popular place, as nearly every table is taken.  Waitresses bustle to and fro,
+making their way from the mahogany bar at the north wall to various tables.  
+A fireplace in the western wallblazes orange and red, warming the room.  
+Performing on a small dalies to the south, a wizened, old bard strums
+beautiful tunes on his wooden harp.  The exit from the common room is to the
+west, but the allure of the bar permits few to leave.
+~
+30 dhq 0 0
+D3
+The entrance to the inn is just to the west.
+~
+~
+0 0 3006 0
+S
+#3008
+Smoke Lane~
+   This narrow road, known to the natives as Smoke Lane, meanders northward
+across a low, rolling plain dotted with trees, until it reaches the rugged
+foothills of the Eastern Mountains.  Gentle hills rise just beyond, marking
+the start of the mountain range.  A breeze rustles up some dust from the dry,
+dirt road.  To the south, this road intersects with a more substantial
+east-west road.
+~
+30 w 0 2
+D0
+Smoke Lane continues nothwards, towards the Eastern Mountains.
+~
+~
+0 -1 3003 0
+D2
+This road intersects with a larger east-west road.
+~
+~
+0 -1 3018 0
+S
+#3009
+Atlon's Fine Breads~
+   Atlon's breads have a fine reputation throughout the region for superior
+quality and excellent taste.  The tempting aroma of fresh-baked breads and
+pastries fills this small shop.  A wide counter seperates the bakery from the
+storefront, a fine dusting of flour blanketing nearly every surface.  Warm
+baked goods fill the shelves behind the counter, offering a good view of
+today's offerings.
+~
+30 cdhq 0 0
+D2
+You see West High Street
+~
+~
+0 -1 3013 0
+S
+#3010
+Trin's General Store~
+   Well known throughout the realms as a buyer of fine goods and retailer of
+the highest quality merchandise, Trin's store reflects that attitude.  Well
+kept, with a large carpet covering the central area, row upon row of shelves
+display all manner of merchandise.  Lanterns, rope, and other common items
+filling every corner of the room, the inventory includes even some rather
+unusual items which seem more for display than utility.  In one corner, a
+narrow stairway leads upward, a small sign proclaiming 'Mira's Clothing'.
+~
+30 cdhq 0 0
+D2
+You see East High Street
+~
+~
+0 -1 3015 0
+D4
+A narrow staircase leads upward.    
+~
+~
+0 0 3089 0
+S
+#3011
+Reteo's Fine Weapons~
+   Within this small shop, Reteo offers for sale the simple product of his
+humble craft, as well as such items as he can afford to buy from adventurers.
+Aside from the occasional showy piece, short swords, daggers, and maces make
+up the bulk of the inventory.  The quality of Reteo's craftmanship is crude
+and common, but his weapons are serviceable enough.  Many adventurers have
+fond memories of their first weapons, obtained in this very shop.  The
+southern doorway opens onto East High Street.
+~
+30 cdhq 0 0
+D2
+You see East High Street.
+~
+~
+0 -1 3016 0
+S
+#3012
+West High Street~
+   Here, at the westernmost end of High Street stands the city gate, where
+High Street extends eastward toward the town Marketplace.  A simple shop
+stands just alongside the roadway to the north, a large, hastily painted sign
+declaring it Madoal's Magic Shop.  To the south rises a large scholarly
+looking building - The Mages Guild.  People pass by quickly as they scurry to
+and fro on their errands.
+~
+30 0 0 1
+D0
+You see Madoal's Magic Shop.
+~
+~
+0 -1 3033 0
+D1
+West High Street continues.
+~
+~
+0 -1 3013 0
+D2
+You see the entrance to the Guild of Magic Users.
+~
+~
+0 -1 3017 0
+D3
+You see the Western Gates
+~
+~
+0 -1 3040 0
+S
+#3013
+West High Street~
+   Travelling along West High Street, the main street of Heliopolis, the
+citizens of this fine town go about their daily affairs.  Directly to the east
+rises the hustle and bustle of The Marketplace, Heliopolis' main square.  
+Here, people mill about, visiting the small shops lining the avenue.  Above
+opposing doorways, signs proclaim Geofrec's Armory to the south, and Atlon's
+Fine Breads to the north.  The roadway extends to the east and west.
+~
+30 0 0 1
+D0
+You see Atlon's Fine Breads.
+~
+~
+0 -1 3009 0
+D1
+You see the MarketPlace.
+~
+~
+0 -1 3014 0
+D2
+You see Geofrec's Armory.
+~
+~
+0 -1 3020 0
+D3
+West High Street continues.
+~
+~
+0 -1 3012 0
+S
+#3014
+The Marketplace~
+   The marketplace air rings with the sharp cries of vendors hawking baked
+goods, textiles, and trinkets.  The dusty roadways surrounding the grand city
+square lies criss-crossed with shallow ruts made by passing carts, while
+brightly colored cobbles adorn the central plaza.  The level of activity here
+is overwhelming, where city guards mill about, ever ready to thwart any
+potential disturbance.  High street extends east to west, while the Temple
+Plaza lies to the north.  Southern Road runs off toward Meeting Square.
+~
+30 0 0 1
+D0
+Temple Plaza lies ahead.
+~
+~
+0 0 3005 0
+D1
+East High Street extends through a busy section of town.
+~
+~
+0 -1 3015 0
+D2
+Southern Road meets Meeting Square a short distance ahead.
+~
+~
+0 0 3068 0
+D3
+West High Street extends through a busy section of town.
+~
+~
+0 0 3013 0
+D4
+The zone room is floating above here!
+~
+~
+0 0 3099 0
+S
+#3015
+East High Street~
+   People bustle about, to and from the Marketplace to the west.  Small
+clusters of guards meander the crowds, preventing the seedier element from
+plying their trade.  Homely storefronts line both sides of the street, a small
+sign to the north proclaiming "Trin's General Store", while an even smaller
+sign hangs from the second-storey window, declaring "Mira's Clothing".  To the
+south lies a lowly kennel.  High Street extends to the east.
+~
+30 0 0 1
+D0
+Trin's General Store lies to the north.
+~
+~
+0 0 3010 0
+D1
+East High Street continues.
+~
+~
+0 0 3016 0
+D2
+You see a small kennel.
+~
+~
+0 0 3031 0
+D3
+The Marketplace can be seen bustling with activity.
+~
+~
+0 0 3014 0
+S
+#3016
+East High Street~
+   High Street cuts a straight path through the city from east to west.  A
+short distance to the west, the din of The Marketplace can be heard.  
+Buildings line both sides of the roadway, to the north, a sign proclaims
+"Reteo's Fine Weapons".  To the south lies a large, squat structure, the mural
+upon the door depicting a large shield overlain by a pair of crossed swords.
+To the east, High Street intersects King's Road at the Eastern Gate of the
+city.
+~
+30 0 0 1
+D0
+Weapons line the inner walls of Reteo's shop.
+~
+~
+0 0 3011 0
+D1
+The eastern gate of the city is not far off.
+~
+~
+0 0 3041 0
+D2
+Warriors enter and leave the guild to the south.
+~
+~
+0 0 3021 0
+D3
+East High Street continues towards the MarketPlace.
+~
+~
+0 0 3015 0
+S
+#3017
+The Entrance to the Mages' Guild~
+   Standing in the grand foyer of this elaborate structure, an ornate sign
+above the inner doorway announces the Mage's Guild.  Students and their
+masters pass in and out of the building, while other citizens seek entrance to
+the school's world-reknowned library.  Unless you are a student of this
+school, it looks as if you will have some difficulty getting past the guard.
+~
+30 d 0 0
+D0
+You see West High Street.
+~
+~
+0 -1 3012 0
+D1
+~
+~
+0 -1 3019 0
+S
+#3018
+An Intersection of Roads~
+   The roadway intersects a smaller byway, allowing easy travel to the north.
+The northern road, known to the locals as Smoke Lane, passes through the
+windswept plains, winding its way toward the craggy peaks of the Eastern
+Mountains.  Westward, along the main road, rises a fine city, the muted din of
+city commotion barely reaching your ears from this distance.  To the east, the
+roadway rises and falls as it climbs the foothills of the Eastern Mountains.
+~
+30 w 0 2
+D0
+A road travels north into the foothills.
+~
+~
+0 -1 3008 0
+D1
+A large road travels eastwards towards Sundhaven.
+~
+~
+0 -1 7402 0
+D3
+The road travels into the city of Heliopolis.
+~
+~
+0 -1 3022 0
+S
+#3019
+The Inner Sanctum~
+   Within the Inner Sanctum of the Mage's Guild students of the magical arts
+come to practice with the High Wizard.  The granite walls and floor lie
+scortched by the soot of failed experiments and spells gone awry.  Dark
+pentagrams and other symbols of ancient power lie partially obscured on the
+floor, a buildup of waxy residue in several places indicating where candles
+are generally placed.  The only intact objects in this room are the contents
+of the bookshelves.  The Master must have cast ward spells upon the books to
+prevent damage by inept students or angry demons.
+~
+30 cdq 0 0
+D3
+~
+~
+0 -1 3017 0
+S
+#3020
+Geofrec's Armors~
+   Nearly every bit of and wallspace is covered in a wide array of various
+armors.  Full suits of matching armor stand on display, while huge tower
+shields hang from the walls.  Helmets, gauntlets, and other accessories line
+the shelves which ring the entire shop.  The clang of steel on steel rings
+loudly from behind the shop.  Through the casement window to the north, West
+High Street passes through the heart of town.  A simple sign hangs against the
+counter.
+~
+30 cdhq 0 0
+D0
+You see West High Street.
+~
+~
+0 -1 3013 0
+E
+sign~
+  Use these commands to trade:
+
+  value <item>     To learn the price of an item in your possession.
+  sell <item>      To sell an item.
+  buy <item>       To buy something (provided the shop has it in stock).
+  list             To see a list of the shop's inventory.
+
+      WE ASK NO CREDIT - WE EXTEND NO CREDIT!
+
+                  NO HAGGLING
+
+~
+S
+#3021
+Entrance to the Warrior's Guild~
+   This grand hall is hung in splendid tapapestries depicting great battles
+between the warriors of Heliopolis and the forces of the Underdark.  Crossed
+broadswords, suspended above a splendid archway in the southern wall, mark the
+entryway to a noisy practice arena.  The shouts of the fencing master rise
+above the din of swordplay, and the curses of opponents.  East High Street
+lies through the doorway to the north.
+~
+30 d 0 0
+D0
+The crowded main street of Heliopolis lies through the doorway.
+~
+~
+0 -1 3016 0
+D2
+The sounds of combat eminate from this direction.
+~
+~
+0 -1 3023 0
+S
+#3022
+Before Heliopolis~
+   You stand at the outskirts of Heliopolis, capital of Caledon, and the
+highest city in the realms.  To the west, the roadway passes through the great
+eastern gates, and onto the main street of the city.  A confusion of shops,
+pubs, and open-air marketplaces crowd the broad thoroughfare.  Off to the
+east, a wide lane passes through the foothills toward the nearby city of
+Sundhaven, Heliopolis' closest neighbor.
+~
+30 cw 0 2
+D1
+The road intersects with another road a short distance ahead.
+~
+~
+0 -1 3018 0
+D3
+The Eastern Gate of Heliopolis rises high above the roadway.
+~
+~
+0 -1 3053 0
+S
+#3023
+The Tournament And Practice Room~
+   Greeted by the sounds of semi-organized chaos, this platform overlooks the
+arena where trained warriors work to hone their fighting skills.  The clash of
+sword upon shield nearly obscures the shouted orders of the master, of sword.
+All is presided over by the warrior guildmaster who surveys the scene from
+this platform, high above the arena floor.  It appears that anyone could be
+easily paired with a sparring partner to practice their skills.
+~
+30 cdq 0 0
+D0
+The entrance hall to the Warrior's Guild is to the north.
+~
+~
+0 -1 3021 0
+D2
+   From this balcony, Arena number one is off to the west and pairs of
+aspiring mages sputter colored lights and wisps of smoke as they practice
+together.  Arena two directly below seems fairly empty.  Arena three, off to
+the east, is filled with noisy weapons fighters clashing in mock battle.    
+~
+~
+0 0 -1 0
+S
+#3024
+West Ash Street~
+   The stench in this area clogs the senses.  Beggars, drunks, and thieves
+converge upon the ramshackle building to the south.  The cracked windows are
+covered in tarpaper, and the wood looks like it's rotting.  A lopsided sign
+hangs from a single chain, reading "Death's Dagger" atop a crude depiction of
+a knife piercing a disembodied heart.  An odd structure to the north looks out
+of place in this part of the city.  It's built to resemble the cultures of the
+far east.  East of here rises the relative safety of crowded Meeting Square.
+~
+30 0 0 1
+D0
+The Monk Training Hall looks out of place in this rundown part of the city.
+~
+~
+0 -1 3083 0
+D1
+A large number of people crowd Meeting Square.
+~
+~
+0 -1 3025 0
+D2
+The dilapidated remains of Death's Dagger Inn lie before you.
+~
+~
+0 -1 3048 0
+D3
+West Ash Street extends past humble businesses and lowly cottages.
+~
+~
+0 -1 3044 0
+S
+#3025
+The Meeting Square~
+   Meeting Square, the most southerly of Heliopolis' plazas, connects to the
+city's Marketplace via Southern Road, to the north.  Throngs of people mill
+about, coming here to escape the Marketplace crowds, and hopefully, to avoid
+the prying eyes of local authorities.  Ash Street extends both east and west,
+its narrow alleyways affording minimal shelter to the homeless.  The smell of
+refuse hangs in the air wafting in from the nearby town dump.  Southern Road
+extends southward past the dumpsite, rising over the river into a residential
+district where many of the most prominent citizens dwell.
+~
+30 0 0 1
+D0
+Southern Road meets the bustle of the Marketplace a short distance ahead.
+~
+~
+0 0 3068 0
+D1
+The dark confines of East Ash Street stand ahead.
+~
+~
+0 0 3026 0
+D2
+Southern Road extends southward, past the dump.
+~
+~
+0 0 2800 0
+D3
+The filth of West Ash Street lies in this direction.
+~
+~
+0 0 3024 0
+S
+#3026
+East Ash Street~
+   Only small groups of people roam the street in this area, where the
+frenzied activity of Meeting Square is absent.  The proximity to the city
+docks has thinned the crowds, and attracted individuals of entirely the wrong
+element.  Delapidated warehouses line both sides of the street, where dock
+workers move cargo to and from ships moored on the river.  Trade goods are
+shipped to Heliopolis from throughout the realms.
+~
+30 0 0 1
+D0
+Piles of pelts lie stacked just within the doorway of a small tannery.
+~
+~
+0 0 3066 0
+D1
+East Ash Street extends to the east, where it meets the dockyard.
+~
+~
+0 -1 3045 0
+D2
+The feeling of great evil eminates from a sullen-looking building.
+~
+~
+0 0 3028 0
+D3
+The bustle of the Meeting Square lies just to the west.
+~
+~
+0 -1 3025 0
+S
+#3027
+The Back Room~
+   This small room appears to be used for small gatherings.  A single, old
+table rests in the center of the room, surrounded by several well-worn chairs.
+There are no windows in the dark-stained walls, the only light provided by a
+greasy lantern suspended above the tabletop.  The single light source causes
+ghostly shadows to dance about, making it difficult to see clearly in the
+ominous darkness of the room.
+~
+30 cdq 0 0
+D0
+The main room of the Death's Dagger Inn lies through a narrow doorway.
+~
+~
+0 -1 3048 0
+S
+#3028
+Anti-Paladin Guild~
+   A sense of overwhelming evil radiates from the very walls of this dismal
+room.  The dark stone which makes up the walls and floor of the guild room
+lies swirled with veins of deep red, remarkably similar in appearance to dried
+blood.  Anti-Paladins from throughout the realms come here to study and
+further their knowledge of the unholy arts.
+~
+30 dq 0 0
+D0
+~
+~
+0 0 3026 0
+S
+#3029
+A Small Clearing~
+   A crackling campfire dominates this small clearing, blazing brightly with
+yellow flames tinged with blue and white.  A crude tent of old and tattered
+cloth is situated alongside the fire, and animal hides hang from nearby trees,
+suspended to dry on hempen ropes.  This primitive lifestyle is common to the
+simple-minded barbarians of Caledon.
+~
+30 q 0 2
+D3
+The undergrowth subsides where a trail cuts through the landscape.
+~
+~
+0 0 3037 0
+S
+#3030
+The City Dump~
+   An overwhelming stench assaults your senses from the great midden heaps
+that fill the town dump.  All manner of refuse lies piled within the mounds of
+filth, including food, scrap metal and lumber, and wads of mouldering paper.
+A high fence surrounds the area, preventing creatures like dogs and racoons
+from infesting the place.  At the very center, a small patch of earth has been
+cleared away, exposing a wide, metal grate.
+~
+30 cq 0 2
+D3
+Southern Road can be seen through the open gate of the town dump.
+~
+~
+0 -1 2800 0
+D5
+A round grate covers an entrance to the city sewers.
+~
+grate~
+1 0 7021 0
+S
+#3031
+The Kennel~
+   The sound of baying dogs and mewling cats fills the room.  Wire mesh cages
+line the majority of the wallspace.  Here, animals are trained basic commands
+as faithful companions of beginning adventurers.  Within the various cages,
+all manner of animals - cats, dogs, and even a wolf or two await new homes.  
+On the far wall, a sign gives instruction in pet ownership and care.  The
+relative peace of East High Street lies beyond the door to the north.
+~
+30 cdhq 0 0
+D0
+The relative quiet of East High Street lies beyond the door.
+~
+~
+0 0 3015 0
+S
+#3032
+&ROFF LIMITS!&n~
+
+This room is off limits to players, and you should NEVER be here. 
+You'd best get out before someone finds you here.
+
+This is the room where pets are stored for the Kennel.
+The room vnum must always be one larger than the vnum of the actual shop.
+
+
+~
+30 doq 0 0
+S
+#3033
+Madoal's Magic Shop~
+   This small shop overflows with shelves and counters filled with a jumble of
+bottles in a wide array of sizes, shapes, and colors - potions or reagents,
+most likely.  Unlabeled boxes contain a variety of small, wooden wands, while
+the larger staves stand in a corner at the back of the shop.  Open boxes of
+scrolls rest upon the floor, where the largest box bears the label 'identify'.
+These particular scrolls must be quite a popular item.
+~
+30 cdhq 0 0
+D2
+West High Street passes before the entrance to this shop.
+~
+~
+0 -1 3012 0
+S
+#3034
+The Dusty Trail Along the North Wall~
+   This narrow trail follows the north city wall.  Off in the distance to the
+west, a smaller trail branches off the main pathway, leading north into open
+grasslands, and off toward the Dragonhelm mountains.  The mountains command
+the view to the north, their majestic snow-capped peaks reaching toward the
+heavens.  The view to the east is dominated by the low, rolling hills of the
+Eastern Mountains.
+~
+30 0 0 2
+D1
+A dusty trail continues east.
+~
+~
+0 -1 3035 0
+D3
+The flat, dusty trail follows the city wall.
+~
+~
+0 -1 3088 0
+S
+#3035
+The Northeast Corner of the Trail~
+   The trail leads west and south here, at the northerneast corner of the city
+walls.  A squared-off, granite slab stands alone at the outer corner of the
+pathway, its base surrounded by a neatly-tended carpet of grass.  The path
+west follows the north city wall, allowing access to the trails leading north
+into the Dragonhelm Mountains.  The road south follows the eastern wall,
+toward the eastern city gate.
+~
+30 0 0 2
+D2
+The trail continues to the south.
+~
+~
+0 -1 3036 0
+D3
+The trail continues to the west.
+~
+~
+0 -1 3034 0
+E
+slab granite base monument tribute headstone~
+
+Upon the simple monument, and following tribute is inscribed:
+
+                - A Lament to the Fido -
+
+               A Fido and Odif were eating
+            When Gods up above gave a beating
+                  The Fido was killed
+                 The Mutt was revealed
+        It proved just how much life is fleeting.
+
+~
+S
+#3036
+East Trail Around Heliopolis~
+   A dusty trail leads north and south along the eastern wall of the city.  
+To the north, the view is dominated by the snow-capped peaks of the Dragonhelm
+Mountains, while to the east lie the low foothills of the Eastern Mountains.
+~
+30 0 0 2
+D0
+The trail continues north.
+~
+~
+0 -1 3035 0
+D2
+The trail continues south.
+~
+~
+0 -1 3037 0
+S
+#3037
+The East Trail Around Heliopolis~
+   A narrow, dusty trail hugs the eastern wall of the city, leading north
+toward the far corner of the city wall, while to the south stands the east
+city gate.  Eastward rise the low foothills of the Eastern Mountains, the
+hills dotted with small towers and keeps, probably only ruins now.  To the
+east lies a small clearing.
+~
+30 0 0 2
+D0
+The trail continues north.
+~
+~
+0 -1 3036 0
+D1
+~
+~
+0 0 3029 0
+D2
+Outside of the east gate of Heliopolis.
+~
+~
+0 -1 3053 0
+S
+#3038
+A Circle of Stones~
+   A small clearing opens before you, completely surrounded by a circle of
+massive, grey stones.  The stones, themselves, have been worn nearly smooth
+from year upon year of exposure to the elements.  Upon entering the circle, a
+feeling of tranquility overcomes you.  Whatever your tendencies, upon this
+sacred ground, no act of violence may be committed.
+~
+30 q 0 3
+D1
+~
+~
+0 0 3056 0
+S
+#3039
+The Upstairs~
+   The staircase opens onto the second level of the inn, where the guestrooms
+are located.  A hallway leads away to the east, wooden doors set at regular
+intervals in the north and south walls.  The hall is clean, the walls covered
+with panels of fine, polished wood.  A small desk rests in the hall a short
+distance from the staircase.  This must be where people pay for their rooms.
+~
+30 cdq 0 0
+D1
+Down the hallway are several doors set in the north and south walls.
+~
+~
+0 0 -1 0
+D5
+The lower level of the inn lies down the staircase.
+~
+~
+0 0 3006 0
+S
+#3040
+The Western Gates~
+   Visible from within the Heliopolis city walls, a guard tower flanks either
+side of the massive oaken gates.  A narrow catwalk bridges the gap between the
+twin towers, reaching over the top of the gates, providing a vantage point
+from which archers may defend the city.  The expanse of High Street,
+Helipolis' main thoroughfare, extends to the east, while Talon Avenue runs
+parallel to the city's western wall.
+~
+30 0 0 1
+D1
+West High street extends before you.
+~
+~
+0 -1 3012 0
+D2
+Talon Avenue runs alongside the inner wall of the city.
+~
+~
+0 -1 3042 0
+D3
+The city's Western Gate rises before you.
+~
+gate~
+1 -1 3052 0
+S
+#3041
+The Eastern Gates~
+   The large oaken gates stand flanked on either side impressive guard towers,
+marking the eastern boundary of the city.  Guards continuously patrol the
+battlements overhead, keeping a keen eye out for trouble.  Two streets
+intersect before the gates.  High Street, the main street of the city, runs
+westward into the heart of the city, eventually meeting The Marketplace.  
+King's Road, a smaller avenue leads north towards the King's castle, and south
+toward the dockyards.
+~
+30 0 0 1
+D0
+King's Road leads north towards Welmar's Castle.~
+~
+0 -1 3075 0
+D1
+Roads lead out of Heliopolis beyond the Eastern Gates.
+~
+gate~
+1 -1 3053 0
+D2
+King's Road leads southwards towards the city docks.
+~
+~
+0 -1 3058 0
+D3
+East High Street leads westwards towards the Marketplace.
+~
+~
+0 -1 3016 0
+S
+#3042
+Talon Avenue~
+   Talon Avenue parallels the city wall, the western gate standing just a
+short distance to the north.  To the south, a slender, white tower rises from
+the city wall.  Unlike the gate, where crowds of people enter and leave the
+city, this district seems strangely quiet.  Occasionally, a bum brushes past,
+forcing you to keep close watch on your purse.
+~
+30 0 0 1
+D0
+The Western Gate stands a short distance away.
+~
+~
+0 -1 3040 0
+D2
+The road continues to the south.
+~
+~
+0 -1 3043 0
+S
+#3043
+Talon Avenue~
+   Talon Avenue extends to the north and south from here, Ash Street branching
+off to the east.  Directly to the west, the entryway to the tall, white tower
+stands against the city wall.  This area is not as well-kept or well-travelled
+as the more northerly parts of the city, so it might be wise to keep a close
+watch on your purse.
+~
+30 0 0 1
+D0
+Talon Avenue stretches before you.
+~
+~
+0 -1 3042 0
+D1
+West Ash Street extends before you.
+~
+~
+0 -1 3044 0
+D2
+Talon Avenue intersects Flame Street a short distance ahead.
+~
+~
+0 -1 3047 0
+D3
+The gateway to the Ivory Tower looms ahead.
+~
+~
+0 -1 3799 0
+S
+#3044
+West Ash Street~
+   The gutters alongside Ash Street, one of the poorer districts, lie clogged
+with refuse.  Beggars, drunks, and common criminals mill about the area,
+awaiting the opportunity to advantage of the rare wealthy passerby.  Talon
+Avenue lies directly to the west, while to the east the street passes through
+Meeting Square, and beyond, intersecting with King's Road at the city wall.  
+To the north stands a low building, the headquarters and barracks of the city
+guard.  To the south lies a stone building, the Heliopolis jail.
+~
+30 0 0 1
+D0
+The Cityguard headquarters stands alongside the roadway.
+~
+~
+0 0 2900 0
+D1
+West Ash Street extends before you.
+~
+~
+0 -1 3024 0
+D2
+The city jail stands alongside the road.
+~
+door~
+1 0 2930 0
+D3
+Talon Avenue extends before you.
+~
+~
+0 -1 3043 0
+S
+#3045
+East Ash Street~
+   The traffic picks up considerably here.  Dock workers move cargo between
+the large warehouse to the east and a waiting ship moored at the docks to the
+south.  Ships from every seaport arrive and depart, continually.  North of the
+street lies a pleasant scene - a secluded grove of trees stands atop a grassy
+knoll in the center of the city.  East Ash continues east and west.
+~
+30 0 0 1
+D0
+A grove of trees stands in this direction, quite out of place in the city.
+~
+~
+0 0 3082 0
+D1
+The roadway intersects King's Road a short distance ahead.
+~
+~
+0 0 3046 0
+D2
+The bustling dockyard stands before you.
+~
+~
+0 0 3049 0
+D3
+East Ash Street continues west toward Meeting Square.
+~
+~
+0 0 3026 0
+S
+#3046
+King's Road~
+   Here stands the intersection of King's Road and East Ash Street, which
+leads west, extending deep into the heart of the city.  King's Road ends here
+at a large warehouse, used in river trade.  The sound of men working at the
+dockyard fill the air as they load and offload the ships.  King's Road
+continues northpast the East Gate of the city, eventually reaching the castle
+of King Welmar.
+~
+30 0 0 1
+D0
+The southern spur of King's Road continues north, toward the East Gate.
+~
+~
+0 0 3058 0
+D2
+A large warehouse stands to the south.
+~
+~
+0 0 3050 0
+D3
+East Ash Street extends before you.
+~
+~
+0 0 3045 0
+S
+#3047
+Intersection of Talon Avenue and Flame Street~
+   Talon Avenue and Flame Street intersect here at the southwestern corner of
+the city wall.  Flame Street extends east toward the Southern road which
+connects the walled main city of Heliopolis with a residential district across
+the river.  To the north, a tall, white tower stands against the city wall.  
+A slender path winds toward the city orphanage to the west.  Curiously, there
+appears to be a lack of guards around this portion of the city.  Better keep
+an eye out for danger.
+~
+30 0 0 1
+D0
+Talon Avenue extends before you.
+~
+~
+0 -1 3043 0
+D1
+Flame Street begins here, extending into the distance..
+~
+~
+0 -1 3072 0
+D2
+~
+~
+0 0 2967 0
+D3
+Down the winding pathway lies the town orphanage.
+~
+~
+0 -1 11101 0
+S
+#3048
+The Death's Dagger Inn~
+   A sullen darkness fills the common room, the only light coming from a few
+papered windows.  Old and broken furnishings lie clustered about the room in a
+haphazard manner.  The few bar patrons here do not even glance up from their
+ale to see who has entered.  Despite years of beer, food, and blood spilled on
+the floor, the faint outline of a trapdoor remains evident.
+~
+30 dh 0 0
+D0
+West Ash Street lies beyond the doorway.
+~
+~
+0 -1 3024 0
+D2
+A small back room invites the curious--or stupid.
+~
+~
+0 0 3027 0
+D5
+It looks like the outline of a trapdoor among the wooden floorboards.
+~
+trapdoor trap door~
+1 -1 3069 0
+S
+#3049
+The City Docks~
+   Sailors and dock workers bustle about, loading and unloading cargo.  The
+ships moored here represent many of the cities friendly to Heliopolis, as well
+as some which are not.  The Chaledros River flows gently by on its westerly
+course.  The relative calm of this portion of the river made this location
+ideal for the city's docks.  East Ash Street can be seen to the north.
+~
+30 h b 1
+D0
+Workers move cargo along East Ash Street.
+~
+~
+0 0 3045 0
+D2
+The Chaledros River flows away westward.
+~
+~
+0 0 911 0
+S
+#3050
+The Warehouse~
+   Stocked full of crates and boxes, this large warehouse must belong to some
+wealthy trader or merchant.  The city docks lie but a short distance from
+here, making this the perfect location to store goods from river trade.  Some
+crates are marked with their destinations, bearing familiar names like New
+Thalos and Mordilnia, as well as far off destinations like Aethelfyrd and
+Silverport.  East Ash Street lies through the doorway to the north.
+~
+30 d 0 0
+D0
+East Ash Street lies through the open doorway.
+~
+~
+0 0 3046 0
+E
+crates cargo boxes~
+   Crates are stacked from floor to ceiling, in various sizes and shapes.  
+Most are marked with their origin or destination.  Most all major cities are
+represented here, as well as some fairly surprising ones.  What would a
+Heliopolan merchant be doing with boxes from Xak'Vandiri of the Underdark?
+~
+S
+#3051
+West Trail Around Heliopolis~
+   A narrow, dusty trail follows the western wall of Helipolis.  To the east,
+the city wall towers over you.  The view to the west is blocked by the great
+Oakwood Forest.  To the northeast, the towering peaks of the Dragonhelm
+Mountains rise into the sky.  The dusty trail continues north and south.
+~
+30 0 0 2
+D0
+The dusty trail continues in this direction.
+~
+~
+0 -1 3056 0
+D2
+The trail outside of the west gate lies before you.
+~
+~
+0 -1 3052 0
+S
+#3052
+Outside the Western Gates~
+   Outside the immense oaken gates that lead into Heliopolis, a guard tower
+flanks either side of the gate, a catwalk stretching between.  A narrow, dusty
+trail strikes off to the north, following the city wall.  To the west, King's
+Highway cuts through a flattened greensward outside the city.  A short
+distance away, the open landscape gives way to the dark expanse of Oakwood
+Forest.  To the east lies the city.
+~
+30 cw 0 2
+D0
+A dusty trail follows the city wall.
+~
+~
+0 -1 3051 0
+D1
+The city gate stands nearby.
+~
+gate~
+1 -1 3040 0
+D2
+~
+~
+0 0 3097 0
+D3
+The King's Highway leads away through the greensward.
+~
+~
+0 -1 6042 0
+S
+#3053
+Outside the Eastern Gates~
+   Here stand the great Eastern Gates of Heliopolis.  The sounds of the city
+clash in a great din, which can be heard outside the gates.  Large towers
+stand at either side, connected by a battlement overhead.  Guards in the
+livery of King Welmar patrol the gates, keeping ruffians out of the city.  To
+the east, a wide roadway extends across the plain toward the city of
+Sundhaven.  Far to the north, the snow-capped peaks of the Eastern Mountains
+rise in the distance.  A dusty trail heads northward, hugging the wall.
+~
+30 w 0 2
+D0
+A dusty trail follows the city wall.
+~
+~
+0 -1 3037 0
+D1
+A large road stretches away toward Sundhaven.
+~
+~
+0 -1 3022 0
+D3
+Twin towers rise alongside the Eastern Gate.
+~
+gate~
+1 -1 3041 0
+S
+#3054
+The Northern End of the Temple~
+   The northern end of the Temple of the Phoenix.  This portion of the temple
+is dominated by an ornate, marble altar, inscribed with a stylistic rendition
+of the great Phoenix taking flight over the city of Heliopolis.  Feelings of
+peace and tranquility pervade the room.  The grace of the Phoenix has surely
+touched this place of rest and healing.  A pew lines the right hand wall
+invitingly.
+~
+30 dfhq 0 0
+D2
+The southern end of the temple lies before you.
+~
+~
+0 0 3001 0
+D5
+Sturdy stairs lead down into a well-lit round room.
+~
+~
+0 0 1298 0
+E
+altar~
+   Though the altar stretches more than ten feet, it appears to have been hewn
+from a single slab of polished, white marble.
+~
+S
+T 3028
+#3055
+&ROFF LIMITS!&n~
+   Within thbe small, dark roomare kept the player items.  It is vital that
+this room's virtual number is exactly one larger than the room by the temple
+altar.
+~
+30 d 0 0
+S
+#3056
+West Trail Around Heliopolis~
+   The dusty trail outside the city wall extends to the north and south here.
+To the north, the trail follows the city wall, turning eastward and following
+the north wall of the temple.  Far to the north rise the Dragonhelm mountains,
+capped in snow.  To the west, the dark expanse of Oakwood streches endlessly.
+A small clearing lies directly to the west.
+~
+30 0 0 2
+D0
+The trail follows the city wall.
+~
+~
+0 -1 3057 0
+D2
+The trail continues toward the city gate.
+~
+~
+0 -1 3051 0
+D3
+A small clearing lies a short distance off the pathway.
+~
+~
+0 0 3038 0
+S
+#3057
+Northwest Corner of Trail~
+   The trail bends around the northwest corner of the city wall, making its
+way south towards the west gate, and east, following the north wall.  The To
+the north, the Dragonhelm mountains rise skyward, preceeded by lower foothills
+before.  The view to the west is completely obscured by the wide expanse of
+the Oakwood Forest.
+~
+30 0 0 2
+D1
+The trail follows the city wall.
+~
+~
+0 -1 3085 0
+D2
+The trails extends southward toward the gate.
+~
+~
+0 -1 3056 0
+S
+#3058
+King's Road~
+   The street lies dark and deserted.  This short spur of King's Road extends
+from the Eastern Gate, running southward to meet Ash Street.  The sounds of
+the city emanate from the Eastern Gate.  People come and go by the city's
+gate, often trading with Heliopolis' nearest neighbor, Sundhaven.  The tall
+city wall casts long shadows on this area.
+~
+30 0 0 1
+D0
+The road extends toward the Eastern Gate of the city.
+~
+~
+0 0 3041 0
+D1
+   The shadows created by the looming wall provide ideal cover for people who
+don't wish to be seen.  A young hooligan is carving something on the wall.
+~
+~
+0 0 -1 0
+D2
+The southern spur of King's Road extends before you.
+~
+~
+0 0 3046 0
+E
+carving~
+The carving reads:
+
+    &YDeath to King Welmar!!!&n
+~
+E
+hooligan~
+The hooligan sees you, and abruplty stops carving.
+~
+S
+#3059
+The Dusty Trail Along the North Wall~
+   The trail follows the north wall here.  A simple, dirt path branches off
+the main trail, running north toward the Dragonhelm mountains.  To the south,
+beyond the wall, rises the high north wall of the Temple of the Phoenix, which
+does not look half as impressive from this side.  The trail continues east and
+west, and the pathway north.
+~
+30 0 0 2
+D0
+Lush, green countryside surrounds Heliopolis.
+~
+~
+0 -1 3060 0
+D1
+The trail follows the city wall.
+~
+~
+0 -1 3087 0
+D3
+The dusty trail follows the city wall.
+~
+~
+0 -1 3064 0
+S
+#3060
+The Path Through the Fields~
+   The cold, granite slopes of the Dragonhelm Mountains cast long shadows
+across the northern fields.  The sound of birds singing from the branches of a
+tall oak tree fills the air, a gentle wind stirring the long, green grass.  
+The path continues northward, passing between and odd structure to the east,
+and a a decrepit inn to the west.  This country lane meets the north wall of
+Heliopolis just to the south.
+~
+30 0 0 2
+D0
+A simple country lane passes through the fields.
+~
+~
+0 -1 3061 0
+D2
+The lane meets a dusty trail that appears to surround the outer city wall.
+~
+~
+0 -1 3059 0
+S
+#3061
+The Path Through the Fields~
+   The path continues its lazy northward direction toward the Dragonhelm
+Mountains.  Birds flit about, chirping gaily, sometimes alighting on one of
+the tall oak trees.  Many of the oaks appear olderthan the city, itself.  Two
+things disrupt the natural beauty of the place, though.  To the west, a narrow
+path leads to the door of a derelict inn surrounded in trees.  To the east,
+almost directly off of the path, stands an unusual, stone building.
+~
+30 c 0 2
+D0
+The path continues northward drawing ever closer to the Dragonhelm Mountains.
+~
+~
+0 -1 3065 0
+D1
+A strange structure rises alongside the trail.
+~
+~
+0 -1 9600 0
+D2
+The natural beauty of the fields extends toward the mountains.
+~
+~
+0 -1 3060 0
+D3
+A delapidated, old inn stands alongside the lane.
+~
+~
+0 0 3570 0
+S
+#3062
+The Post Office~
+   This tiny room occupies only a corner within the Inn of the Flames.  The
+town postal system has taken this space as its main office.  Crates of
+undelivereded mail rest along the walls, waiting to be delivered to the far
+corners of the world.  By the looks of things, the postal service will soon
+need to seek larger accomodations.
+~
+30 cdhq 0 1
+D2
+The entrance to the inn lies across the way.
+~
+~
+0 0 3006 0
+S
+#3063
+The Temple Forge~
+   Given these troubled times, temple administrators felt it necessary to
+provide at least the basics in equipment and weapons for the congregation.  
+Racks of equipment and weapons, free for the taking, line the walls.  Wooden
+benches stand alongside several of the racks, where those in need may await
+new offerings.
+~
+30 cdmq 0 1
+D0
+~
+~
+0 0 -1 0
+D3
+The busy temple is back west.
+~
+~
+0 0 3001 0
+D5
+~
+~
+17 0 1297 0
+E
+ground~
+   Polished smooth by constant foot-traffic, the floor of this room is
+typically covered in donated items, meant for those in need.
+~
+S
+#3064
+The Dusty Trail Along the North Wall~
+   The trail around the city wall continues here, running east to west.  To
+the north, the Dragonhelm mountains consume the view, their snow-capped peaks
+reaching for the heavens.  Far to the east rise the foothills, the Eastern
+Mountains standing tall, behind.  To the west, the trees of Oakwood Forest
+fill the horizon.
+~
+30 0 0 2
+D1
+The trail continues in this direction.
+~
+~
+0 -1 3059 0
+D3
+The trail extends in this direction, following the city wall.
+~
+~
+0 -1 3086 0
+S
+#3065
+The Path Through the Fields~
+   The countryside changes subtly as the path converges upon the Dragonhelms.
+The soft wind gently blows through the fields of grass.  Towering, granite
+peaks rise cold and stark.  To the south, the city wall stands, the Temple of
+the Phoenix rising behind it.  The path travels south, past the unusual
+structure to the east, finally meeting the northern wall of the city.
+~
+30 0 0 2
+D0
+The path continues northward into the Dragonhelm Mountains.
+~
+~
+0 -1 3081 0
+D2
+The path continues through the field, past an odd structure to the east.
+~
+~
+0 -1 3061 0
+D3
+~
+~
+0 0 -1 0
+S
+#3066
+Marcus and Sons' Tannery~
+   This small tannery stands close to the dockyard in anticipation trade ships
+that frequent this port.  As ships dock frequently, the owner was forced to
+enlist the aid of his sons in this very lucrative business.  Bundles of soft
+pelts stand ready for shipment on the next boat, while others are still in the
+process of being cured.
+~
+30 cdhq 0 0
+D2
+   The dockyard lies beyond the open doorway.  The sound of the lapping waves
+blends softly into the city noise.
+~
+~
+0 0 3026 0
+O
+0 0 0
+O
+1 0 0
+O
+2 0 0
+O
+3 0 0
+S
+#3067
+The First National Caledonian Bank~
+   A small booth stands against the back wall of this narrow room, where
+patrons of the local bank come to do their business.  A small sign affixed to
+the counter provides the following instructions: &WDEPOSIT $$$&n, &WWITHDRAW $$$&n, or
+&WBALANCE&n.  King's Road lies to the east, visible through the large windows.
+~
+30 cd 0 1
+D1
+The well-paved King's Road lies through the doorway.
+~
+~
+0 -1 3076 0
+S
+#3068
+Southern Road~
+   This short stretch of roadway connects the marketplace to the north with
+Meeting Square to the south.  Crowds of people move past, but the road is
+relatively empty, compared to the throngs of people milling about the
+Marketplace.  The piercing cries of hawkers can be heard over the general din.
+~
+30 0 0 1
+D0
+The hustle and bustle of the marketplace lies ahead.
+~
+~
+0 0 3014 0
+D2
+Meeting Square lies only a short distance away.
+~
+~
+0 0 3025 0
+S
+#3069
+An Old Staircase~
+   Though this staircase is rarely uesd since the crackdown on crime in the
+city, the rickety steps still see infrequent traffic, as not everyone heeds
+the law.  The stairs lead down to a sub-level of the city sewers, poorly lit
+by a single, sputtering torch.  Grime and dirt mar the walls, and old water
+stains mark the lower stairway.  A slender shaft of dim light emanates from
+the common room of the Death's Dagger Inn.
+~
+30 acdr 0 0
+D4
+A trapdoor leads back up to the Death's Dagger Inn.
+~
+trapdoor trap door~
+1 -1 3048 0
+D5
+The shaft leads down to a tunnel junction.
+~
+~
+0 -1 3070 0
+S
+#3070
+A Round Sewer Junction~
+   The abandoned shaft leads down to this room, a junction in the old sewers
+of Heliopolis.  This sub-level is no longer used and should have been sealed
+off.  It appears that someone is making use of this abandoned section of
+sewers.  The walls have been finished in panels of black onyx, while the floor
+is finished in marble with an inlaid design - a spike-armored fist surrounded
+by a red aura.  Aside from the staircase and the passages to the north and
+south, the remaining exits have been sealed off.
+~
+30 adh 0 0
+D0
+An abandoned sewer tunnel leads into the darkness.
+~
+~
+0 -1 3071 0
+D2
+~
+~
+0 0 2950 0
+D4
+An old staircase leads upward, passing through an old shaft.
+~
+~
+0 -1 3069 0
+S
+#3071
+An Access Tunnel in the Old Sewer System~
+   This narrow tunnel leads away from the round junction below Death's Dagger
+Inn.  Rarely uesd in the days, when this sewer carried waste, it is even less
+used now.  The tunnel is kept meticulously clean, however, and rumours abound
+of an assassin's guild using the old sewers as their secret hideaway.  A
+sturdy, iron door in the west wall surely hides many secrets that the average
+citizen could never know.
+~
+30 ad 0 0
+D2
+The tunnel leads toward the junction room.
+~
+~
+0 -1 3070 0
+D3
+A sturdy, iron door bars the way.
+~
+door sturdy iron~
+257 -1 3074 0
+S
+T 3021
+T 3022
+#3072
+Flame Street~
+   Flame Street follows the southern wall of the city.  From behind the wall,
+the roar of rushing water, the Chaledros River, greets your ears.  This
+portion of the city lies unusually quiet, where Guild-halls and small shops
+line the street.  A tall cathedral, the guild of paladins, lies directly
+north.  A short distance to the east, the roadway intersects Southern Road,
+which leads toward the residential district.
+~
+30 0 0 1
+D0
+A spire of a tall cathedral rises before you.
+~
+~
+0 -1 3079 0
+D1
+Flame Street meets Southern Road some distance ahead.
+~
+~
+0 -1 3073 0
+D2
+A healer's cottage stands alongside the road.
+~
+~
+0 0 2818 0
+D3
+Flame Street meets Talon Avenue at the southwestern corner of the city.
+~
+~
+0 -1 3047 0
+S
+#3073
+Flame Street~
+   Flame Street, the southernmost road in Heliopolis, rests quietly, the
+street lying beneath the shadow of the city wall.  The road intersects Talon
+Avenue to the west, while Southern Road to the east leads into the residential
+district.  The roar of the rushing Chaledros river can be heard over the wall.
+~
+30 0 0 1
+D1
+Flame Street intersects Southern Road just ahead.
+~
+~
+0 -1 2800 0
+D2
+The grand arch of the Heliopolis Municipal Stable rises overhead.
+~
+~
+0 0 3093 0
+D3
+Flame Street extends in a westerly direction. 
+~
+~
+0 -1 3072 0
+S
+#3074
+The House of Malebolge~
+   An unusual sight greets the unwary visitor - an opulent chamber in the
+midst of the abandoned sewer.  Expensive rugs line the hard, stone floors,
+while fine tapestries adorn the otherwise-bare walls.  Chairs and pillows rest
+within this room, while candles and incense burn on side tables.  This
+fantastic place is the home of Malebolge, master of the Assassin's Guild of
+Caledon.  The center of the room is dominiated by a massive, oak table, upon
+which a fabulous chess set rests, arrayed in mid-game.
+~
+30 ad 0 0
+D1
+A sturdy, iron door leads to the access tunnel.
+~
+door sturdy iron~
+257 -1 3071 0
+E
+chess board chessboard~
+   Upon further examination of the board, it is revealed that the pieces are
+not actually chess pieces, they are life-like renditions of people and other
+creatures found throughout the realms.  Some of the pawns you even recognize--
+friends and adventurers of some reknown!  Something much deeper than a simple
+game of chess is going on here...
+~
+S
+#3075
+The King's Road~
+   This point marks the beginning of King's Road, leading from the Eastern
+Gate of the city to the King's castle, directly to the north.  Shops line the
+western side of the thoroughfare, while the city wall rises on the east.  The
+view to the north is dominated by the grand castle of the Caledonian King.  
+The road is busy with people visiting the local shops, and on their way to
+business in the castle.
+~
+30 0 0 1
+D0
+The road extendss toward the castle.
+~
+~
+0 -1 3076 0
+D2
+The Eastern Gates of the city lie ahead.
+~
+~
+0 -1 3041 0
+S
+#3076
+The King's Road~
+   The northern section of King's Road extends toward the large castle to the
+north, and the Eastern Gates to the south.  Busy shops line the western side
+of the street, while a grassy area opens near the city wall to the east.  A
+squat, stone building dominate the western side of the street, a sign
+proclaiming it "The First National Caledonian Bank".
+~
+30 0 0 1
+D0
+The road extends toward the castle.
+~
+~
+0 -1 3077 0
+D2
+The road continues toward the city gates.
+~
+~
+0 -1 3075 0
+D3
+The Heliopolis branch of the bank stands alongside the busy roadway.
+~
+~
+0 -1 3067 0
+S
+#3077
+The King's Road~
+   King's Road continues its north-south path, looming under the shadow of the
+high turrets of the castle to the north.  Still a wide and busy thoroughfare,
+shops line the western side of the street.  A large sign in a storefront
+proclaims the Heliopolis Cartographer's Guild.  A wide swath of grass lines
+the eastern side of the road beneath the city wall.  People enjoy the relative
+peace of the setting, while traffic flows by.
+~
+30 0 0 1
+D0
+The castle looms high overhead.
+~
+~
+0 -1 3078 0
+D2
+The road extends toward the city gates.
+~
+~
+0 -1 3076 0
+D3
+The Cartographer's Guild stands alongside the roadway.
+~
+~
+0 -1 3084 0
+S
+#3078
+The King's Road Before the Drawbridge~
+   The wide thoroughfare of King's Road ends here at the guardpost before the
+castle drawbridge.  A deep, narrow moat surrounds the two sides of the castle
+not abutting the city wall.  A wooden drawbridge, which is perpetually down
+during these times of peace, joins the castle to the roadway.  Traffic is
+congested here, as the drawbridge is not as wide as the street.
+~
+30 0 0 1
+D0
+A drawbridge spans the moat.
+~
+~
+0 -1 11004 0
+D2
+King's Road continues south toward the gates.
+~
+~
+0 -1 3077 0
+S
+#3079
+Entrance to the Cathedral~
+   The vaulted ceiling of the great cathedral rises out of sight, reaching
+toward heaven it would appear.  Elaborate, stained-glass windows line the
+walls, admitting filtered light, where heavy, wooden pews line the aisles.  
+People fill the pews, heads bowed, praying in soft tones to their god.  
+Directly before the main aisle, a great altar adorned in beautiful paintings
+proclaims the greatness of your god.
+~
+30 cd 0 0
+D0
+Down the main aisle rises the massive altar.
+~
+~
+0 -1 3080 0
+D2
+Flame Street lies ahead.
+~
+~
+0 -1 3072 0
+S
+#3080
+The Altar~
+   At the center of the room rises a magnificent altar.  The murmur of soft
+prayers and gentle chants fills the room, the high, domed ceiling reaching for
+the heavens.  Numerous candles burn in a small alcove to the side of the
+altar.  An enormous pipe organ fills an entire wall of the cathedral, its
+tall, brass pipes reaching upward.  The exit, as well as the burdens and evils
+of the world, lie to the south.
+~
+30 cdq 0 0
+D2
+The main cathedral floor, and the exit lie to the south.
+~
+~
+0 -1 3079 0
+S
+#3081
+The Path Through the Fields~
+   The elevation gradually changes as the path makes its way through the
+fields and up into the awe-inspiring mountain range to the north.  Hills swell
+upward to meet the Dragonhelms, rising and falling as the foothills merges
+with the grassy fields.  Clusters of trees and brush perch atop some of the
+higher hilltops, others remaining barren and rocky.  Deer graze in the
+distance, keeping a watchful eye for predators.
+~
+30 0 0 2
+D0
+The path picks the safest route through the wide fields of grass.
+~
+~
+0 0 3090 0
+D2
+The path picks the safest route through the wide fields of grass.
+~
+~
+0 0 3065 0
+O
+0 0 0
+O
+1 0 0
+O
+2 0 0
+O
+3 0 0
+S
+#3082
+The Ranger's Guild~
+   The greenery in this small area stands in stark contrast to the surrounding
+city.  Rangers have cultivated this small grove as a place to hold their
+rigorous training.  A feeling of ease pervades the area, the pressures and
+toils of city life lifted like a blanket by the call of singing birds.  Ash
+Street lies to the south.
+~
+30 cdqD 0 0
+D2
+The dreary expanse of the city lies in this direction.
+~
+~
+0 0 3045 0
+O
+0 760 1
+S
+#3083
+The Monk Training Hall~
+   This building has been refurbished by its present occupants to reflect
+eastern decor.  Bamboo walls, rice paper doors, and hanging scrollwork serve
+to set the mood.  Numerous monks practice their art in the center of the
+floor.  While most are engaged in fighting, some of the aspirants practice
+other talents, such as feigning death or falling from great heights.  West Ash
+Street lies to the south.
+~
+30 cdq 0 0
+D2
+West Ash Street lies through the open doorway.
+~
+~
+0 -1 3024 0
+S
+#3084
+The Cartographer's Shop~
+   From within this tiny shop, a single window looks out onto King's Road to
+the east.  The shop is crowded with people examining the myriad collection of
+maps.  Maps of all sorts cover every available surface, including walls,
+tables, and sometimes even the floor.  Perhaps you should purchase some maps
+before heading off on your adventures.
+~
+30 cdhq 0 0
+D1
+King's Road lies through the open doorway.
+~
+~
+0 -1 3077 0
+S
+#3085
+The Dusty Trail Along the North Wall~
+   Scorch marks dot the rough, stone walls that separate the city of
+Heliopolis from the northern wilderness.  Remnants of the last invasion
+attempt on Heliopolis led by a reclusive wizard from the Dragonhelms, the
+citizens of Heliopolis have decided to leave the markings as a constant
+reminder of what might happen if they do not remain vigilant.
+~
+30 0 0 2
+D1
+~
+~
+0 0 3086 0
+D3
+~
+~
+0 0 3057 0
+S
+#3086
+The Dusty Trail Along the North Wall~
+   A gentle breeze kicks up the dirt, sending dust swirling about this
+well-trodden pathway encircling the city of Heliopolis.  Over the high stone
+wall, the top of the Temple of the Phoenix rises in all its splendor.  The
+ominous Dragonhelm Mountains rise to the north, while directly to the east, a
+pathway leads northward through the grasslands, in the direction of those
+awe-inspiring peaks.
+~
+30 0 0 2
+D1
+~
+~
+0 0 3064 0
+D3
+~
+~
+0 0 3085 0
+S
+#3087
+A Dusty Trail Along the North Wall~
+   Directly to the west, a narrow, uncluttered pathway leads through the
+grasslands to the north; its destination, the magnificent Dragonhelm
+Mountains.  The Dragonhelms have been a much rumored source of adventure for
+anyone brave enough to make the arduous journey.  The pathway continues east
+and west, following the north wall.
+~
+30 0 0 2
+D1
+~
+~
+0 0 3088 0
+D3
+~
+~
+0 0 3059 0
+S
+#3088
+The Dusty Trail Along the North Wall~
+   The high stone wall affords the city of Heliopolis more than adequate
+protection from any threat, whether it be the hill giants rumored to live
+north among the Dragonhelms, or any of the various goblin clans that plague
+this region.  To the east and west, the dusty pathway continues.
+~
+30 0 0 2
+D1
+~
+~
+0 0 3034 0
+D3
+~
+~
+0 0 3087 0
+S
+#3089
+Mira's Clothing Shoppe~
+   A smooth, wood-planked floor extends beneath the gently sloping roof, where
+racks of clothing line the walls.  A couch rests before a multi-paned, dormer
+window, the shutters thrown back to admit natural light to this dark, attic
+room.  Alongside the couch stands a worktable, boasting a wide array of sewing
+notions.  In the center of the room, a dressmaker's form stands draped in a
+work in progress.  Off in the corner, a narrow stairway leads downward.
+~
+30 d 0 0
+D5
+A narrow staircase leads into the shop, below.
+~
+~
+0 0 3010 0
+S
+#3090
+The Path Through the Fields~
+   Twisting its way between boulders and broken trees, the path meanders
+through the grassy hills.  The fields covering the rolling hills are narrower
+than in the south, since there is less room to grow thanks to the fir trees
+that have taken root.  The scent of a wood fire fills the air, drifting in
+from some unknown direction.  Surely that must mean there is shelter nearby.
+~
+30 0 0 2
+D0
+   The path continues its journey into the north, disappearing into the
+mountain-filled horizon.    
+~
+~
+0 0 3091 0
+D2
+The path picks its way around rocks and shrubs as it descends the hills.
+~
+~
+0 0 3081 0
+O
+0 0 0
+O
+1 0 0
+O
+2 0 0
+O
+3 0 0
+S
+#3091
+The Path Through the Fields~
+   Fir trees stand tall and thick at the borders of the field; so thick that
+barely an acre of open field remains.  Oddly, grasses dominate this area, as
+in the south, creating a curious hourglass effect.  Animals hidden in the
+forest chatter noisily, but try as you may, the sources are undetectable.  
+The path presses upward from the hills into the steeper countryside after
+climbing from the flatlands, below.
+~
+30 0 0 2
+D0
+The path emerges onto a spacious field.
+~
+~
+0 0 2100 0
+D2
+The path emerges onto a spacious field.
+~
+~
+0 0 3090 0
+O
+0 0 0
+O
+1 0 0
+O
+2 0 0
+O
+3 0 0
+S
+#3092
+The Tackroom~
+   The tack room of the Heliopolis Municipal Stable, infused with the
+persistent aroma of newly oiled leather, is a magnificent example of
+equestrian decor.
+~
+30 dC 0 0
+D3
+The barreled tunnel of the stable entrance.
+~
+~
+0 0 3093 0
+O
+0 0 0
+O
+1 0 0
+O
+2 0 0
+O
+3 0 0
+S
+#3093
+The Heliopolis Municipal Stable~
+   The archway above the grand entrance to the Heliopolis Municipal Stable
+encloses a red brick passage.  The tunnel amplifies the gentle clip clop of
+the horses being excercised within the practice yard.
+~
+30 cdC 0 0
+D0
+   The arena entrance opens onto Flame Street.  The eastern edifice of the
+Cathedral stands neatly framed within the arch.
+~
+~
+0 0 3073 0
+D1
+A low, narrow doorway leads into the dimly lit tackroom.
+~
+~
+0 0 3092 0
+D2
+The tunnel opens onto the central yard of the stable.
+~
+~
+0 0 3094 0
+O
+0 0 0
+O
+1 0 0
+O
+2 0 0
+O
+3 0 0
+S
+#3094
+The Paddock~
+   The yard of the Heliopolis Municipal Stable is a large, roughly square open
+space, well-trod, yet fairly clean.  At intervals, the surrounding fence is
+interrupted by gates or stalls leading to the interior of the stable.  A well
+and watering trough stand near the center of the yard.
+~
+30 C 0 0
+D0
+   The grand arch of the entrance frames a view of the cathedral on the
+opposite side of Flame Street.
+~
+~
+0 0 3093 0
+D2
+An open stall serves as the gateway to the interior of the stable.
+~
+~
+0 0 3095 0
+O
+0 0 0
+O
+1 0 0
+O
+2 0 0
+O
+3 0 0
+S
+#3095
+Brush and Bridle~
+   Riders arrive here early each morning, where mounts are saddled and bridled
+and groomed after their exercise.  A wooden door leads into the main stables,
+an old horseshoe nailed to the lintel, overhead.
+~
+30 dC 0 0
+D0
+The barrel tunnel of the stable entrance is visible across the paddock.
+~
+~
+0 0 3094 0
+D2
+A dutch gate to the stalls.
+~
+gate~
+259 0 3096 0
+O
+0 0 0
+O
+1 0 0
+O
+2 0 0
+O
+3 0 0
+S
+#3096
+A Stall~
+   This is for employees only!
+~
+30 0 0 0
+D0
+~
+~
+1 0 3095 0
+O
+0 0 0
+O
+1 0 0
+O
+2 0 0
+O
+3 0 0
+S
+#3097
+The Portal Chamber~
+You are in an unfinished room.
+~
+30 0 0 0
+D0
+~
+~
+0 0 3052 0
+O
+0 0 0
+O
+1 0 0
+O
+2 0 0
+O
+3 0 0
+S
+#3098
+The Sundhaven Post Carriage~
+   A simple post carriage with two leather-covered benches, enclosed by low
+windows allows a view of the passing countryside.  The doors, on the sides
+facing north and south, allow a passenger to quickly exit the cabin.
+~
+30 foBC 0 0
+D0
+
+~
+~
+0 0 3098 0
+D2
+
+~
+~
+0 0 3098 0
+O
+0 0 0
+O
+1 0 0
+O
+2 0 0
+O
+3 0 0
+S
+T 3098
+T 3097
+T 3096
+#3099
+The Zone Room~
+   This room provides connection points to other worlds that have not yet
+found a permanent home in our world.  Take care when entering these zones.  
+There may be high level aggressive monsters.  Check "areas" to see what level
+they are rated for.  West: Mega-Tokyo, not for the little ones.
+~
+30 cd 0 0
+D3
+Magical lights of a strange portal are there.
+~
+~
+0 0 5700 0
+D5
+The safety of the marketplace lies that way.
+~
+~
+0 0 3014 0
+S
+$~

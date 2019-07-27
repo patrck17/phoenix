@@ -1,0 +1,950 @@
+Q This special drink served in Sundhaven is also the name of an old British comedy with Rowen Atkinson.
+~
+2
+A  Rogue’s Brew.
+A  Fire Whiskey.
+A  Mud Puddle.
+X  Black Adder.
+A  Laughing Banana.
+
+Q If you can kill the rock golems, you can get clay leg pants from what zone?
+~
+1
+A  Ice Caves of Alludia.
+A  Great Rift Desert.
+A  Gargoyle Tower.
+A  ThunderDelve Village.
+X  Temple of the Earth Mother.
+
+Q In the residence of the Grand Mistress of the High Tower of Magic, beyond the 3 locked doors, there are a dozen pieces of equipment that load.  Which of the following are not found there?
+~
+1
+A  Cameleon poncho and ebony kris.
+A  Small emerald ring and emerald bracelet.
+A  Leather backpack and shimmering cloak.
+A  Heart shaped medallion and seashell ring.
+X  Elixir of earth root and spirit berries.
+
+Q This item may help you resist poison, but it’s more valuable for its constitution bonus.  
+~
+1
+A  Brown robe.
+A  Ghant queen’s plates.
+A  Skexie headdress.
+X  Mudpack.
+A  Mayor’s magenta colored shirt.
+
+Q Which object in Lava Tubes, guarded by lava elementals is the equivalent of the elven necklace, but for elves and their kin?
+~
+2
+X   Lavalier.
+A  Torque.
+A  Talisman of Power.
+A  Iron Cross.
+A  Gem of House Zuviir.
+
+Q What fried Halfling body part can you eat in Hidden Outpost?
+~
+3
+A  Giblets.
+A  Loins.
+A  Ears.
+A  Hairy Feet.
+X  Lips
+
+Q This mighty weapon, from the fortress of the midnight warlock, casts Harm spells.
+~
+2
+A  Cthrek Guru.
+A  Dacra.
+X  Deathbringer.
+A  Jawbone of Lord Suzerain.
+A  Holy Word.
+
+Q What 3 objects must be put on the plaque in Wood of Ages as part of the quest to get the jeweled belt?  Emerald, ruby, and …
+~
+3
+A  Topaz
+X  Sapphire.
+A  Opal.
+A  Diamond.
+A  Leather Strap.
+
+Q What wand can be found in a footlocker near the Ghenna Swordmaster?
+~
+3
+A  Crystalline ball.
+A  20 mm cannon.
+A  Old man’s cane.
+X  Book of the wyrm.
+A  Fire gem.
+
+Q What quickling item grants Haste?
+~
+1
+X  Short sword of speed.
+A  Wristband of speed.
+A  Quickling bracers.
+A  Tiny quickling medallion.
+A  Green felt hat.
+
+Q Besides gold, what is found in the chest of Fyda, the Orc Chieftain of Firetop Mountain?
+~
+2
+A  Viper fang.
+A  Leafy tendril.
+A  Darksteel shield.
+A  Carved wooden ring.
+X  Black velvet gloves.
+
+Q Which of the following neck items does not give +2 int and +2 wis?
+~
+3
+A  Guardian’s Collar.
+X  Golden Crucifix.
+A  Eye of Ra.
+A  Unholy medallion.
+A  All four items above give +2 int and +2 wis.
+
+Q What leveling item hides inside a book in the library of the High Tower of Magic?
+~
+2
+A  Silver quill.
+A  Thoth’s quill.
+A  Library card.
+X  Spectacles.
+A  Deck of tarot cards.
+
+Q The banshee outside of the Black Tower, in midnight warlock zone, wears what neck item?
+~
+2
+X  Serpent amulet.
+A  Amulet of the scryer.
+A  Inlaid necklace.
+A  Titanium pendant.
+A  Black plate neckguard.
+
+
+Q What back item from Damon’s Gorge improves armor class?
+~
+3
+A  Healer’s doe-skin satchel.
+A  Wings of a demon.
+X  Wing warmers.
+A  Bitter chocolate bat wings.
+A  A large porpoise fin.
+
+Q Name the key you use to get out of the locked canning pantry in Norsgard.
+~
+2
+A Peeler.
+X Carrot.  
+A Green seedpod.
+A  Rolling pin.
+A  Norsgardian spear
+
+Q Galrid is in ruins because of a spell by a powerful wizard.  What does Lisa, cleric of the fern, need from you to undo the magic?  
+~
+3
+A  Dust from the wizard (now turned ghost) that you collect when you slay him.
+A  An earring of kindness, stolen by the evil wizard.
+A  A bright blue neon potion to complete a brew which will repair the castle.
+A  The crown from the undead remains of the rightful king
+X   The book that the wizard used to cast the evil spell.
+
+Q This item from Wirelenze grants haste and resistance to sleep.
+~
+1
+A  Medical needle filled with purple serum.
+X  Caffeine bracelet.
+A  Some cheetah sweat.
+A  Military-issue eyepatch.
+A  Some speed pills.
+
+Q In Kilheart Fen you can find a pirogue.  What kind of object is it?
+~
+2
+A  Lantern.
+X  Boat.
+A  Staff.
+A  Portal.
+A  Sandwich.
+
+Q What should you collect from the Silverport junk dealer in order to get the robes of healing?
+~
+3
+A  Rusted belt buckle.
+A  Blood stained bones.
+A  Moth-eaten bolt of silk.
+X  Piano wire.
+A  Wagon wheel.
+
+Q It makes sense that this object is in Wirelenze.  Unfortunately it will lower your charisma by 3.
+~
+2
+A  Fish-stained robe.
+A  Face of the mutant.
+A  Black flame candle.
+A  Necklace of intestines.
+X  Manure.
+
+Q Which food from Naraka has the following description:
+      “The method of eating is to place forefinger and thumb at top and slowly
+squeeze as you slide down the length of it.  The brown stuff that oozes out is
+like tartar sauce …”
+~
+1
+A  Sauteed scorpion.
+A  Cactus root.
+X  Earthworm.
+A  Chocolate éclair.
+A  Cow patty.
+
+Q This hand item is good for a mana and spellfail boost, if you don’t mind a lower con and susceptibility to ‘holy’.
+~
+3
+A  Thin pair of silver edged gloves.
+X  Skeleton gloves.
+A  Sealskin gloves.
+A  Chrome gauntlets.
+A  Black spiked gauntlets.
+
+Q This wrist item from Uthendia gives 20 maxmana and -4 on saves vs. spells.
+~
+2
+A  Bracelet of Academics.
+A  Wizard’s wristband.
+A  Bearded wristlet.
+X  Sorcerer’s bracelet
+A  Flaming diamond-studded bracelet.
+
+Q Two items from calenamarth that decrease your wisdom are leggings and sleeves made from …
+~
+1
+X  skin.
+A  chrome.
+A  lichen.
+A  mithril.
+A  dragonscale.
+
+Q What weapon does the Crystal Commander load?
+~
+3
+A  Axe of severance.
+A  Vorpal blade.
+A  Amarth-Dur, the Doomhammer.
+A  Disembowler.
+X  Negotiating tool.
+
+Q The bracelet of Taryn Aslir is sought after by remorts mainly because of what attribute?
+~
+3
+A  Permanent haste.
+A  Permanent sanctuary.
+X  Resist slash.
+A  Mana regeneration and spell fail bonus.
+A  +2 damage, +2 hit.
+
+Q What must you “enter” to take a portal to Kaltalath?
+~
+2
+A  A door called “riddle”.
+A  Crystal ball.
+X Cave.
+A  Rainbow.
+A   Pipe.
+
+Q What zone has wing-warmers, a back item that gives sprites AC?
+~
+3
+A  Forest of Rhowyn.
+X  Damon’s Gorge.
+A  Magic in Midlin
+A  Elven Village.
+A  Pillars of Aule.
+
+Q Near Orshignal is a little cottage with a dog hiding inside the _____.  This is the dog that loads the opal collar and opal potion.  What do you have to open to reach him?
+~
+3
+A  Pantry.
+A  Shed.
+A  Hamper.
+A  Window seat.
+X  Fireplace.
+
+Q In what zone can you spin a roulette wheel?
+~
+2
+A  New Thalos.
+A  Mordilnia.
+A  Orshingal City.
+X  Naraka.
+A  Aethylfyrd.
+
+Q To reach the sandy ring, you must unlock a chamber guarded by the great sphinx.  What is the name of the door to the chamber, and what is the name of the key the sphinx holds?
+~
+2
+A  Door = Opportunity.  Key = Knock.
+X  Door = Riddle.  Key = Answer.
+A  Door = Mystery.  Key = Perseverance.
+A  Door = Sarcophagus.  Key = Ankh.
+A  Door = Mummy.  Key = Scissors.
+
+Q The way to gain information from folks in this town is to “Hail” them.  Name the town.
+~
+1
+X  Pia.
+A  Fineash.
+A  New Haven.
+A  Ixchal.
+A  D’Equines City.
+
+Q To get through the Golden Gates of New Thalos, what must you utter to the royal guard?
+~
+2
+A  Hail to the maestro!
+A  Long live Raphael!
+A  Peace be unto Daityas!
+X  By the power of the djinn!
+A  Please.
+
+Q What zone marks the end point for the “enhanced ring of youth” quest?
+~
+3
+A  Glyph.
+A  Oakwood Forest.
+A  Arachnid City.
+A  Skexie Palace - Gelfling Area.
+X  Shaolin Temple.
+
+Q To enter Galaxy, you must pass through the …
+~
+2
+X  crystal ball in Silverport.
+A  crystal ball in Uthendia.
+A  rainbow in Misty Valley.
+A  rainbow in Uthendia.
+A  rainbow in Silverport.
+
+Q What zone loads a powerful set of “wizardly robes”?
+~
+2
+A  Lost Temple.
+A  Satanic Cathedral.
+X  Morwen Manor.
+A  Castle Mistamere.
+A  Silverport Sewage and Drainage.
+
+Q The con-boosting “mood ring” is readily available in what zone?
+~
+1
+A  Candyland.
+X  Briarton Delve.
+A  Ejoren Tama Desert.
+A  Vice Island.
+A  Hill Giant Steading.
+
+Q In what zone might you be ambushed by a zombie kitty?
+~
+1
+A  Uthendia.
+A  Calegra Forest.
+A  Demon Clan Hall.
+X  Galrid ruins.
+A  Pharoah’s Pyramid.
+
+Q A salivary gland, a Victoria’s secret bag, a toilet scrubber, a pony keg, a Yoda puppet, and a gutted duck are among the items in this odd zone.
+~
+3
+X  Damon’s Gorge (II).
+A  The Alluring Mermaid.
+A  Ghenna.
+A  The Cackling Phoenix Inn.
+A  Skexie Palace.
+
+Q It’s usually not hard to find a black sandstone shield lying on the streets of what town?
+~
+1
+A  Thalos.
+A  Manachal Village.
+A  Aethylfyrd.
+A  Elven Village.
+X  Sundhaven.
+
+Q Wristbands of speed are worn by a scout on the outskirts of what city?
+~
+1
+A  Xak’Vandiri.
+A  Briarhurst.
+X  Keorc Koilos.
+A  Tyver Township.
+A  Silverport.
+
+Q What zone has a cool leather jacket?
+~
+1
+X MegaTokyo.
+A Troglodyte Caves.
+A Alien Spaceship.
+A  Nekros Manteia.
+A  Rose Palace.
+
+Q What zone produces the water earring?
+~
+1
+A  Briarton Public Library.
+A  Silvermist Marsh.
+A  The Swamp of Capirona.
+A  Lacanja Tributaries.
+X  Atlantis.
+
+Q If you’re heading to a fancy ball in Helio, where should you go first to pick up your ‘Handsome Black Tuxedo’?
+~
+2
+A  Rand’s Tower.
+A  Heliopolis.
+X  Pia.
+A  Keorc Koilos.
+A  New Thalos.
+
+Q What zone, home to many avians, is the dwelling place of Venatus, goddess of the hunt?
+~
+3
+A  Calegra Forest.
+X  Hueterni Forest.
+A  Oakwood Forest.
+A  Pygmy Village.
+A  Jungle Walk.
+
+Q Lak-Taque, goddess of gold and riches, is worshipped by monks in what zone?
+~
+2
+A  Athylfyrd.
+A  Xak’Vandiri.
+A  Shaolin Temple.
+X  Fineash.
+A  The Settlement of Alatna.
+
+Q The toxic blade comes from the marsh giant of what zone?
+~
+1
+X  Plague Island.
+A  Jungle of the Howler Monkeys.
+A  Darkwood Forest.
+A  Kilheart Fen.
+A  Luminescent Garden.
+
+Q In the gardens outside this building, are “living plants” with tentacle-like vines and a nasty gas-blast attack.  Name this building, on the edge of Melkain Marsh.
+~
+3
+A  High Tower of Magic.
+A  Strange Mansion.
+A  Castle of Galrid.
+A  Midnight Warlock Fortress.
+X  Morwen Manor.
+
+Q A dracolich named Wyrenthoth waits for you in the lower level of what zone?
+~
+2
+A  Crystal Castle.
+A  Temple of the Earth Mother.
+X   Abandoned Cathedral.
+A  Cult of the Dragon.
+A  Castle Demise.
+
+Q Five zones contain ents or treants.  They include Necros Manteia, Mahn Tor, Eisencone, Damon’s Gorge and …
+~
+3
+A Geburtsort Nummid-Ea.
+X  Briarton Delve. 
+A  Thorbardin.
+A  The Newbie Zone.
+A  The Wood of Ages.
+
+Q There are 2 staffs in the game that go by the name Wyrm’s Eye.  But only one of them loads in a deep zone.  Name the zone.
+~
+3
+A  Kobold Warrens.
+A  Kraal Nexus.
+A  Tunnel of the Ilythiiri.
+X  Carulakus.
+A  Bowles of the UnderDark.
+
+Q What zone contains all of the following rooms: a scribnery, a colonnade, a sauna, a bailey, an oratory, an antechamber, and a scullery?
+~
+2
+X  Crystal Castle.
+A  Abandoned Cathedral.
+A  Ancalador.
+A  Galaxy (Reborn).
+A  Palace of the Prophets.
+
+Q Where would you go to stroll the ironically named streets, “Sunset” and “Sunrise”?
+~
+2
+A  Goblin Caves.
+A  The Lost City of Atlantis.
+A  Ogre Quarter.
+A  Village of Knar-og.
+X   Xak Vandiri.
+
+Q This place is famous for its magical flowers, including carmine-rose orchids and azure lilies.
+~
+1
+A  Gypsy Village.
+A  Misty Valley.
+X  Calenamarth.
+A  Savannah.
+A  Harmony Plains.
+
+Q A javelin of lightning is hidden in some rags in what zone?
+~
+2
+A  Isle of Santuary.
+A  Orc Hills.
+A  Norsgard.
+X  Hill Giant Steading.
+A  Silver Mountain.
+
+Q  “Lauprette Manor” is where you can find the dexterity and damage-boosting “handball”.  The manor is better known as what zone?
+~
+2
+A  Morwen Manor.
+X   Strange Mansion.
+A  Rurac’s Castle.
+A  Galrid Castle.
+A  Drake’s Barbican.
+
+Q In this zone, you can stand in the middle of a bridge and head toward either end.  But whichever way you chose, you’re going south.  Name the zone.  
+~
+3
+A  Great Pyramid.
+A  D’Haran Highway.
+A  Shadow Heights.
+X  Arctic Fields.  
+A  Firetop Mountain.
+
+Q The ornery druids of this zone attack on sight, shouting “For the trees!” before hitting you with pixie dust, flame strikes and sunrays.  Name the zone.
+~
+2
+X   Northern Plains.
+A  Iludria Mountain Range.
+A  Plague Island.
+A  Hidden Outpost.
+A  Rock Island.
+
+Q A level 50 badger is among the mobs you may stumble into in this ever-changing maze.  Name the zone.
+~
+1
+A  Narakan Sewers.
+A  King’s Gambit.
+X  Calegra.
+A  Jungle Walk.
+A  Kaltalath.
+
+Q Halflings abound here, but you should also keep an eye open for lizards and a rabid badger named Sawtooth.  Name the zone.
+~
+1
+A  Wirelenze.
+X  Dalelands.
+A  Thistle Desert.
+A  Harfoot Delve.
+A  Yaxchilan Pond.
+
+Q The +3 damage, -3 spell-fail Gauntlets of Vengeance are found in …
+~
+3
+A  Shadow Heights Mines.
+A  Keep of Mahn-Tor.
+X  Uthendia.
+A  Uluitur.
+A  Mega Tokyo--Genom Tower.
+
+Q A rugby shirt, a comic book, and an oatmeal cookie are among the items in this zone.
+~
+1
+A  Candy Land.
+A  Briarton Public Library.
+A  The World Serpent Inn.
+X  Orphanage.
+A  Temple Halls.
+
+Q Within House Okabanok, there is a note about a massive tunnel under construction that will travel beneath the waves and connect continents.  Name the zone.
+~
+3
+X  Trizcillante.
+A  Orc Mountain Fortress.
+A  Arctic Ocean.
+A  Narakan Monestary Catacombs.
+A  der Rom Von Kisher.
+
+Q Where will you find Kell St, Tremil St. and Barnes Ave?
+~
+2
+A  Trizcillante.
+A  Silverport.
+A  Mordilnia.
+A  Crab Crater City.
+X  New Haven.
+
+Q Jormungand awaits the brave adventurer in …
+~
+2
+A  Stone Circle.
+A  Infernal Palace.
+X   Bowels of the Underdark.
+A  Raiden’s Keep.
+A  Ashaba.
+
+Q The Jiuyangzhenjing manual is a fiery scroll from where?
+~
+1
+A  Lava Tubes.
+A  Mega Toyko.
+X  Shaolin Temple.
+A  High Tower of Magic.
+A  The Temples of Ixchal.
+
+Q This is a good quality in an underdark cloak, but a bad quality if it’s coming from your speaker system.  “Cloak of …”
+~
+1
+A   Diffraction.
+X   Distortion.
+A   Impedance.
+A  Impotence.
+A  Feedback.
+
+Q The only wearable skin in Howler Jungle comes from the hoofed “Thompson’s _____”.
+~
+3
+A   tapir.
+A  baboon.
+A  marmoset.
+X  gazelle.
+A  buffalo.
+
+Q If you feed a capybara liver to the ____ in the Howler Jungle, he will give you an enchantable shield with AC apply of 16.  
+~
+2
+X  Anaconda
+A  Rhino
+A  Tiger.
+A  Crocodile.
+A  Lemur.
+
+Q A black marble wand from the summoner in the High Tower of Magic casts what spell?
+~
+2
+A  Summon.
+A  Summon Mount.
+A  Clone.
+A  Animate Dead.
+X  Conjure Infantry.
+
+Q Madame Zalenza in Silverport must be really ugly because her mirror casts what spell?
+~
+2
+A  Charm Person.
+A  Stone skin.
+X  Blindness
+A  Cure Plague.
+A  Fear.
+
+Q What can you buy from the Silverport dentist for 1,400 coins?
+~
+3
+A  Dental Floss.
+X  Pain Killer.
+A  Gold Filling
+A  Sterile Mask.
+A  Fluoride Pill.
+
+Q Originally a year that marked the freedom of Hebrew slaves, it has come to mean “an anniversary celebration”.  It is also a cherry dish sold in Naraka.
+~
+1
+X Jubilee
+A  Inauguration.
+A  Gala.
+A  Festival.
+A  Commemoration.
+
+Q What does the jaguarundi in Howler Jungle give you if you pet him?
+~
+2
+A  Needle claws.
+A  A long, slinky tail.
+X  Whiskers
+A  Chrysalis.
+A  Vine whip.
+
+Q Skull and dragon are two types of ____ you can find in Xak Vandiri.
+~
+1
+A  Whips.                                                                                                                                                                  
+X  Tattoos.
+A  Maces.
+A  Manacles.
+A  Helms.
+
+Q Which God represents death, decay, disease, and chaotic evil?
+~
+1
+A The Phoenix
+A Ra
+X Malebolge
+A Damien
+A The insane god
+
+Q Which ore cannot be found in the mines of Uluitur?
+~
+3
+X Platinum Ore
+A Gold Ore
+A Mithril Ore
+A Silver Ore
+A None of the above
+
+Q Where can one find "the marshbird"?
+~
+2
+A King's Gambit
+X Kilheart Fen
+A Wood of Ages
+A Melkain Marsh
+A Naraka
+
+Q How do you reach the Galaxy?
+~
+1
+A Travel north then east through the Calegra forest
+A Take a sea voyage from Silverport
+A Enter a rainbow portal
+A Inside of the Alien spaceship
+X Entering a crystal ball
+
+Q Ghenna can be reached north of what type of village?
+~
+1
+X Gypsy
+A Orcish
+A Elven
+A Fishing
+A Polygamy
+
+Q Where might you find a village of gnolls?
+~
+2
+A West of Keorc Koilos.
+X In the northwestern end of the Narakan countryside.
+A In the southeastern portion of the Calegra forest.
+A Southeast of Mordilnia
+A Directly north of Geburtsort Nummid-Ea
+
+Q Who is the Lord of the Steel Paladins?
+~ 
+3
+X Roderic
+A Rurac
+A Rennie Sorin
+A Nathan Rahl 
+A Abdul
+
+Q While exploring Plague Island there is a very nasty patch of quicksand,
+  how does one avoid a painful death in the dirt?
+~
+2
+X Grabbing onto a Vine
+A Recalling
+A Grabbing onto a ledge
+A Jumping out of the quicksand
+A Pressing a red button
+
+Q The Seardluin of the Deep Wood Village can be found underneath a certain
+  building.  Which would that be?
+~
+3
+X A Kennel
+A A Weaponshop
+A An Item Shop
+A A Magic Shop
+A A Barbershop
+
+Q The Valsharen Drow Vel'Xundussa Magthere or VDVM is located in Uluitur,
+  what exactly does it do?
+~
+3
+X A Security Institute
+A A Magic School
+A A Warrior's School
+A A house of a rich noble
+A An inn
+
+Q Nidhug is a ... in the cold regions north of Naraka.
+~
+2
+X Dragon
+A Sprite
+A Dwarf
+A Castle
+A Mine
+
+Q Which of these is a village of Dwarves?
+~
+1
+X Thorbardin
+A Kilheart Fen
+A Uluitur
+A Naraka
+A Norsgard
+
+Q If you were trying to find Chief Sorsquinah, where would you go?
+~
+3
+X The Tundra
+A Ghenna
+A Alluria
+A The Orc Hills
+A Uthendia
+
+Q There is a town to the north east of New Thalos, what is the name of
+  that town?
+~
+1
+X Tyver Township
+A Deep Wood Village
+A The Manachal Village
+A Village of Knar-og 
+A Town of Pia
+
+Q Who fixes armor and weapons in Ixchal?
+~
+2
+X Crunch
+A Tink
+A Hummel
+A Bleoryn
+A Jack
+
+Q To reach the sandy ring, you must unlock a chamber guarded by the 
+  great Sphinx.  What is the name of the door to the chamber, and
+  what is the name of the key that the Sphinx holds?
+~
+3
+A The door is Opportunity and the key is Knock.
+X The door is Riddle and the key is Answer.
+A The door is Mystery and the key is Perseverance.
+A The door is Sarcophagus and the key is Ankh.
+A The door is Mummy and the key is Scissors.
+
+Q The way to gain information from folks in this town is to .Hail. them.
+~
+1
+X Pia
+A Fineash
+A New Haven
+A Ixchal
+A D.Equines City
+
+Q To get through the Golden Gates of New Thalos, what must you utter to the
+  royal guard?
+~
+2
+A Hail to the maestro!
+A Long live Raphael!
+A Peace be unto Daityas!
+X By the power of the djinn!
+A Please.
+
+Q Which area loads a powerful set of .Wizardly Robes.?
+~
+2
+X Morwen Manor
+A Lost Temple
+A Satanic Cathedral
+A Castle Mistamere
+A Silverport Sewage and Drainage
+
+Q If you were trying to avoid a Zombie Kitty, where wouldn't you go?
+~
+1
+A Uthendia
+A Calegra Forest
+A Demon Clan Hall
+X Galrid ruins
+A Pharoah.s Pyramid
+
+Q It.s usually not hard to find a black sandstone shield lying on the streets
+  of what town?
+~
+1
+A Thalos
+A Manachal Village
+A Aethylfyrd
+A Elven Village
+X Sundhaven
+
+Q Wristbands of speed are worn by a scout on the outskirts of what city?
+~
+1
+A Xak.Vandiri.
+A Briarhurst.
+X Keorc Koilos.
+A Tyver Township.
+A Silverport.
+
+Q What zone has a cool leather jacket?
+~
+1
+X MegaTokyo.
+A Troglodyte Caves.
+A Alien Spaceship.
+A Nekros Manteia.
+A Rose Palace.
+
+Q If you wanted to find a water earring, where would you look?
+~
+2
+A Briarton Public Library.
+A Silvermist Marsh.
+A The Samp of Capirona.
+A Lacanja Tributaries.
+X Atlantis.
+
+Q If you.re heading to a fancy ball in Heliopolis, where should you go first
+  to pick up your .Handsome Black Tuxedo.?
+~
+2
+A Rand.s Tower
+A Heliopolis
+X Pia
+A Keorc Koilos
+A New Thalos
+
+Q What forest, home to many avians, is the dwelling place of Venatus, Goddess
+  of the Hunt?
+~
+2
+A Calegra Forest
+X Hueterni Forest
+A Oakwood Forest
+A The Deep Jungle
+A Jungle Walk
+
+Q Lak-Taque, goddess of gold and riches, is worshipped by monks in what town?
+~
+1
+A Athylfyrd.
+A Xak.Vandiri.
+A Heliopolis
+X Fineash.
+A The Settlement of Alatna.
+
+Q In the gardens outside this structure near Melkain Marsh, there are 
+  .living plants. with tentacle-like vines and a nasty gas attack.
+~
+2
+A High Tower of Magic.
+A Strange Mansion.
+A Castle of Galrid.
+A Midnight Warlock Fortress.
+X Morwen Manor.

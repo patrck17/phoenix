@@ -1,0 +1,62 @@
+                	P H O E N I X  M U D  4 . 0
+			     
+      			      is based on
+
+                    C  I  R  C  L  E  M  U  D     3  .  0
+
+============================================================================
+CircleMUD Credits:
+
+CircleMUD was developed from DikuMUD (Gamma 0.0) by Jeremy "Ras" Elson 
+(jelson@cs.jhu.edu) at Johns Hopkins University's Department of Computer 
+Science.  All code unique to CircleMUD is protected under a copyright by the 
+Trustees of the Johns Hopkins University.
+============================================================================
+DikuMUD Credits:
+
+Katja Nyboe               [Superwoman] (katz@freja.diku.dk)
+Tom Madsen              [Stormbringer] (noop@freja.diku.dk)
+Hans Henrik Staerfeldt           [God] (bombman@freja.diku.dk)
+Michael Seifert                 [Papi] (seifert@freja.diku.dk)
+Sebastian Hammer               [Quinn] (quinn@freja.diku.dk)
+============================================================================
+PhoenixMUD is brought to you by:
+
+Opie                [Head Implementor] (opie@phoenixmud.net)
+Aleksandr          [World Implementor] (aleks@phoenixmud.net)
+Cymynedd              [PR Implementor] (cymy@phoenixmud.net)
+Masque              [Code Implementor] (masque@phoenixmud.net)
+Rastan	     [World Implementor (PM1)] (rastan@phoenixmud.net)
+Iluvatar     [World Impmementor (PM2)] (eschmitt@ebicom.net)
+
+PhoenixMUD 4.0 Coders:
+
+Opie                      [Head Coder]
+Masque	           [Former Head Coder]
+Anduin	           [Former Head Coder] (02/97-04/97)
+Echo	           [Former Head Coder] (10/96-01/97)
+Aleksandr           [Numerous Changes] (10/96-present)
+Bon                 [Numerous Changes] (07/97-11/97)
+Xaggo           [Infobar and Scorebar] (12/96-01/97)
+============================================================================
+Thanks and Credits to:
+
+OasisOLC originaly written and distributed by Harvey Gilpin.
+
+Text Editor written by Michael Scott <scottm@workcomm.net> and improved
+upon by Chris a.k.a. Shaft, <zero@cnw.com>, Head Imp of zeroMUD
+
+Daniel Koepke <dkoepke@california.com> for numerous patches and being a 
+huge help on the CircleMUD mailing list.
+
+Special thanks to the people at SillyMUD and Silicon Realms for many useful 
+ideas including the infobar and scorebar.
+
+Infobar and Scorebar ideas originally by Valinor and Buddah of Silicon Realms.
+
+Thanks to Norm and Mallery, Implementors of MozartMUD (mozart.apk.net 4500)
+for all of their help, support, and friendship over the years.
+
+Thanks also to Darksword <sword@bucket.ualr.edu>, Head Implementor of Cities 
+of Glory MUD.
+==============================================================================
