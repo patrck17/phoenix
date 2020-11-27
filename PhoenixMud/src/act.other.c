@@ -1,11 +1,11 @@
 /* ************************************************************************
-*   File: act.other.c                                   Part of CircleMUD * 
-*  Usage: Miscellaneous player-level commands                             * 
-*                                                                         * 
-*  All rights reserved.  See license.doc for complete information.        * 
-*                                                                         * 
-*  Copyright (C) 1993, 94 by the Trustees of the Johns Hopkins University * 
-*  CircleMUD is based on DikuMUD, Copyright (C) 1990, 1991.               * 
+*   File: act.other.c                                   Part of CircleMUD *
+*  Usage: Miscellaneous player-level commands                             *
+*                                                                         *
+*  All rights reserved.  See license.doc for complete information.        *
+*                                                                         *
+*  Copyright (C) 1993, 94 by the Trustees of the Johns Hopkins University *
+*  CircleMUD is based on DikuMUD, Copyright (C) 1990, 1991.               *
 ************************************************************************ */
 
 #define __ACT_OTHER_C__
@@ -193,7 +193,7 @@ ACMD(do_quit)
                GET_GOLD(ch) = 0;
                GET_BANK_GOLD(ch) = 0;
                }
-            send_to_char(ch, "The auctioneer drops into the room, beats you up, and "      
+            send_to_char(ch, "The auctioneer drops into the room, beats you up, and "
                              "takes some of your money.\r\n");
             mudlogf(CMP, LVL_DGOD, TRUE, "Gold: The auctioneer has taken %ld "
                     "coins from %s for bailing on an auction.",
@@ -218,10 +218,11 @@ ACMD(do_quit)
          mudlogf(NRM, MAX(LVL_IMMORT, GET_INVIS_LEV(ch)), TRUE,
                  "%s has left the game using %s.", GET_NAME(ch),
                  ztquit[subcmd]);
+         send_info("[ INFO ] %s has left the game.\n\r", GET_NAME(ch));
          send_to_char(ch, "Goodbye, friend.. Come back soon!\r\n");
          /*
-          * kill off all sockets connected to the same player as the one who is 
-          * trying to quit.  Helps to maintain sanity as well as prevent duping. 
+          * kill off all sockets connected to the same player as the one who is
+          * trying to quit.  Helps to maintain sanity as well as prevent duping.
           */
          for (d = descriptor_list; d; d = next_d)
             {
@@ -283,7 +284,7 @@ ACMD(do_save)
                              max_obj_save, nitems);
             return;
             }
-         
+
          xap_objs_backup=xap_objs;
          xap_objs = 2;
          Crash_crashsave(ch);
@@ -664,7 +665,7 @@ void check_group_inspire(struct char_data *ch, int add_affect)
 {
   if (!ch || !AFF_FLAGGED(ch, AFF_GROUP)) {
     return;
-  }  
+  }
 
   struct char_data *leader = ch->master ? ch->master : ch;
   struct follow_type *f;
@@ -866,7 +867,7 @@ ACMD(do_ungroup)
    char *buf=get_buffer(MAX_INPUT_LENGTH);
 
    one_argument(argument, buf);
-   
+
    if (!*buf)
    {
      if (ch->master || !(AFF_FLAGGED(ch, AFF_GROUP)))
@@ -905,11 +906,11 @@ ACMD(do_ungroup)
    else
    {
      REMOVE_BIT(AFF_FLAGS(tch), AFF_GROUP);
-     
+
      act("$N is no longer a member of your group.",FALSE,ch,0,tch,TO_CHAR);
      act("You have been kicked out of $n's group!",FALSE,ch,0,tch,TO_VICT);
      act("$N has been kicked out of $n's group!",  FALSE,ch,0,tch,TO_NOTVICT);
-     
+
      if (!AFF_FLAGGED(tch, AFF_CHARM))
        stop_follower(tch);
    }
@@ -1739,7 +1740,7 @@ ACMD(do_remort)
    struct obj_data *tmp_obj = NULL;
 
    int scr_remort_bonuses[12][6] = {
-   // str int wis dex con cha 
+   // str int wis dex con cha
      { 1,  0,  0,  0,  1,  0  },// warrior
      { 0,  1,  1,  0,  0,  0  },// cleric
      { 0,  1,  0,  1,  0,  0  },// thief
@@ -1752,7 +1753,7 @@ ACMD(do_remort)
      { 1,  0,  1,  0,  0,  0  },// paladin
      { 1,  1,  0,  0,  0,  0  },// anti-paladin
      { 0,  1,  1,  0,  0,  0  },// druid
-   };   
+   };
 
    skip_spaces(&argument);
    if(IS_NPC(ch))
@@ -1898,7 +1899,7 @@ ACMD(do_remort)
          GET_SKILL(ch,PROF_DAGGER)=35;
          GET_ALIGNMENT(ch)=1000;
          break;
-      default:        
+      default:
          break;
          } /* end switch */
 
@@ -2156,7 +2157,7 @@ ACMD(do_battle)
 /* makes sure that player cannot give/drop more than they bid on an auction */
 int can_give_gold(struct char_data *ch, int amount)
 {
-   if ((aauction.in_progress == FALSE) || 
+   if ((aauction.in_progress == FALSE) ||
        (GET_IDNUM(ch) != aauction.bidder_id_num))
       return 1;
 
@@ -2171,7 +2172,7 @@ ACMD (do_tag)
 {
    struct char_data *victim;
    char *arg=get_buffer(MAX_INPUT_LENGTH);
-                 
+
    any_one_arg(argument, arg);
 
    if (ch->char_specials.in_battle == TRUE)
@@ -2219,7 +2220,7 @@ ACMD (do_tag)
             }
 
    do_action(ch, arg, find_command("tag_social"), 0);
-   release_buffer(arg);  
+   release_buffer(arg);
 }
 
 ACMD(do_graffiti)
@@ -2277,9 +2278,9 @@ ACMD(do_graffiti)
     send_to_char(ch, "You scrawl your graffiti across the area.\r\n");
     save_graffiti();
     mudlogf(CMP, LVL_IMMORT, TRUE, "Graffiti: %s permanently wrote \"%s\" at #%ld (%s).",
-      GET_NAME(ch), 
-      text, 
-      GET_ROOM_VNUM(IN_ROOM(ch)), 
+      GET_NAME(ch),
+      text,
+      GET_ROOM_VNUM(IN_ROOM(ch)),
       world[IN_ROOM(ch)].name
     );
   } else if (starts_with("temporary", sub)) {
@@ -2321,9 +2322,9 @@ ACMD(do_graffiti)
     send_to_char(ch, "You scrawl your graffiti across the area.\r\n");
     save_graffiti();
     mudlogf(CMP, LVL_IMMORT, TRUE, "Graffiti: %s temporarily wrote \"%s\" at #%ld (%s).",
-      GET_NAME(ch), 
-      text, 
-      GET_ROOM_VNUM(IN_ROOM(ch)), 
+      GET_NAME(ch),
+      text,
+      GET_ROOM_VNUM(IN_ROOM(ch)),
       world[IN_ROOM(ch)].name
     );
   } else {
@@ -2383,7 +2384,7 @@ void print_imms(char *buf, int min, int max, int string_index)
 
   int count = 0;
   for (i = 0; i < nMaps; i++) {
-    if (mapping[i].level >= min && mapping[i].level <= max) { 
+    if (mapping[i].level >= min && mapping[i].level <= max) {
      count++;
     }
   }
@@ -2537,7 +2538,7 @@ extern struct obj_data *obj_proto;
 int min_level(struct char_data *ch,int spellnum);
 
 
-const char *reimb_usage = 
+const char *reimb_usage =
 "Usage: reimb <\"skill\"|\"eq\"|\"reimb!\">\r\n"
 "\r\n"
 "To add a skill or spell to the reimb list:\r\n"
@@ -2633,9 +2634,9 @@ void commit_reimb(struct char_data* ch)
     } else {
       GET_SKILL(ch, i) = MAX(GET_SKILL(ch, i), ch->player_specials->reimb_skills[i]);
       if (spells[i].is_spell == IS_SPELL) {
-	GET_SKILL(ch, i) = MAX(1, GET_SKILL(ch, i)); 
+	GET_SKILL(ch, i) = MAX(1, GET_SKILL(ch, i));
       } else {
-	GET_SKILL(ch, i) = MAX(25, GET_SKILL(ch, i)); 
+	GET_SKILL(ch, i) = MAX(25, GET_SKILL(ch, i));
       }
     }
   }
@@ -2660,8 +2661,8 @@ void commit_reimb(struct char_data* ch)
 
   ch->player_specials->is_being_reimbd = 0;
 
-  send_to_char(ch, "Okay.\r\n"); 
-  send_info("[ INFO ] %s has just been REIMBURSED!\r\n", GET_NAME(ch));  
+  send_to_char(ch, "Okay.\r\n");
+  send_info("[ INFO ] %s has just been REIMBURSED!\r\n", GET_NAME(ch));
 }
 
 ACMD(do_old_reimb)
@@ -2698,7 +2699,7 @@ ACMD(do_old_reimb)
     return;
   }
 
-  char *reimb_type = strtok(buf, " "); 
+  char *reimb_type = strtok(buf, " ");
   if (!reimb_type) {
     send_to_char(ch, reimb_usage);
     return;
@@ -2779,7 +2780,7 @@ ACMD(do_old_reimb)
 	    ch->player_specials->reimb_num_skills++;
 	    send_to_char(ch, "Removed %s from skill list.\r\n", spells[i].spell_name);
 	  } else if (ch->player_specials->reimb_num_skills <= 0) {
-	    send_to_char(ch, "You have no more skills left to reimb.\r\n");	    
+	    send_to_char(ch, "You have no more skills left to reimb.\r\n");
 	  } else {
 	    ch->player_specials->reimb_skills[i] = 95;
 	    ch->player_specials->reimb_num_skills--;
@@ -2791,7 +2792,7 @@ ACMD(do_old_reimb)
 	    ch->player_specials->reimb_num_spells++;
 	    send_to_char(ch, "Removed %s from spell list.\r\n", spells[i].spell_name);
 	  } else if (ch->player_specials->reimb_num_spells <= 0) {
-	    send_to_char(ch, "You have no more spells left to reimb.\r\n");	    
+	    send_to_char(ch, "You have no more spells left to reimb.\r\n");
 	  } else {
 	    ch->player_specials->reimb_skills[i] = 10;
 	    ch->player_specials->reimb_num_spells--;
@@ -2827,7 +2828,7 @@ ACMD(do_flush)
   }
 
   printf("Flushing: %s\n", GET_NAME(ch));
-  
+
   if (d->large_outbuf)
     {
       release_buffer(d->large_outbuf);
