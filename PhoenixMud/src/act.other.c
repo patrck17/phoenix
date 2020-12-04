@@ -218,7 +218,9 @@ ACMD(do_quit)
          mudlogf(NRM, MAX(LVL_IMMORT, GET_INVIS_LEV(ch)), TRUE,
                  "%s has left the game using %s.", GET_NAME(ch),
                  ztquit[subcmd]);
-         send_info("[ INFO ] %s has left the game.\n\r", GET_NAME(ch));
+         if (GET_INVIS_LEV(ch) == 0) {
+            send_info("[ INFO ] %s has left the game.\n\r", GET_NAME(ch));
+         }
          send_to_char(ch, "Goodbye, friend.. Come back soon!\r\n");
          /*
           * kill off all sockets connected to the same player as the one who is

@@ -3727,7 +3727,9 @@ void nanny(struct descriptor_data *d, char *argu)
 			load_result = Crash_load(d->character);
 			save_char(d->character, IN_ROOM(d->character));
 
-            send_info("[ INFO ] %s has entered the game.\n\r", GET_NAME(d->character));
+            if (GET_INVIS_LEV(d->character) == 0) {
+                send_info("[ INFO ] %s has entered the game.\n\r", GET_NAME(d->character));
+            }
 
 			act("$n has entered the game.", TRUE, d->character, 0,
 			    0, TO_ROOM);
