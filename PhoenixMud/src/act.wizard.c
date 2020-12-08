@@ -294,7 +294,7 @@ room_rnum find_target_room(struct char_data * ch, char *rawroomstr)
      release_buffer(roomstr);
      return NOWHERE;
    }
-   if (IS_NPC(target_mob)) {     
+   if (IS_NPC(target_mob)) {
      send_to_char(ch, "Try a player.\r\n");
      release_buffer(roomstr);
      return NOWHERE;
@@ -394,7 +394,7 @@ ACMD(do_at)
      release_buffer(buf);
      release_buffer(command);
      return;
-   }   
+   }
 
       {
       /* a location has been found. */
@@ -717,34 +717,34 @@ ACMD(do_gen_vfile)
       filename=LOCATE_OBJ_LOG;
       break;
    case SCMD_V_LEVELS:
-      filename=LOG_LEVELS;              
+      filename=LOG_LEVELS;
       break;
    case SCMD_V_NEWPLAYERS:
-      filename=LOG_NEWPLAYERS;              
+      filename=LOG_NEWPLAYERS;
       break;
    case SCMD_V_DEATH:
-      filename=DT_LOG;              
+      filename=DT_LOG;
       break;
    case SCMD_V_BAN:
-      filename=BAN_LOG;              
+      filename=BAN_LOG;
       break;
    case SCMD_V_OBJSCRAP:
-      filename=OBJSCRAP_LOG;              
+      filename=OBJSCRAP_LOG;
       break;
    case SCMD_V_OLC:
-      filename=OLC_LOG;              
+      filename=OLC_LOG;
       break;
    case SCMD_V_USAGE:
-      filename=USAGE_LOG;              
+      filename=USAGE_LOG;
       break;
    case SCMD_V_RESTARTS:
-      filename=RESTART_LOG;              
+      filename=RESTART_LOG;
       break;
    case SCMD_V_RENTGONE:
-      filename=RENTGONE_LOG;              
+      filename=RENTGONE_LOG;
       break;
    case SCMD_V_BADPWS:
-      filename=BADPW_LOG;              
+      filename=BADPW_LOG;
       break;
    case SCMD_V_GODFIGHT:
       filename=GODFIGHT_LOG;
@@ -960,7 +960,7 @@ ACMD(do_goto)
    if (zone != 0 && zone != 12 && zone != 30 && GET_LEVEL(ch) < WALK_INTO_LEVEL && !is_olc_set(ch, zone)) {
      send_to_char(ch, "You do not have permissions to goto there.\r\n");
      return;
-   }   
+   }
 
    buf=get_buffer(SMALL_BUFSIZE);
    if (POOFOUT(ch))
@@ -1204,7 +1204,7 @@ void do_stat_room(struct char_data * ch)
    if (GET_LEVEL(ch) < STAT_ROOM_LEVEL && !is_olc_set(ch, GET_ROOM_VNUM(IN_ROOM(ch))/100)) {
      send_to_char(ch, "You do not have permissions to stat this room.\r\n");
      return;
-   }   
+   }
 
    char *buf=get_buffer(MAX_STRING_LENGTH);
    char *buf1=get_buffer(SMALL_BUFSIZE);
@@ -1225,7 +1225,7 @@ void do_stat_room(struct char_data * ch)
 
    sprintbit(rm->room_flags, room_bits, buf1);
    sprintbit(rm->room2_flags, room2_bits, buf3);
-   
+
    send_to_char(ch, "SpecProc: %s%s%s, Flags: %s%s%s%s\r\n",
                 NCYN,(rm->func == NULL) ? "None" : "Exists",NNRM,
                 NCYN,buf1,!strcmp(buf3, "NOBITS ")?"":buf3,NNRM);
@@ -1389,7 +1389,7 @@ void do_stat_room(struct char_data * ch)
    for (i = 0; i < num_graffiti; i++) {
      if (graffiti[i].room_vnum == rm->number) {
        if (!counter) {
-	 send_to_char(ch, "Graffiti:\r\n");
+     send_to_char(ch, "Graffiti:\r\n");
        }
        counter++;
        sprintf(buf, " %3d - %s\r\n", counter, graffiti[i].text);
@@ -1429,7 +1429,7 @@ void do_stat_object(struct char_data * ch, struct obj_data * j)
      release_buffer(buf1);
      release_buffer(buf2);
      return;
-   }   
+   }
 
    vnum = GET_OBJ_VNUM(j);
    send_to_char(ch, "Name: '%s%s%s', Aliases: %s%s%s\r\n",
@@ -1864,7 +1864,7 @@ void do_stat_character(struct char_data * ch, struct char_data * k)
      release_buffer(buf2);
      return;
    }
-   
+
 
    switch (GET_SEX(k))
       {
@@ -1889,17 +1889,17 @@ void do_stat_character(struct char_data * ch, struct char_data * k)
    send_to_char(ch,"%s %s '%s%s%s'  IDNum: [%s%5ld%s], In room [%s%5ld%s], E-mail [%s%s%s]\r\n",
                 buf2,(!IS_NPC(k) ? "PC" : (!IS_MOB(k) ? "NPC" : "MOB")),
                 NCYN,GET_NAME(k),NNRM,
-                NCYN,IS_NPC(k)?GET_ID(k):GET_IDNUM(k),NNRM, 
+                NCYN,IS_NPC(k)?GET_ID(k):GET_IDNUM(k),NNRM,
                 NCYN,GET_ROOM_VNUM(IN_ROOM(k)),NNRM,
-		NCYN,GET_EMAIL(k)[0] ? GET_EMAIL(k) : "NONE", NNRM
-		);
+        NCYN,GET_EMAIL(k)[0] ? GET_EMAIL(k) : "NONE", NNRM
+        );
    } else {
    send_to_char(ch,"%s %s '%s%s%s'  IDNum: [%s%5ld%s], In room [%s%5ld%s]\r\n",
                 buf2,(!IS_NPC(k) ? "PC" : (!IS_MOB(k) ? "NPC" : "MOB")),
                 NCYN,GET_NAME(k),NNRM,
-                NCYN,IS_NPC(k)?GET_ID(k):GET_IDNUM(k),NNRM, 
+                NCYN,IS_NPC(k)?GET_ID(k):GET_IDNUM(k),NNRM,
                 NCYN,GET_ROOM_VNUM(IN_ROOM(k)),NNRM
-		);
+        );
    }
 
    if (IS_MOB(k))
@@ -1996,7 +1996,7 @@ void do_stat_character(struct char_data * ch, struct char_data * k)
                 NCYN, GET_CHA(k), NNRM,
                 NCYN, age(k)->year, NNRM);
 
-   send_to_char(ch, "Hit p.:[%s%d/%d+%d%s]  Mana p.:[%s%d/%d+%d%s] "  
+   send_to_char(ch, "Hit p.:[%s%d/%d+%d%s]  Mana p.:[%s%d/%d+%d%s] "
                     "Move p.:[%s%d/%d+%d%s]  Ht/Wt:[%s%d/%d%s]\r\n",
                 NCYN, GET_HIT(k), GET_MAX_HIT(k), hit_gain(k),
                 NNRM, NCYN, GET_MANA(k), GET_MAX_MANA(k),
@@ -2040,7 +2040,7 @@ void do_stat_character(struct char_data * ch, struct char_data * k)
       }
 
    send_to_char(ch, ", Guarding: %s%s%s",
-		NCYN, GET_GUARDING(k) ? GET_NAME(GET_GUARDING(k)) : "Nobody", NNRM);
+        NCYN, GET_GUARDING(k) ? GET_NAME(GET_GUARDING(k)) : "Nobody", NNRM);
 
    send_to_char(ch, "\r\n");
 
@@ -2127,7 +2127,7 @@ void do_stat_character(struct char_data * ch, struct char_data * k)
 
    if(!IS_NPC(k))
       {
-	float fraction = 100*GET_EXPLORED(k) / (float)top_of_world;
+    float fraction = 100*GET_EXPLORED(k) / (float)top_of_world;
       send_to_char(ch,  "Hunger: %s%d%s, Thirst: %s%d%s, Drunk: %s%d%s "
                    "Light: %s%d%s QP: %s%d%s Explored: %s%d%s (%.3f%%)\r\n",
                    NCYN,GET_COND(k, FULL),NNRM,
@@ -2135,9 +2135,9 @@ void do_stat_character(struct char_data * ch, struct char_data * k)
                    NCYN,GET_COND(k, DRUNK),NNRM,
                    NCYN,GET_LIGHT(k),NNRM,
                    /*NCYN,k->player_specials->explored_total,NNRM,*/
-		   NCYN,GET_QPOINTS(k),NNRM,
-		   NCYN,GET_EXPLORED(k),NNRM, fraction
-		   );
+           NCYN,GET_QPOINTS(k),NNRM,
+           NCYN,GET_EXPLORED(k),NNRM, fraction
+           );
       }
    else
       send_to_char(ch, "Light: %s%d%s\r\n",NCYN,GET_LIGHT(k),NNRM);
@@ -2165,7 +2165,7 @@ void do_stat_character(struct char_data * ch, struct char_data * k)
             *buf = found = 0;
             }
          }
-      
+
       if (*buf)
          send_to_char(ch,  "%s",buf);
       release_buffer(buf);
@@ -2250,7 +2250,7 @@ void do_stat_character(struct char_data * ch, struct char_data * k)
          {
          *buf2 = '\0';
          send_to_char(ch,  "SPL: (%3dhr %2dlvl) %s%-26s%s ", aff->duration + 1,
-		      aff->spell_level,
+              aff->spell_level,
                       NCYN,
                       ((aff->type>=0)&&(aff->type<MAX_SPELLS))?
                       spells[aff->type].spell_name:"TYPE_UNDEFINED",
@@ -2792,12 +2792,12 @@ ACMD(do_load)
          }
       else
          {
-	   if (GET_LEVEL(ch) < LOAD_MOB_LEVEL && !is_olc_set(ch, vnumber/100)) {
-	     send_to_char(ch, "You do not have permissions to load that mob.\r\n");
-	     release_buffer(buf);
-	     release_buffer(buf2);
-	     return;
-	   }
+       if (GET_LEVEL(ch) < LOAD_MOB_LEVEL && !is_olc_set(ch, vnumber/100)) {
+         send_to_char(ch, "You do not have permissions to load that mob.\r\n");
+         release_buffer(buf);
+         release_buffer(buf2);
+         return;
+       }
 
          mob = read_mobile(r_num, REAL);
          char_to_room(mob, IN_ROOM(ch));
@@ -2825,12 +2825,12 @@ ACMD(do_load)
          }
       else
          {
-	   if (GET_LEVEL(ch) < LOAD_OBJ_LEVEL && !is_olc_set(ch, vnumber/100)) {
-	     send_to_char(ch, "You do not have permissions to load that obj.\r\n");
-	     release_buffer(buf);
-	     release_buffer(buf2);
-	     return;
-	   }
+       if (GET_LEVEL(ch) < LOAD_OBJ_LEVEL && !is_olc_set(ch, vnumber/100)) {
+         send_to_char(ch, "You do not have permissions to load that obj.\r\n");
+         release_buffer(buf);
+         release_buffer(buf2);
+         return;
+       }
 
          obj = read_object(r_num, REAL);
          obj_to_char(obj, ch);
@@ -2883,12 +2883,12 @@ ACMD(do_vstat)
          }
       else
          {
-	   if (GET_LEVEL(ch) < VSTAT_LEVEL && !is_olc_set(ch, vnumber/100)) {
-	     send_to_char(ch, "You do not have permissions to vstat that mob.\r\n");
-	     release_buffer(buf);
-	     release_buffer(buf2);
-	     return;
-	   }
+       if (GET_LEVEL(ch) < VSTAT_LEVEL && !is_olc_set(ch, vnumber/100)) {
+         send_to_char(ch, "You do not have permissions to vstat that mob.\r\n");
+         release_buffer(buf);
+         release_buffer(buf2);
+         return;
+       }
          mob = read_mobile(r_num, REAL);
          char_to_room(mob, 0);
          do_stat_character(ch, mob);
@@ -2903,12 +2903,12 @@ ACMD(do_vstat)
          }
       else
          {
-	   if (GET_LEVEL(ch) < VSTAT_LEVEL && !is_olc_set(ch, vnumber/100)) {
-	     send_to_char(ch, "You do not have permissions to vstat that obj.\r\n");
-	     release_buffer(buf);
-	     release_buffer(buf2);
-	     return;
-	   }
+       if (GET_LEVEL(ch) < VSTAT_LEVEL && !is_olc_set(ch, vnumber/100)) {
+         send_to_char(ch, "You do not have permissions to vstat that obj.\r\n");
+         release_buffer(buf);
+         release_buffer(buf2);
+         return;
+       }
 
          obj = read_object(r_num, REAL);
          do_stat_object(ch, obj);
@@ -3142,7 +3142,7 @@ ACMD(do_advance)
          do_start(victim, FALSE);
          oldlevel = 0;
          }
-      
+
       /* otherwise, cruise through all of the levels advancing when appropriate */
       for (i = 1; (i <= LVL_IMPL) && (i <= newlevel); i++)
          {
@@ -3161,93 +3161,90 @@ ACMD(do_advance)
    }
 
 
-ACMD(do_restore)
-   {
-   struct char_data *vict;
-   int i;
-   char *buf = get_buffer(MAX_INPUT_LENGTH);
+ACMD(do_restore) {
+    struct char_data *vict;
+    int i;
+    char *buf = get_buffer(MAX_INPUT_LENGTH);
 
 
-   one_argument(argument, buf);
-   if (!*buf)
-      send_to_char(ch,"Whom do you wish to restore?\r\n");
-   else if (!(vict = get_char_vis(ch, buf,FIND_CHAR_WORLD)))
-      send_to_char(ch,NOPERSON);
-   else
-     {
-
-	if (!IS_NPC(vict) && GET_LEVEL(ch) >= LVL_HERO) {
-	  for (i = 0; i < MAX_SPELLS; i++) {
-	    if (GET_LEVEL(vict) >= min_level(vict, i)) {
-	      if (GET_LEVEL(vict) == LVL_AVATAR) {
-		GET_SKILL(vict, i) = MAX(GET_SKILL(vict, i), spells[i].is_spell == IS_SPELL ? 10 : 95);
-	      } else if (GET_LEVEL(vict) == LVL_ANGEL) {
-		GET_SKILL(vict, i) = MAX(GET_SKILL(vict, i), spells[i].is_spell == IS_SPELL ? 7 : 70);
-	      } else if (GET_LEVEL(vict) == LVL_HERO) {
-		GET_SKILL(vict, i) = MAX(GET_SKILL(vict, i), spells[i].is_spell == IS_SPELL ? 5 : 50);
-	      }
-	    }
-	  }
-	}
-
-      GET_HIT(vict) = GET_MAX_HIT(vict);
-      GET_MANA(vict) = GET_MAX_MANA(vict);
-      GET_MOVE(vict) = GET_MAX_MOVE(vict);
-
-
-	/*
-	if((GET_LEVEL(ch)<LVL_DGOD)&&
-              (str_cmp(GET_NAME(vict),GET_NAME(ch))!=0))
-         {
-         release_buffer(buf);
-         return;
-         }
-      GET_HIT(vict) = GET_MAX_HIT(vict);
-      GET_MANA(vict) = GET_MAX_MANA(vict);
-      GET_MOVE(vict) = GET_MAX_MOVE(vict);
-
-
-      if (!IS_NPC(vict) && (GET_LEVEL(ch) >= LVL_GRGOD) && 
-          (GET_LEVEL(vict) >= LVL_IMMORT))
-         {
-         for (i = 1; i <= MAX_SKILLS; i++)
-            {
-            if(spells[i].is_spell==IS_SPELL)
-               {
-               if (GET_LEVEL(vict) >= LVL_GRGOD)
-                  SET_SKILL(vict, i, 10);
-               else
-                  SET_SKILL(vict, i, 7);
-               }
-            else
-               {
-               if (GET_LEVEL(vict) >= LVL_GRGOD)
-                  SET_SKILL(vict, i, 95);
-               else
-                  SET_SKILL(vict, i, 75);
-               }
+    one_argument(argument, buf);
+    if (!*buf)
+        send_to_char(ch,"Whom do you wish to restore?\r\n");
+    else if (!(vict = get_char_vis(ch, buf,FIND_CHAR_WORLD)))
+        send_to_char(ch,NOPERSON);
+    else {
+        if (!IS_NPC(vict) && GET_LEVEL(ch) >= LVL_HERO) {
+            for (i = 0; i < MAX_SPELLS; i++) {
+                if (GET_LEVEL(vict) >= min_level(vict, i)) {
+                    if (GET_LEVEL(vict) >= LVL_AVATAR) {
+                        GET_SKILL(vict, i) = MAX(GET_SKILL(vict, i), spells[i].is_spell == IS_SPELL ? 10 : 95);
+                    } else if (GET_LEVEL(vict) == LVL_ANGEL) {
+                        GET_SKILL(vict, i) = MAX(GET_SKILL(vict, i), spells[i].is_spell == IS_SPELL ? 7 : 70);
+                    } else if (GET_LEVEL(vict) == LVL_HERO) {
+                        GET_SKILL(vict, i) = MAX(GET_SKILL(vict, i), spells[i].is_spell == IS_SPELL ? 5 : 50);
+                    }
+                }
             }
-	*/
-	/*
-         if (GET_LEVEL(vict) >= LVL_GRGOD)
-            {
-            vict->real_abils.str_add = 100;
-            vict->real_abils.intel = 25;
-            vict->real_abils.wis = 25;
-            vict->real_abils.dex = 25;
-            vict->real_abils.str = 25;
-            vict->real_abils.con = 25;
-            vict->real_abils.cha = 25;
-            }
-         vict->aff_abils = vict->real_abils;*/
-	 //}
-      update_pos(vict);
-      send_to_char(ch,OK);
-      act("You have been fully healed by $N!", FALSE, vict, 0, ch, TO_CHAR);
-      mudlogf(BRF,GOD_LOG(ch),TRUE,
-              "(GC) %s has restored %s.",GET_NAME(ch),GET_NAME(vict));
-   }
-   release_buffer(buf);
+        }
+
+        GET_HIT(vict) = GET_MAX_HIT(vict);
+        GET_MANA(vict) = GET_MAX_MANA(vict);
+        GET_MOVE(vict) = GET_MAX_MOVE(vict);
+
+
+        /*
+        if((GET_LEVEL(ch)<LVL_DGOD)&&
+        (str_cmp(GET_NAME(vict),GET_NAME(ch))!=0))
+        {
+        release_buffer(buf);
+        return;
+        }
+        GET_HIT(vict) = GET_MAX_HIT(vict);
+        GET_MANA(vict) = GET_MAX_MANA(vict);
+        GET_MOVE(vict) = GET_MAX_MOVE(vict);
+
+
+        if (!IS_NPC(vict) && (GET_LEVEL(ch) >= LVL_GRGOD) &&
+        (GET_LEVEL(vict) >= LVL_IMMORT))
+        {
+        for (i = 1; i <= MAX_SKILLS; i++)
+        {
+        if(spells[i].is_spell==IS_SPELL)
+        {
+        if (GET_LEVEL(vict) >= LVL_GRGOD)
+        SET_SKILL(vict, i, 10);
+        else
+        SET_SKILL(vict, i, 7);
+        }
+        else
+        {
+        if (GET_LEVEL(vict) >= LVL_GRGOD)
+        SET_SKILL(vict, i, 95);
+        else
+        SET_SKILL(vict, i, 75);
+        }
+        }
+        */
+        /*
+        if (GET_LEVEL(vict) >= LVL_GRGOD)
+        {
+        vict->real_abils.str_add = 100;
+        vict->real_abils.intel = 25;
+        vict->real_abils.wis = 25;
+        vict->real_abils.dex = 25;
+        vict->real_abils.str = 25;
+        vict->real_abils.con = 25;
+        vict->real_abils.cha = 25;
+        }
+        vict->aff_abils = vict->real_abils;*/
+        //}
+        update_pos(vict);
+        send_to_char(ch,OK);
+        act("You have been fully healed by $N!", FALSE, vict, 0, ch, TO_CHAR);
+        mudlogf(BRF,GOD_LOG(ch),TRUE,
+        "(GC) %s has restored %s.",GET_NAME(ch),GET_NAME(vict));
+        }
+    release_buffer(buf);
 }
 
 
@@ -3407,7 +3404,7 @@ ACMD(do_poofset)
       default:
          send_to_char(ch, "Your goto messages are:\n\r");
          send_to_char(ch, "Poofin: %s %s\n\r", GET_NAME(ch), POOFIN(ch));
-         send_to_char(ch, "Poofout: %s %s\n\r", GET_NAME(ch), POOFOUT(ch));         
+         send_to_char(ch, "Poofout: %s %s\n\r", GET_NAME(ch), POOFOUT(ch));
          break;
          }
       }
@@ -3494,7 +3491,7 @@ ACMD(do_dc)
       STATE(d)=CON_DISCONNECT;
       if (num_to_dc)
          {
-         send_to_char(ch, "Connection #%d(%s) closed.\r\n", 
+         send_to_char(ch, "Connection #%d(%s) closed.\r\n",
                  num_to_dc, d->character?GET_NAME(d->character):"NULL");
          mudlogf(BRF,GOD_LOG(ch),TRUE, "(GC) Connection #%d(%s) closed by %s.",
                  num_to_dc, d->character?GET_NAME(d->character):"NULL",GET_NAME(ch));
@@ -3652,13 +3649,13 @@ ACMD(do_flux)
    char *arg=get_buffer(MAX_INPUT_LENGTH);
    struct descriptor_data *pt;
    struct char_data *i;
-          
+
    any_one_arg(argument, arg);
    if (!str_cmp(arg,"plague") && GET_LEVEL(ch) >= LVL_IMPL)
       {
-      for (i = character_list; i ; i = i->next)  
+      for (i = character_list; i ; i = i->next)
          {
-         if (AFF_FLAGGED(i, AFF_PLAGUE))  
+         if (AFF_FLAGGED(i, AFF_PLAGUE))
             {
             affect_from_char(i, SPELL_PLAGUE);
             }
@@ -3723,20 +3720,20 @@ ACMD(do_force)
             else
                act(buf1, TRUE, ch, NULL, vict, TO_VICT);
             }
-	 char *b = get_buffer(MAX_INPUT_LENGTH);
-	 strcpy(b, to_force);
-	 char *token = strtok(b, " ");
-	 /* If you're forcing a mob to gremort, log the god command regardless of level. */
+     char *b = get_buffer(MAX_INPUT_LENGTH);
+     strcpy(b, to_force);
+     char *token = strtok(b, " ");
+     /* If you're forcing a mob to gremort, log the god command regardless of level. */
          if (GET_LEVEL(ch) < LVL_NO_LOG || starts_with("mgremort", token)) {
-	   mudlogf(NRM, GOD_LOG(ch), TRUE,"(GC) %s %sforced %s to %s",
-	             GET_NAME(ch), invis, GET_NAME(vict), to_force);
-	 }
-	 if (starts_with("mgremort", token) && GET_LEVEL(ch) < LVL_ADMIN) {
-	   send_to_char(ch, "Sorry, forcing mobs to gremort is illegal.\r\n");
-	 } else {
-	   command_interpreter(vict, to_force);
-	 }
-	 release_buffer(b);
+       mudlogf(NRM, GOD_LOG(ch), TRUE,"(GC) %s %sforced %s to %s",
+                 GET_NAME(ch), invis, GET_NAME(vict), to_force);
+     }
+     if (starts_with("mgremort", token) && GET_LEVEL(ch) < LVL_ADMIN) {
+       send_to_char(ch, "Sorry, forcing mobs to gremort is illegal.\r\n");
+     } else {
+       command_interpreter(vict, to_force);
+     }
+     release_buffer(b);
          }
       }
    else if (!str_cmp("room", arg))
@@ -4933,12 +4930,12 @@ ACMD(do_show)
                   { "resists",    LVL_GRGOD,  SHOW_OBJRESIST },
                   { "ignored",    LVL_GRGOD,  SHOW_IGNORED },
                   { "nevermob",   LVL_SERPII, SHOW_NEVERMOB },
-		  { "quests",     LVL_SERPII, SHOW_QUESTS },
-		  { "graffiti",   LVL_IMMORT, SHOW_GRAFFITI },
-		  { "explored",   LVL_IMMORT, SHOW_EXPLORED },
-		  { "email",      LVL_DGOD,   SHOW_EMAIL },
-		  { "gremort_record", LVL_GRGOD, SHOW_GREMORT_RECORDS },
-		  { "player_shops", LVL_IMMORT, SHOW_PLAYER_SHOPS },
+          { "quests",     LVL_SERPII, SHOW_QUESTS },
+          { "graffiti",   LVL_IMMORT, SHOW_GRAFFITI },
+          { "explored",   LVL_IMMORT, SHOW_EXPLORED },
+          { "email",      LVL_DGOD,   SHOW_EMAIL },
+          { "gremort_record", LVL_GRGOD, SHOW_GREMORT_RECORDS },
+          { "player_shops", LVL_IMMORT, SHOW_PLAYER_SHOPS },
                   { "\n",         0, 0 }
                };
    /* search for: */
@@ -5548,10 +5545,10 @@ ACMD(do_show)
          {
          count=atoi(value);
          }
-      else  
+      else
          {
          count=0;
-         }  
+         }
       for (i = 0, j = 0; i < top_of_world; i++)
          {
          if ((IS_SET(world[i].room_flags, ROOM_NOTRACK)&&(fields[l].position==SHOW_NOTRACK))||
@@ -5566,7 +5563,7 @@ ACMD(do_show)
                       GET_ROOM_VNUM(i), world[i].name)
                ;
             if(strlen(buf)>32400)
-               {   
+               {
                sprintf(buf+strlen(buf), "Buffer Size Exceeded.  Use show %s <number> "
                                         "(%ld)to view more.\r\n", fields[l].cmd, j);
                break;
@@ -5986,7 +5983,7 @@ ACMD(do_show)
       strcpy(buf, "God Commands\r\n--------------------------\r\n");
       for (j=0,i = 1;*cmd_info[i].command!='\n'; i++)
          {
-         if((cmd_info[i].minimum_level>=LVL_IMMORT) && 
+         if((cmd_info[i].minimum_level>=LVL_IMMORT) &&
             (cmd_info[i].minimum_level<=GET_LEVEL(ch)))
             {
             sprintf(buf+strlen(buf), "|%-14.14s %3d|%s",
@@ -6057,7 +6054,7 @@ ACMD(do_show)
    case SHOW_WEAPONSPELL:
       strcpy(buf, "Weapon Spells:\r\n"
                   "--------------\r\n");
-      for(i=0; i<top_of_objt;i++)   
+      for(i=0; i<top_of_objt;i++)
          {
          for(t=0;t<MAX_SPELL_AFFECT;t++)
             if(obj_proto[i].spell_affect[t].spelltype!=0)
@@ -6069,7 +6066,7 @@ ACMD(do_show)
                             NCYN,obj_proto[i].spell_affect[t].percentage,NNRM);
                }
          }
-      strcat(buf,"\r\n");   
+      strcat(buf,"\r\n");
       if(ch->desc)
          page_string(ch->desc,buf,TRUE,"");
       break;
@@ -6078,14 +6075,14 @@ ACMD(do_show)
                   "---------------------\r\n");
       for(i=0; i<top_of_objt;i++)
          {
-         if(obj_proto[i].obj_flags.bitvector)  
+         if(obj_proto[i].obj_flags.bitvector)
             {
             sprintf(buf+strlen(buf),"(%5ld) %-30.30s :",
                     obj_index[i].vnum ,obj_proto[i].short_description);
             sprintbit(obj_proto[i].obj_flags.bitvector, affected_bits, buf+strlen(buf));
             strcat(buf,"\r\n");
             }
-         }   
+         }
       strcat(buf,"\r\n");
       if(ch->desc)
          page_string(ch->desc,buf,TRUE,"");
@@ -6133,7 +6130,7 @@ ACMD(do_show)
                   "------------------------");
       for(i=0,j=1; i<top_of_objt;i++)
          {
-         if((obj_proto[i].obj_flags.value[4]==LVL_AVATAR) && 
+         if((obj_proto[i].obj_flags.value[4]==LVL_AVATAR) &&
             !(IS_SET(obj_proto[i].obj_flags.extra_flags2,ITEM2_DBLREMORT) ||
               IS_SET(obj_proto[i].obj_flags.extra_flags2,ITEM2_REMORT)))
             {
@@ -6150,7 +6147,7 @@ ACMD(do_show)
       break;
    case SHOW_DBLREMORTEQ:
       strcpy(buf, "Double Remort Equipment:\r\n"
-                  "------------------------");  
+                  "------------------------");
       for(i=0,j=1; i<top_of_objt;i++)
          {
          if(IS_SET(obj_proto[i].obj_flags.extra_flags2, ITEM2_DBLREMORT))
@@ -6160,8 +6157,8 @@ ACMD(do_show)
             sprintf(buf+strlen(buf),"(%5ld) %-30.30s ",
                     obj_index[i].vnum, obj_proto[i].short_description);
             j++;
-            }   
-         }      
+            }
+         }
       strcat(buf,"\r\n");
       if(ch->desc)
          page_string(ch->desc,buf,TRUE,"");
@@ -6217,7 +6214,7 @@ ACMD(do_show)
             }
          }
       strcat(buf,"\r\n");
-      if(ch->desc)   
+      if(ch->desc)
          page_string(ch->desc,buf,TRUE,"");
       break;
    case SHOW_IGNORED:
@@ -6241,7 +6238,7 @@ ACMD(do_show)
             }
          }
       break;
-   case SHOW_OBJDATA:       
+   case SHOW_OBJDATA:
       if (*value && is_number(value))
          {
          count=atoi(value);
@@ -6250,7 +6247,7 @@ ACMD(do_show)
          {
          count=0;
          }
-   
+
       for (orn = count; orn <= top_of_objt; orn++)
          {
          if(strlen(buf)>32500)
@@ -6287,7 +6284,7 @@ ACMD(do_show)
          }
       if(ch->desc)
          page_string(ch->desc,buf,TRUE,"");
-         
+
       break;
    case SHOW_ASSEMBLIES:
       assemblyListToChar(ch);
@@ -6298,46 +6295,46 @@ ACMD(do_show)
      if (value) {
        victim = get_player_vis(ch, value, FIND_CHAR_WORLD);
        if (victim) {
-	 sprintf(buf, "Quests %s has completed:\r\n", GET_NAME(victim));
+     sprintf(buf, "Quests %s has completed:\r\n", GET_NAME(victim));
        }
      }
      if (!victim) {
        if (value && value[0]) {
-	 quest_name = value;
-	 sprintf(buf, "Quests matching your criteria:\r\n");
+     quest_name = value;
+     sprintf(buf, "Quests matching your criteria:\r\n");
        } else {
-	 quest_name = NULL;
-	 sprintf(buf, "Usage: show quests <player-name|quest-substring>\r\n\r\nQuests:\r\n");
+     quest_name = NULL;
+     sprintf(buf, "Usage: show quests <player-name|quest-substring>\r\n\r\nQuests:\r\n");
        }
      }
      char *buf2 = get_buffer(MAX_STRING_LENGTH);
      if (victim) {
        for (i = 0; i < num_dg_quests; i++) {
-	 for (j = 0; j < dg_quests[i].num_completed; j++) {
-	   if (dg_quests[i].completed_by[j] == victim->pfilepos) {
-	     sprintf(buf2, "%3d - %s\r\n", (int)i+1, dg_quests[i].quest_name);
-	     if (strlen(buf) + strlen(buf2) < 32700) {
-	       strcat(buf, buf2);
-	     }
-	     break;
-	   }
-	 }
+     for (j = 0; j < dg_quests[i].num_completed; j++) {
+       if (dg_quests[i].completed_by[j] == victim->pfilepos) {
+         sprintf(buf2, "%3d - %s\r\n", (int)i+1, dg_quests[i].quest_name);
+         if (strlen(buf) + strlen(buf2) < 32700) {
+           strcat(buf, buf2);
+         }
+         break;
+       }
+     }
        }
      } else if (quest_name) {
        for (i = 0; i < num_dg_quests; i++) {
-	 if (stristr(dg_quests[i].quest_name, quest_name)) {
-	   sprintf(buf2, "%3d - %s\r\n", (int)i+1, dg_quests[i].quest_name);
-	   if (strlen(buf) + strlen(buf2) < 32700) {
-	     strcat(buf, buf2);
-	   }
-	 }
+     if (stristr(dg_quests[i].quest_name, quest_name)) {
+       sprintf(buf2, "%3d - %s\r\n", (int)i+1, dg_quests[i].quest_name);
+       if (strlen(buf) + strlen(buf2) < 32700) {
+         strcat(buf, buf2);
+       }
+     }
        }
      } else {
        for (i = 0; i < num_dg_quests; i++) {
-	 sprintf(buf2, "%3d - %s\r\n", (int)i+1, dg_quests[i].quest_name);
-	 if (strlen(buf) + strlen(buf2) < 32700) {	  
-	   strcat(buf, buf2);
-	 }
+     sprintf(buf2, "%3d - %s\r\n", (int)i+1, dg_quests[i].quest_name);
+     if (strlen(buf) + strlen(buf2) < 32700) {
+       strcat(buf, buf2);
+     }
        }
      }
      send_to_char(ch, buf);
@@ -6345,19 +6342,19 @@ ACMD(do_show)
      break;
        /*
        if (quest_name && strstr(dg_quests[i].quest_name, quest_name)) {
-	 sprintf(buf2, "(%d) %s :", i+1, dg_quests[i].quest_name);
-	 if (strlen(buf) + strlen(buf2) < 32700) {
-	   strcat(buf, buf2);
-	 }
+     sprintf(buf2, "(%d) %s :", i+1, dg_quests[i].quest_name);
+     if (strlen(buf) + strlen(buf2) < 32700) {
+       strcat(buf, buf2);
+     }
        }
        for (j = 0; j < dg_quests[i].num_completed; j++) {
-	 sprintf(buf2, " %s", (player_table + dg_quests[i].completed_by[j])->name);
-	 if (strlen(buf) + strlen(buf2) < 32700) {
-	   strcat(buf, buf2);
-	 }
+     sprintf(buf2, " %s", (player_table + dg_quests[i].completed_by[j])->name);
+     if (strlen(buf) + strlen(buf2) < 32700) {
+       strcat(buf, buf2);
+     }
        }
        if (strlen(buf) < 32700) {
-	 strcat(buf, "\r\n");
+     strcat(buf, "\r\n");
        }
        */
    }
@@ -6369,25 +6366,25 @@ ACMD(do_show)
      for (i = 0; i < num_graffiti; i++) {
        int found = 0;
        for (j = 0; j < nvnums; j++) {
-	 if (graffiti[i].room_vnum == vnums[j]) {
-	   found = 1;
-	   break;
-	 }
+     if (graffiti[i].room_vnum == vnums[j]) {
+       found = 1;
+       break;
+     }
        }
        if (!found) {
-	 if (nvnums < 5000) {
-	   vnums[nvnums++] = graffiti[i].room_vnum;
-	 }
+     if (nvnums < 5000) {
+       vnums[nvnums++] = graffiti[i].room_vnum;
+     }
        }
      }
      sprintf(buf, "Rooms containing graffiti:\r\n");
      for (i = 0; i < nvnums; i++) {
        int rnum = real_room(vnums[i]);
        if (rnum >= 0) {
-	 sprintf(buf2, "  [%5d] %s\r\n", vnums[i], world[rnum].name);
-	 if (strlen(buf) + strlen(buf2) < 32700) {
-	   strcat(buf, buf2);
-	 }
+     sprintf(buf2, "  [%5d] %s\r\n", vnums[i], world[rnum].name);
+     if (strlen(buf) + strlen(buf2) < 32700) {
+       strcat(buf, buf2);
+     }
        }
      }
      page_string(ch->desc, buf, TRUE, "");
@@ -6422,29 +6419,29 @@ ACMD(do_show)
        int tzone;
        sprintf(buf, "Zones %s has explored:\r\n", GET_NAME(victim));
        for (i = 0; i <= MIN(EXPLORED_TOP_VNUM/100, top_of_zone_table+1); i++) {
-	 for (j = 0; j < 100; j++) {
-	   int vnum = 100*i + j;
-	   if (victim->player_specials->explored_vnums[vnum/8] & (1 << (vnum%8))) {
-	     for (tzone = 0; tzone <= top_of_zone_table && zone_table[tzone].number != i; tzone++);
-	     sprintf(buf2, "%3d - %s\r\n", (int)i, zone_table[tzone].name);
-	     if (strlen(buf) + strlen(buf2) < 32700) {
-	       strcat(buf, buf2);
-	     }
-	     break;
-	   }
-	 }
+     for (j = 0; j < 100; j++) {
+       int vnum = 100*i + j;
+       if (victim->player_specials->explored_vnums[vnum/8] & (1 << (vnum%8))) {
+         for (tzone = 0; tzone <= top_of_zone_table && zone_table[tzone].number != i; tzone++);
+         sprintf(buf2, "%3d - %s\r\n", (int)i, zone_table[tzone].name);
+         if (strlen(buf) + strlen(buf2) < 32700) {
+           strcat(buf, buf2);
+         }
+         break;
+       }
+     }
        }
      } else {
        int tzone;
        for (tzone = 0; tzone <= top_of_zone_table && zone_table[tzone].number != zone; tzone++);
        sprintf(buf, "Rooms %s has explored in zone #%d (%s):\r\n", GET_NAME(victim), zone, zone_table[tzone].name);
        for (i = zone*100; i < (zone+1)*100; i++) {
-	 if (victim->player_specials->explored_vnums[i/8] & (1 << i%8)) {
-	   sprintf(buf2, "%6d - %s\r\n", (int)i, world[real_room(i)].name);
-	   if (strlen(buf) + strlen(buf2) < 32700) {
-	     strcat(buf, buf2);
-	   }
-	 }
+     if (victim->player_specials->explored_vnums[i/8] & (1 << i%8)) {
+       sprintf(buf2, "%6d - %s\r\n", (int)i, world[real_room(i)].name);
+       if (strlen(buf) + strlen(buf2) < 32700) {
+         strcat(buf, buf2);
+       }
+     }
        }
      }
      /* send_to_char(ch, buf); */
@@ -6459,22 +6456,22 @@ ACMD(do_show)
      for (i = 0; i < top_of_p_table; i++) {
        char *name = player_table[i].name;
        if (!name) {
-	 continue;
+     continue;
        }
        struct char_file_u cf;
        memset(&cf, 0, sizeof(struct char_file_u));
        load_char_ascii(&cf, name);
-       if (cf.email && cf.email[0]) { 
-	 if (name[0]) {
-	   name[0] = toupper(name[0]);
-	 }
-	 sprintf(buf2, "%3d. [%4ld] %-20s : %s\r\n", ++count, cf.char_specials_saved.idnum, name, cf.email);
-	 strcat(buf, buf2);
+       if (cf.email && cf.email[0]) {
+     if (name[0]) {
+       name[0] = toupper(name[0]);
+     }
+     sprintf(buf2, "%3d. [%4ld] %-20s : %s\r\n", ++count, cf.char_specials_saved.idnum, name, cf.email);
+     strcat(buf, buf2);
        }
      }
      release_buffer(buf2);
      page_string(ch->desc, buf, TRUE, "");
-   }    
+   }
    break;
    case SHOW_GREMORT_RECORDS: {
       char *buf2 = get_buffer(MAX_STRING_LENGTH);
@@ -6613,7 +6610,7 @@ ACMD(do_set)
          { "exp",         LVL_GRGOD,     BOTH,      NUMBER } ,
          { "hitroll",     LVL_GRGOD,     BOTH,      NUMBER } ,
          { "damroll",     LVL_GRGOD,     BOTH,      NUMBER } ,
-         { "invis",       LVL_ADMIN,      PC,       NUMBER } ,          
+         { "invis",       LVL_ADMIN,      PC,       NUMBER } ,
          { "nohassle",    LVL_GRGOD,     PC,        BINARY } ,  /* 25 */
          { "frozen",      LVL_FREEZE,    PC,        BINARY } ,
          { "lastlearn",   LVL_GRGOD,     PC,        NUMBER } ,
@@ -6655,7 +6652,7 @@ ACMD(do_set)
          { "holylight",   LVL_GOD,       PC,        BINARY } , /* 63 */
          { "pk",          LVL_ADMIN,     PC,        BINARY } , /* 64 */
          { "nocommune",   LVL_SERP,      PC,        BINARY } , /* 65 */
-	 { "explored",    LVL_IMPL,      PC,        NUMBER } , /* 66 */
+     { "explored",    LVL_IMPL,      PC,        NUMBER } , /* 66 */
          { "\n" ,         0,             BOTH,      MISC }
       } ;
 
@@ -6765,11 +6762,11 @@ ACMD(do_set)
       }
    if (GET_LEVEL(ch) != LVL_IMPL)
       {
-	/*if((GET_LEVEL(ch)==GET_LEVEL(vict)) && !str_cmp(GET_NAME(ch),"iluvatar"))
+    /*if((GET_LEVEL(ch)==GET_LEVEL(vict)) && !str_cmp(GET_NAME(ch),"iluvatar"))
          {
          send_to_char(ch,"Iluvatar special power mode ON!\r\n");
          }
-	 else*/ if ((dot_mode==FIND_INDIV)&&!IS_NPC(vict) &&
+     else*/ if ((dot_mode==FIND_INDIV)&&!IS_NPC(vict) &&
                (GET_LEVEL(ch) <= GET_LEVEL(vict)) && (vict != ch))
          {
          send_to_char(ch,"Maybe that's not such a great idea...\r\n");
@@ -6944,7 +6941,7 @@ ACMD(do_set)
       if (IS_NPC(vict) || GET_LEVEL(vict) >= LVL_GRGOD)
          RANGE(3, 125);
       else
-	RANGE(3, race_max_stats[GET_RACE(vict)][3]);
+    RANGE(3, race_max_stats[GET_RACE(vict)][3]);
       vict->real_abils.dex = value;
       affect_total(vict);
       break;
@@ -7172,12 +7169,12 @@ ACMD(do_set)
          {
          GET_WEIGHT(vict) = MIN(number(race_size_info[i].MWmin,
                                        race_size_info[i].MWmax), 255);
-         GET_HEIGHT(vict) = MIN(number(race_size_info[i].MHmin,   
+         GET_HEIGHT(vict) = MIN(number(race_size_info[i].MHmin,
                                        race_size_info[i].MHmax), 255);
          }
       else
          {
-         GET_WEIGHT(vict) = MIN(number(race_size_info[i].FWmin,   
+         GET_WEIGHT(vict) = MIN(number(race_size_info[i].FWmin,
                                        race_size_info[i].FWmax), 255);
          GET_HEIGHT(vict) = MIN(number(race_size_info[i].FHmin,
                                        race_size_info[i].FHmax), 255);
@@ -7571,7 +7568,7 @@ ACMD(do_set)
       send_to_char(vict, "You now have %d quest points.\r\n", value);
       mudlogf(BRF, GET_LEVEL(ch), TRUE, "(GC) %s has set %s's quest points to %d.",
               GET_NAME(ch), GET_NAME(vict), value);
-      break;      
+      break;
    case 61:
       if (is_file)
          {
@@ -7579,7 +7576,7 @@ ACMD(do_set)
          release_buffer(buf);
          release_buffer(field);
          release_buffer(val_arg1);
-         release_buffer(val_arg);   
+         release_buffer(val_arg);
          release_buffer(name);
          free_char(vict);
          return;
@@ -7609,7 +7606,7 @@ ACMD(do_set)
             extract_obj(unequip_char(vict, WEAR_HEART));
          equip_char(vict, obj, WEAR_HEART);
          }
-      break; 
+      break;
    case 62:
       REMORT_LEVEL(vict) = (value < 0) ? 0 : value;
       break;
@@ -7673,13 +7670,13 @@ ACMD(do_set)
       int k;
       if((table_pos = find_id(GET_IDNUM(vict)))!=-1)
       {
-	player_table[table_pos].level = GET_LEVEL(vict);
-	player_table[table_pos].plr_flags=PLR_FLAGS(vict);
-	
-	for(k=0;k<5;k++)
-	  player_table[table_pos].gold[k] = vict->points.gold[k];
-	for(k=0;k<32;k++)
-	  player_table[table_pos].bank_gold[k] = vict->points.bank_gold[k];
+    player_table[table_pos].level = GET_LEVEL(vict);
+    player_table[table_pos].plr_flags=PLR_FLAGS(vict);
+
+    for(k=0;k<5;k++)
+      player_table[table_pos].gold[k] = vict->points.gold[k];
+    for(k=0;k<32;k++)
+      player_table[table_pos].bank_gold[k] = vict->points.bank_gold[k];
       }
 
       write_player_index_file();
@@ -7915,7 +7912,7 @@ ACMD(do_home)
                {
                if (GET_LEVEL(victim) < LVL_IMMORT)
                   {
-		    int vnum = GET_ROOM_VNUM(IN_ROOM(victim));
+            int vnum = GET_ROOM_VNUM(IN_ROOM(victim));
 
                   tmp = real_room(GET_HOME(victim));
                   char_from_room(victim);
@@ -7926,7 +7923,7 @@ ACMD(do_home)
                   if (GET_LEVEL(ch) <= LVL_ADMIN)
                      {
                      mudlogf(BRF,GOD_LOG(ch),TRUE,
-			     "(GC) %s has sent %s home from room %d.",GET_NAME(ch),GET_NAME(victim), vnum);
+                 "(GC) %s has sent %s home from room %d.",GET_NAME(ch),GET_NAME(victim), vnum);
                      }
                   }
                else
@@ -8093,9 +8090,9 @@ ACMD(do_rlist)
       send_to_char(ch,"Usage: rlist <begining number> <ending number>\r\n");
       send_to_char(ch,"Usage: rlist <begining number>\r\n");
       send_to_char(ch,"Usage: rlist -h\r\n\r\n");
-      
-      
-      
+
+
+
 
       release_buffer(buf2);
       release_buffer(buf);
@@ -8164,9 +8161,9 @@ ACMD(do_rlist)
       {
       if (GET_ROOM_VNUM(nr) >= first)
          {
-	   if (GET_LEVEL(ch) < RLIST_LEVEL && !is_olc_set(ch, GET_ROOM_VNUM(nr)/100)) {
-	     continue;
-	   }
+       if (GET_LEVEL(ch) < RLIST_LEVEL && !is_olc_set(ch, GET_ROOM_VNUM(nr)/100)) {
+         continue;
+       }
 
          if(strlen(buf)>32000)
             {
@@ -8257,9 +8254,9 @@ ACMD(do_mlist)
       {
       if (mob_index[nr].vnum >= first)
          {
-	   if (GET_LEVEL(ch) < MLIST_LEVEL && !is_olc_set(ch, mob_index[nr].vnum/100)) {
-	     continue;
-	   }
+       if (GET_LEVEL(ch) < MLIST_LEVEL && !is_olc_set(ch, mob_index[nr].vnum/100)) {
+         continue;
+       }
 
          if(strlen(buf)>32000)
             {
@@ -8477,9 +8474,9 @@ ACMD(do_mlev)
    strcpy(buf,"Num  Virtual Description                         lvl|cl|race|spec\r\n");
    for (nr=0; nr <= top_of_mobt; nr++)
       {
-	if (GET_LEVEL(ch) < MLEV_LEVEL && !is_olc_set(ch, mob_index[nr].vnum/100)) {
-	  continue;
-	}
+    if (GET_LEVEL(ch) < MLEV_LEVEL && !is_olc_set(ch, mob_index[nr].vnum/100)) {
+      continue;
+    }
 
       if((mob_proto[nr].player.level >= first) &&
               (mob_proto[nr].player.level <= last))
@@ -8673,9 +8670,9 @@ ACMD(do_olist)
       {
       if (obj_index[nr].vnum >= first)
          {
-	   if (GET_LEVEL(ch) < OLIST_LEVEL && !is_olc_set(ch, obj_index[nr].vnum/100)) {
-	     continue;
-	   }
+       if (GET_LEVEL(ch) < OLIST_LEVEL && !is_olc_set(ch, obj_index[nr].vnum/100)) {
+         continue;
+       }
 
          if(strlen(buf)>32000)
             {
@@ -8831,7 +8828,7 @@ ACMD(do_gremort)
          advance_level(victim,FALSE);
          advance_level(victim,TRUE);
          GET_COND(victim, FULL) = -1;
-         GET_COND(victim, THIRST) = -1; 
+         GET_COND(victim, THIRST) = -1;
          }
       else if (REMORT_LEVEL(victim) == TRIPLE_REMORT)
       {
@@ -8843,7 +8840,7 @@ ACMD(do_gremort)
          advance_level(victim,FALSE);
          advance_level(victim,TRUE);
          GET_COND(victim, FULL) = -1;
-         GET_COND(victim, THIRST) = -1; 
+         GET_COND(victim, THIRST) = -1;
       }
       else
          {
@@ -9357,7 +9354,7 @@ ACMD(do_itake)
    else if (!(victim = get_char_vis(ch, buf,FIND_CHAR_WORLD)))
       {
       send_to_char(ch, "Can't find the person you are looking for.\r\n");
-      }   
+      }
    else
       {
       for (found = FALSE, i = 0; i < NUM_WEARS && !found; i++)
@@ -9376,17 +9373,17 @@ ACMD(do_itake)
             release_buffer(buf2);
             release_buffer(buf);
             return;
-            }  
+            }
          }
 
       if (found)
          obj_to_char(unequip_char(victim, i), victim);
       obj_from_char(tar_obj);
       obj_to_char(tar_obj, ch);
-      send_to_char(ch, "You took %s from %s.\r\n", 
+      send_to_char(ch, "You took %s from %s.\r\n",
                    GET_OBJ_NAME(tar_obj), GET_NAME(victim));
       mudlogf(BRF, GOD_LOG(ch), TRUE, "(GC) itake: %s took %s from %s.",
-              GET_NAME(ch), GET_OBJ_NAME(tar_obj), GET_NAME(victim)); 
+              GET_NAME(ch), GET_OBJ_NAME(tar_obj), GET_NAME(victim));
       }
    release_buffer(buf);
    release_buffer(buf2);
@@ -9419,7 +9416,7 @@ ACMD(do_igive)
       {
       obj_from_char(igive_obj);
       obj_to_char(igive_obj, victim);
-      send_to_char(ch, "You give %s to %s.\r\n", 
+      send_to_char(ch, "You give %s to %s.\r\n",
                    GET_OBJ_NAME(igive_obj), GET_NAME(victim));
       mudlogf(BRF, GOD_LOG(ch), TRUE, "(GC) igive: %s has given %s to %s.",
               GET_NAME(ch), GET_OBJ_NAME(igive_obj), GET_NAME(victim));
@@ -9458,11 +9455,11 @@ ACMD(do_logsearch) {
         {"bugs"     , BUG_FILE       , LVL_DETY  , "Bug file"},
         {"corpse"   , CORPSE_LOG     , LVL_IMMORT, "Player corpses"},
         {"changes"  , CHANGES_FILE   , LVL_IMMORT, "Code changes"},
-        {"crash"    , CRASH_LOG      , LVL_ADMIN , "Tail of syslog before last crash"}, 
-        {"delete"   , DELETE_LOG     , LVL_DGOD  , "Player self-deletions"},  
+        {"crash"    , CRASH_LOG      , LVL_ADMIN , "Tail of syslog before last crash"},
+        {"delete"   , DELETE_LOG     , LVL_DGOD  , "Player self-deletions"},
         {"dts"      , DT_LOG         , LVL_DGOD  , "Death traps"},
         {"errors"   , ERRORS_FILE    , LVL_IMMORT, "System errors"},
-        {"gold"     , GOLD_LOG       , LVL_DGOD  , "Gold logging"},  
+        {"gold"     , GOLD_LOG       , LVL_DGOD  , "Gold logging"},
         {"godcmds"  , GODCMD_LOG     , LVL_ADMIN , "Immortal commands log"},
         {"help"     , HELP_LOG       , LVL_IMMORT, "Non-existant, requested help files"},
         {"ideas"    , IDEA_FILE      , LVL_IMMORT, "Ideas file"},
@@ -9477,12 +9474,12 @@ ACMD(do_logsearch) {
         {"rip"      , RIP_LOG        , LVL_IMMORT, "Death by mob logs"},
         {"scripterr", SCRIPTERR_LOG  , LVL_ARCH  , "DG Script errors"},
         {"scriptlog", SCRIPT_LOG     , LVL_ARCH  , "Dg Script logs(via dg_log)"},
-        {"system"   , SYSLOG_FILE    , LVL_ADMIN , "Main syslog file"}, 
-        {"typos"    , TYPO_FILE      , LVL_IMMORT, "Typo file"}, 
+        {"system"   , SYSLOG_FILE    , LVL_ADMIN , "Main syslog file"},
+        {"typos"    , TYPO_FILE      , LVL_IMMORT, "Typo file"},
         {"usage"    , USAGE_LOG      , LVL_DGOD  , "Usage logs(5 minute increment)"},
-	{"quests"   , DG_QUEST_LOG   , LVL_IMMORT, "DG Quest log"},
-	{"graffiti" , GRAFFITI_LOG   , LVL_IMMORT, "Graffiti log"},
-	{"upload"   , UPLOAD_LOG     , LVL_ADMIN , "Zone file upload log"},
+        {"quests"   , DG_QUEST_LOG   , LVL_IMMORT, "DG Quest log"},
+        {"graffiti" , GRAFFITI_LOG   , LVL_IMMORT, "Graffiti log"},
+        {"upload"   , UPLOAD_LOG     , LVL_ADMIN , "Zone file upload log"},
         {"\0",0,0}
     };
 
@@ -9494,7 +9491,7 @@ ACMD(do_logsearch) {
         for (i = 0; *loginf[i].name; i++)
             if (GET_LEVEL(ch) >= loginf[i].minlev) {
                 send_to_char(ch, " %3d. %-20s %-20s %s\r\n",
-                             i+1, loginf[i].name, 
+                             i+1, loginf[i].name,
                              WizLevels[((int)loginf[i].minlev)-LVL_IMMORT],
                              loginf[i].purpose);
             }
