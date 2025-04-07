@@ -317,7 +317,7 @@ const char * GREETINGS =   /* -naj greetings 12/16/96 - changed this since i was
 "\r\n"
 "\x1B[32m                Brought to you by:                \r\n" 
 "\x1B[32m        Opie, Aleksandr, Cymynedd, Masque         \r\n"     
-"\x1b[31m    PhoenixMUD is made possible by Funcity.org    \r\n"
+"\x1b[31m   PhoenixMUD is made possible by Vineyard.haus   \r\n"
 "\x1B[32m    Based on CircleMUD created by Jeremy Elson    \r\n"
 "\x1B[32m       A derivative of DikuMUD, created by        \r\n"
 "\x1B[32m       Hans Henrik Staerfeldt, Katja Nyboe,       \r\n"
