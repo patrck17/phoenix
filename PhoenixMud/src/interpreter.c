@@ -1587,7 +1587,7 @@ const struct command_info cmd_info[] = {
 	{"recite", POS_FIGHTING, do_use, 0, SCMD_RECITE},
 	{"recall", POS_CHANT, do_recall, 0, 0},
 	{"receive", POS_STANDING, do_not_here, 1, 0},
-	{"recharge", POS_STANDING, do_recharge, 108, 0},
+	{"recharge", POS_STANDING, do_recharge, 1, 0},
 	{"redirect", POS_FIGHTING, do_redirect, 1, 0},
 	{"redraw", POS_DEAD, do_infobar, 0, SCMDB_REDRAW},
 	{"reelin", POS_SITTING, do_reelin, 1, 0},
