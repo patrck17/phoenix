@@ -3089,6 +3089,7 @@ ACMD(do_advance)
           */
          GET_MAX_HIT(victim)=20;
          GET_MAX_MANA(victim)=100;
+         GET_MAX_MOVE(victim)=100;
          send_to_char(victim,"You are momentarily enveloped by darkness!\r\n"
                       "You feel somewhat diminished.\r\n");
          }
