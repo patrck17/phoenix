@@ -78,6 +78,10 @@ void log_corpse(struct char_data *ch,struct obj_data *cont,char *ztString);
 void dismount_char(struct char_data *ch);
 void id_obj_to_char(struct char_data *ch, struct obj_data *obj);
 void id_char_to_char(struct char_data *ch, struct char_data *victim);
+void prune_crlf(char *string);
+int min_level(struct char_data *ch,int spellnum);
+int  invalid_class(struct char_data *ch, struct obj_data *obj);
+int  invalid_race(struct char_data *ch, struct obj_data *obj);
 
 char *ztquit[] =
    {
@@ -826,7 +830,7 @@ ACMD(do_group)
          send_to_char(ch, "Everyone following you is already in your group.\r\n");
       }
    else if (!(vict = get_char_vis(ch, buf,FIND_CHAR_ROOM)))
-      send_to_char(ch, NOPERSON);
+      send_to_char(ch, "%s", NOPERSON);
    else if ((vict->master != ch) && (vict != ch))
       act("$N must follow you to enter your group.", FALSE, ch, 0, vict,
           TO_CHAR);
@@ -1261,9 +1265,9 @@ ACMD(do_display)
    if (!*argument)
       {
       if (GET_LEVEL(ch) < LVL_IMMORT)
-         send_to_char(ch, usage);
+         send_to_char(ch, "%s", usage);
       else
-         send_to_char(ch, immusage);
+         send_to_char(ch, "%s", immusage);
       return;
       }
    if ((!str_cmp(argument, "on")) || (!str_cmp(argument, "all")))
@@ -1306,25 +1310,25 @@ ACMD(do_display)
             if (GET_LEVEL(ch) >= LVL_IMMORT)
                SET_BIT(PRF2_FLAGS(ch), PRF2_DISPTIME);
             else
-               send_to_char(ch, usage);
+               send_to_char(ch, "%s", usage);
             break;
          case '2':
             if (GET_LEVEL(ch) >= LVL_IMMORT)
                SET_BIT(PRF2_FLAGS(ch), PRF2_DISPDATE);
             else
-               send_to_char(ch, usage);
+               send_to_char(ch, "%s", usage);
             break;
          default:
             if (GET_LEVEL(ch) < LVL_IMMORT)
-               send_to_char(ch, usage);
+               send_to_char(ch, "%s", usage);
             else
-               send_to_char(ch, immusage);
+               send_to_char(ch, "%s", immusage);
             return;
             break;
             }
          }
       }
-   send_to_char(ch,OK);
+   send_to_char(ch, "%s", OK);
    }
 
 
@@ -1688,9 +1692,9 @@ ACMD(do_gen_tog)
       }
 
    if (result)
-      send_to_char(ch,tog_messages[subcmd][TOG_ON]);
+      send_to_char(ch, "%s", tog_messages[subcmd][TOG_ON]);
    else
-      send_to_char(ch,tog_messages[subcmd][TOG_OFF]);
+      send_to_char(ch, "%s", tog_messages[subcmd][TOG_OFF]);
 
    return;
    }
@@ -1851,12 +1855,12 @@ ACMD(do_remort)
 
       if (GET_CLASS(ch) < CLASS_KENSAI)
       {
-         ch->real_abils.str=MIN(ch->real_abils.str + scr_remort_bonuses[GET_CLASS(ch)][0], race_max_stats[GET_RACE(ch)][0]);
-         ch->real_abils.intel=MIN(ch->real_abils.intel + scr_remort_bonuses[GET_CLASS(ch)][1], race_max_stats[GET_RACE(ch)][1]);
-         ch->real_abils.wis=MIN(ch->real_abils.wis + scr_remort_bonuses[GET_CLASS(ch)][2], race_max_stats[GET_RACE(ch)][2]);
-         ch->real_abils.dex=MIN(ch->real_abils.dex + scr_remort_bonuses[GET_CLASS(ch)][3], race_max_stats[GET_RACE(ch)][3]);
-         ch->real_abils.con=MIN(ch->real_abils.con + scr_remort_bonuses[GET_CLASS(ch)][4], race_max_stats[GET_RACE(ch)][4]);
-         ch->real_abils.cha=MIN(ch->real_abils.cha + scr_remort_bonuses[GET_CLASS(ch)][5], race_max_stats[GET_RACE(ch)][5]);
+         ch->real_abils.str=MIN(ch->real_abils.str + scr_remort_bonuses[(int)GET_CLASS(ch)][0], race_max_stats[GET_RACE(ch)][0]);
+         ch->real_abils.intel=MIN(ch->real_abils.intel + scr_remort_bonuses[(int)GET_CLASS(ch)][1], race_max_stats[GET_RACE(ch)][1]);
+         ch->real_abils.wis=MIN(ch->real_abils.wis + scr_remort_bonuses[(int)GET_CLASS(ch)][2], race_max_stats[GET_RACE(ch)][2]);
+         ch->real_abils.dex=MIN(ch->real_abils.dex + scr_remort_bonuses[(int)GET_CLASS(ch)][3], race_max_stats[GET_RACE(ch)][3]);
+         ch->real_abils.con=MIN(ch->real_abils.con + scr_remort_bonuses[(int)GET_CLASS(ch)][4], race_max_stats[GET_RACE(ch)][4]);
+         ch->real_abils.cha=MIN(ch->real_abils.cha + scr_remort_bonuses[(int)GET_CLASS(ch)][5], race_max_stats[GET_RACE(ch)][5]);
       }
 
       switch (GET_CLASS(ch))
@@ -1908,7 +1912,7 @@ ACMD(do_remort)
       send_info("[ INFO ] %s has just remorted %s %s!!\r\n",
                 GET_NAME(ch), same?"SAME-CLASS":"into a",
                 same ? scr_male_pc_class_types[(int)GET_CLASS(ch)] : pc_class_types[(int)GET_CLASS(ch)]);
-      send_to_char(ch,OK);
+      send_to_char(ch,"%s", OK);
       }
    else if((GET_RACE(ch)<RACE_DRACONIAN)&&(GET_CLASS(ch)>=CLASS_KENSAI)&&
            (GET_LEVEL(ch)==LVL_ANGEL))
@@ -1939,7 +1943,7 @@ ACMD(do_remort)
          }
       else
          {
-         send_to_char(ch,"That is not a valid RACE!\r\n");
+         send_to_char(ch, "%s", "That is not a valid RACE!\r\n");
          return;
          }
       affect_remove_all(ch);
@@ -2019,7 +2023,7 @@ ACMD(do_remort)
 
       send_info("[ INFO ] %s has just remorted into a %s!!\r\n",GET_NAME(ch),
                 pc_race_types[GET_RACE(ch)]);
-      send_to_char(ch,OK);
+      send_to_char(ch, "%s", OK);
       }
    else if (REMORT_LEVEL(ch) == DOUBLE_REMORT && GET_RACE(ch) >= RACE_DRACONIAN)
    {
@@ -2059,10 +2063,10 @@ ACMD(do_remort)
       GET_WIMP_LEV(ch) = 0;
 
       send_info("[ INFO ] %s has just THIRD remorted!!!!\r\n",GET_NAME(ch));
-      send_to_char(ch,OK);
+      send_to_char(ch, "%s", OK);
    }
    else
-      send_to_char(ch,"Just isn't gonna happen\r\n");
+      send_to_char(ch, "%s", "Just isn't gonna happen\r\n");
    if (tmp_obj)
       equip_char(ch, tmp_obj, WEAR_HEART);
    affect_total(ch);
@@ -2537,7 +2541,6 @@ ACMD(do_uwizlist)
 
 struct char_data *get_char_room_vis(struct char_data *ch, char *name);
 extern struct obj_data *obj_proto;
-int min_level(struct char_data *ch,int spellnum);
 
 
 const char *reimb_usage =
@@ -2618,11 +2621,11 @@ int can_wear_lr(struct char_data *ch, struct obj_data *obj, int message);
 
 void commit_reimb(struct char_data* ch)
 {
-  int i;
-  if (GET_EQ(ch, i)) {
+  if (GET_EQ(ch, WEAR_HEART)) {
     struct obj_data* tmp_obj = unequip_char(ch, WEAR_HEART);
     extract_obj(tmp_obj);
   }
+  int i;
   for (i = 0; i < NUM_WEARS; i++) {
     if (GET_EQ(ch, i) && (i != WEAR_HEART)) {
       send_to_char(ch, "You have to be completely naked for this to work.\r\n");
@@ -2703,7 +2706,7 @@ ACMD(do_old_reimb)
 
   char *reimb_type = strtok(buf, " ");
   if (!reimb_type) {
-    send_to_char(ch, reimb_usage);
+    send_to_char(ch, "%s", reimb_usage);
     return;
   }
 
@@ -2715,12 +2718,12 @@ ACMD(do_old_reimb)
     }
     int islot = get_slot(slot);
     if (islot <= 0) {
-      send_to_char(ch, reimb_usage);
+      send_to_char(ch, "%s", reimb_usage);
       return;
     }
     char *name = strtok(NULL, "");
     if (!name) {
-      send_to_char(ch, reimb_usage);
+      send_to_char(ch, "%s", reimb_usage);
       return;
     }
     int i;
@@ -2740,25 +2743,25 @@ ACMD(do_old_reimb)
       }
     }
     if (tot_match > 1) {
-      send_to_char(ch, "Too many matches.  Please refine your query.\r\n");
+      send_to_char(ch, "%s", "Too many matches.  Please refine your query.\r\n");
     } else if (tot_match == 1) {
       struct obj_data* obj = &obj_proto[matches[0]];
       if (!position_ok(obj, islot)) {
-	send_to_char(ch, "You can't wear that object in that slot.\r\n");
+	send_to_char(ch, "%s", "You can't wear that object in that slot.\r\n");
 	return;
       }
       if (!can_wear_lr(ch, obj, TRUE)) {
-	send_to_char(ch, "You're too low a level.\r\n");
+	send_to_char(ch, "%s", "You're too low a level.\r\n");
 	return;
       }
       if (invalid_align(ch, obj) || invalid_class(ch, obj) || invalid_race(ch, obj)) {
-	send_to_char(ch, "You aren't the proper race, class or alignment.\r\n");
+	send_to_char(ch, "%s", "You aren't the proper race, class or alignment.\r\n");
 	return;
       }
       ch->player_specials->reimb_obj_vnums[islot] = matches[0];
       send_to_char(ch, "Added equipment \"%s\" in slot %s.\r\n", GET_OBJ_NAME(&obj_proto[matches[0]]), slots[islot]);
     } else {
-      send_to_char(ch, "Possible matches:\r\n");
+      send_to_char(ch, "%s", "Possible matches:\r\n");
       for (i = 0; i < tot_match; i++) {
 	send_to_char(ch, "  %s\r\n", GET_OBJ_NAME(&obj_proto[matches[i]]));
       }
@@ -2809,7 +2812,7 @@ ACMD(do_old_reimb)
   } else if (!strcmp(reimb_type, "reimb!")) {
     commit_reimb(ch);
   } else {
-    send_to_char(ch, reimb_usage);
+    send_to_char(ch, "%s", reimb_usage);
   }
 
   return;
