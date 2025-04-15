@@ -42,8 +42,8 @@
 #define GREMORT_ANGEL_GOLD_COST   750000
 #define GREMORT_AVATAR_GOLD_COST 1000000
 
-const char *gremort_exam_types[3];
-const char *gremort_exam_results[5];
+extern const char *gremort_exam_types[3];
+extern const char *gremort_exam_results[5];
 
 typedef struct gremort_exam_record {
   long player_id;
