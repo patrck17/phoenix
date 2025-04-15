@@ -2076,11 +2076,12 @@ struct player_shop {
 
 extern struct player_shop* player_shops;
 
-extern struct default_ability_data
+struct default_ability_data
 {
   int race;
   int clazz;
   struct char_ability_data abilities;
 };
+
 extern struct default_ability_data default_player_stats[ 100 ];
 extern int num_default_player_stats;
