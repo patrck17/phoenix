@@ -972,11 +972,11 @@ void shopping_sell(char *arg, struct char_data * ch,
       }
 
    GET_GOLD(ch) += goldamt;
+   tempstr=get_buffer(256);
+   times_message(sold_obj, name, sold,tempstr);
    sprintf(buf, "$n sells %s.", tempstr);
    act(buf, FALSE, ch, obj, 0, TO_ROOM);
 
-   tempstr=get_buffer(256);
-   times_message(sold_obj, name, sold,tempstr);
    sprintf(buf, shop_index[shop_nr].message_sell, GET_NAME(ch), goldamt);
    do_tell(keeper, buf, cmd_tell, 0);
    send_to_char(ch, "The shopkeeper now has %s.\r\n", tempstr);
