@@ -19,7 +19,7 @@ extern int cha_align_table[][21];
 #define log(x) basic_mud_log(x)
 #endif
 
-#define mudlog(a,b,c,d)        mudlogf(b,c,d,a)
+#define mudlog(a,b,c,d)        mudlogf(b,c,d,"%s",a)
 
 /* public functions in utils.c */
 int	str_cmp(char *arg1, char *arg2);
