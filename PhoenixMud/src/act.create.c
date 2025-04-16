@@ -792,7 +792,7 @@ ACMD(do_restring)
   char obj_alias[ 4096 ] = { '\0' };
   char field_name[ 4096 ] = { '\0' };
   char new_text[ 4096 ] = { '\0' };
-  char buffer[ 4096 ] = { '\0' };
+  char buf[ 4096 ] = { '\0' };
   char buffer2[ 4096 ] = { '\0' };
   struct obj_data* p_obj = NULL;
 
@@ -806,8 +806,8 @@ ACMD(do_restring)
     return;
   }
 
-  half_chop( argument, obj_alias, buffer );
-  half_chop( buffer, field_name, new_text );
+  half_chop( argument, obj_alias, buf );
+  half_chop( buf, field_name, new_text );
 
   printf( "Restring: obj_alias=%s, field_name=%s, new_text=%s\n", obj_alias, field_name, new_text );
 
