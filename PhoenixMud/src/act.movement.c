@@ -47,6 +47,7 @@ void do_doorcmd(struct char_data *ch, struct obj_data *obj, int door,int scmd);
 void close_door(room_rnum was_in, int door);
 void process_skills(struct char_data *ch, struct char_data *tch, struct obj_data *item, 
                     int t_alt, int skill, int state);
+int handleGetOutOfDeathFree(struct char_data*);
 
 /* simple function to determine if char can walk on water */
 int has_boat(struct char_data *ch)

@@ -38,6 +38,7 @@ obj_data *get_obj_by_room(room_data *room, char *name);
 void script_log(char *msg);
 void wld_command_interpreter(room_data *room, char *argument);
 void death_cry(struct char_data *ch);
+int handleGetOutOfDeathFree(struct char_data*);
 
 #define WCMD(name)  \
 void (name)(room_data *room, char *argument, int cmd, int subcmd)
@@ -391,7 +392,7 @@ WCMD(do_wteleport)
                if (GET_LEVEL(ch) < LVL_IMMORT)
                   {
 		    if (handleGetOutOfDeathFree(ch)) {
-		      return 1;
+		      return;
 		    }
 
                   log_death_trap(ch);

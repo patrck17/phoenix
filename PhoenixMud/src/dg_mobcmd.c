@@ -60,6 +60,7 @@ void sub_write(char *arg, char_data *ch, byte find_invis, int targets);
 long asciiflag_conv(char *flag);
 room_data *get_room(char *name);
 void death_cry(struct char_data *ch);
+int handleGetOutOfDeathFree(struct char_data*);
 
 /*
  * Local functions.

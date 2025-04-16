@@ -43,6 +43,7 @@ int mob_go_path(struct char_data *ch, room_vnum dest);
 int is_empty(int zone_nr);
 int has_object(struct char_data *ch, obj_rnum obj_real_num);
 void death_cry(struct char_data *ch);
+int handleGetOutOfDeathFree(struct char_data*);
 
 ACMD(do_action);
 ACMD(do_gen_comm);
