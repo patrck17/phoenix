@@ -54,8 +54,7 @@ int  invalid_class(struct char_data *ch, struct obj_data *obj);
 int  invalid_race(struct char_data *ch, struct obj_data *obj);
 int Obj_to_store(struct obj_data * obj, FILE * fl,int location);
 int Crash_is_unrentable(struct obj_data * obj);
-int parse_xap_obj(char *filename, struct obj_data **obj,char *line,
-                  FILE *fl, int version, int *locate);
+int parse_xap_obj(char *filename, struct obj_data **obj,char *line, FILE *fl, int version, int *locate);
 void Crash_count_items(struct obj_data * obj, long *nitems);
 
 /* Local variables */
@@ -1272,8 +1271,6 @@ SPECIAL(shop_keeper)
 
 int ok_damage_shopkeeper(struct char_data * ch, struct char_data * victim)
 {
-   int sindex;
-
    if (IS_MOB(victim) && (mob_index[GET_MOB_RNUM(victim)].func==shop_keeper)&&
            !AFF_FLAGGED(victim,AFF_CHARM))
    {

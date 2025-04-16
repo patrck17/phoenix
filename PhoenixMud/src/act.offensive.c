@@ -70,7 +70,7 @@ ACMD(do_assist)
         }
     else if (!(helpee = get_char_vis(ch, arg,FIND_CHAR_ROOM)))
         {
-        send_to_char(ch, NOPERSON);
+        send_to_char(ch, "%s", NOPERSON);
         }
     else if (helpee == ch)
         {
@@ -223,7 +223,7 @@ ACMD(do_plink)
     else
         {
         if (!(victim = get_char_vis(ch, arg,FIND_CHAR_WORLD)) || IS_NPC(victim))
-            send_to_char(ch,NOPERSON);
+            send_to_char(ch, "%s", NOPERSON);
         else if(!str_cmp(GET_NAME(victim),"faron") && (GET_LEVEL(ch) < 124))
             {
             send_to_char(ch, "You can't plink Faron!!  Now you DIE!!\r\n");
@@ -288,7 +288,7 @@ ACMD(do_smite)
     else
         {
         if (!(victim = get_char_vis(ch, arg,FIND_CHAR_WORLD)) || IS_NPC(victim))
-            send_to_char(ch,NOPERSON);
+            send_to_char(ch, "%s", NOPERSON);
         else if(!str_cmp(GET_NAME(victim),"faron") && (GET_LEVEL(ch) < 124))
             {
             send_to_char(ch, "You can't smite Faron!!  Now you DIE!!\r\n");
@@ -466,7 +466,7 @@ ACMD(do_order)
                 }
             else
                 {
-                send_to_char(ch, OK);
+                send_to_char(ch, "%s", OK);
                 command_interpreter(vict, message);
                 }
             }
@@ -511,7 +511,7 @@ ACMD(do_order)
                     }
                 }
             if (found)
-                send_to_char(ch, OK);
+                send_to_char(ch, "%s", OK);
             else
                 send_to_char(ch, "Nobody here is a loyal subject of yours!\r\n");
             }

@@ -61,9 +61,11 @@ extern struct index_data *obj_index;
 extern struct char_data *character_list;
 
 extern const long race_stats[NUM_RACES][6];
-
-
-
+int parse_xap_obj(char*, struct obj_data**, char*, FILE*, int, int*);
+void prune_crlf(char* txt);
+int get_shop_item_count(struct player_shop*);
+void save_char_ascii(struct char_file_u*);
+int is_name(const char*, const char*);
 
 
 ACMD(do_shop);
@@ -103,7 +105,6 @@ void load_player_shop(struct player_shop* shop)
   int version = 2;
   struct obj_data* temp;
   char filename[1024];
-  char buffer[1024];
   char line[2048];
   int locate = 1;
 
@@ -150,28 +151,28 @@ void load_player_shops()
     mudlogf(CMP, LVL_IMMORT, TRUE, "SYSERR: could not open %s for reading", PLAYER_SHOP_INDEX);
     return;
   }
-  char buffer[1024];
-  fgets(buffer, 1023, fp);
-  sales_tax = atof(buffer);
-  fgets(buffer, 1023, fp);
-  latest_month_rent_collected = atoi(buffer);
+  char buf[1024];
+  fgets(buf, 1023, fp);
+  sales_tax = atof(buf);
+  fgets(buf, 1023, fp);
+  latest_month_rent_collected = atoi(buf);
   mudlogf(CMP, LVL_IMMORT, TRUE, "PLAYER_SHOP: sales_tax=%f, latest_month_rent_collected=%d\n", sales_tax, latest_month_rent_collected);
   
-  while (fgets(buffer, 1023, fp)) {
+  while (fgets(buf, 1023, fp)) {
     struct player_shop* shop = (struct player_shop*)malloc(sizeof(struct player_shop));
-    prune_crlf(buffer);
-    strcpy(shop->player_name, buffer);
-    fgets(buffer, 1023, fp);
-    shop->vnum_location = atoi(buffer);
-    fgets(buffer, 1023, fp);
-    shop->rent = atoi(buffer);
-    fgets(buffer, 1023, fp);
-    shop->is_active = atoi(buffer);
+    prune_crlf(buf);
+    strcpy(shop->player_name, buf);
+    fgets(buf, 1023, fp);
+    shop->vnum_location = atoi(buf);
+    fgets(buf, 1023, fp);
+    shop->rent = atoi(buf);
+    fgets(buf, 1023, fp);
+    shop->is_active = atoi(buf);
     shop->next = player_shops;
     player_shops = shop;
     shop->contents = NULL;
     load_player_shop(shop);
-    mudlogf(CMP, LVL_IMMORT, TRUE, "PLAYER_SHOP: Loaded shop for %s at room %d, rent=%d, is active=%d, items for sale=%d", shop->player_name, shop->vnum_location, shop->rent, shop->is_active, get_shop_item_count(shop));
+    mudlogf(CMP, LVL_IMMORT, TRUE, "PLAYER_SHOP: Loaded shop for %s at room %ld, rent=%d, is active=%d, items for sale=%d", shop->player_name, shop->vnum_location, shop->rent, shop->is_active, get_shop_item_count(shop));
   }
 }
 
@@ -186,11 +187,11 @@ struct player_shop* find_player_shop(char* player_name)
   return NULL;
 }
 
-struct player_shop* find_player_shop_by_room(int room_vnum)
+struct player_shop* find_player_shop_by_room(int rvnum)
 {
   struct player_shop* shop = player_shops;
   for (; shop; shop = shop->next) {
-    if (shop->vnum_location == room_vnum) {
+    if (shop->vnum_location == rvnum) {
       return shop;
     }
   }
@@ -258,9 +259,9 @@ int delete_player_shop(struct char_data* ch, char* player_name, room_vnum vnum_l
 
 void save_player_shop(struct player_shop* shop)
 {
-  char buffer[1024];
-  sprintf(buffer, "%s/%c%s.txt", PLAYER_SHOP_DIR, toupper(shop->player_name[0]), shop->player_name+1);
-  FILE* fp = fopen(buffer, "w");
+  char buf[1024];
+  sprintf(buf, "%s/%c%s.txt", PLAYER_SHOP_DIR, toupper(shop->player_name[0]), shop->player_name+1);
+  FILE* fp = fopen(buf, "w");
   if (!fp) {
     mudlogf(CMP, LVL_IMMORT, TRUE, "SYSERR: Could not save %s's shop.", shop->player_name);
     return;
@@ -494,7 +495,7 @@ ACMD(do_shop)
       return;
     }
     sprintf(buffer1, "                     %c%s's Shop\r\n\r\n", toupper(shop->player_name[0]), shop->player_name+1);
-    send_to_char(ch, buffer1);
+    send_to_char(ch, "%s", buffer1);
     send_to_char(ch, "     Item                                    Cost          Condition         Wear\r\n");
     send_to_char(ch, "---------------------------------------------------------------------------------\r\n");
     struct shop_item* item = shop->contents;
@@ -530,7 +531,7 @@ ACMD(do_shop)
 	      i, GET_OBJ_NAME(obj), item->amount,
 	      item_condition_no_color[condition], item_wear_no_color[wcondition]);
       i++;
-      send_to_char(ch, buffer1);
+      send_to_char(ch, "%s", buffer1);
     }    
     return;
   } else if (str_cmp(command, "add") == 0) {
@@ -845,12 +846,12 @@ ACMD(do_retool)
     return;
   }
 
-  char buffer[4096];
-  sprintf(buffer, "(GC) %s (%d %s-%s) adjusted stats from %d/%d/%d/%d/%d/%d to %d/%d/%d/%d/%d/%d.",
-	  GET_NAME(ch), GET_LEVEL(ch), class_abbrevs[GET_CLASS(ch)], race_abbrevs[GET_RACE(ch)],
+  char buf[4096];
+  sprintf(buf, "(GC) %s (%d %s-%s) adjusted stats from %d/%d/%d/%d/%d/%d to %d/%d/%d/%d/%d/%d.",
+	  GET_NAME(ch), GET_LEVEL(ch), class_abbrevs[(int)GET_CLASS(ch)], race_abbrevs[GET_RACE(ch)],
 	  GET_STR(ch), GET_INT(ch), GET_WIS(ch), GET_DEX(ch), GET_CON(ch), GET_CHA(ch),
 	  GET_STR(ch)+add_str, GET_INT(ch)+add_int, GET_WIS(ch)+add_wis, GET_DEX(ch)+add_dex, GET_CON(ch)+add_con, GET_CHA(ch)+add_cha);
-  mudlogf(CMP, LVL_IMMORT, TRUE, buffer);
+  mudlogf(CMP, LVL_IMMORT, TRUE, "%s", buf);
 
   ch->real_abils.str += add_str;
   ch->real_abils.intel += add_int;
