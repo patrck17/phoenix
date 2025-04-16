@@ -13,17 +13,11 @@
 #include "../localHeader/conf.h" 
 #include "../localHeader/sysdep.h" 
  
- 
-#ifdef CIRCLE_WINDOWS  /* Includes for Win32 */ 
-#include <direct.h> 
-#include <mmsystem.h> 
-#else    /* Includes for UNIX */ 
 #include <sys/socket.h> 
 #include <sys/resource.h> 
 #include <netinet/in.h> 
 #include <netdb.h> 
 #include <signal.h> 
-#endif 
 
 #include <stdarg.h> 
 
@@ -175,8 +169,8 @@ void mprog_act_trigger(char *buf, struct char_data *mob, struct char_data *ch,
 void do_auction_update (void); 
 void proc_color(char *inbuf, int color);
 void write_last_command (void);
-void vwrite_to_output(struct descriptor_data *t, const char *format, 
-		      va_list args);
+void vwrite_to_output(struct descriptor_data *t, const char *format, va_list args);
+void player_shop_monthly_rent_check();
 
 
 ACMD(do_infobar);                                 /* -naj infobar prototype */ 
@@ -1178,7 +1172,7 @@ void echo_off(struct descriptor_data *d)
       (char)0, 
    }; 
  
-   SEND_TO_Q(d,off_string); 
+   SEND_TO_Q(d, "%s", off_string); 
 } 
  
  
@@ -1198,7 +1192,7 @@ void echo_on(struct descriptor_data *d)
    }
    ; 
  
-   SEND_TO_Q(d,on_string); 
+   SEND_TO_Q(d, "%s", on_string); 
 } 
  
  
@@ -1581,8 +1575,7 @@ void vwrite_to_output(struct descriptor_data *t, const char *format, va_list arg
 
    if(t->large_outbuf&&( t->bufptr<SMALL_BUFSIZE)&&(t->bufptr!=-1))
       {
-      log("SYSERR: have a large but why: %d/%d %s",strlen(t->output),t->bufptr,
-	  last_command);
+      log("SYSERR: have a large but why: %d/%d %s",strlen(t->output),t->bufptr, last_command);
       }
       
    if(!t->output)
@@ -1650,8 +1643,7 @@ void vwrite_to_output(struct descriptor_data *t, const char *format, va_list arg
       t->bufspace=SMALL_BUFSIZE-1;
       *(t->output)= '\0';
       t->bufptr = 0; 
-      mudlogf(CMP,LVL_IMMORT,TRUE,"SYSERR: Have a LARGE and shouldn't: %s",
-	  last_command?last_command:"No Command!");
+      mudlogf(CMP,LVL_IMMORT,TRUE,"SYSERR: Have a LARGE and shouldn't: %s", last_command);
       buf_overflows++;
       release_buffer(buf);
       return; 
@@ -1712,7 +1704,6 @@ int new_descriptor(int s)
    socket_t desc; 
    int sockets_connected = 0; 
    unsigned long addr; 
-   int i; 
    static int last_desc = 0; /* last descriptor number */ 
    struct descriptor_data *newd; 
    struct sockaddr_in peer; 
@@ -1720,8 +1711,8 @@ int new_descriptor(int s)
    char *buf2;
  
   /* accept the new connection */ 
-   i = sizeof(peer); 
-   if ((desc = accept(s, (struct sockaddr *) &peer, &i)) == INVALID_SOCKET) 
+   size_t peersize = sizeof(peer); 
+   if ((desc = accept(s, (struct sockaddr *) &peer, &peersize)) == INVALID_SOCKET) 
       { 
       perror("SYSERR: accept"); 
       return -1; 
@@ -1827,7 +1818,7 @@ int new_descriptor(int s)
    newd->next = descriptor_list; 
    descriptor_list = newd; 
    if(port!=4999)
-      SEND_TO_Q(newd,GREETINGS); 
+      SEND_TO_Q(newd, "%s", GREETINGS); 
    SEND_TO_Q(newd,"Please wait"); 
    ident_start(newd, peer.sin_addr.s_addr); 
  
@@ -1864,13 +1855,15 @@ int process_output(struct descriptor_data *t)
       if (!PRF_FLAGGED(t->character,PRF_INFOBAR))  /* -naj infobar2 12/16/96 - make sure extra spacing goes to window */ 
 	 strcat(i + 2, "\r\n"); 
       else 
-	 sprintf(i,"%s\e8\r\n\e7",i);  /* -naj infobar2 -output lines.*/
+      strcat(i, "\e8\r\n\e7");
+	 //sprintf(i,"%s\e8\r\n\e7",i);  /* -naj infobar2 -output lines.*/
       }
 
   /* -naj infobar2 12/16/96 - curser back to input line */ 
    if (STATE(t)==CON_PLAYING && t->character) 
       if (!IS_NPC(t->character)&&PRF_FLAGGED(t->character,PRF_INFOBAR)) 
-	 sprintf(i,"%s%s",i,scrpos(24, 1, t->character));  
+	 strcat(i,scrpos(24, 1, t->character));  
+	 //sprintf(i,"%s%s",i,scrpos(24, 1, t->character));  
   /* strcat(i, scrpos(24, 1, t->character)); */  
    
   /* add a prompt */
