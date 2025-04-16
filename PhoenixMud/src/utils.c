@@ -136,10 +136,13 @@ char *str_dup(const char *source)
  */
 void prune_crlf(char *txt)
 {
-  int i = strlen(txt) - 1;
-
-  while (txt[i] == '\n' || txt[i] == '\r')
-    txt[i--] = '\0';
+  for (ssize_t ii = strlen(txt) - 1; ii > 0; ii--) {
+      if (txt[ii] == '\n' || txt[ii] == '\r') {
+         txt[ii] = '\0';
+      } else {
+         break;
+      }
+  }
 }
  
 /* str_cmp: a case-insensitive version of strcmp */ 
