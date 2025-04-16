@@ -81,8 +81,7 @@ ACMD(do_commune)
       }
    else
       {
-      sprintf(buf,"You commune, '&M%s&n'\r\n",argument);
-      send_to_char(ch, buf);
+      send_to_char(ch,"You commune, '&M%s&n'\r\n",argument);
 
       if (GET_LEVEL(ch) < LVL_IMMORT)
          {
@@ -155,7 +154,7 @@ ACMD(do_say)
       MOBTrigger = FALSE;
       act(buf, FALSE, ch, 0, 0, TO_ROOM|DG_NO_TRIG);
       if (!IS_NPC(ch)&&PRF_FLAGGED(ch, PRF_NOREPEAT))
-         send_to_char(ch,OK);
+         send_to_char(ch,"%s", OK);
       else
          {
          send_to_char(ch,"You say, '&W%s&n'\r\n", argument);
@@ -210,7 +209,7 @@ ACMD(do_gsay)
             act(buf, FALSE, ch, 0, f->follower, TO_VICT | TO_SLEEP);
 
       if (PRF_FLAGGED(ch, PRF_NOREPEAT))
-         send_to_char(ch,OK);
+         send_to_char(ch, "%s", OK);
       else
          send_to_char(ch, "You tell the group, '&W%s&n'\r\n", argument);
       release_buffer(buf);
@@ -235,7 +234,7 @@ void perform_tell(struct char_data *ch, struct char_data *vict, char *arg)
       }
 
    if (!IS_NPC(ch)&&PRF_FLAGGED(ch, PRF_NOREPEAT))
-      send_to_char(ch,OK);
+      send_to_char(ch, "%s", OK);
    else
       {
       sprintf(buf, "%sYou tell $N, '%s'%s",CCRED(ch, C_CMP), arg,
@@ -320,10 +319,10 @@ ACMD(do_tell)
       send_to_char(ch, "Who do you wish to tell what??\r\n");
    else if (GET_LEVEL(ch) < LVL_IMMORT &&
             !(vict = get_player_vis(ch, buf, FIND_CHAR_WORLD)))
-      send_to_char(ch, NOPERSON);
+      send_to_char(ch, "%s", NOPERSON);
    else if (GET_LEVEL(ch) >= LVL_IMMORT &&
             !(vict = get_char_vis(ch, buf, FIND_CHAR_WORLD)))
-      send_to_char(ch, NOPERSON);
+      send_to_char(ch, "%s", NOPERSON);
    else if(is_tell_ok(ch,vict))
       perform_tell(ch, vict, buf2);
    release_buffer(buf);
@@ -411,7 +410,7 @@ ACMD(do_spec_comm)
       send_to_char(ch, "Whom do you want to %s.. and what??\r\n", action_sing);
       }
    else if (!(vict = get_char_vis(ch, buf, FIND_CHAR_ROOM)))
-      send_to_char(ch, NOPERSON);
+      send_to_char(ch, "%s", NOPERSON);
    else if (vict == ch)
       send_to_char(ch, "You can't get your mouth close enough to your ear...\r\n");
    else
@@ -421,7 +420,7 @@ ACMD(do_spec_comm)
          act(buf, FALSE, ch, 0, vict, TO_VICT);
 
       if (!IS_NPC(ch)&&PRF_FLAGGED(ch, PRF_NOREPEAT))
-         send_to_char(ch, OK);
+         send_to_char(ch, "%s", OK);
       else
          {
          send_to_char(ch, "You %s %s, '%s'\r\n", action_sing,
@@ -614,7 +613,7 @@ ACMD(do_page)
                act(buf, FALSE, ch, 0, vict, TO_VICT);
 
             if (PRF_FLAGGED(ch, PRF_NOREPEAT))
-               send_to_char(ch, OK);
+               send_to_char(ch, "%s", OK);
             else
                act(buf, FALSE, ch, 0, vict, TO_CHAR);
             }
@@ -709,7 +708,7 @@ ACMD(do_gen_comm)
 
    if (PLR_FLAGGED(ch, PLR_NOSHOUT))
       {
-      send_to_char(ch, com_msgs[subcmd][0]);
+      send_to_char(ch, "%s", com_msgs[subcmd][0]);
       return;
       }
    else if (ROOM_FLAGGED(IN_ROOM(ch), ROOM_SOUNDPROOF)&&
@@ -731,7 +730,7 @@ ACMD(do_gen_comm)
       {
       if (!IS_NPC(ch)&&PRF_FLAGGED(ch, channels[subcmd]))
          {
-         send_to_char(ch, com_msgs[subcmd][2]);
+         send_to_char(ch, "%s", com_msgs[subcmd][2]);
          return;
          }
       }
@@ -739,7 +738,7 @@ ACMD(do_gen_comm)
       {
       if (!IS_NPC(ch)&&PRF2_FLAGGED(ch, channels[subcmd]))
          {
-         send_to_char(ch, com_msgs[subcmd][2]);
+         send_to_char(ch, "%s", com_msgs[subcmd][2]);
          return;
          }
       }
@@ -773,7 +772,7 @@ ACMD(do_gen_comm)
 
    /* first, set up strings to be given to the communicator */
    if (!IS_NPC(ch)&&PRF_FLAGGED(ch, PRF_NOREPEAT))
-      send_to_char(ch, OK);
+      send_to_char(ch, "%s", OK);
    else
       {
       char *buf1 = get_buffer(MAX_STRING_LENGTH);
@@ -824,10 +823,10 @@ ACMD(do_gen_comm)
             continue;
 
          if (COLOR_LEV(tch) >= C_NRM)
-            send_to_char(i->character, color_on);
+            send_to_char(i->character, "%s", color_on);
          act(buf, FALSE, ch, 0, i->character, TO_VICT | TO_SLEEP);
          if (COLOR_LEV(tch) >= C_NRM)
-            send_to_char(i->character, KNRM);
+            send_to_char(i->character, "%s", KNRM);
          }
       }
    release_buffer(buf);
@@ -1650,7 +1649,7 @@ ACMD(do_qcomm)
       {
       buf = get_buffer(512);
       if (!IS_NPC(ch)&&PRF_FLAGGED(ch, PRF_NOREPEAT))
-         send_to_char(ch,OK);
+         send_to_char(ch,"%s", OK);
       else
          {
          if (subcmd == SCMD_QSAY)
@@ -1847,7 +1846,7 @@ ACMD(do_remortnet)
    release_buffer(buf1);
    release_buffer(buf3);
    if (IS_NPC(ch) || (!IS_NPC(ch) && PRF_FLAGGED(ch, PRF_NOREPEAT)))
-      send_to_char(ch, OK);
+      send_to_char(ch, "%s", OK);
    }
 
 
@@ -1885,7 +1884,7 @@ ACMD(do_ignore)
       send_to_char(ch, "You are no longer ignoring anyone.\r\n");
       }
    else if (!(vict = get_player_vis(ch, buf, FIND_CHAR_WORLD)))
-      send_to_char(ch, NOPERSON);
+      send_to_char(ch, "%s", NOPERSON);
    else if (vict == ch)
       send_to_char(ch, "You ignore yourself - hmm hmm la di da... dang, not working.\r\n");
    else if (GET_LEVEL(vict)>GET_LEVEL(ch) && GET_LEVEL(vict)>=LVL_IMMORT)
@@ -1986,7 +1985,7 @@ ACMD(do_newbie)
       if (!IS_NPC(tch) && ignoring(tch, ch) && GET_LEVEL(tch) < LVL_IMMORT) {
 	continue;
       }
-      send_to_char(i->character, buf);
+      send_to_char(i->character, "%s", buf);
     }
   }
 }
