@@ -5970,8 +5970,6 @@ void load_default_player_stats( void )
     exit( 1 );
   }
 
-  printf(" Default stats for new players:\n");
-
   char buffer[ 2048 ];
   int index = 0;
   while( 1 )
@@ -5985,8 +5983,6 @@ void load_default_player_stats( void )
     }
     buffer[ strlen(buffer) - 1 ] = '\x0';
 
-    printf( "  %s", buffer );
-    
     char* race = strtok( buffer, " " );
     char* clazz = strtok( NULL, " " );
     char* str = strtok( NULL, " " );
@@ -6022,15 +6018,6 @@ void load_default_player_stats( void )
     default_player_stats[ index ].abilities.con = atoi( con );
     default_player_stats[ index ].abilities.cha = atoi( cha );
 
-    printf( "  ... %d(%s) %d(%s) %d %d %d %d %d\n",
-           clazz_ind, class_abbrevs[ clazz_ind ],
-           race_ind, race_abbrevs[ race_ind ],
-           default_player_stats[ index ].abilities.str,
-           default_player_stats[ index ].abilities.intel,
-           default_player_stats[ index ].abilities.wis,
-           default_player_stats[ index ].abilities.dex,
-           default_player_stats[ index ].abilities.con,
-           default_player_stats[ index ].abilities.cha );
     index++;
   }
   num_default_player_stats = index;
