@@ -4715,6 +4715,8 @@ int valid_script(trig_data *trig, struct char_data *ch)
    for(i=0;i<50;i++)
       levels[i]=0;
 
+   position++;
+
    sendValidScriptOutput("SCRIPT LOG",0,ch,FALSE);
 
    for(c = trig->cmdlist; c; c = c->next)
@@ -4812,6 +4814,7 @@ int valid_script(trig_data *trig, struct char_data *ch)
          }
 
       }
+   position--;
    if(position)
       {
       char *buf = get_buffer(512);
