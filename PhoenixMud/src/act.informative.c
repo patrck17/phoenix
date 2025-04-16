@@ -4219,13 +4219,10 @@ ACMD(do_gwho)
 	struct char_data *tch;
 	struct follow_type *f;
 	char *name_search = get_buffer(128);
-	int num_on_line;
-	int real_group;
 	short output;
 	int num_can_see;
 	send_to_char(ch, "Immortals Presently in the Realm\r\n"
 		     "--------------------------------\r\n\r\n");
-	num_on_line = 0;
 	output = FALSE;
 	name_search[0] = '\0';
 	num_can_see = 0;
@@ -4254,7 +4251,6 @@ ACMD(do_gwho)
 		send_to_char(ch, "      &Y(None).&n\r\n");
 	output = FALSE;
 	name_search[0] = '\0';
-	real_group = FALSE;
 	num_can_see = 0;
 	send_to_char(ch, "\r\nUnGrouped Players Presently in the Realm\r\n"
 		     "----------------------------------------\r\n");
