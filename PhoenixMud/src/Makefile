@@ -13,7 +13,7 @@ MYFLAGS = -Wall -Wshadow -Wnested-externs -ffreestanding -m32
 #MYFLAGS = 
 
 #flags for profiling (see hacker.doc for more information)
-PROFILE = 
+PROFILE = -L/lib/i386-linux-gnu
 
 ##############################################################################
 # Do Not Modify Anything Below This Line (unless you know what you're doing) #
