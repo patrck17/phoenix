@@ -151,12 +151,12 @@ ACMD(do_osearch)
   memset(imm, 0, 64*sizeof(int));
 
   if (!argument || !*argument) {
-    send_to_char(ch, osearch_usage);
+    send_to_char(ch, "%s", osearch_usage);
     return;
   }
   skip_spaces(&argument);
   if (!argument || !*argument) {
-    send_to_char(ch, osearch_usage);
+    send_to_char(ch, "%s", osearch_usage);
     return;
   }
 
@@ -188,8 +188,7 @@ ACMD(do_osearch)
       i = find_abbrev_in_list(value, item_types);
       if (i == -1) {
 	concatenate_list(item_types, buf2);
-	sprintf(buf3, "Unrecognized item type \"%s\".  Valid types are:\r\n\r\n%s\r\n", value, buf2);
-	send_to_char(ch, buf3);
+	send_to_char(ch, "Unrecognized item type \"%s\".  Valid types are:\r\n\r\n%s\r\n", value, buf2);
 	return;
       }
       item_type = i;
@@ -197,8 +196,7 @@ ACMD(do_osearch)
       i = find_abbrev_in_list(value, wear_bits);
       if (i == -1) {
 	concatenate_list(wear_bits, buf2);
-	sprintf(buf3, "Unrecognized item type \"%s\".  Valid types are:\r\n\r\n%s\r\n", value, buf2);
-	send_to_char(ch, buf3);
+	send_to_char(ch, "Unrecognized item type \"%s\".  Valid types are:\r\n\r\n%s\r\n", value, buf2);
 	return;
       }
       wear_type = i;
@@ -213,8 +211,7 @@ ACMD(do_osearch)
 	i = find_abbrev_in_list(apply, apply_types);
 	if (i == -1) {
 	  concatenate_list(apply_types, buf2);
-	  sprintf(buf3, "Unrecognized apply \"%s\".  Valid applies are:\r\n\r\n%s\r\n", value, buf2);
-	  send_to_char(ch, buf3);
+	  send_to_char(ch, "Unrecognized apply \"%s\".  Valid applies are:\r\n\r\n%s\r\n", value, buf2);
 	  release_buffer(tmp);
 	  return;
 	}
@@ -235,8 +232,7 @@ ACMD(do_osearch)
 	i = find_abbrev_in_list(resist, immunity_names);
 	if (i == -1) {
 	  concatenate_list(immunity_names, buf2);
-	  sprintf(buf3, "Unrecognized immunity type \"%s\".  Valid types are:\r\n\r\n%s\r\n", value, buf2);
-	  send_to_char(ch, buf3);
+	  send_to_char(ch, "Unrecognized immunity type \"%s\".  Valid types are:\r\n\r\n%s\r\n", value, buf2);
 	  release_buffer(tmp);
 	  return;
 	}
@@ -257,8 +253,7 @@ ACMD(do_osearch)
 	i = find_abbrev_in_list(suscept, immunity_names);
 	if (i == -1) {
 	  concatenate_list(immunity_names, buf2);
-	  sprintf(buf3, "Unrecognized immunity type \"%s\".  Valid types are:\r\n\r\n%s\r\n", value, buf2);
-	  send_to_char(ch, buf3);
+	  send_to_char(ch, "Unrecognized immunity type \"%s\".  Valid types are:\r\n\r\n%s\r\n", value, buf2);
 	  release_buffer(tmp);
 	  return;
 	}
@@ -279,8 +274,7 @@ ACMD(do_osearch)
 	i = find_abbrev_in_list(immune, immunity_names);
 	if (i == -1) {
 	  concatenate_list(immunity_names, buf2);
-	  sprintf(buf3, "Unrecognized immunity type \"%s\".  Valid types are:\r\n\r\n%s\r\n", value, buf2);
-	  send_to_char(ch, buf3);
+	  send_to_char(ch, "Unrecognized immunity type \"%s\".  Valid types are:\r\n\r\n%s\r\n", value, buf2);
 	  release_buffer(tmp);
 	  return;
 	}
@@ -368,7 +362,7 @@ ACMD(do_osearch)
       release_buffer(tmp);
     } else {
       send_to_char(ch, "Unknown option, \"%s\".\r\n\r\n", option);
-      send_to_char(ch, osearch_usage);
+      send_to_char(ch, "%s", osearch_usage);
       return;
     }
   }

@@ -900,8 +900,7 @@ void id_obj_to_char(struct char_data *ch, struct obj_data *obj)
       sprintbit(GET_OBJ_EXTRA2(obj), extra_bits2_id, buf2);
       strcat(buf1, buf2);
     }
-    strcat(buf1, "\r\n");
-    send_to_char(ch, buf1);
+    send_to_char(ch, "%s\r\n", buf1);
     release_buffer(buf1);
   }
 
@@ -934,7 +933,7 @@ void id_obj_to_char(struct char_data *ch, struct obj_data *obj)
       break;
    case ITEM_WAND:
    case ITEM_STAFF:
-      send_to_char(ch, "This %s casts at level %s%d%s: ",
+      send_to_char(ch, "This %s casts at level %s%ld%s: ",
                    item_types[(int)GET_OBJ_TYPE(obj)],
                    NCYN, GET_OBJ_VAL( obj, 0 ), NNRM );
       if ((GET_OBJ_VAL(obj, 3) >= 1) && (GET_OBJ_VAL(obj,3)<MAX_SPELLS))

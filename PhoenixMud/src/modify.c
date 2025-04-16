@@ -888,7 +888,7 @@ void string_add(struct descriptor_data *d, char *str)
 	 { 
 	 if (terminator != 1)
 	    SEND_TO_Q(d,"Description aborted.\r\n"); 
-	 SEND_TO_Q(d,MENU); 
+	 SEND_TO_Q(d, "%s", MENU); 
 	 STATE(d) = CON_MENU; 
 	 } 
       else if (STATE(d) == CON_TEXTED || STATE(d) == CON_ADD_NEWS)
@@ -1053,7 +1053,7 @@ ACMD(do_skillset)
       } 
    if (!(vict = get_char_vis(ch, name,FIND_CHAR_WORLD))) 
       { 
-      send_to_char(ch, NOPERSON); 
+      send_to_char(ch, "%s", NOPERSON); 
       release_buffer(name);
       return; 
       } 

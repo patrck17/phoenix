@@ -132,7 +132,7 @@ void load_spells(void) {
       new_record=FALSE;
       while (new_record==FALSE) {
          if(!get_line(fp, line)) {
-            log(buf1);
+            log("%s", buf1);
             exit(1);
          }
          switch (*line) {
@@ -156,7 +156,7 @@ void load_spells(void) {
                return;
                break;
             default:
-               log(buf1);
+               log("%s", buf1);
                log("SYSERR: %s",line);
                exit(1);
                break;

@@ -662,7 +662,7 @@ void mag_affects(int level, struct char_data * ch, struct char_data * victim,
        case SPELL_CURSE: 
 	  if (mag_savingthrow(victim, savetype, level,0)) 
 	     { 
-	     send_to_char(ch,NOEFFECT); 
+	     send_to_char(ch, "%s", NOEFFECT); 
 	     return; 
 	     } 
  
@@ -727,7 +727,7 @@ void mag_affects(int level, struct char_data * ch, struct char_data * victim,
        case SPELL_POISON: 
 	  if (mag_savingthrow(victim, savetype,level,0)) 
 	     { 
-	     send_to_char(ch,NOEFFECT); 
+	     send_to_char(ch, "%s", NOEFFECT); 
 	     return; 
 	     } 
  
@@ -742,7 +742,7 @@ void mag_affects(int level, struct char_data * ch, struct char_data * victim,
        case SPELL_PROT_FROM_EVIL: 
 	  if(AFF_FLAGGED(victim,AFF_PROTECT_GOOD))
 	     {
-	     send_to_char(ch,NOEFFECT); 
+	     send_to_char(ch, "%s", NOEFFECT); 
 	     return;
 	     }
 	  af[0].duration = level*2; 
@@ -754,7 +754,7 @@ void mag_affects(int level, struct char_data * ch, struct char_data * victim,
        case SPELL_PROT_FROM_GOOD: 
 	  if(AFF_FLAGGED(victim,AFF_PROTECT_EVIL))
 	     {
-	     send_to_char(ch,NOEFFECT); 
+	     send_to_char(ch, "%s", NOEFFECT); 
 	     return;
 	     }
 	  af[0].duration = level*2; 
@@ -1209,7 +1209,7 @@ void mag_affects(int level, struct char_data * ch, struct char_data * victim,
 	 if(AFF_FLAGGED(victim,af[i].bitvector))
 	    {
             if (spellnum!=SPELL_ENLIVEN)
-	       send_to_char(ch,NOEFFECT); 
+	       send_to_char(ch, "%s", NOEFFECT); 
 	    return; 
 	    }
       }
@@ -1223,7 +1223,7 @@ void mag_affects(int level, struct char_data * ch, struct char_data * victim,
    {
      if( spellnum == SPELL_INSPIRE && aff->spell_level + 2 > level )
      {
-       send_to_char(ch, NOEFFECT );
+       send_to_char(ch,  "%s", NOEFFECT);
        return;
      }
 
@@ -1238,7 +1238,7 @@ void mag_affects(int level, struct char_data * ch, struct char_data * victim,
      if (affected_by_spell(victim,spellnum) && !(accum_duration||accum_affect)) 
      { 
        if (spellnum!=SPELL_ENLIVEN)
-         send_to_char(ch,NOEFFECT); 
+         send_to_char(ch, "%s", NOEFFECT); 
        return; 
      } 
    }
@@ -1765,7 +1765,7 @@ void mag_summons(int level, struct char_data * ch, struct obj_data * obj,
       } 
    if (number(0, 101) < pfail) 
       { 
-      send_to_char(ch,mag_summon_fail_msgs[fmsg]); 
+      send_to_char(ch, "%s", mag_summon_fail_msgs[fmsg]); 
       return; 
       } 
    for (i = 0; i < num; i++) 
@@ -2067,7 +2067,7 @@ void mag_unaffects(int level, struct char_data * ch, struct char_data * victim,
    if (!affected_by_spell(victim, spell)&&(count<1))
       { 
       if(spellnum!=SPELL_HEAL)
-	 send_to_char(ch, NOEFFECT); 
+	 send_to_char(ch, "%s", NOEFFECT); 
       return; 
       } 
  
@@ -2160,7 +2160,7 @@ void mag_alter_objs(int level, struct char_data * ch, struct obj_data * obj,
       } 
  
    if (to_char == NULL) 
-      send_to_char(ch, NOEFFECT); 
+      send_to_char(ch, "%s", NOEFFECT); 
    else 
       act(to_char, TRUE, ch, obj, 0, TO_CHAR); 
  

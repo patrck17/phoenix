@@ -1183,7 +1183,7 @@ void redit_parse(struct descriptor_data * d, char *arg)
 		 d->backstr = NULL; 
 		 if (OLC_ROOM(d)->description) 
 		    { 
-		    SEND_TO_Q(d,OLC_ROOM(d)->description); 
+		    SEND_TO_Q(d, "%s", OLC_ROOM(d)->description); 
 		    d->backstr = str_dup(OLC_ROOM(d)->description); 
 		    } 
 		 d->str = &OLC_ROOM(d)->description; 
@@ -1370,7 +1370,7 @@ void redit_parse(struct descriptor_data * d, char *arg)
 		 d->backstr = NULL; 
 		 if (OLC_EXIT(d)->general_description) 
 		    { 
-		    SEND_TO_Q(d,OLC_EXIT(d)->general_description); 
+		    SEND_TO_Q(d, "%s", OLC_EXIT(d)->general_description); 
 		    d->backstr = str_dup(OLC_EXIT(d)->general_description); 
 		    } 
 		 d->str = &OLC_EXIT(d)->general_description; 
@@ -1536,7 +1536,7 @@ void redit_parse(struct descriptor_data * d, char *arg)
 		 d->backstr = NULL; 
 		 if (OLC_DESC(d)->description) 
 		    { 
-		    SEND_TO_Q(d,OLC_DESC(d)->description); 
+		    SEND_TO_Q(d, "%s", OLC_DESC(d)->description); 
 		    d->backstr = str_dup(OLC_DESC(d)->description); 
 		    } 
 		 d->str = &OLC_DESC(d)->description; 

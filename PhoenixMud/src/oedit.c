@@ -1461,7 +1461,7 @@ void oedit_parse(struct descriptor_data * d, char *arg)
 		 d->backstr = NULL; 
 		 if (OLC_OBJ(d)->action_description) 
 		    { 
-		    SEND_TO_Q(d,OLC_OBJ(d)->action_description); 
+		    SEND_TO_Q(d, "%s", OLC_OBJ(d)->action_description); 
 		    d->backstr = str_dup(OLC_OBJ(d)->action_description); 
 		    } 
 		 d->str = &OLC_OBJ(d)->action_description; 
@@ -2119,7 +2119,7 @@ void oedit_parse(struct descriptor_data * d, char *arg)
 		 d->backstr = NULL; 
 		 if (OLC_DESC(d)->description) 
 		    { 
-		    SEND_TO_Q(d,OLC_DESC(d)->description); 
+		    SEND_TO_Q(d, "%s", OLC_DESC(d)->description); 
 		    d->backstr = str_dup(OLC_DESC(d)->description); 
 		    } 
 		 d->str = &OLC_DESC(d)->description; 

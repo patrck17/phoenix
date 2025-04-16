@@ -2112,7 +2112,7 @@ int Crash_load_xapobjs(struct char_data *ch)
          char *buf1 = get_buffer(256);
          sprintf(buf1, "SYSERR OBJLOAD: READING OBJECT FILE %s (5)", filename);
          perror(buf1);
-         log(buf1);
+         log("%s", buf1);
          log("SYSERR OBJLOAD: Errno for opening %s = %d",filename,errno);
          send_to_char(ch, "\r\n********************* NOTICE *********************\r\n"
                       "There was a problem loading your objects from disk.\r\n"

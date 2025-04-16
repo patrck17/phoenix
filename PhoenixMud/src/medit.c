@@ -1654,7 +1654,7 @@ void medit_parse(struct descriptor_data * d, char *arg)
          d->backstr = NULL;
          if (OLC_MOB(d)->player.description)
             {
-            SEND_TO_Q(d,OLC_MOB(d)->player.description);
+            SEND_TO_Q(d, "%s", OLC_MOB(d)->player.description);
             d->backstr = str_dup(OLC_MOB(d)->player.description);
             }
          d->str = &OLC_MOB(d)->player.description;
@@ -2173,7 +2173,7 @@ void medit_parse(struct descriptor_data * d, char *arg)
          d->backstr = NULL;
          if (OLC_MPROG(d)->comlist)
             {
-            SEND_TO_Q(d,OLC_MPROG(d)->comlist);
+            SEND_TO_Q(d, "%s", OLC_MPROG(d)->comlist);
             d->backstr = str_dup(OLC_MPROG(d)->comlist);
             }
          d->str = &OLC_MPROG(d)->comlist;
