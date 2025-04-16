@@ -282,7 +282,7 @@ void adjust_fight_usage(struct char_data *ch)
   strcat(buf, buf2);
   strcat(buf, "\r\n");
   strcat(buf, "DO NOT EDIT THESE VALUES IF YOU DO NOT KNOW WHAT YOU ARE DOING!\r\n");
-  send_to_char(ch, buf);
+  send_to_char(ch, "%s", buf);
   release_buffer(buf);
 }
 
