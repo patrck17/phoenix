@@ -1217,7 +1217,7 @@ struct char_data *give_find_vict(struct char_data * ch, char *arg)
       }
    else if (!(vict = get_char_vis(ch, arg,FIND_CHAR_ROOM)))
       {
-      send_to_char(ch, NOPERSON);
+      send_to_char(ch, "%s", NOPERSON);
       return (NULL);
       }
    else if (vict == ch)
@@ -1255,7 +1255,7 @@ void perform_give_gold(struct char_data * ch, struct char_data * vict,
       act("$N politely refuses your gift.", FALSE, ch, 0, vict, TO_CHAR);
       return;
       }
-   send_to_char(ch, OK);
+   send_to_char(ch, "%s", OK);
    buf=get_buffer(SMALL_BUFSIZE);
    mprog_bribe_trigger(vict, ch, amount);
    sprintf(buf, "$n gives you %d gold coin%s.", amount,amount==1?"":"s");

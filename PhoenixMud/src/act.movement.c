@@ -754,7 +754,7 @@ void do_doorcmd(struct char_data *ch, struct obj_data *obj, int door, int scmd)
          OPEN_DOOR(IN_ROOM(ch), obj, door);
          if (back)
             OPEN_DOOR(other_room, obj, rev_dir[door]);
-         send_to_char(ch,OK);
+         send_to_char(ch,"%s",OK);
          break;
       case SCMD_UNLOCK:
       case SCMD_LOCK:
@@ -1337,7 +1337,7 @@ ACMD(do_wake)
       if (GET_POS(ch) == POS_SLEEPING)
          send_to_char(ch, "Maybe you should wake yourself up first.\r\n");
       else if ((vict = get_char_vis(ch, arg,FIND_CHAR_ROOM)) == NULL)
-         send_to_char(ch, NOPERSON);
+         send_to_char(ch, "%s", NOPERSON);
       else if (vict == ch)
          self = 1;
       else if (AWAKE(vict))
@@ -1385,7 +1385,7 @@ ACMD(do_follow)
       {
       if (!(leader = get_char_vis(ch, buf,FIND_CHAR_ROOM)))
          {
-         send_to_char(ch, NOPERSON);
+         send_to_char(ch, "%s", NOPERSON);
          release_buffer(buf);
          return;
          }

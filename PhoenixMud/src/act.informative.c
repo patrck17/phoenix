@@ -427,7 +427,7 @@ void look_at_char(struct char_data *i, struct char_data *ch)
 		act("\r\n$n is using:", FALSE, i, 0, ch, TO_VICT);
 		for (j = 0; j < NUM_WEARS; j++)
 			if (GET_EQ(i, j) && CAN_SEE_OBJ(ch, GET_EQ(i, j))) {
-				send_to_char(ch, where[j]);
+				send_to_char(ch, "%s", where[j]);
 				show_obj_to_char(GET_EQ(i, j), ch, 1);
 			}
 	}
@@ -992,7 +992,7 @@ void look_at_room(struct char_data *ch, int ignore_brief)
 
 	if ((!IS_NPC(ch) && !PRF_FLAGGED(ch, PRF_BRIEF)) || ignore_brief ||
 	    ROOM_FLAGGED(IN_ROOM(ch), ROOM_DEATH))
-		send_to_char(ch, world[IN_ROOM(ch)].description);
+		send_to_char(ch, "%s", world[IN_ROOM(ch)].description);
 
 	/* autoexits */
 	if (IS_NPC(ch) || PRF_FLAGGED(ch, PRF_AUTOEXIT))
@@ -1840,7 +1840,7 @@ ACMD(do_equipment)
 	for (i = 0; i < NUM_WEARS; i++) {
 		if (GET_EQ(ch, i)) {
 			if (CAN_SEE_OBJ(ch, GET_EQ(ch, i))) {
-				send_to_char(ch, where[i]);
+				send_to_char(ch, "%s", where[i]);
 				show_obj_to_char(GET_EQ(ch, i), ch, 1);
 				found = TRUE;
 			} else {
@@ -2237,7 +2237,7 @@ ACMD(do_who)
 				strcpy(buf, buf1);
 				break;
 			default:
-				send_to_char(ch, WHO_USAGE);
+				send_to_char(ch, "%s", WHO_USAGE);
 				release_buffer(buf);
 				release_buffer(arg);
 				release_buffer(Imm_buf);
@@ -2249,7 +2249,7 @@ ACMD(do_who)
 			}	/* end of switch */
 
 		} else {	/* endif */
-			send_to_char(ch, WHO_USAGE);
+			send_to_char(ch, "%s", WHO_USAGE);
 			release_buffer(buf);
 			release_buffer(buf1);
 			release_buffer(arg);
@@ -2733,7 +2733,7 @@ ACMD(do_gen_ps)
 		send_to_char(ch, "\033[H\033[J");
 		break;
 	case SCMD_VERSION:
-		send_to_char(ch, circlemud_version);
+		send_to_char(ch, "%s", circlemud_version);
 		break;
 	case SCMD_WHOAMI:
 		send_to_char(ch, "%s\r\n", GET_NAME(ch));
@@ -2770,7 +2770,7 @@ void perform_graffiti_where(struct char_data *ch)
 		}
 	}
 	if (counter) {
-		send_to_char(ch, buf);
+		send_to_char(ch, "%s", buf);
 	} else {
 		send_to_char(ch,
 			     "You have yet to leave your mark on this world.  Get going!\r\n");
@@ -3037,7 +3037,7 @@ ACMD(do_zinfo)
 		zone_continent[(int)zone_table[world[IN_ROOM(ch)].zone].
 			       continent][0]);
 
-	send_to_char(ch, buf);
+	send_to_char(ch, "%s", buf);
 	release_buffer(buf);
 }
 
@@ -3203,7 +3203,7 @@ ACMD(do_diagnose)
 
 	if (*buf) {
 		if (!(vict = get_char_vis(ch, buf, FIND_CHAR_ROOM))) {
-			send_to_char(ch, NOPERSON);
+			send_to_char(ch, "%s", NOPERSON);
 		} else
 			diag_char_to_char(vict, ch);
 	} else {
