@@ -2415,6 +2415,7 @@ int search_block(char *arg, char **list, int exact)
 
 	if (*arg == '!')
 		return -1;
+
 	/* Make into lower case, and get length of string */
 	for (l = 0; *(arg + l); l++)
 		*(arg + l) = LOWER(*(arg + l));
@@ -2491,8 +2492,6 @@ int reserved_word(char *argument)
  */
 char *one_argument(char *argument, char *first_arg)
 {
-	char *begin = first_arg;
-
 	if (!argument) {
 		log("SYSERR: one_argument received a NULL pointer.");
 		*first_arg = '\0';
@@ -2502,15 +2501,19 @@ char *one_argument(char *argument, char *first_arg)
 	do {
 		skip_spaces(&argument);
 
-		first_arg = begin;
-		while (*argument && !isspace((int)*argument)) {
-			*(first_arg++) = LOWER(*argument);
-			argument++;
+		size_t ii;
+
+		for (ii = 0; ii < strlen(argument); ii++) {
+			if (isspace((int)argument[ii])) break;
+
+			first_arg[ii] = LOWER(argument[ii]);
 		}
 
-		*first_arg = '\0';
+		argument += ii;
+
+		first_arg[ii] = '\0';
 	}
-	while (fill_word(begin));
+	while (fill_word(first_arg));
 
 	return argument;
 }
@@ -2577,11 +2580,19 @@ char *five_arguments(char *argument, char *first_arg, char *second_arg,
 		     char *third_arg, char *fourth_arg, char *fifth_arg)
 {
 	return
-	    one_argument(one_argument
-			 (one_argument
-			  (one_argument
-			   (one_argument(argument, first_arg), second_arg),
-			   third_arg), fourth_arg), fifth_arg);
+	    one_argument(
+			one_argument(
+				one_argument(
+					one_argument(
+						one_argument(
+							argument, 
+							first_arg
+						), 
+						second_arg
+					), third_arg
+				), fourth_arg
+			), fifth_arg
+		);
 
 }
 

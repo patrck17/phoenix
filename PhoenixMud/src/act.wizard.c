@@ -141,8 +141,7 @@ void read_line_ascii(FILE *fp, char *string, int len);
 void write_player_index_file(void);
 void load_player_index_file(void);
 void proc_color(char*, int);
-
-
+int get_shop_item_count(struct player_shop*);
 
 ACMD(do_echo)
    {
@@ -2796,6 +2795,7 @@ ACMD(do_load)
        }
 
          mob = read_mobile(r_num, REAL);
+         fprintf(stderr, "Load: %ld\n", IN_ROOM(ch));
          char_to_room(mob, IN_ROOM(ch));
          GET_MOB_VAL(mob,0)=GET_ROOM_VNUM(IN_ROOM(ch));
          mob->orig_room=IN_ROOM(ch);
@@ -6483,12 +6483,10 @@ ACMD(do_show)
      char buf2[1024];
      buf[0] = '\x0';
      struct player_shop* shop = player_shops;
-     int i = 1;
      sprintf(buf2, "%3s  %-15s   %-10s %10s   %s\r\n", " ", "Name", "Location", "Rent", "");
      strcat(buf, buf2);
-     for (; shop; shop = shop->next) {
-       sprintf(buf2, "%3d. %-15s %10d %10d %s  (%3d items)\r\n", i, shop->player_name, shop->vnum_location, shop->rent, shop->is_active ? "Active" : "Not active", get_shop_item_count(shop));
-       i++;
+     for (int ii = 1; shop; shop = shop->next, ii++) {
+       sprintf(buf2, "%3d. %-15s %10d %10d %s  (%3d items)\r\n", ii, shop->player_name, shop->vnum_location, shop->rent, shop->is_active ? "Active" : "Not active", get_shop_item_count(shop));
        strcat(buf, buf2);
      }
      page_string(ch->desc, buf, TRUE, "");
@@ -6553,7 +6551,7 @@ ACMD(do_set)
    char *val_arg;
    char *val_arg1;
    int on = 0, off = 0, value = 0,value1=0;
-   char is_file = 0, is_mob = 0, is_player = 0;
+   char is_file = 0, is_player = 0;
    int player_i = 0;
    int password_change =0;
    zone_vnum zone_num = 0, zone_found = 0;
@@ -6652,7 +6650,6 @@ ACMD(do_set)
       }
    else if (!str_cmp(name, "mob"))
       {
-      is_mob = 1;
       half_chop(buf, name, buf);
       }
 
@@ -8489,19 +8486,12 @@ ACMD(do_mlev)
    release_buffer(buf);
    }
 
-ACMD(do_distribute)
-   {
-   struct char_data *mob;
-   struct obj_data *obj;
-   int num,number1, number2, number3, number4, r_num;
-   room_rnum random_room=0;
-   int z=0;
-   char *b1=get_buffer(64);
-   char *b2=get_buffer(64);
-   char *b3=get_buffer(64);
-   char *b4=get_buffer(64);
-   char *b5=get_buffer(64);
-
+ACMD(do_distribute) {
+   char b1[64];
+   char b2[64];
+   char b3[64];
+   char b4[64];
+   char b5[64];
 
    /** b1 = obj/mob
    ** b2 = vnum
@@ -8510,97 +8500,130 @@ ACMD(do_distribute)
    ** b5 = number of items
    **/
 
-   five_arguments(argument, b1,b2,b3,b4,b5);
+   five_arguments(argument, b1, b2, b3, b4, b5);
 
-
-   if (!*b1 || !*b2 || !*b3 || !*b4 || !*b5 || !isdigit((int)*b2) ||
-           !isdigit((int)*b2) || !isdigit((int)*b3) || !isdigit((int)*b4) ||
-           !isdigit((int)*b5))
-      {
+   if (!*b1 || !*b2 || !*b3 || !*b4 || !*b5) {
       send_to_char(ch,"Usage: distribute { obj | mob } <v_number> <start> <end> <amount>\r\n");
-      release_buffer(b5);
-      release_buffer(b4);
-      release_buffer(b3);
-      release_buffer(b2);
-      release_buffer(b1);
       return;
-      }
-
-
-   num = ((number3 = atoi(b4)) - (number2 = atoi(b3)));
-   do
-      {
-      random_room = number(number2,number3);
-      }while((random_room = real_room(random_room))==-1);
-    number4 = atoi(b5);
-
-
-   if ((num >99) || (num < 0)|| (number3<99) || (number2<99))
-      {
-      send_to_char(ch,"Error in starting room or ending room.\r\n");
-      }
-   else if(((number1 = atoi(b2)) || (number2 = atoi(b3)) ||(number3 = atoi(b4))
-            ||(number4 = atoi(b5))) < 0)
-      {
-      send_to_char(ch,"A NEGATIVE number??\r\n");
-      }
-   else if (is_abbrev(b1, "mob"))
-      {
-      if ((r_num = real_mobile(number1)) < 0)
-         {
-         send_to_char(ch,"There is no monster with that number.\r\n");
-         }
-      else
-         {
-         for(z=number4;z>0;z--)
-            {
-            mob = read_mobile(r_num, REAL);
-            GET_MOB_VAL(mob,0)=GET_ROOM_VNUM(random_room);
-            mob->orig_room=random_room;
-            char_to_room(mob, random_room);
-            do
-               {
-               random_room = number(number2,number3);
-               }while((random_room = real_room(random_room))==-1);
-            }
-         mudlogf(NRM, GOD_LOG(ch), TRUE, "(GC) %s distributed %d of mob #%d(%s) to room(s) %d-%d.",
-             GET_NAME(ch), number4, number1, GET_NAME(mob), number2, number3);
-         }
-      }
-   else if (is_abbrev(b1, "obj"))
-      {
-      if ((r_num = real_object(number1)) < 0)
-         {
-         send_to_char(ch,"There is no object with that number.\r\n");
-         }
-      else if ((GET_LEVEL(ch) < LVL_IMPL) && (real_zone(number1) == 0))
-         {
-         send_to_char(ch,"You cannot distribute from MUD Internals.\r\n");
-         }
-      else
-         {
-         for(z=number4;z>0;z--)
-            {
-            obj = read_object(r_num, REAL);
-            obj_to_room(obj, random_room);
-            do
-               {
-               random_room = number(number2,number3);
-               }while((random_room = real_room(random_room))==-1);
-            }
-         mudlogf(NRM, GOD_LOG(ch), TRUE, "(GC) %s distributed %d of obj #%d(%s) to room(s) %d-%d.",
-            GET_NAME(ch), number4, number1, GET_OBJ_NAME(obj), number2, number3);
-         }
-      }
-   else
-      send_to_char(ch,"That'll have to be either 'obj' or 'mob'.\r\n");
-   release_buffer(b5);
-   release_buffer(b4);
-   release_buffer(b3);
-   release_buffer(b2);
-   release_buffer(b1);
    }
 
+   int vnum = atoi(b2); 
+   int start_room = atoi(b3);
+   int end_room = atoi(b4);
+   int amount = atoi(b5);
+
+   if (vnum <= 0) {
+      send_to_char(ch, "Invalid vnum");
+      return;
+   }
+
+   if (start_room < 99 || end_room < 99 || end_room < start_room || end_room - start_room > 99) {
+      send_to_char(ch,"Invalid starting room or ending room.\r\n");
+      return;
+   }
+
+   int rstart = -1;
+   int rend = -1;
+
+   for (room_rnum room = real_room(start_room); start_room <= end_room; room = real_room(++start_room)) {
+      if (room == -1) continue;
+
+      if(rstart == -1) rstart = start_room;
+
+      rend = start_room;
+   }
+
+   if (rstart == -1) {
+      send_to_char(ch,"No rooms in range.\r\n");
+      return;
+   }
+
+   if (amount <= 0) {
+      send_to_char(ch, "Invalid amount");
+      return;
+   }
+
+   int mobobj = -1;
+
+   if (is_abbrev(b1, "mob")) {
+      mobobj = 1;
+   } else if (is_abbrev(b1, "obj")) {
+      mobobj = 0;
+   }
+
+   if (mobobj == -1) {
+      send_to_char(ch,"That'll have to be either 'obj' or 'mob'.\r\n");
+      return;
+   }
+
+   if(mobobj) { // mob
+      mob_rnum rmob = real_mobile(vnum);
+      if (rmob == -1) {
+         send_to_char(ch,"There is no monster with that number.\r\n");
+         return;
+      }
+
+      char* mob_name = 0;
+      for (size_t ii = 0; ii < amount; ii++) {
+         room_rnum random_room = -1;
+         while(random_room == -1) {
+            random_room = real_room(number(rstart, rend));
+         }
+
+         struct char_data* mob = read_mobile(rmob, REAL);
+
+         if (mob == NULL) {
+            send_to_char(ch,"Error reading mobile.\r\n");
+            return;
+         }
+
+         if (!mob_name) mob_name = strdup(GET_NAME(mob));
+
+         fprintf(stderr, "Distribute: %ld\n", random_room);
+         char_to_room(mob, random_room);
+         GET_MOB_VAL(mob,0)=GET_ROOM_VNUM(random_room);
+         mob->orig_room=random_room;
+         load_mtrigger(mob);
+      }
+
+      mudlogf(NRM, GOD_LOG(ch), TRUE, "(GC) %s distributed %d of mob #%d(%s) to room(s) %d-%d.", GET_NAME(ch), amount, vnum, mob_name, rstart, rend); 
+      free(mob_name);
+   } else {
+      obj_rnum robj = real_object(vnum);
+      if (robj == -1) {
+         send_to_char(ch,"There is no object with that number.\r\n");
+         return;
+      }
+
+      if ((GET_LEVEL(ch) < LVL_IMPL) && (real_zone(vnum) == 0)) {
+         send_to_char(ch,"You cannot distribute from MUD Internals.\r\n");
+         return;
+      }
+
+      char* obj_name = 0;
+
+      for (size_t ii = 0; ii < amount; ii++) {
+         struct obj_data* obj = read_object(robj, REAL);
+
+         if (obj == NULL) {
+            send_to_char(ch,"Error reading object.\r\n");
+            return;
+         }
+
+         if (!obj_name) obj_name = GET_OBJ_NAME(obj);
+
+         room_rnum random_room = -1;
+         while(random_room == -1) {
+            random_room = real_room(number(rstart, rend));
+         }
+
+         obj_to_room(obj, random_room);
+      }
+
+      mudlogf(NRM, GOD_LOG(ch), TRUE, "(GC) %s distributed %d of obj #%d(%s) to room(s) %d-%d.", GET_NAME(ch), amount, vnum, obj_name, rstart, rend);
+      free(obj_name);
+   }
+}
 
 ACMD(do_olist)
    {
@@ -8610,9 +8633,7 @@ ACMD(do_olist)
 
    int first, last, nr, found = 0;
 
-
    two_arguments(argument, buf, buf2);
-
 
    if (!*buf)
       {
