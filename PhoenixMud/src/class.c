@@ -774,9 +774,6 @@ void do_start(struct char_data * ch, bool from_scratch)
       {     0,  3043,  3076,  3081,  5428,  3032,     0,     0,     0 }  /* merchant     */
     };
 
-  int z, pos;
-  struct obj_data *obj;
-
   GET_LEVEL(ch) = 1;
   GET_EXP(ch) = 1;
 
@@ -820,139 +817,157 @@ void do_start(struct char_data * ch, bool from_scratch)
 
   /* Give starting EQ and gold, including weapon based on class, if first time */
   if (from_scratch)
-    {
+  {
     GET_GOLD(ch) = 150;
-    for (z=0; z<9; z++)
-      {
-      if (eqlistnew[(int)GET_CLASS(ch)][z] == 0)
-        continue;
 
-      obj = read_object(real_object(eqlistnew[(int)GET_CLASS(ch)][z]), REAL);
-      for (pos=1; pos<NUM_WEARS; pos++)
+    for (int neweqidx = 0; neweqidx < 9; neweqidx++) {
+
+      int neweqnum = eqlistnew[(int)GET_CLASS(ch)][neweqidx];
+      if (neweqnum == 0) continue;
+
+      obj_rnum rnum = real_object(neweqnum);
+      if (rnum < 0) continue;  // object doesn't exist
+
+      struct obj_data *obj = read_object(rnum, REAL);
+      if (obj == NULL) continue; // object doesn't exist
+
+      int pos;
+      for (pos = 1; pos < NUM_WEARS; pos++)
         if (OBJWEAR_FLAGGED(obj, WEAR_BIT(pos)))
           break;
 
-      if (eqlistnew[(int)GET_CLASS(ch)][z] == 21642)
-         for (j=0; j<5; j++)
-            obj_to_obj(read_object(real_object(21651), REAL), obj);
+      if (neweqnum == 21642) // quiver
+        for (j = 0; j < 5; j++) {
+          struct obj_data *arrow = read_object(real_object(21651), REAL);
 
-      if ((pos == NUM_WEARS) || (z > 5))
-         obj_to_char(obj, ch);
+          obj_to_obj(arrow, obj); // arrows
+        }
+
+      if ((pos == NUM_WEARS) || (neweqidx > 5))
+        obj_to_char(obj, ch);
       else
-         equip_char(ch, obj, pos);
-      }
-    
+        equip_char(ch, obj, pos);
+    }
+
     /* food */
-    for (z=0; z<3; z++)
-       obj_to_char(read_object(real_object(21694), REAL), ch);
+    int bread_vobj = real_object(21694);
+    if (bread_vobj > 0) {
+      for (int z = 0; z < 3; z++) {
+        struct obj_data *bread_obj = read_object(bread_vobj, REAL);
+        if (bread_obj) {
+          obj_to_char(bread_obj, ch);
+        }
+      }
+    }
+
     /* map */
     obj_to_char(read_object(real_object(11), REAL), ch);
 
-    GET_SKILL(ch,PROF_FISTICUFFS)=40;
-    GET_SKILL(ch,SKILL_READ_MAGIC)=50;
-/*    GET_SKILL(ch,SKILL_RIDING)=50;*/
-    GET_SKILL(ch,SKILL_FISHING)=50;
+    GET_SKILL(ch, PROF_FISTICUFFS) = 40;
+    GET_SKILL(ch, SKILL_READ_MAGIC) = 50;
+    /*    GET_SKILL(ch,SKILL_RIDING)=50;*/
+    GET_SKILL(ch, SKILL_FISHING) = 50;
     switch (GET_CLASS(ch))
-      {
-      case CLASS_MAGIC_USER:
-        GET_SKILL(ch,SKILL_READ_MAGIC)=90;
-        GET_SKILL(ch,PROF_CLUB)=35;
-        break;
-      case CLASS_CLERIC:
-        GET_SKILL(ch,SKILL_READ_MAGIC)=90;
-        GET_SKILL(ch,PROF_CLUB)=35;
-        GET_ALIGNMENT(ch)=1000;
-        break;
-      case CLASS_DRUID:
-        GET_SKILL(ch,SKILL_READ_MAGIC)=90;
-        GET_SKILL(ch,PROF_CLUB)=35;
-        GET_ALIGNMENT(ch)=0;
-        break;
-      case CLASS_BARD:
-        GET_SKILL(ch,PROF_SWORD)=35;
-        GET_SKILL(ch,PROF_THROW)=35;
-        break;
-      case CLASS_THIEF:
-        /*   case CLASS_ASSASSIN: -- MOVED TO REMORT */
-        GET_SKILL(ch,PROF_DAGGER)=35;
-        GET_SKILL(ch,PROF_THROW)=35;
-        break;
-      case CLASS_WARRIOR:
-        GET_SKILL(ch,PROF_SWORD)=35;
-        GET_SKILL(ch,PROF_DAGGER)=35;
-        break;
-      case CLASS_RANGER:
-        GET_SKILL(ch,PROF_SWORD)=35;
-        GET_SKILL(ch,PROF_DAGGER)=35;
-        GET_SKILL(ch,PROF_BOW)=35;
-        GET_ALIGNMENT(ch)=500;
-        break;
-      case CLASS_PALADIN:
-        GET_SKILL(ch,PROF_SWORD)=35;
-        GET_SKILL(ch,PROF_DAGGER)=35;
-        GET_ALIGNMENT(ch)=1000;
-        break;
-      case CLASS_ANTI_PALADIN:
-        GET_SKILL(ch,PROF_SWORD)=35;
-        GET_SKILL(ch,PROF_DAGGER)=35;
-        GET_ALIGNMENT(ch)=-1000;
-        break;
-      case CLASS_BARBARIAN:
-        GET_SKILL(ch,PROF_HAMMER)=35;
-        GET_SKILL(ch,PROF_AXE)=35;
-        break;
-      case CLASS_MONK:
-        GET_SKILL(ch,PROF_THROW)=35;
-        break;
-      case CLASS_KENSAI:
-        GET_SKILL(ch,PROF_SWORD)=35;
-        GET_SKILL(ch,PROF_HAMMER)=35;
-        GET_SKILL(ch,PROF_AXE)=35;
-        GET_SKILL(ch,PROF_DAGGER)=35;
-        break;
-      case CLASS_ASSASSIN:
-        GET_SKILL(ch,PROF_SWORD)=35;
-        GET_SKILL(ch,PROF_HAMMER)=35;
-        GET_SKILL(ch,PROF_AXE)=35;
-        GET_SKILL(ch,PROF_DAGGER)=35;
-        break;
-      case CLASS_NECROMANCER:
-        GET_SKILL(ch,SKILL_READ_MAGIC)=90;
-        GET_SKILL(ch,PROF_CLUB)=35;
-        GET_SKILL(ch,PROF_DAGGER)=35;
-        GET_ALIGNMENT(ch)=-1000;
-        break;
-      case CLASS_DEVA:
-        GET_SKILL(ch,SKILL_READ_MAGIC)=90;
-        GET_SKILL(ch,PROF_CLUB)=35;
-        GET_SKILL(ch,PROF_DAGGER)=35;
-        GET_ALIGNMENT(ch)=1000;
-        break;
-      default:
-        break;
-      } /* end switch */
+    {
+    case CLASS_MAGIC_USER:
+      GET_SKILL(ch, SKILL_READ_MAGIC) = 90;
+      GET_SKILL(ch, PROF_CLUB) = 35;
+      break;
+    case CLASS_CLERIC:
+      GET_SKILL(ch, SKILL_READ_MAGIC) = 90;
+      GET_SKILL(ch, PROF_CLUB) = 35;
+      GET_ALIGNMENT(ch) = 1000;
+      break;
+    case CLASS_DRUID:
+      GET_SKILL(ch, SKILL_READ_MAGIC) = 90;
+      GET_SKILL(ch, PROF_CLUB) = 35;
+      GET_ALIGNMENT(ch) = 0;
+      break;
+    case CLASS_BARD:
+      GET_SKILL(ch, PROF_SWORD) = 35;
+      GET_SKILL(ch, PROF_THROW) = 35;
+      break;
+    case CLASS_THIEF:
+      /*   case CLASS_ASSASSIN: -- MOVED TO REMORT */
+      GET_SKILL(ch, PROF_DAGGER) = 35;
+      GET_SKILL(ch, PROF_THROW) = 35;
+      break;
+    case CLASS_WARRIOR:
+      GET_SKILL(ch, PROF_SWORD) = 35;
+      GET_SKILL(ch, PROF_DAGGER) = 35;
+      break;
+    case CLASS_RANGER:
+      GET_SKILL(ch, PROF_SWORD) = 35;
+      GET_SKILL(ch, PROF_DAGGER) = 35;
+      GET_SKILL(ch, PROF_BOW) = 35;
+      GET_ALIGNMENT(ch) = 500;
+      break;
+    case CLASS_PALADIN:
+      GET_SKILL(ch, PROF_SWORD) = 35;
+      GET_SKILL(ch, PROF_DAGGER) = 35;
+      GET_ALIGNMENT(ch) = 1000;
+      break;
+    case CLASS_ANTI_PALADIN:
+      GET_SKILL(ch, PROF_SWORD) = 35;
+      GET_SKILL(ch, PROF_DAGGER) = 35;
+      GET_ALIGNMENT(ch) = -1000;
+      break;
+    case CLASS_BARBARIAN:
+      GET_SKILL(ch, PROF_HAMMER) = 35;
+      GET_SKILL(ch, PROF_AXE) = 35;
+      break;
+    case CLASS_MONK:
+      GET_SKILL(ch, PROF_THROW) = 35;
+      break;
+    case CLASS_KENSAI:
+      GET_SKILL(ch, PROF_SWORD) = 35;
+      GET_SKILL(ch, PROF_HAMMER) = 35;
+      GET_SKILL(ch, PROF_AXE) = 35;
+      GET_SKILL(ch, PROF_DAGGER) = 35;
+      break;
+    case CLASS_ASSASSIN:
+      GET_SKILL(ch, PROF_SWORD) = 35;
+      GET_SKILL(ch, PROF_HAMMER) = 35;
+      GET_SKILL(ch, PROF_AXE) = 35;
+      GET_SKILL(ch, PROF_DAGGER) = 35;
+      break;
+    case CLASS_NECROMANCER:
+      GET_SKILL(ch, SKILL_READ_MAGIC) = 90;
+      GET_SKILL(ch, PROF_CLUB) = 35;
+      GET_SKILL(ch, PROF_DAGGER) = 35;
+      GET_ALIGNMENT(ch) = -1000;
+      break;
+    case CLASS_DEVA:
+      GET_SKILL(ch, SKILL_READ_MAGIC) = 90;
+      GET_SKILL(ch, PROF_CLUB) = 35;
+      GET_SKILL(ch, PROF_DAGGER) = 35;
+      GET_ALIGNMENT(ch) = 1000;
+      break;
+    default:
+      break;
+    } /* end switch */
 
     /* Equip the heart of a noob. */
-    int rnum = real_object(3047);
-    if (rnum > 0) {
-      obj = read_object(rnum, REAL);
-      if (obj) {
-	equip_char(ch, obj, WEAR_HEART);
+    obj_rnum heart_rnum = real_object(3047);
+    if (heart_rnum > 0) {
+      struct obj_data* heart = read_object(heart_rnum, REAL);
+      if (heart) {
+        equip_char(ch, heart, WEAR_HEART);
       }
     }
 
     /* Set up autoexit--everyone uses anyway */
-    
-SET_BIT(PRF_FLAGS(ch),PRF_AUTOEXIT|PRF_AUTOSPLIT|PRF_AUTOLOOT|PRF_AUTOGOLD|PRF_AUTOSAC|PRF_SUMMONABLE|PRF_DISPMANA|PRF_DISPHP|PRF_DISPMOVE);
-    SET_BIT(PRF2_FLAGS(ch),PRF2_DISPGOLD|PRF2_DISPEXP|PRF2_DISPALIGN|PRF2_DISPMAX|PRF2_PAGE_OK|PRF2_RECALLABLE);
-    REMOVE_BIT(PLR_FLAGS(ch),PLR_DELETED);
+
+    SET_BIT(PRF_FLAGS(ch), PRF_AUTOEXIT | PRF_AUTOSPLIT | PRF_AUTOLOOT | PRF_AUTOGOLD | PRF_AUTOSAC | PRF_SUMMONABLE | PRF_DISPMANA | PRF_DISPHP | PRF_DISPMOVE);
+    SET_BIT(PRF2_FLAGS(ch), PRF2_DISPGOLD | PRF2_DISPEXP | PRF2_DISPALIGN | PRF2_DISPMAX | PRF2_PAGE_OK | PRF2_RECALLABLE);
+    REMOVE_BIT(PLR_FLAGS(ch), PLR_DELETED);
     /* Send a nifty message */
-    send_to_char(ch,"\r\nAs you are born into the realm,"
-                 " you gain possession of items\r\n"
-                 "that have been passed down in your"
-                 " family generation after\r\n"
-                 "generation... May the gods protect you.\r\n\r\n");
-    }
+    send_to_char(ch, "\r\nAs you are born into the realm,"
+                     " you gain possession of items\r\n"
+                     "that have been passed down in your"
+                     " family generation after\r\n"
+                     "generation... May the gods protect you.\r\n\r\n");
+  }
   /* end if (from_scratch) */
   }
 
