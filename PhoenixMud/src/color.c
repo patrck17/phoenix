@@ -28,7 +28,6 @@
 #define CMAG  "\x1B[0;35m"
 #define CCYN  "\x1B[0;36m"
 #define CWHT  "\x1B[0;37m"
-#define CNUL  ""
 
 #define BBLK  "\x1B[1;30m"
 #define BRED  "\x1B[1;31m"
@@ -119,45 +118,39 @@ int is_colour(char code)
    return -1;
 }
 
-void proc_color(char *inbuf, int colour)
+void proc_color(char *inbuf, int color_on)
 {
    register int j = 0, p = 0;
-   int k, max, c = 0;
    char *out_buf;
 
-   if (inbuf[0] == '\0')
-      return;
-   out_buf=get_buffer(32750);
-   while (inbuf[j] != '\0')
-      {
-      if ((inbuf[j]=='\\') && (inbuf[j+1]=='c') && 
-	  isnum(inbuf[j + 2]) && isnum(inbuf[j + 3])) 
-	 {
-	 c = (inbuf[j + 2] - '0')*10 + inbuf[j + 3]-'0';
-	 j += 4;
-	 }
-      else if ((inbuf[j] == '&') && !(is_colour(inbuf[j + 1]) == -1)) 
-	 {
-	 c = is_colour(inbuf[j + 1]);
-	 j += 2;
-	 } 
-      else 
-	 {
-	 out_buf[p] = inbuf[j];
-	 j++;
-	 p++;
-	 continue;
-	 }
-      if (c >= MAX_COLORS)
-	 c = 0;
-      max = strlen(COLOURLIST[c]);
-      if (colour || max == 1)
-	 for (k = 0; k < max; k++) 
-	    {
-	    out_buf[p] = COLOURLIST[c][k];
-	    p++;
-	    }
+   if (inbuf[0] == '\0') return;
+   out_buf = get_buffer(32750);
+
+   while (inbuf[j] != '\0') {
+      int coloridx = 0;
+
+      // Possible buffer overrun. If "\" is the last character in the buffer, we'll keep reading after. Same with & below
+      if ((inbuf[j] == '\\') && (inbuf[j + 1] == 'c') && isnum(inbuf[j + 2]) && isnum(inbuf[j + 3])) {
+         coloridx = (inbuf[j + 2] - '0') * 10 + inbuf[j + 3] - '0';
+         j += 4;
+      } else if ((inbuf[j] == '&') && !(is_colour(inbuf[j + 1]) == -1)) {
+         coloridx = is_colour(inbuf[j + 1]);
+         j += 2;
+      } else {
+         out_buf[p++] = inbuf[j++];
+         continue;
       }
+
+      if (coloridx >= MAX_COLORS)
+         coloridx = 0;
+
+      size_t color_len = strlen(COLOURLIST[coloridx]); // Length of the color code. Length 1 is either a literal \ or &
+
+      if (color_on || color_len == 1) {
+         memcpy(out_buf + p, COLOURLIST[coloridx], color_len);
+         p += color_len;
+      }
+   }
 
    out_buf[p] = '\0';
 
@@ -165,29 +158,20 @@ void proc_color(char *inbuf, int colour)
    release_buffer(out_buf);
 }
 
+void strip_color(char *inbuf) {
+   int j = 0;
 
-void strip_color(char *inbuf)
-{
-   int j=0;
-   
-   if(*inbuf=='\0')
+   if (*inbuf == '\0')
       return;
-   
-   while (inbuf[j] != '\0')
-      {
-      if ((inbuf[j]=='\\') && (inbuf[j+1]=='c') && 
-	  isnum(inbuf[j + 2]) && isnum(inbuf[j + 3])) 
-	 {
-	 inbuf[j]=' ';
-	 }
-      else if ((inbuf[j] == '&') && !(is_colour(inbuf[j + 1]) == -1)) 
-	 {
-	 inbuf[j]=' ';
-	 inbuf[j+1]=' ';
-	 } 
-      j++;
+
+   while (inbuf[j] != '\0') {
+      if ((inbuf[j] == '\\') && (inbuf[j + 1] == 'c') && isnum(inbuf[j + 2]) && isnum(inbuf[j + 3])) {
+         inbuf[j] = ' ';
       }
+      else if ((inbuf[j] == '&') && !(is_colour(inbuf[j + 1]) == -1)) {
+         inbuf[j] = ' ';
+         inbuf[j + 1] = ' ';
+      }
+      j++;
+   }
 }
-
-
-
