@@ -140,6 +140,7 @@ void load_char_ascii(struct char_file_u *ch, char *name);
 void read_line_ascii(FILE *fp, char *string, int len);
 void write_player_index_file(void);
 void load_player_index_file(void);
+void proc_color(char*, int);
 
 
 
@@ -162,7 +163,7 @@ ACMD(do_echo)
       MOBTrigger = FALSE;
       act(buf, FALSE, ch, 0, 0, TO_ROOM);
       if (!IS_NPC(ch)&&PRF_FLAGGED(ch, PRF_NOREPEAT))
-         send_to_char(ch,OK);
+         send_to_char(ch, "%s", OK);
       else
          {
          MOBTrigger = FALSE;
@@ -249,7 +250,7 @@ ACMD(do_send)
       }
    else if (!(vict = get_char_vis(ch, arg,FIND_CHAR_WORLD)))
       {
-      send_to_char(ch,NOPERSON);
+      send_to_char(ch,"%s",NOPERSON);
       }
    else
       {
@@ -647,165 +648,160 @@ ACMD(do_who_battle)
 
 /* Bug/Typo/Idea file viewing from snippets --Erika */
 
-
-ACMD(do_gen_vfile)
+   ACMD(do_gen_vfile)
    {
-   char *syscom,*buf,*buf1,*buf2,*txtbuf;
-   FILE *pfp;
-   char *filename;
+      char *syscom, *buf, *buf1, *buf2, *txtbuf;
+      FILE *pfp;
+      char *filename;
 
-
-
-
-   switch (subcmd)
+      switch (subcmd)
       {
-   case SCMD_V_BUGS:
-      filename = BUG_FILE;
-      break;
-   case SCMD_V_IDEAS:
-      filename = IDEA_FILE;
-      break;
-   case SCMD_V_TYPOS:
-      filename = TYPO_FILE;
-      break;
-   case SCMD_V_CHANGES:
-      filename=CHANGES_FILE;
-      break;
-   case SCMD_V_SYSLOG:
-      filename=SYSLOG_FILE;
-      break;
-   case SCMD_V_ERRORS:
-      filename=ERRORS_FILE;
-      break;
-   case SCMD_V_MAILLOG:
-      filename=MAIL_LOG;
-      break;
-   case SCMD_V_BIGRENT:
-      filename=BIGRENT_LOG;
-      break;
-   case SCMD_V_BUF:
-      filename=BUF_LOG;
-      break;
-   case SCMD_V_LASTCMD:
-      filename=LASTCMD_LOG;
-      break;
-   case SCMD_V_GODCMD:
-      filename=GODCMD_LOG;
-      break;
-   case SCMD_V_DELETE:
-      filename=DELETE_LOG;
-      break;
-   case SCMD_V_RIP:
-      filename=RIP_LOG;
-      break;
-   case SCMD_V_CORPSE:
-      filename=CORPSE_LOG;
-      break;
-   case SCMD_V_CRASH:
-      filename=CRASH_LOG;
-      break;
-   case SCMD_V_SCRIPTERR:
-      filename=SCRIPTERR_LOG;
-      break;
-   case SCMD_V_HELP:
-      filename=HELP_LOG;
-      break;
-   case SCMD_V_GOLD:
-      filename=GOLD_LOG;
-      break;
-   case SCMD_V_LOCATE_OBJ:
-      filename=LOCATE_OBJ_LOG;
-      break;
-   case SCMD_V_LEVELS:
-      filename=LOG_LEVELS;
-      break;
-   case SCMD_V_NEWPLAYERS:
-      filename=LOG_NEWPLAYERS;
-      break;
-   case SCMD_V_DEATH:
-      filename=DT_LOG;
-      break;
-   case SCMD_V_BAN:
-      filename=BAN_LOG;
-      break;
-   case SCMD_V_OBJSCRAP:
-      filename=OBJSCRAP_LOG;
-      break;
-   case SCMD_V_OLC:
-      filename=OLC_LOG;
-      break;
-   case SCMD_V_USAGE:
-      filename=USAGE_LOG;
-      break;
-   case SCMD_V_RESTARTS:
-      filename=RESTART_LOG;
-      break;
-   case SCMD_V_RENTGONE:
-      filename=RENTGONE_LOG;
-      break;
-   case SCMD_V_BADPWS:
-      filename=BADPW_LOG;
-      break;
-   case SCMD_V_GODFIGHT:
-      filename=GODFIGHT_LOG;
-      break;
-   case SCMD_V_SCRIPTLOG:
-      filename=SCRIPT_LOG;
-      break;
-   case SCMD_V_SHOP:
-     filename = SHOP_LOG;
-     break;
-   default:
-      send_to_char(ch,"INVALID COMMAND!!: go_gen_vfile\r\n");
-      return;
-      break;
+      case SCMD_V_BUGS:
+         filename = BUG_FILE;
+         break;
+      case SCMD_V_IDEAS:
+         filename = IDEA_FILE;
+         break;
+      case SCMD_V_TYPOS:
+         filename = TYPO_FILE;
+         break;
+      case SCMD_V_CHANGES:
+         filename = CHANGES_FILE;
+         break;
+      case SCMD_V_SYSLOG:
+         filename = SYSLOG_FILE;
+         break;
+      case SCMD_V_ERRORS:
+         filename = ERRORS_FILE;
+         break;
+      case SCMD_V_MAILLOG:
+         filename = MAIL_LOG;
+         break;
+      case SCMD_V_BIGRENT:
+         filename = BIGRENT_LOG;
+         break;
+      case SCMD_V_BUF:
+         filename = BUF_LOG;
+         break;
+      case SCMD_V_LASTCMD:
+         filename = LASTCMD_LOG;
+         break;
+      case SCMD_V_GODCMD:
+         filename = GODCMD_LOG;
+         break;
+      case SCMD_V_DELETE:
+         filename = DELETE_LOG;
+         break;
+      case SCMD_V_RIP:
+         filename = RIP_LOG;
+         break;
+      case SCMD_V_CORPSE:
+         filename = CORPSE_LOG;
+         break;
+      case SCMD_V_CRASH:
+         filename = CRASH_LOG;
+         break;
+      case SCMD_V_SCRIPTERR:
+         filename = SCRIPTERR_LOG;
+         break;
+      case SCMD_V_HELP:
+         filename = HELP_LOG;
+         break;
+      case SCMD_V_GOLD:
+         filename = GOLD_LOG;
+         break;
+      case SCMD_V_LOCATE_OBJ:
+         filename = LOCATE_OBJ_LOG;
+         break;
+      case SCMD_V_LEVELS:
+         filename = LOG_LEVELS;
+         break;
+      case SCMD_V_NEWPLAYERS:
+         filename = LOG_NEWPLAYERS;
+         break;
+      case SCMD_V_DEATH:
+         filename = DT_LOG;
+         break;
+      case SCMD_V_BAN:
+         filename = BAN_LOG;
+         break;
+      case SCMD_V_OBJSCRAP:
+         filename = OBJSCRAP_LOG;
+         break;
+      case SCMD_V_OLC:
+         filename = OLC_LOG;
+         break;
+      case SCMD_V_USAGE:
+         filename = USAGE_LOG;
+         break;
+      case SCMD_V_RESTARTS:
+         filename = RESTART_LOG;
+         break;
+      case SCMD_V_RENTGONE:
+         filename = RENTGONE_LOG;
+         break;
+      case SCMD_V_BADPWS:
+         filename = BADPW_LOG;
+         break;
+      case SCMD_V_GODFIGHT:
+         filename = GODFIGHT_LOG;
+         break;
+      case SCMD_V_SCRIPTLOG:
+         filename = SCRIPT_LOG;
+         break;
+      case SCMD_V_SHOP:
+         filename = SHOP_LOG;
+         break;
+      default:
+         send_to_char(ch, "INVALID COMMAND!!: go_gen_vfile\r\n");
+         return;
       }
 
-   buf=get_buffer(MAX_INPUT_LENGTH);
-   buf1=get_buffer(MAX_INPUT_LENGTH);
-   buf2=get_buffer(MAX_INPUT_LENGTH);
-   syscom=get_buffer(512);
-   txtbuf=get_buffer(32750);
+      buf = get_buffer(MAX_INPUT_LENGTH);
+      buf1 = get_buffer(MAX_INPUT_LENGTH);
+      buf2 = get_buffer(MAX_INPUT_LENGTH);
+      syscom = get_buffer(512);
+      txtbuf = get_buffer(32750);
 
-   half_chop (argument,buf,buf1);
-   half_chop (buf1,buf2,buf1);
+      half_chop(argument, buf, buf1);
+      half_chop(buf1, buf2, buf1);
 
-   sprintf(syscom,"/usr/bin/tail -200 %s", filename);
-   if ((pfp = popen(syscom,"r")) == NULL)
+      sprintf(syscom, "/usr/bin/tail -200 %s", filename);
+      if ((pfp = popen(syscom, "r")) == NULL)
       {
-      send_to_char(ch,"No entries found.\r\n");
-      log(syscom);
-      perror("tail failed");
-      if((pfp=popen("pwd","r"))==NULL)
+         send_to_char(ch, "No entries found.\r\n");
+         log("%s", syscom);
+         perror("tail failed");
+         if ((pfp = popen("pwd", "r")) == NULL)
          {
-         system("pwd");
+            system("pwd");
          }
+         else
+         {
+            fgets(syscom, 120, pfp);
+            log("%s", syscom);
+            send_to_char(ch, "%s", syscom);
+            pclose(pfp);
+         }
+      }
       else
-         {
-         fgets(syscom,120,pfp);
-         log(syscom);
-         send_to_char(ch, "%s", syscom);
-         pclose(pfp);
-         }
-      }
-   else
       {
-      txtbuf[0]='\0';
-      send_to_char(ch,"Contents of file: \r\n");
-      while (fgets(syscom,254,pfp) != NULL)
+         txtbuf[0] = '\0';
+         send_to_char(ch, "Contents of file: \r\n");
+         while (fgets(syscom, 254, pfp) != NULL)
          {
-         strcat(txtbuf,syscom);
-         strcat(txtbuf,"\r");
+            strcat(txtbuf, syscom);
+            strcat(txtbuf, "\r");
          }
-      pclose(pfp);
+         pclose(pfp);
       }
-   if(ch->desc)
-      page_string(ch->desc,txtbuf,TRUE,"");
-   release_buffer(txtbuf);
-   release_buffer(syscom);
-   release_buffer(buf2);
-   release_buffer(buf1);
-   release_buffer(buf);
+      if (ch->desc)
+         page_string(ch->desc, txtbuf, TRUE, "");
+      release_buffer(txtbuf);
+      release_buffer(syscom);
+      release_buffer(buf2);
+      release_buffer(buf1);
+      release_buffer(buf);
    }
 
 ACMD(do_tedit)
@@ -1010,7 +1006,7 @@ ACMD(do_trans)
    else if (str_cmp("all", buf))
       {
       if (!(victim = get_char_vis(ch, buf,FIND_CHAR_WORLD)))
-         send_to_char(ch,NOPERSON);
+         send_to_char(ch, "%s", NOPERSON);
       else if (victim == ch)
          send_to_char(ch,"That doesn't make much sense, does it?\r\n");
       else
@@ -1077,7 +1073,7 @@ ACMD(do_trans)
                     GET_ROOM_VNUM(IN_ROOM(ch)));
             look_at_room(victim, 0);
             }
-      send_to_char(ch,OK);
+      send_to_char(ch,"%s", OK);
       }
    release_buffer(buf);
    }
@@ -1114,7 +1110,7 @@ ACMD(do_teleport)
    if (!*buf)
       send_to_char(ch,"Whom do you wish to teleport?\r\n");
    else if (!(victim = get_char_vis(ch, buf,FIND_CHAR_WORLD)))
-      send_to_char(ch,NOPERSON);
+      send_to_char(ch, "%s", NOPERSON);
    else if (victim == ch)
       send_to_char(ch,"Use 'goto' to teleport yourself.\r\n");
    else if ((GET_LEVEL(victim) >= GET_LEVEL(ch)) && !IS_NPC(victim))
@@ -1123,7 +1119,7 @@ ACMD(do_teleport)
       send_to_char(ch,"Where do you wish to send this person?\r\n");
    else if ((target = find_target_room(ch, buf2)) >= 0)
       {
-      send_to_char(ch,OK);
+      send_to_char(ch, "%s", OK);
       act("$n disappears in a puff of smoke.", FALSE, victim, 0, 0, TO_ROOM);
       if (IN_ROOM(victim) != NOWHERE)
          char_from_room(victim);
@@ -1393,7 +1389,7 @@ void do_stat_room(struct char_data * ch)
        }
        counter++;
        sprintf(buf, " %3d - %s\r\n", counter, graffiti[i].text);
-       send_to_char(ch, buf);
+       send_to_char(ch, "%s", buf);
      }
    }
 
@@ -2572,7 +2568,7 @@ ACMD(do_snoop)
          release_buffer(arg);
          return;
          }
-      send_to_char(ch,OK);
+      send_to_char(ch, "%s", OK);
 
 
       if(subcmd==SCMD_SNOOP)
@@ -2672,7 +2668,7 @@ ACMD(do_become)
       {
       mudlogf(BRF, GOD_LOG(ch), TRUE, "(GC) %s has become %s.", GET_NAME(ch),
               GET_NAME(victim));
-      send_to_char(ch,OK);
+      send_to_char(ch, "%s", OK);
 
 
       ch->desc->character = victim;
@@ -2711,7 +2707,7 @@ ACMD(do_switch)
       send_to_char(ch,"You are not godly enough to use that room!\r\n");
    else
       {
-      send_to_char(ch,OK);
+      send_to_char(ch, "%s", OK);
       mudlogf(BRF,GOD_LOG(ch),TRUE,
               "(GC) %s switches into %s.",GET_NAME(ch),GET_NAME(victim));
 
@@ -2996,7 +2992,7 @@ ACMD(do_purge)
          }
 
 
-      send_to_char(ch,OK);
+      send_to_char(ch, "%s", OK);
       }
    else
       {
@@ -3105,7 +3101,7 @@ ACMD(do_advance)
          }
 
 
-      send_to_char(ch,OK);
+      send_to_char(ch, "%s", OK);
 
 
       /* Record the advance in the syslog */
@@ -3172,7 +3168,7 @@ ACMD(do_restore) {
     if (!*buf)
         send_to_char(ch,"Whom do you wish to restore?\r\n");
     else if (!(vict = get_char_vis(ch, buf,FIND_CHAR_WORLD)))
-        send_to_char(ch,NOPERSON);
+        send_to_char(ch, "%s", NOPERSON);
     else {
         if (!IS_NPC(vict) && GET_LEVEL(ch) >= LVL_HERO) {
             for (i = 0; i < MAX_SPELLS; i++) {
@@ -3240,7 +3236,7 @@ ACMD(do_restore) {
         vict->aff_abils = vict->real_abils;*/
         //}
         update_pos(vict);
-        send_to_char(ch,OK);
+        send_to_char(ch, "%s", OK);
         act("You have been fully healed by $N!", FALSE, vict, 0, ch, TO_CHAR);
         mudlogf(BRF,GOD_LOG(ch),TRUE,
         "(GC) %s has restored %s.",GET_NAME(ch),GET_NAME(vict));
@@ -3368,7 +3364,7 @@ ACMD(do_gecho)
          if (STATE(pt)==CON_PLAYING && pt->character && pt->character != ch)
             send_to_char(pt->character,"%s",buf);
       if (!IS_NPC(ch)&&PRF_FLAGGED(ch, PRF_NOREPEAT))
-         send_to_char(ch,OK);
+         send_to_char(ch, "%s", OK);
       else
          send_to_char(ch,"%s",buf);
       if(GET_LEVEL(ch)<LVL_IMPL)
@@ -3708,12 +3704,12 @@ ACMD(do_force)
             str_cmp("room", arg)))
       {
       if (!(vict = get_char_vis(ch, arg,FIND_CHAR_WORLD)))
-         send_to_char(ch,NOPERSON);
+         send_to_char(ch, "%s", NOPERSON);
       else if ((GET_LEVEL(ch) <= GET_LEVEL(vict)) && !IS_NPC(vict))
          send_to_char(ch,"No, no, no!\r\n");
       else
          {
-         send_to_char(ch,OK);
+         send_to_char(ch, "%s", OK);
          if (subcmd == SCMD_FORCE)
             {
             if (GET_INVIS_LEV(ch) > GET_LEVEL(vict))
@@ -3739,7 +3735,7 @@ ACMD(do_force)
       }
    else if (!str_cmp("room", arg))
       {
-      send_to_char(ch,OK);
+      send_to_char(ch, "%s", OK);
       for (vict = world[IN_ROOM(ch)].people; vict; vict = next_force)
          {
          next_force = vict->next_in_room;
@@ -3760,7 +3756,7 @@ ACMD(do_force)
       }
    else /* force all */
       {
-      send_to_char(ch,OK);
+      send_to_char(ch, "%s", OK);
       for (i = descriptor_list; i; i = next_desc)
          {
          next_desc = i->next;
@@ -3953,7 +3949,7 @@ ACMD(do_wiznet)
    release_buffer(buf2);
    release_buffer(buf1);
    if (!IS_NPC(ch)&&PRF_FLAGGED(ch, PRF_NOREPEAT))
-      send_to_char(ch,OK);
+      send_to_char(ch, "%s", OK);
    }
 
 
@@ -3967,7 +3963,7 @@ ACMD(do_godlog)
       {
       log("(GC) %s logs: %s",GET_NAME(ch),argument);
       if (!IS_NPC(ch)&&PRF_FLAGGED(ch, PRF_NOREPEAT))
-         send_to_char(ch,OK);
+         send_to_char(ch, "%s", OK);
       else
          {
          send_to_char(ch, "You log, '%s%s%s'\r\n",NCYN,argument,NNRM);
@@ -4323,7 +4319,6 @@ void show_connections(struct char_data *ch,char *arg)
    {
    int zone_num;
    int j,i,k,tele_targ;
-   int start_room;
    char *buf;
 
    if(!*arg)
@@ -4344,7 +4339,6 @@ void show_connections(struct char_data *ch,char *arg)
    if(zone_num>=0 && zone_num <=top_of_zone_table)
       {
       buf=get_buffer(32750);
-      start_room=zone_table[zone_num].number*100;
 
       sprintf(buf,"Connections from %-30.30s\r\n"
               "----------------------------------------------------------------------\r\n",
@@ -4540,62 +4534,49 @@ void show_rconnect(struct char_data *ch,char *arg)
       }
    }
 
+void show_mobs(struct char_data *ch) {
+   const size_t linelength = 76; // Should match the headers and format strings below
 
+   char *buf = get_buffer(linelength * (100)); // Room for 100 mobs
 
-void show_mobs(struct char_data *ch)
-   {
-   struct char_data *mob;
-   int i, zone, top_zone, found;
-   char *buf3=get_buffer(64);
-   char *buf=get_buffer(32750);
-   bool any = FALSE;
+   int char_zone_num = world[IN_ROOM(ch)].zone;
+   struct zone_data current_zone = zone_table[char_zone_num];
 
+   // Zone 
+   int first_mob_vnum = current_zone.number * 100;
+   int last_mob_vnum = current_zone.top; // PM always sets this to first_mob_vnum + 99
 
-   *buf3 = '\0';
-   zone = zone_table[(world[IN_ROOM(ch)].zone)].number * 100;
-   top_zone = zone_table[(world[IN_ROOM(ch)].zone)].top;
+   send_to_char(ch, "VNUM  Mob Name             LV   EXP      AC   HitP  HR  DR  Gold     Align\r\n");
+   send_to_char(ch, "--------------------------------------------------------------------------\r\n");
 
+   *buf = '\0';
+   for (int possible_mob_vnum = first_mob_vnum; possible_mob_vnum <= last_mob_vnum; possible_mob_vnum++) {
+      for (struct char_data* mob = character_list; mob; mob = mob->next) {
+         if (GET_MOB_VNUM(mob) != possible_mob_vnum) continue;
+         char line[linelength];
 
-   send_to_char(ch,"VNUM   Mob Name             LV   EXP     AC  HitP   HR  DR");
-   send_to_char(ch, "  Gold    Align\r\n");
-   send_to_char(ch, "------------------------------------------------------");
-   send_to_char(ch, "-------------------\r\n");
-
-
-   *buf  = '\0';
-   for (i = zone; i <= top_zone; i++)
-      {
-      found = FALSE;
-      for (mob = character_list; mob; mob = mob->next)
-         {
-         if ((GET_MOB_VNUM(mob) == i) && found == FALSE)
-            {
-            found = TRUE;
-            any = TRUE;
-            strncpy(buf3, GET_NAME(mob), 20);
-            sprintf(buf,"%s%-5d %-20s  %-4d %-6ld %-4d %-5d  %-2d  %-2d  %-8ld %-4d\r\n",
-                    buf, i, buf3, GET_LEVEL(mob), GET_EXP(mob),
-                    GET_AC(mob), GET_MAX_HIT(mob),
-                    GET_HITROLL(mob), GET_DAMROLL(mob),
-                    GET_GOLD(mob), GET_ALIGNMENT(mob));
-            *buf3 = '\0';
-            }
-         }
+         // Color codes in mob name screw up table alignment
+         char* mob_name_no_color = strdup(GET_NAME(mob));
+         proc_color(mob_name_no_color, C_OFF);
+         sprintf(line, "%5d %-20.20s %4d %8ld %4d %5d %3d %3d %8ld %5d\r\n",
+                  possible_mob_vnum, mob_name_no_color, GET_LEVEL(mob), GET_EXP(mob),
+                  GET_AC(mob), GET_MAX_HIT(mob),
+                  GET_HITROLL(mob), GET_DAMROLL(mob),
+                  GET_GOLD(mob), GET_ALIGNMENT(mob));
+         strcat(buf, line);
       }
-   if(ch->desc)
-      page_string(ch->desc,buf,TRUE,"");
-
-
-   if (any == FALSE)
-      send_to_char(ch,"\r\nThere are no mobs in this zone... Sorry\r\n");
-
-   release_buffer(buf);
-   release_buffer(buf3);
    }
 
+   if (ch->desc)
+      page_string(ch->desc, buf, TRUE, "");
 
-void show_objs(struct char_data *ch)
-   {
+   if (buf[0] == '\0')
+      send_to_char(ch, "\r\nThere are no mobs in this zone... Sorry\r\n");
+
+   release_buffer(buf);
+}
+
+void show_objs(struct char_data *ch) {
    struct obj_data *obj;
    int i, zone, top_zone, found;
    char *buf3=get_buffer(64);
@@ -4740,7 +4721,7 @@ void show_bad_spell_lvl(struct char_data *ch,char *value)
    if(!value||!*value)
       {
       send_to_char(ch,"USAGE: show badspllvl <item_type>\r\n");
-      send_to_char(ch,valid_types);
+      send_to_char(ch, "%s", valid_types);
       return;
       }
    for(j=0;*item_types[j]!='\n';j++)
@@ -4751,7 +4732,7 @@ void show_bad_spell_lvl(struct char_data *ch,char *value)
    if(*item_types[j]=='\n')
       {
       send_to_char(ch,"USAGE: show badspllvl <A VALID item_type>\r\n");
-      send_to_char(ch,valid_types);
+      send_to_char(ch, "%s", valid_types);
       return;
       }
    type=0;
@@ -4771,7 +4752,7 @@ void show_bad_spell_lvl(struct char_data *ch,char *value)
    if(!type)
       {
       send_to_char(ch,"That type of item has no spells.\r\n");
-      send_to_char(ch,valid_types);
+      send_to_char(ch, "%s", valid_types);
       return;
       }
 
@@ -6338,7 +6319,7 @@ ACMD(do_show)
      }
        }
      }
-     send_to_char(ch, buf);
+     send_to_char(ch, "%s", buf);
      release_buffer(buf2);
      break;
        /*
@@ -8853,7 +8834,7 @@ ACMD(do_gremort)
       mudlogf(CMP,MAX(LVL_IMMORT,GET_INVIS_LEV(ch)),TRUE,
               "(GC) %s gremorts %s.",GET_NAME(ch),GET_NAME(victim));
 
-      send_to_char(ch,OK);
+      send_to_char(ch, "%s", OK);
       }
    else
       {
@@ -9002,7 +8983,7 @@ ACMD(adjust_mobs)
       vznum=mob_index[nr].vnum/100;
       olc_add_to_save_list(vznum,OLC_SAVE_MOB);
       }
-   send_to_char(ch,OK);
+   send_to_char(ch, "%s", OK);
    }
 
 ACMD(adjust_objs)
@@ -9026,7 +9007,7 @@ ACMD(adjust_objs)
       =material_affs[obj_proto[nr].material].default_dam_slots;
       olc_add_to_save_list(vznum,OLC_SAVE_OBJ);
       }
-   send_to_char(ch,OK);
+   send_to_char(ch, "%s", OK);
    }
 
 ACMD(adjust_rooms)
@@ -9045,7 +9026,7 @@ ACMD(adjust_rooms)
       vznum=GET_ROOM_VNUM(nr)/100;
       olc_add_to_save_list(vznum,OLC_SAVE_ROOM);
       }
-   send_to_char(ch,OK);
+   send_to_char(ch, "%s", OK);
    }
 
 ACMD(adjust_zones)
@@ -9064,7 +9045,7 @@ ACMD(adjust_zones)
       vznum=zone_table[nr].number;
       olc_add_to_save_list(vznum,OLC_SAVE_ZONE);
       }
-   send_to_char(ch,OK);
+   send_to_char(ch, "%s", OK);
    }
 
 ACMD(adjust_shops)
@@ -9082,7 +9063,7 @@ ACMD(adjust_shops)
       vznum=SHOP_ROOM(nr,0)/100;
       olc_add_to_save_list(vznum,OLC_SAVE_SHOP);
       }
-   send_to_char(ch,OK);
+   send_to_char(ch, "%s", OK);
    }
 
 
