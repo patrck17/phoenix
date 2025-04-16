@@ -5,5 +5,5 @@
 		"source=${localEnv:HOME}/work/phoenix,target=/work,type=bind"
 	],
 
-	"postCreateCommand": "sudo apt-get update && sudo apt-get install -y gcc-multilib make"
+	"postCreateCommand": "sudo dpkg --add-architecture i386 && sudo apt-get update && sudo apt-get install -y gcc-multilib make libc6-dev:i386"
 }
