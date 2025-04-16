@@ -198,7 +198,7 @@ int gremort_load_skill_requirements(void)
       log("SYSERR: Invalid gremort spell proficiency type %d.", req.proficiency);
     } else if (req.class < 0 || req.class >= NUM_CLASSES) {
       log("SYSERR: Invalid gremort class type %d.", req.class);
-    } else if (req.skill < 0 || req.skill >= MAX_SPELLS) {
+    } else if (req.skill < 0 || req.skill > MAX_SPELLS) {
       log("SYSERR: Invalid gremort skill type %d.", req.skill);
     } else {
       /* log("GREMORT-EXAM: Loaded requirement class %s(%d) exam %s(%d) skill %s(%d) proficiency %d.",
