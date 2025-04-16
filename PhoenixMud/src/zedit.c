@@ -944,17 +944,16 @@ int start_change_command(struct descriptor_data *d, int pos)
 /* the main menu */ 
 void zedit_disp_menu(struct descriptor_data * d) 
 { 
-   int subcmd = 0, room, counter = 0; 
+   int subcmd = 0, counter = 0; 
    char *buf1=get_buffer(MAX_STRING_LENGTH);
    char *buf2=get_buffer(MAX_STRING_LENGTH);
 
    get_char_cols(d->character); 
-   room = real_room(OLC_NUM(d)); 
  
    sprintbit(OLC_ZONE(d)->bitvector,zone_bits,buf1);
   /*. Menu header .*/ 
    send_to_char(d->character, 
-	   "[H[J" 
+	   "\033[H\033[J" 
 	   "Room number: %s%d%s  Room zone: %s%ld\r\n" 
 	   "%sZ%s) Zone name   : %s%s\r\n" 
 	   "%sA%s) Zone author : %s%s\r\n" 
