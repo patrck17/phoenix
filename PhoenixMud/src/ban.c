@@ -282,153 +282,113 @@ ACMD(do_unban)
  **************************************************************************/ 
  
 
-int num_invalid = 0; 
- 
-int Valid_Name(char *newname) 
-{ 
-   int i; 
- 
+int Valid_Name(char *newname) { 
    char *tempname;
-
-  /* return valid if list doesn't exist */ 
-   if (!invalid_list || num_invalid < 1) 
-      return (1); 
  
   /* change to lowercase */ 
    tempname = stolower(newname);
 
   /* Does the desired name contain a string in the invalid list? */ 
-   for (i = 0; i < num_invalid; i++) 
-      {
-      if (strstr(tempname, invalid_list[i])) 
-	 return (0);
-      }
+   for (int ii = 0; ii < MAX_INVALID_NAMES; ii++) {
+      if (invalid_list[ii] == NULL) break;
+
+      if (strstr(tempname, invalid_list[ii])) 
+         return FALSE;
+   }
 
   /* The following added to prevent use of mob names */ 
-   for (i = 0; i < top_of_mobt; i++) 
-      { 
-      if (isname(tempname, mob_proto[i].player.name))
-	 return (0);
-      }
-   return (1); 
-} 
- 
- 
-void Read_Invalid_List(void) 
-{ 
-   FILE *fp; 
-   char *temp;
- 
-   if (!(fp = fopen(XNAME_FILE, "r"))) 
-      { 
-      perror("SYSERR: Unable to open '" XNAME_FILE "' file for reading."); 
-      return; 
-      } 
+   for (int ii = 0; ii < top_of_mobt; ii++) { 
+      if (isname(tempname, mob_proto[ii].player.name))
+         return FALSE;
+   }
 
-   temp=get_buffer(256);
-   num_invalid=0;
-   while(get_line(fp,temp)&&(num_invalid<MAX_INVALID_NAMES))
-      invalid_list[num_invalid++] = str_dup(temp);
+   return TRUE; 
+}
 
-   if (num_invalid >= MAX_INVALID_NAMES) 
-      {
+void Read_Invalid_List(void)
+{
+   FILE *fp;
+
+   memset(invalid_list, 0, sizeof(invalid_list));
+
+   if (!(fp = fopen(XNAME_FILE, "r")))
+   {
+      perror("SYSERR: Unable to open '" XNAME_FILE "' file for reading.");
+      return;
+   }
+
+   char* temp = get_buffer(256);
+
+   for (size_t ii = 0; ii < MAX_INVALID_NAMES; ii++) {
+      int linesread = get_line(fp, temp);
+      if (linesread == 0) break;
+
+      invalid_list[ii] = str_dup(temp);
+   }
+
+   if (!feof(fp)) {
       log("SYSERR: Too many invalid names, change MAX_INVALID_NAMES in ban.c");
       exit(1);
-      }
-   
+   }
+
    release_buffer(temp);
-   fclose(fp); 
-} 
+   fclose(fp);
+}
 
 ACMD(do_add_xname)
 {
-   FILE *fp;
-   int  i;
-   char *buf;
-
    skip_spaces(&argument);
-   
-   if(*argument)
-      {
-      for (i = 0; argument[i]; i++) 
-	 argument[i] = LOWER(argument[i]); 
 
-      if(strlen(argument)<4)
-	 {
-	 send_to_char(ch,"To use this command, to name has to be at least 4 chars\r\nlong.  If you HAVE to add a smaller name, please post it to\r\nimmortal board for an implementor to add\r\n");
-	 return;
-	 }
-      else if(!Valid_Name(argument))
-	 {
-	 send_to_char(ch,"That name is already on the xnames list.\r\nIf this is wrong please post to the immort board\r\nUse the command by itself to see the list\r\n--Masque\r\n");
-	 return;
-	 }
-      /*
-      else if(strstr("masque",argument))
-	 {
-	 send_to_char(ch,"Fuck YOU!\r\n");
-	 mudlogf(CMP,LVL_IMMORT,TRUE,
-		 "ALERT: %s just tried to xname %s(masque)",
-		 GET_NAME(ch),argument);
-	 return;
-	 }
-      else if(strstr("cymynedd",argument))
-	 {
-	 send_to_char(ch,"Fuck YOU!\r\n");
-	 mudlogf(CMP,LVL_IMMORT,TRUE,
-		 "ALERT: %s just tried to xname %s(cymynedd)",
-		 GET_NAME(ch),argument);
-	 return;
-	 }
-      else if(strstr("aleksandr",argument))
-	 {
-	 send_to_char(ch,"Fuck YOU!\r\n");
-	 mudlogf(CMP,LVL_IMMORT,TRUE,
-		 "ALERT: %s just tried to xname %s(aleksandr)",
-		 GET_NAME(ch),argument);
-	 return;
-	 }
-      else if(strstr("iluvatar",argument))
-         {
-         send_to_char(ch,"Fuck YOU!\r\n");
-         mudlogf(CMP,LVL_IMMORT,TRUE,
-                 "ALERT: %s just tried to xname %s(iluvatar)",
-                 GET_NAME(ch),argument);
+   if (*argument) {
+      for (int ii = 0; argument[ii]; ii++)
+         argument[ii] = LOWER(argument[ii]);
+
+      if (strlen(argument) < 4) {
+         send_to_char(ch, "To use this command, to name has to be at least 4 chars long.");
          return;
-         }*/
-      else
-	 {
-	 if((fp=fopen(XNAME_FILE,"a+"))==NULL)
-	    {
-	    mudlogf(CMP,LVL_IMMORT,TRUE,"Could not open %s for append!",
-		    XNAME_FILE);
-	    return;
-	    }
-	 fprintf(fp,"%s\n",argument);
-	 fclose(fp);
-	 
-	 if(num_invalid<MAX_INVALID_NAMES)
-	    invalid_list[num_invalid++]=str_dup(argument);
-	 else
-	    send_to_char(ch,"This name won't be added until the value of MAX_INVALID_NAMES is increases,\r\n post to the board\r\n");
+      } else if (!Valid_Name(argument)) {
+         send_to_char(ch, "That name is already on the xnames list.\r\n");
+         return;
+      } else {
+         size_t empty;
 
-	 
-	 }
+         for(empty = 0; empty < MAX_INVALID_NAMES && invalid_list[empty]; empty++);
+
+         if (empty == MAX_INVALID_NAMES) {
+            send_to_char(ch, "The list is full, please contact an immortal.\r\n");
+            return;
+         }
+
+         invalid_list[empty] = str_dup(argument);
+
+         FILE *fp = fopen(XNAME_FILE, "w");
+         if (fp == NULL)
+         {
+            mudlogf(CMP, LVL_IMMORT, TRUE, "Could not open %s for writing!", XNAME_FILE);
+            send_to_char(ch, "Unable to save the xnames list. Please contact a developer.\r\n");
+            return;
+         }
+
+         for (size_t ii = 0; ii < MAX_INVALID_NAMES && invalid_list[ii]; ii++)
+            fprintf(fp, "%s\n", invalid_list[ii]);
+
+         fclose(fp);
+
       }
-   buf=get_buffer(MAX_STRING_LENGTH);
-   for(i=0;i<num_invalid;i++)
-      {
-      sprintf(buf+strlen(buf),"%-17.17s ",invalid_list[i]);
-      if((i>0)&&(((i+1)%4)==0))
-	 strcat(buf,"\n");
-      }
-   
-   if(ch->desc)
-      page_string(ch->desc,buf,TRUE,"");
-   
+   }
+
+   char* buf = get_buffer(18 * MAX_INVALID_NAMES + MAX_INVALID_NAMES/4); // Each printed row is 3 names up to 17 characters followed by a space
+   for (size_t ii = 0; ii < MAX_INVALID_NAMES && invalid_list[ii]; ii++) {
+      char name[18];
+      snprintf(name, sizeof(name), "%-17.17s ", invalid_list[ii]);
+      strcat(buf, name);
+
+      if ((ii + 1) % 4 == 0) strcat(buf, "\n");
+   }
+
+   if (ch->desc)
+      page_string(ch->desc, buf, TRUE, "");
+
    release_buffer(buf);
    return;
 }
-
-
-

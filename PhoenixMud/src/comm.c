@@ -2410,7 +2410,6 @@ RETSIGTYPE unrestrict_game(int sig)
 	  BRF, LVL_IMMORT, TRUE); 
    ban_list = NULL; 
    circle_restrict = 0; 
-   num_invalid = 0; 
 } 
  
  
