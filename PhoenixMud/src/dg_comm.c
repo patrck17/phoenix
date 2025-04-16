@@ -205,7 +205,7 @@ void send_to_zone(char *messg, zone_rnum zrn)
       if (!i->connected && i->character && AWAKE(i->character) &&
               (IN_ROOM(i->character) != NOWHERE) &&
               (world[IN_ROOM(i->character)].zone == zrn))
-         SEND_TO_Q(i,messg);
+         SEND_TO_Q(i, "%s", messg);
    }
 
 

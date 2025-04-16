@@ -295,7 +295,7 @@ ACMD(do_reboot)
       return;
       }
 
-   send_to_char(ch,OK);
+   send_to_char(ch, "%s", OK);
    release_buffer(arg);
    }
 
@@ -1318,7 +1318,7 @@ void parse_room(FILE * fl, int virtual_nr, int version)
       if (already_read==FALSE)
          if(!get_line(fl, line))
             {
-            log(buf);
+            log("%s", buf);
             exit(1);
             }
       switch (*line)
@@ -1426,7 +1426,7 @@ void parse_room(FILE * fl, int virtual_nr, int version)
             return;
             break;
          default:
-            log(buf);
+            log("%s", buf);
             exit(1);
             break;
          }
@@ -4483,7 +4483,7 @@ char *fread_string(FILE * fl, char *error)
       if (length + templength >= MAX_STRING_LENGTH)
          {
          log("SYSERR: fread_string: string too large (db.c) %s",tmp);
-         log(error);
+         log("%s", error);
          exit(1);
          }
       else

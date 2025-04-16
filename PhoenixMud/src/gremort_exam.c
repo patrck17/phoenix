@@ -311,7 +311,7 @@ void gremort_attributes_check_update(struct char_data *ch)
   command_interpreter(ch, "look");
 
   if (!gremort_examine_skills(ch, result)) {
-    send_to_char(ch, result);
+    send_to_char(ch, "%s", result);
   } else if ((lastExam = get_latest_gremort_exam_record(ch)) && lastExam->exam_type == examType) {
     send_to_char(ch, "Yes, you are STILL ready to begin the %s test.\r\n", gremort_exam_types[examType]);
   } else if (GET_LEVEL(ch) != LVL_HERO-1) {
@@ -506,16 +506,12 @@ void gremort_exam_trivia_update(struct char_data *ch, int cmd, char *argument)
   char buf[4096], buf2[1024];
   int i;
 
-  sprintf(buf, "GREMORT-EXAM: ch=%s, cmd=%3d, state=%2d, busy=%1d, timer=%3d, arg=%s, asked=%d, correct=%d, failed=%d", GET_NAME(ch), cmd, state, busy, timer, argument, questions_asked, questions_correct, questions_failed);
-  log(buf);
-  if (ch) {
-    strcat(buf, "\r\n");
-    //send_to_char(ch, buf);
-  }
+  log("GREMORT-EXAM: ch=%s, cmd=%3d, state=%2d, busy=%1d, timer=%3d, arg=%s, asked=%d, correct=%d, failed=%d", GET_NAME(ch), cmd, state, busy, timer, argument, questions_asked, questions_correct, questions_failed);
 
   if (!ch || IS_NPC(ch) || GET_LEVEL(ch) >= LVL_IMMORT) {
     return;
   }
+
   if (state == 0 && busy) {
     char_from_room(ch);
     char_to_room(ch, real_room(GREMORT_SEND_HOME_ROOM_VNUM));
@@ -695,7 +691,7 @@ void gremort_exam_trivia_update(struct char_data *ch, int cmd, char *argument)
       strcat(buf, question->answers[answer_order[i]]);
     }
     strcat(buf, "\r\n");
-    send_to_char(ch, buf);
+    send_to_char(ch, "%s", buf);
     room_rnum rnum = real_room(GREMORT_EXAM_PART2_ROOM_VNUM);
     free(world[rnum].description);
     world[rnum].description = strdup(buf);
@@ -825,14 +821,7 @@ void gremort_exam_quest_update(struct char_data *ch, int cmd, char *argument)
   static int timer = 0;
   static char arg[MAX_STRING_LENGTH] = {'\x0'};
 
-  char buf[4096];
-
-  sprintf(buf, "GREMORT-EXAM QUEST: ch=%s, cmd=%3d, state=%2d, busy=%1d, timer=%3d, arg=%s", GET_NAME(ch), cmd, state, busy, timer, argument);
-  log(buf);
-  if (ch) {
-    strcat(buf, "\r\n");
-    //send_to_char(ch, buf);
-  }
+  log("GREMORT-EXAM QUEST: ch=%s, cmd=%3d, state=%2d, busy=%1d, timer=%3d, arg=%s", GET_NAME(ch), cmd, state, busy, timer, argument);
 
   if (state == 0 && busy) {
     char_from_room(ch);

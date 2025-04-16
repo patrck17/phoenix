@@ -1186,7 +1186,7 @@ void show_buffers(struct char_data *ch, int buffer_type, int display_type)
 	 if (ch)
 	    send_to_char(ch,"%s",buf);
 	 else
-	    log(buf);
+	    log("%s", buf);
 	 }
 
    release_buffer(buf);
@@ -1209,7 +1209,7 @@ ACMD(do_overflow)
    release_buffer(buf);
 
    if (ch)
-      send_to_char(ch,OK);
+      send_to_char(ch, "%s", OK);
 }
 
 char *BUFFER_FORMAT =
@@ -1249,7 +1249,7 @@ ACMD(do_buffer)
    release_buffer(arg3);
 
    if (size == -1)	/* Oops, error. */
-      send_to_char(ch,BUFFER_FORMAT);
+      send_to_char(ch, "%s", BUFFER_FORMAT);
    else if (size == -2) {	/* -2 means a toggle command. */
    if (is_abbrev(arg1, "verbose"))
       {
@@ -1277,7 +1277,7 @@ ACMD(do_buffer)
       send_to_char(ch,(buffer_opt & BUF_OVERBOOT) ? "Reboot on overflow.\r\n" : "Will try to keep going.\r\n");
       }
    else
-      send_to_char(ch,BUFFER_FORMAT);
+      send_to_char(ch, "%s", BUFFER_FORMAT);
    } 
    else if (is_abbrev(arg1, "delete"))
       {
@@ -1304,7 +1304,7 @@ ACMD(do_buffer)
    else if (is_abbrev(arg1, "add"))
       new_buffer(size, persistant); /* So easy. :) */
    else
-      send_to_char(ch,BUFFER_FORMAT);
+      send_to_char(ch, "%s", BUFFER_FORMAT);
 
    release_buffer(arg1);
 }

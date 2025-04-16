@@ -38,7 +38,6 @@ extern struct index_data *mob_index;
 extern struct index_data *obj_index;
 extern struct zone_data *zone_table;
 extern int top_of_zone_table;
-extern int restrict;
 extern int top_of_mobt;
 extern int top_of_objt;
 extern int top_of_p_table;
@@ -298,7 +297,7 @@ ACMD (do_makeclan)
          break;
       if (cur->cl_number > count)
          break;
-      log (cur->cl_name);
+      log ("%s", cur->cl_name);
       prev=cur;
       cur = cur->next;
       count++;
@@ -1025,7 +1024,7 @@ ACMD (do_csay)
    buf1=get_buffer(512);
    if (PRF_FLAGGED(ch,PRF_NOREPEAT))
       {
-      send_to_char(ch,OK);
+      send_to_char(ch, "%s", OK);
       }
    else
       {
