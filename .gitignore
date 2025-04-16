@@ -1,3 +1,2 @@
 *.o
-circle/compile/circle
-circle/bin/circle
+circle
