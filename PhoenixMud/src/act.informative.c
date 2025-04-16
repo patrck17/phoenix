@@ -82,7 +82,8 @@ struct time_info_data *real_time_passed(time_t t2, time_t t1);
 void str_add_spaces(char *source, int total_length);
 int compute_armor_class(struct char_data *ch);
 int parse_class(char *arg);
-struct char_data *item_owner(struct obj_data *obj);
+struct char_data *item_owner(struct obj_data *obj); 
+struct player_shop* is_object_in_player_shop(struct obj_data*);
 
 /* global */
 int boot_high = 0;
@@ -542,7 +543,7 @@ void list_one_char(struct char_data *i, struct char_data *ch)
 	} else if (FURNITURE(i) && IN_ROOM(FURNITURE(i)) == IN_ROOM(i)) {
 		char *tmpbuf = get_buffer(128);
 		strcpy(tmpbuf, position_types[(int)GET_POS(i)]);
-		LOW(tmpbuf);
+		tmpbuf = LOW(tmpbuf);
 		sprintf(buf + strlen(buf), " is here %s on %s.",
 			tmpbuf, FURNITURE(i)->short_description);
 		release_buffer(tmpbuf);
@@ -703,14 +704,13 @@ ACMD(do_whois)
 		if (IS_SCR(victim)) {
 			if (GET_SEX(victim) == SEX_FEMALE) {
 				class_name =
-				    scr_female_pc_class_types[GET_CLASS
-							      (victim)];
+				    scr_female_pc_class_types[(int)GET_CLASS(victim)];
 			} else {
 				class_name =
-				    scr_male_pc_class_types[GET_CLASS(victim)];
+				    scr_male_pc_class_types[(int)GET_CLASS(victim)];
 			}
 		} else {
-			class_name = pc_class_types[GET_CLASS(victim)];
+			class_name = pc_class_types[(int)GET_CLASS(victim)];
 		}
 		send_to_char(ch, "%s %s is:\r\n", GET_NAME(victim),
 			     GET_TITLE(victim));
@@ -1632,7 +1632,7 @@ ACMD(do_score)
 	if (FURNITURE(ch)) {
 		char *tmpbuf = get_buffer(128);
 		strcpy(tmpbuf, position_types[(int)GET_POS(ch)]);
-		LOW(tmpbuf);
+		tmpbuf = LOW(tmpbuf);
 		sprintf(buf_temp1 + strlen(buf_temp1), "You are %s on %s.\r\n",
 			tmpbuf, FURNITURE(ch)->short_description);
 		release_buffer(tmpbuf);
@@ -1671,10 +1671,11 @@ ACMD(do_score)
 			strcat(buf_temp1, "Sitting");
 			break;
 		case POS_FIGHTING:
-			if (ch->char_specials.fighting)
-				sprintf(buf_temp1, "%sFighting %s", buf_temp1,
-					PERS(ch->char_specials.fighting, ch));
-			else
+			if (ch->char_specials.fighting) {
+				strcat(buf_temp1, "Fighting ");
+				strcat(buf_temp1, PERS(ch->char_specials.fighting, ch));
+				//sprintf(buf_temp1, "%sFighting %s", buf_temp1, PERS(ch->char_specials.fighting, ch));
+			} else
 				strcat(buf_temp1, "Fighting nothing");
 			break;
 		case POS_STANDING:
