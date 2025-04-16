@@ -46,6 +46,7 @@ void mprog_give_trigger(struct char_data * mob, struct char_data * ch,
 void mprog_bribe_trigger(struct char_data * mob, struct char_data * ch,
                          int amount);
 int can_give_gold(struct char_data *ch, int amount);
+int min_level(struct char_data *ch,int spellnum);
 
 
 void log_corpse(struct char_data *ch,struct obj_data *cont,char *ztString)
@@ -2170,7 +2171,7 @@ void perform_wear(struct char_data * ch, struct obj_data * obj, int where_pos, i
    if (
      !IS_NPC(ch)
      &&
-     (where_pos == WEAR_WIELD_1) || (where_pos == WEAR_WIELD_2)
+     (where_pos == WEAR_WIELD_1 || where_pos == WEAR_WIELD_2)
      &&
      !GET_SKILL(ch, SKILL_DUAL_WIELD)
      &&
@@ -2181,7 +2182,7 @@ void perform_wear(struct char_data * ch, struct obj_data * obj, int where_pos, i
       }
 
    if (!IS_NPC(ch)
-       && (where_pos == WEAR_WIELD_1) || (where_pos == WEAR_WIELD_2)
+       && (where_pos == WEAR_WIELD_1 || where_pos == WEAR_WIELD_2)
        && (GET_EQ(ch, WEAR_WIELD_1) || GET_EQ(ch, WEAR_WIELD_2))
        && !SCR_SKILLCHECK(ch, SKILL_DUAL_WIELD))
    {
@@ -2967,7 +2968,6 @@ ACMD(do_assemble)
 
 ACMD(do_castout)
    {
-   struct obj_data *pole;
    int fail, pos;
 
    if (PLR_FLAGGED(ch, PLR_FISHING))
@@ -2979,13 +2979,11 @@ ACMD(do_castout)
    if (GET_EQ(ch, WEAR_HOLD_1) &&
        (GET_OBJ_TYPE(GET_EQ(ch, WEAR_HOLD_1)) == ITEM_POLE)) 
       {
-      pole = GET_EQ(ch, WEAR_HOLD_1);
       pos = WEAR_HOLD_1;
       }
    else if (GET_EQ(ch, WEAR_HOLD_2) &&                                  
             (GET_OBJ_TYPE(GET_EQ(ch, WEAR_HOLD_2)) == ITEM_POLE))
       {
-      pole = GET_EQ(ch, WEAR_HOLD_2);
       pos = WEAR_HOLD_2;
       }
    else
