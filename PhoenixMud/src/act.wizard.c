@@ -8618,6 +8618,7 @@ ACMD(do_distribute) {
          }
 
          obj_to_room(obj, random_room);
+         load_otrigger(obj);
       }
 
       mudlogf(NRM, GOD_LOG(ch), TRUE, "(GC) %s distributed %d of obj #%d(%s) to room(s) %d-%d.", GET_NAME(ch), amount, vnum, obj_name, rstart, rend);
