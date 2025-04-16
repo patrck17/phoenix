@@ -1873,7 +1873,7 @@ void extract_char(struct char_data * ch)
       {
       STATE(ch->desc) = CON_MENU;
       if(port!=4999)
-         SEND_TO_Q(ch->desc, MENU);
+         SEND_TO_Q(ch->desc, "%s", MENU);
       }
    else
       {

@@ -3014,7 +3014,7 @@ void nanny(struct descriptor_data *d, char *argu)
 					       strlen(tmp_name) + 1);
 					strcpy(d->character->player.name,
 					       CAP(tmp_name));
-					SEND_TO_Q(d, NAME_POLICY);
+					SEND_TO_Q(d, "%s", NAME_POLICY);
 					GET_PFILEPOS(d->character) = player_i;
 					SEND_TO_Q(d,
 						  "Did I get that right, %s (Y/N)? ",
@@ -3068,7 +3068,7 @@ void nanny(struct descriptor_data *d, char *argu)
 				       strlen(tmp_name) + 1);
 				strcpy(d->character->player.name,
 				       CAP(tmp_name));
-				SEND_TO_Q(d, NAME_POLICY);
+				SEND_TO_Q(d, "%s", NAME_POLICY);
 				SEND_TO_Q(d, "Did I get that right, %s (Y/N)? ",
 					  tmp_name);
 				STATE(d) = CON_NAME_CNFRM;
@@ -3220,9 +3220,9 @@ void nanny(struct descriptor_data *d, char *argu)
 				return;
 
 			if (GET_LEVEL(d->character) >= LVL_IMMORT)
-				SEND_TO_Q(d, imotd);
+				SEND_TO_Q(d, "%s", imotd);
 			else
-				SEND_TO_Q(d, motd);
+				SEND_TO_Q(d, "%s", motd);
 
 			if (PLR_FLAGGED(d->character, PLR_INVSTART))
 				GET_INVIS_LEV(d->character) =
@@ -3293,7 +3293,7 @@ void nanny(struct descriptor_data *d, char *argu)
 			/* clear the screen */
 			SEND_TO_Q(d, "\033[H\033[J\e[?7h\e[r\x1B[1m\x1B[36m");
 			if (port != 4999)
-				SEND_TO_Q(d, MENU);
+				SEND_TO_Q(d, "%s", MENU);
 			STATE(d) = CON_MENU;
 		}
 
@@ -3317,8 +3317,8 @@ void nanny(struct descriptor_data *d, char *argu)
 		}
 
 		/* 10/27/96, Echo - race menu added. See race.c for details. */
-		SEND_TO_Q(d, race_menu);
-		SEND_TO_Q(d, race_prompt);
+		SEND_TO_Q(d, "%s", race_menu);
+		SEND_TO_Q(d, "%s", race_prompt);
 		STATE(d) = CON_QRACE;
 		break;
 
@@ -3344,17 +3344,15 @@ void nanny(struct descriptor_data *d, char *argu)
 							SEND_TO_Q(d,
 								  "\r\nThat's not a race.");
 						else
-							SEND_TO_Q(d,
-								  this_help->
-								  entry);
+							SEND_TO_Q(d, "%s", this_help->entry);
 						break;
 					}
 				}
 				release_buffer(help_choice);
 			} else
 				SEND_TO_Q(d, "\r\nThat's not a race.");
-			SEND_TO_Q(d, race_menu);
-			SEND_TO_Q(d, race_prompt);
+			SEND_TO_Q(d, "%s", race_menu);
+			SEND_TO_Q(d, "%s", race_prompt);
 			return;
 		} else
 			GET_RACE(d->character) = load_result;
@@ -3362,16 +3360,16 @@ void nanny(struct descriptor_data *d, char *argu)
 		/* 10/27/96, Echo - The following class menu lists only those classes
 		 *   which are allowed based on the race the character has chosen.
 		 */
-		SEND_TO_Q(d, class_menu_header);
+		SEND_TO_Q(d, "%s", class_menu_header);
 		for (i = 0; i < CLASS_KENSAI; i++)
 			if (LEGAL_CLASS[(int)GET_RACE(d->character)][i])
-				SEND_TO_Q(d, class_menu_choices[i]);
+				SEND_TO_Q(d, "%s", class_menu_choices[i]);
 		SEND_TO_Q(d, "   or [q] to go back to the race menu.\r\n");
 		/* 10/27/96, Echo - removed default class menu in favor of above,
 		 *   which just lists available classes for the selected race.
 		 * SEND_TO_Q(class_menu, d);
 		 */
-		SEND_TO_Q(d, class_prompt);
+		SEND_TO_Q(d, "%s", class_prompt);
 		STATE(d) = CON_QCLASS;
 		break;
 
@@ -3395,26 +3393,24 @@ void nanny(struct descriptor_data *d, char *argu)
 							SEND_TO_Q(d,
 								  "\r\nThat's not a class.");
 						else
-							SEND_TO_Q(d,
-								  this_help->
-								  entry);
+							SEND_TO_Q(d, "%s", this_help->entry);
 						break;
 					}
 				}
 				release_buffer(help_choice);
 			} else if ((*argu == 'q') || (*argu == 'Q')) {
-				SEND_TO_Q(d, race_menu);
-				SEND_TO_Q(d, race_prompt);
+				SEND_TO_Q(d, "%s", race_menu);
+				SEND_TO_Q(d, "%s", race_prompt);
 				STATE(d) = CON_QRACE;
 				break;
 			} else
 				SEND_TO_Q(d, "\r\nThat's not a class.");
 
-			SEND_TO_Q(d, class_menu_header);
+			SEND_TO_Q(d, "%s", class_menu_header);
 			for (i = 0; i < NUM_CLASSES; i++)
 				if (LEGAL_CLASS[(int)GET_RACE(d->character)][i])
-					SEND_TO_Q(d, class_menu_choices[i]);
-			SEND_TO_Q(d, class_prompt);
+					SEND_TO_Q(d, "%s", class_menu_choices[i]);
+			SEND_TO_Q(d, "%s", class_prompt);
 			return;
 		} else
 		    if (!LEGAL_CLASS[(int)GET_RACE(d->character)][load_result])
@@ -3437,8 +3433,8 @@ void nanny(struct descriptor_data *d, char *argu)
 
 		if (!d->first_time) {
 			send_to_char(d->character, "\r\n");
-			send_to_char(d->character, hometown_menu);
-			SEND_TO_Q(d, hometown_prompt);
+			send_to_char(d->character, "%s", hometown_menu);
+			SEND_TO_Q(d, "%s", hometown_prompt);
 			STATE(d) = CON_HOME_TOWN;
 		} else {
 			/*
@@ -3470,7 +3466,7 @@ void nanny(struct descriptor_data *d, char *argu)
 			set_default_player_stats(d->character);
 			save_char(d->character, NOWHERE);
 
-			SEND_TO_Q(d, motd);
+			SEND_TO_Q(d, "%s", motd);
 			SEND_TO_Q(d, "\r\n\n*** PRESS RETURN: ");
 			STATE(d) = CON_RMOTD;
 		}
@@ -3496,8 +3492,8 @@ void nanny(struct descriptor_data *d, char *argu)
 		default:
 			send_to_char(d->character,
 				     "That is not a valid hometown!\r\n\r\n");
-			send_to_char(d->character, hometown_menu);
-			SEND_TO_Q(d, hometown_prompt);
+			send_to_char(d->character, "%s", hometown_menu);
+			SEND_TO_Q(d, "%s", hometown_prompt);
 			return;
 		}
 		log("Hometown: %s created with choice %c and recalls to room %ld.", GET_NAME(d->character), argu[0], GET_HOME(d->character));
@@ -3513,7 +3509,7 @@ void nanny(struct descriptor_data *d, char *argu)
 		d->character->real_abils.cha = race_stats[i][5];
 		save_char(d->character, NOWHERE);
 
-		SEND_TO_Q(d, stat_menu);
+		SEND_TO_Q(d, "%s", stat_menu);
 
 		for (j = 0; j < 6; j++) {
 			send_to_char(d->character, "\033[%d;%dH", 5 + j, 19);
@@ -3635,7 +3631,7 @@ void nanny(struct descriptor_data *d, char *argu)
       /** End of stat selection **/
 		save_char(d->character, NOWHERE);	/* save so dc doesn't kill stats */
 
-		SEND_TO_Q(d, motd);
+		SEND_TO_Q(d, "%s", motd);
 		SEND_TO_Q(d, "\r\n\n*** PRESS RETURN: ");
 		STATE(d) = CON_RMOTD;
 
@@ -3648,7 +3644,7 @@ void nanny(struct descriptor_data *d, char *argu)
 	case CON_RMOTD:	/* read CR after printing motd   */
 		SEND_TO_Q(d, "\033[H\033[J\e[?7h\e[r\x1B[1m\x1B[36m");
 		if (port != 4999)
-			SEND_TO_Q(d, MENU);
+			SEND_TO_Q(d, "%s", MENU);
 		STATE(d) = CON_MENU;
 		break;
 
@@ -3793,11 +3789,9 @@ void nanny(struct descriptor_data *d, char *argu)
 							d->
 							first_time ?
 							" (defaults) " : "");
-						send_to_char(vict,
-							     CCYEL(vict,
-								   C_NRM));
-						send_to_char(vict, buf1);
-						log(buf1);
+						send_to_char(vict, CCYEL(vict, C_NRM));
+						send_to_char(vict, "%s", buf1);
+						log("%s", buf1);
 						send_to_char(vict,
 							     CCNRM(vict,
 								   C_NRM));
@@ -3922,7 +3916,7 @@ void nanny(struct descriptor_data *d, char *argu)
 		default:
 			SEND_TO_Q(d, "\r\nThat's not a menu choice!\r\n");
 			if (port != 4999)
-				SEND_TO_Q(d, MENU);
+				SEND_TO_Q(d, "%s", MENU);
 			break;
 		}
 
@@ -3935,7 +3929,7 @@ void nanny(struct descriptor_data *d, char *argu)
 			SEND_TO_Q(d, "\033[H\033[J\e[?7h\e[r\x1B[1m\x1B[36m");
 			SEND_TO_Q(d, "\r\nIncorrect password.\r\n");
 			if (port != 4999)
-				SEND_TO_Q(d, MENU);
+				SEND_TO_Q(d, "%s", MENU);
 			STATE(d) = CON_MENU;
 			return;
 		} else {
@@ -3952,7 +3946,7 @@ void nanny(struct descriptor_data *d, char *argu)
 			SEND_TO_Q(d, "\033[H\033[J\e[?7h\e[r\x1B[1m\x1B[36m");
 			SEND_TO_Q(d, "\r\nIncorrect password.\r\n");
 			if (port != 4999)
-				SEND_TO_Q(d, MENU);
+				SEND_TO_Q(d, "%s", MENU);
 			STATE(d) = CON_MENU;
 		} else {
 			SEND_TO_Q(d,
@@ -3993,7 +3987,7 @@ void nanny(struct descriptor_data *d, char *argu)
 			SEND_TO_Q(d, "\033[H\033[J\e[?7h\e[r\x1B[1m\x1B[36m");
 			SEND_TO_Q(d, "\r\nCharacter not deleted.\r\n");
 			if (port != 4999)
-				SEND_TO_Q(d, MENU);
+				SEND_TO_Q(d, "%s", MENU);
 			STATE(d) = CON_MENU;
 		}
 		break;
@@ -4011,7 +4005,7 @@ void nanny(struct descriptor_data *d, char *argu)
 			"E-mail: %s changed e-mail address to \"%s\".",
 			GET_NAME(d->character), GET_EMAIL(d->character));
 		save_char(d->character, IN_ROOM(d->character));
-		SEND_TO_Q(d, MENU);
+		SEND_TO_Q(d, "%s", MENU);
 		STATE(d) = CON_MENU;
 		break;
 

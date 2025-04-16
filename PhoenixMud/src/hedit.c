@@ -323,7 +323,7 @@ void hedit_parse(struct descriptor_data *d, char *arg)
 		 d->backstr = NULL;
 		 if (OLC_HELP(d)->entry) 
 		    {
-		    SEND_TO_Q(d,OLC_HELP(d)->entry);
+		    SEND_TO_Q(d, "%s", OLC_HELP(d)->entry);
 		    d->backstr = str_dup(OLC_HELP(d)->entry);
 		    }
 		 d->str = &OLC_HELP(d)->entry;

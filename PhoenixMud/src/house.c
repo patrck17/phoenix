@@ -558,7 +558,7 @@ void hcontrol_build_house(struct char_data * ch, char *arg)
    arg = one_argument(arg, arg1);
    if (!*arg1)
       {
-      send_to_char(ch,HCONTROL_FORMAT);
+      send_to_char(ch, "%s", HCONTROL_FORMAT);
       release_buffer(arg1);
       return;
       }
@@ -580,7 +580,7 @@ void hcontrol_build_house(struct char_data * ch, char *arg)
    arg = one_argument(arg, arg1);
    if (!*arg1)
       {
-      send_to_char(ch,HCONTROL_FORMAT);
+      send_to_char(ch, "%s", HCONTROL_FORMAT);
       release_buffer(arg1);
       return;
       }
@@ -613,7 +613,7 @@ void hcontrol_build_house(struct char_data * ch, char *arg)
    one_argument(arg, arg1);
    if (!*arg1)
       {
-      send_to_char(ch,HCONTROL_FORMAT);
+      send_to_char(ch, "%s", HCONTROL_FORMAT);
       release_buffer(arg1);
       return;
       }
@@ -655,7 +655,7 @@ void hcontrol_destroy_house(struct char_data * ch, char *arg)
 
    if (!*arg)
       {
-      send_to_char(ch, HCONTROL_FORMAT);
+      send_to_char(ch, "%s", HCONTROL_FORMAT);
       return;
       }
    if ((i = find_house(atoi(arg))) < 0)
@@ -702,7 +702,7 @@ void hcontrol_pay_house(struct char_data * ch, char *arg)
    int i;
 
    if (!*arg)
-      send_to_char(ch, HCONTROL_FORMAT);
+      send_to_char(ch, "%s", HCONTROL_FORMAT);
    else if ((i = find_house(atoi(arg))) < 0)
       send_to_char(ch, "Unknown house.\r\n");
    else
@@ -743,7 +743,7 @@ ACMD(do_hcontrol)
    else if (is_abbrev(arg1, "show"))
       hcontrol_list_houses(ch);
    else
-      send_to_char(ch, HCONTROL_FORMAT);
+      send_to_char(ch, "%s", HCONTROL_FORMAT);
 
    release_buffer(arg2);
    release_buffer(arg1);
