@@ -353,72 +353,58 @@ void assign_triggers(void *i, int type)
    int rnum;
    struct trig_proto_list *trg_proto;
 
-   switch (type)
-      {
-       case MOB_TRIGGER:
-	  mob = (char_data *)i;
-	  trg_proto = mob->proto_script;
-	  while (trg_proto) 
-	     {
-	     rnum = real_trigger(trg_proto->vnum);
-	     if (rnum==-1) 
-		{
-		log("SYSERR: trigger #%ld non-existant, for mob #%ld",
-			trg_proto->vnum, mob_index[mob->nr].vnum);
-		}
-	     else
-		{
-		if (!SCRIPT(mob))
-		   CREATE(SCRIPT(mob), struct script_data, 1);
-		add_trigger(SCRIPT(mob), read_trigger(rnum), -1);
-		}
-	     trg_proto = trg_proto->next;
-	     }
-	  break;
-       case OBJ_TRIGGER:
-	  obj = (obj_data *)i;
-	  trg_proto = obj->proto_script;
-	  while (trg_proto) 
-	     {
-	     rnum = real_trigger(trg_proto->vnum);
-	     if (rnum==-1) 
-		{
-		log("SYSERR: trigger #%ld non-existant, for obj #%ld",
-			trg_proto->vnum, obj_index[obj->item_number].vnum);
-		}
-	     else 
-		{
-		if (!SCRIPT(obj))
-		   CREATE(SCRIPT(obj), struct script_data, 1);
-		add_trigger(SCRIPT(obj), read_trigger(rnum), -1);
-		}
-	     trg_proto = trg_proto->next;
-	     }
-	  break;
-       case WLD_TRIGGER:
-	  room = (struct room_data *)i;
-	  trg_proto = room->proto_script;
-	  while (trg_proto) 
-	     {
-	     rnum = real_trigger(trg_proto->vnum);
-	     if (rnum==-1) 
-		{
-		log("SYSERR: trigger #%ld non-existant, for room #%ld",
-			trg_proto->vnum, room->number);
-		}
-	     else
-		{
-		if (!SCRIPT(room))
-		   CREATE(SCRIPT(room), struct script_data, 1);
-		add_trigger(SCRIPT(room), read_trigger(rnum), -1);
-		}
-	     trg_proto = trg_proto->next;
-	     }
-	  break;
-       default:
-	  log("SYSERR: unknown type for assign_triggers()");
-	  break;
-      }
+   switch (type) {
+      case MOB_TRIGGER:
+         mob = (char_data *)i;
+         trg_proto = mob->proto_script;
+         while (trg_proto) {
+            rnum = real_trigger(trg_proto->vnum);
+            if (rnum == -1) {
+               log("SYSERR: trigger #%ld non-existant, for mob #%ld",
+                  trg_proto->vnum, mob_index[mob->nr].vnum);
+            } else {
+               if (!SCRIPT(mob))
+                  CREATE(SCRIPT(mob), struct script_data, 1);
+               add_trigger(SCRIPT(mob), read_trigger(rnum), -1);
+            }
+            trg_proto = trg_proto->next;
+         }
+         break;
+      case OBJ_TRIGGER:
+         obj = (obj_data *)i;
+         trg_proto = obj->proto_script;
+         while (trg_proto) {
+            rnum = real_trigger(trg_proto->vnum);
+            if (rnum == -1) {
+               log("SYSERR: trigger #%ld non-existant, for obj #%ld",
+                  trg_proto->vnum, obj_index[obj->item_number].vnum);
+            } else {
+               if (!SCRIPT(obj)) {
+                  CREATE(SCRIPT(obj), struct script_data, 1);
+               }
+               add_trigger(SCRIPT(obj), read_trigger(rnum), -1);
+            }
+            trg_proto = trg_proto->next;
+         }
+         break;
+      case WLD_TRIGGER:
+         room = (struct room_data *)i;
+         trg_proto = room->proto_script;
+         while (trg_proto) {
+            rnum = real_trigger(trg_proto->vnum);
+            if (rnum == -1) {
+               log("SYSERR: trigger #%ld non-existant, for room #%ld",
+                  trg_proto->vnum, room->number);
+            } else {
+               if (!SCRIPT(room))
+                  CREATE(SCRIPT(room), struct script_data, 1);
+               add_trigger(SCRIPT(room), read_trigger(rnum), -1);
+            }
+            trg_proto = trg_proto->next;
+         }
+         break;
+      default:
+         log("SYSERR: unknown type for assign_triggers()");
+         break;
+   }
 }
-
-
