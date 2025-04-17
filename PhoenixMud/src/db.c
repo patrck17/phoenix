@@ -5799,7 +5799,6 @@ void load_dg_quests(void)
     while ((token = strtok(NULL, " \r\n"))) {
       quest->completed_by = (int *)realloc(quest->completed_by, ++quest->num_completed * sizeof(int));
       quest->completed_by[quest->num_completed-1] = atoi(token);
-      log("%d has completed %s.", atoi(token), quest_name);
     }
   }
   fclose(fp);
