@@ -623,127 +623,103 @@ void read_gm_line(FILE * gm_f, char *string, void *data)
   release_buffer(buf);
   }
 
-void boot_the_guilds(FILE * gm_f, char *filename, int rec_count)
-  {
-  char *buf;
-  char *buf2=get_buffer(256);
-  int temp;
-  int done = 0;
-  static char line[256];
+void boot_the_guilds(FILE * gm_f, char *filename, int rec_count) {
+  char *buf2 = get_buffer(256);
   int linenum;
   int version;
 
-  version =1;
+  version = 1;
 
   sprintf(buf2, "beginning of GM file %s", filename);
 
-  while (!done)
-    {
-    buf = fread_string(gm_f, buf2);
+  for (;;) {
+    char *buf = fread_string(gm_f, buf2);
 
-    if(*buf=='@')
-      {
-      if(sscanf(buf,"@Version: %d",&version)!=1)
-        {
-        log("SYSERR: Format error in %s #%d",filename, rec_count);
-        log("SYSERR: ...Line: %s\n",buf);
+    if (*buf == '@') {
+      if (sscanf(buf, "@Version: %d", &version) != 1) {
+        log("SYSERR: Format error in %s #%d", filename, rec_count);
+        log("SYSERR: ...Line: %s\n", buf);
         exit(1);
-        }
       }
-    else      if (*buf == '#')   /* New Trainer */
-      {
+      free(buf);
+    } else if (*buf == '#') { /* New Trainer */
+
+      int temp;
       sscanf(buf, "#%d\n", &temp);
       sprintf(buf2, "GM #%d in GM file %s", temp, filename);
-      /*  free(buf);*/  /* Plug memory leak! */
       if (!top_guild)
         CREATE(gm_index, struct guild_master_data, rec_count);
 
       GM_NUM(top_guild) = temp;
       clear_skills(top_guild);
 
-      if(!get_line(gm_f,line)||(sscanf(line,"%d",&temp)!=1))
-        {
+      char line[256];
+      if (!get_line(gm_f, line) || (sscanf(line, "%d", &temp) != 1)) {
         log("SYSERR: Format error in 1st skill of guild #%d (%s)",
-            GM_NUM(top_guild),line);
+            GM_NUM(top_guild), line);
         exit(1);
-        }
-      linenum=1;
-      while( temp > -1)
-        {
+      }
+
+      linenum = 1;
+      while (temp > -1)
+      {
         gm_index[top_guild].skills_and_spells[(int)temp] = 1;
         linenum++;
-        if(!get_line(gm_f,line)||(sscanf(line,"%d",&temp)!=1))
-          {
-          log("SYSERR: Format error in skill #%d of guild #%d (%s)",
-              linenum,GM_NUM(top_guild),line);
-          exit(1);
-          }
-        }
-
-      if(!get_line(gm_f,line)||(sscanf(line,"%f",&GM_CHARGE(top_guild))!=1))
+        if (!get_line(gm_f, line) || (sscanf(line, "%d", &temp) != 1))
         {
-        log("SYSERR: Format error in cost line of guild #%d (%s)",
-            GM_NUM(top_guild),line);
-        exit(1);
+          log("SYSERR: Format error in skill #%d of guild #%d (%s)", linenum, GM_NUM(top_guild), line);
+          exit(1);
         }
+      }
+
+      if (!get_line(gm_f, line) || (sscanf(line, "%f", &GM_CHARGE(top_guild)) != 1))
+      {
+        log("SYSERR: Format error in cost line of guild #%d (%s)", GM_NUM(top_guild), line);
+        exit(1);
+      }
 
       gm_index[top_guild].no_such_skill = fread_string(gm_f, buf2);
       gm_index[top_guild].not_enough_gold = fread_string(gm_f, buf2);
 
-      if(!get_line(gm_f,line)||
-          (sscanf(line,"%d %d %d", &GM_TYPE(top_guild),&GM_MINLVL(top_guild),
-                  &GM_MAXLVL(top_guild))!=3))
-        {
+      if (!get_line(gm_f, line) || (sscanf(line, "%d %d %d", &GM_TYPE(top_guild), &GM_MINLVL(top_guild), &GM_MAXLVL(top_guild)) != 3)) {
         log("SYSERR: Format error in type line of guild #%d (%s)",
-            GM_NUM(top_guild),line);
+            GM_NUM(top_guild), line);
         exit(1);
-        }
+      }
 
-      if(!get_line(gm_f,line)||
-          (sscanf(line,"%d", &GM_TRAINER(top_guild))!=1))
-        {
+      if (!get_line(gm_f, line) || (sscanf(line, "%d", &GM_TRAINER(top_guild)) != 1)) {
         log("SYSERR: Format error in trainer line of guild #%d (%s)",
-            GM_NUM(top_guild),line);
+            GM_NUM(top_guild), line);
         exit(1);
-        }
+      }
 
       GM_TRAINER(top_guild) = real_mobile(GM_TRAINER(top_guild));
 
-      if(!get_line(gm_f,line)||
-          (sscanf(line,"%d",&GM_WITH_WHO(top_guild))!=1))
-        {
-        log("SYSERR: Format error in with_who line of guild #%d (%s)",
-            GM_NUM(top_guild),line);
+      if (!get_line(gm_f, line) || (sscanf(line, "%d", &GM_WITH_WHO(top_guild)) != 1)) {
+        log("SYSERR: Format error in with_who line of guild #%d (%s)", GM_NUM(top_guild), line);
         exit(1);
-        }
+      }
 
-      if(!get_line(gm_f,line)||(sscanf(line,"%d", &GM_OPEN(top_guild))!=1))
-        {
-        log("SYSERR: Format error in open line of guild #%d (%s)",
-            GM_NUM(top_guild),line);
+      if (!get_line(gm_f, line) || (sscanf(line, "%d", &GM_OPEN(top_guild)) != 1)) {
+        log("SYSERR: Format error in open line of guild #%d (%s)", GM_NUM(top_guild), line);
         exit(1);
-        }
+      }
 
-      if(!get_line(gm_f,line)||(sscanf(line,"%d", &GM_CLOSE(top_guild))!=1))
-        {
-        log("SYSERR: Format error in close line of guild #%d (%s)",
-            GM_NUM(top_guild),line);
+      if (!get_line(gm_f, line) || (sscanf(line, "%d", &GM_CLOSE(top_guild)) != 1)) {
+        log("SYSERR: Format error in close line of guild #%d (%s)", GM_NUM(top_guild), line);
         exit(1);
-        }
+      }
 
       GM_FUNC(top_guild) = 0;
       top_guild++;
-      }
-    else
-      {
-      if (*buf == '$')  /* EOF */
-        done = TRUE;
-      /*free(buf);*/  /* Plug memory leak! */
-      }
+      free(buf);
+    } else if (*buf == '$') { /* EOF */
+      free(buf);
+      break;
     }
-  release_buffer(buf2);
   }
-
+  release_buffer(buf2);
+}
 
 void assign_the_gms(void)
   {
