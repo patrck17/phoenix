@@ -594,82 +594,76 @@ int Crash_write_rentcode(struct char_data * ch, FILE * fl,
 
 /* so this is gonna be the auto equip (hopefully) */
 void auto_equip(struct char_data *ch, struct obj_data *obj, int locate)
-   {
+{
    int j;
 
-   if (locate > 0)
-      {
+   if (locate > 0) {
       /* was worn */
-      switch (j = locate-1)
-         {
+      switch (j = locate - 1) {
          case WEAR_FINGER_R:
          case WEAR_FINGER_L:
-            if (!CAN_WEAR(obj,ITEM_WEAR_FINGER)) /* not fitting :( */
+            if (!CAN_WEAR(obj, ITEM_WEAR_FINGER)) /* not fitting :( */
                locate = 0;
             break;
          case WEAR_NECK_1:
          case WEAR_NECK_2:
-            if (!CAN_WEAR(obj,ITEM_WEAR_NECK))
+            if (!CAN_WEAR(obj, ITEM_WEAR_NECK))
                locate = 0;
             break;
          case WEAR_BODY:
-            if (!CAN_WEAR(obj,ITEM_WEAR_BODY))
+            if (!CAN_WEAR(obj, ITEM_WEAR_BODY))
                locate = 0;
             break;
          case WEAR_HEAD:
-            if (!CAN_WEAR(obj,ITEM_WEAR_HEAD))
+            if (!CAN_WEAR(obj, ITEM_WEAR_HEAD))
                locate = 0;
             break;
          case WEAR_LEGS:
-            if (!CAN_WEAR(obj,ITEM_WEAR_LEGS))
+            if (!CAN_WEAR(obj, ITEM_WEAR_LEGS))
                locate = 0;
             break;
          case WEAR_FEET:
-            if (!CAN_WEAR(obj,ITEM_WEAR_FEET))
+            if (!CAN_WEAR(obj, ITEM_WEAR_FEET))
                locate = 0;
             break;
          case WEAR_HANDS:
-            if (!CAN_WEAR(obj,ITEM_WEAR_HANDS))
+            if (!CAN_WEAR(obj, ITEM_WEAR_HANDS))
                locate = 0;
             break;
          case WEAR_ARMS:
-            if (!CAN_WEAR(obj,ITEM_WEAR_ARMS))
+            if (!CAN_WEAR(obj, ITEM_WEAR_ARMS))
                locate = 0;
             break;
          case WEAR_SHIELD:
-            if (!CAN_WEAR(obj,ITEM_WEAR_SHIELD))
+            if (!CAN_WEAR(obj, ITEM_WEAR_SHIELD))
                locate = 0;
             break;
          case WEAR_ABOUT:
-            if (!CAN_WEAR(obj,ITEM_WEAR_ABOUT))
+            if (!CAN_WEAR(obj, ITEM_WEAR_ABOUT))
                locate = 0;
             break;
          case WEAR_WAIST:
-            if (!CAN_WEAR(obj,ITEM_WEAR_WAIST))
+            if (!CAN_WEAR(obj, ITEM_WEAR_WAIST))
                locate = 0;
             break;
          case WEAR_WRIST_R:
          case WEAR_WRIST_L:
-            if (!CAN_WEAR(obj,ITEM_WEAR_WRIST))
+            if (!CAN_WEAR(obj, ITEM_WEAR_WRIST))
                locate = 0;
             break;
          case WEAR_WIELD_1:
          case WEAR_WIELD_2:
-            if (!CAN_WEAR(obj,ITEM_WEAR_WIELD))
+            if (!CAN_WEAR(obj, ITEM_WEAR_WIELD))
                locate = 0;
             break;
          case WEAR_HOLD_1:
          case WEAR_HOLD_2:
-            if (!CAN_WEAR(obj,ITEM_WEAR_HOLD) &&
-                    !(IS_WARRIOR(ch) &&
-                      CAN_WEAR(obj,ITEM_WEAR_WIELD) &&
-                      (GET_OBJ_TYPE(obj) == ITEM_WEAPON)))
+            if (!CAN_WEAR(obj, ITEM_WEAR_HOLD))
                locate = 0;
             break;
-            /* New EQ positions--Aleks */
          case WEAR_EAR_L:
          case WEAR_EAR_R:
-            if (!CAN_WEAR(obj,ITEM_WEAR_EAR))
+            if (!CAN_WEAR(obj, ITEM_WEAR_EAR))
                locate = 0;
             break;
          case WEAR_FACE:
@@ -680,36 +674,56 @@ void auto_equip(struct char_data *ch, struct obj_data *obj, int locate)
             if (!CAN_WEAR(obj, ITEM_WEAR_BACK))
                locate = 0;
             break;
-         case WEAR_HEART: 
+         case WEAR_HEART:
             break;
          default:
             locate = 0;
-         }
-      if (locate > 0)
-         {
-         if (!GET_EQ(ch,j))
-            {
-            /* check ch's alignment to prevent $M from being zapped through auto-equip */
-            /* check also if ch is appropriate level to wear item -Nomikos 12/26/04 */
-            if (((IS_OBJ_STAT(obj, ITEM_ANTI_EVIL) && IS_EVIL(ch)) ||
-                    (IS_OBJ_STAT(obj, ITEM_ANTI_GOOD) && IS_GOOD(ch)) ||
-                    (IS_OBJ_STAT(obj, ITEM_ANTI_NEUTRAL) && IS_NEUTRAL(ch)) ||
-                    !can_wear_lr(ch, obj, FALSE))&&
-                    GET_LEVEL(ch)<LVL_IMMORT && REMORT_LEVEL(ch) < TRIPLE_REMORT)
+      }
+      if (GET_EQ(ch, j)) locate = 0;
+      if (IS_OBJ_STAT(obj, ITEM_ANTI_EVIL)    && IS_EVIL(ch)   ) locate = 0;
+      if (IS_OBJ_STAT(obj, ITEM_ANTI_GOOD)    && IS_GOOD(ch)   ) locate = 0;
+      if (IS_OBJ_STAT(obj, ITEM_ANTI_NEUTRAL) && IS_NEUTRAL(ch)) locate = 0;
+      if (!can_wear_lr(ch, obj, FALSE) && GET_LEVEL(ch) < LVL_IMMORT && REMORT_LEVEL(ch) < TRIPLE_REMORT) locate = 0;
 
-               locate = 0;
-            else
-               equip_char(ch, obj, j);
+      // If a playerfile was corrupted, the character may have been created with
+      // their original equipment (which is in a differnet file) AND given the
+      // starting equipment. This can result in characters with saved equipment
+      // for more than two hands.
+      if (j == WEAR_SHIELD || j == WEAR_WIELD_1 || j == WEAR_WIELD_2 || j == WEAR_HOLD_1 || j == WEAR_HOLD_2) {
+         int hands = 0;
+
+         if (GET_EQ(ch, WEAR_SHIELD)) hands++;
+         if (GET_EQ(ch, WEAR_HOLD_1)) hands++;
+         if (GET_EQ(ch, WEAR_HOLD_2)) hands++;
+
+         if (GET_EQ(ch, WEAR_WIELD_1)) {
+            struct obj_data * weapon = GET_EQ(ch, WEAR_WIELD_1);
+            if (TWO_HANDED(weapon)) {
+               hands++;
             }
-         else  /* oops - saved player with double equipment[j]? */
+            hands++;
+         } 
+
+         if (GET_EQ(ch, WEAR_WIELD_2)) {
+            struct obj_data * weapon = GET_EQ(ch, WEAR_WIELD_2);
+            if (TWO_HANDED(weapon)) {
+               hands++;
+            }
+            hands++;
+         }
+
+         if (hands >= 2) {
             locate = 0;
          }
       }
-   if (locate <= 0)
-      obj_to_char(obj, ch);
    }
 
-
+   if (locate > 0) {
+      equip_char(ch, obj, j);
+   } else {
+      obj_to_char(obj, ch);
+   }
+}
 
 #define MAX_BAG_ROW 5
 /* should be enough - who would carry a bag in a bag in a bag in a
