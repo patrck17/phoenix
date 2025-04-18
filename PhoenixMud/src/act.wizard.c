@@ -6455,26 +6455,47 @@ ACMD(do_show)
      page_string(ch->desc, buf, TRUE, "");
    }
    break;
-   case SHOW_GREMORT_RECORDS: {
+   case SHOW_GREMORT_RECORDS:
+   {
       char *buf2 = get_buffer(MAX_STRING_LENGTH);
       strcpy(buf2, argument);
       strtok(buf2, " ");
       buf[0] = '\x0';
       char *name = strtok(NULL, " ");
-      if (!name) {
-        send_to_char(ch, "Usage: show gremort_record [player_name]\r\n\r\n");
+      if (!name)
+      {
+         send_to_char(ch, "Usage: show gremort_record [player_name]\r\n\r\n");
+         release_buffer(buf2);
+         break;
       }
-      int counter = 1;
+      name = stolower(strdup(name));
+      int counter = 0;
       for (i = 0; i < nExamRecords; i++) {
-        strcpy(buf2, argument);
-        strtok(buf2, " ");
-        if (!name || starts_with(examRecords[i].player_name, name)) {
-          char buf3[1024];
-          strftime(buf3, 1000, "%a %b %d %Y %H:%M:%S", localtime(&examRecords[i].date_taken));
-          sprintf(buf2, "%3d. %s %8s - %s : %s\r\n", counter++, buf3, gremort_exam_types[examRecords[i].exam_type], examRecords[i].player_name, gremort_exam_results[examRecords[i].result]);
-          strcat(buf, buf2);
-        }
+         char* cmpname = stolower(strdup(examRecords[i].player_name));
+         int match = starts_with(cmpname, name);
+         free(cmpname);
+
+         if (!match) continue;
+
+         snprintf(buf2, MAX_STRING_LENGTH, "%3d. ", ++counter);
+
+         strftime(buf2 + strlen(buf2), MAX_STRING_LENGTH - strlen(buf2), "%a %b %d %Y %H:%M:%S ", localtime(&examRecords[i].date_taken));
+
+         snprintf(buf2 + strlen(buf2),
+            MAX_STRING_LENGTH - strlen(buf2),
+            "%8s - %s : %s\r\n",
+            gremort_exam_types[examRecords[i].exam_type],
+            examRecords[i].player_name,
+            gremort_exam_results[examRecords[i].result]
+         );
+
+         if (strlen(buf) + strlen(buf2) > 32750) {
+            break;
+         }
+
+         strcat(buf, buf2);
       }
+      free(name);
       page_string(ch->desc, buf, TRUE, "");
       release_buffer(buf2);
       break;

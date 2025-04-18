@@ -1221,21 +1221,14 @@ int price_adjust (struct char_data * ch, struct char_data * vendor, int price)
 }
 
 /* added nomikos 10-05-02 either i'm stupid or there isn't one of these */
-char *stolower (char * string)
-{
-   char *temp, tempch;
-   
-   for (temp=string; *string!='\0';string++)
-   {
-      if (isupper(*string))
-      {
-         tempch = (char)tolower(*string); 
-         *string = tempch;
-      }
+char *stolower (char * string) {
+   char* ptr = string;
+
+   while (*ptr) {
+      *ptr++ = tolower(*ptr);
    }
 
-   string = temp;
-   return (temp);
+   return string;
 }
 
 /* Case insensitive strstr -- search for the first occurance of "key" in "string".
