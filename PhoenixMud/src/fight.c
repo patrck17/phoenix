@@ -1603,7 +1603,6 @@ void make_corpse(struct char_data * ch, struct char_data * killer)
 /* When ch kills victim */
 void change_alignment(struct char_data * ch, struct char_data * victim)
    {
-   int temp;
    /*
     * new alignment change algorithm: if you kill a monster with alignment A, 
     * you move 1/16th of the way to having alignment -A.  Simple and fast. 
@@ -1622,7 +1621,6 @@ void change_alignment(struct char_data * ch, struct char_data * victim)
          }
       else /*neutral*/
          {
-         temp=GET_ALIGNMENT(victim)-250;
          GET_ALIGNMENT(ch)+=((-GET_ALIGNMENT(victim)/ADJUST_NEUTRAL_ALIGN(ch)));
          }
       }
@@ -1638,7 +1636,6 @@ void change_alignment(struct char_data * ch, struct char_data * victim)
          }
       else /*neutral*/
          {
-         temp=GET_ALIGNMENT(victim)+250;
          GET_ALIGNMENT(ch)+=((-GET_ALIGNMENT(victim)/ADJUST_NEUTRAL_ALIGN(ch)));
          }
       }
@@ -2060,7 +2057,6 @@ void perform_group_gain(struct char_data * ch, int base,
    {
    int share,max_gain;
    int exp_after_lim;
-   int min_kills;
 
    if (REMORT_LEVEL(ch) == TRIPLE_REMORT)
    {
@@ -2645,15 +2641,21 @@ int Obj_Imm_Dam(struct obj_data *tobj,int ImmBit)
    return 1;
    }
 
-int damage_obj_chance()
+/* Nomikos 5/4/2025 - Added ability to better avoid equipment damage. Previously was 4, now between 1 and 4 */
+int damage_obj_chance(int dex, int wis)
    {
-   /*int damage_chance=0;
-   float damage_float=0.0;
-   damage_chance = (float)tslots/20;
-   damage_float *= damage_float;
-   damage_float /=4;
-   damage_chance =damage_float -1;*/
-   return MAX(1,4);
+   float average, modifier;
+	   
+   /* Average Dexterity and Wisdom. They play equal parts in minimizing EQ damage */
+   /* Keep it between 0 and 25 */
+   average = MAX(MIN((float)(dex + wis) / 2.0, 25.0), 0.0);
+	   
+   /* Normalize and multiply by 3, giving us a range between 0 and 3 */
+   modifier = (average / 25.0) * 3.0;
+
+   /* At a maximum of 25 dex/wis, obtain a 4x reduction in equipment damage. */
+   /* At a minimum of 0 dex/wis (w/affects), keep same as before, at 4 */
+   return MAX(1, (int)(4.0 - modifier));
    }
 
 int damage_obj_range(int base,int pos,int material,int ImmBit)
@@ -2683,7 +2685,6 @@ int damage(struct char_data * ch, struct char_data * victim, int dam,
    /* char local_buf[256];*/ /* asl --Erika */
    bool missile=FALSE;
    struct obj_data * obj;
-   int ret_val=0;
    int range,damage_chance;
    int damage_item=0;
    int flee_chance;
@@ -2853,7 +2854,7 @@ int damage(struct char_data * ch, struct char_data * victim, int dam,
             {
             range = damage_obj_range(500,j,victim->equipment[j]->material,ImmBit);
             /* log("condition after : %d, %s ",condition,equipment_types[j]); */
-            damage_chance = damage_obj_chance();
+            damage_chance = damage_obj_chance(GET_DEX(victim), GET_WIS(victim));
             /* log("damage chance : %d, in  %d (tslot: %d) ",damage_chance,condition,GET_OBJ_TSLOTS(victim->equipment[j])); */
 
             if (number(0, range) < damage_chance)
@@ -2881,7 +2882,8 @@ int damage(struct char_data * ch, struct char_data * victim, int dam,
                     (GET_OBJ_TSLOTS(GET_EQ(victim,j)) != INDESTRUCTABLE))
                {
                obj=unequip_char(victim,j);
-               obj_to_room(obj,IN_ROOM(victim));
+               /* Nomikos 5/2/2025: don't want to lose it
+	       ** obj_to_room(obj,IN_ROOM(victim)); */
                scrap_item(obj,victim);
                }
             }
@@ -3201,7 +3203,6 @@ int damage(struct char_data * ch, struct char_data * victim, int dam,
       if (!getOutOfDeathFree) {
 	die(victim,ch);
       }
-      ret_val=-1;
 
       /* Autosplit done in do_get -Anduin 7/3/97 */
       if (!IS_NPC(ch) && isnpc && !missile)
