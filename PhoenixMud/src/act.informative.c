@@ -2999,46 +2999,103 @@ ACMD(do_where)
 	release_buffer(arg);
 }
 
+/* 4/30/2025 Nomikos - Added ability for mortals to list zones based on criteria */
 ACMD(do_zinfo)
 {
-	char *buf = get_buffer(32750);
-
 	/* check these three things so that techno-mudders can't abuse it */
 	if (AFF_FLAGGED(ch, AFF_BLIND)) {
-		send_to_char(ch,
-			     "You can't see a damned thing, you're blind!\r\n");
-		release_buffer(buf);
+		send_to_char(ch, "You can't see a damned thing, you're blind!\r\n");
 		return;
 	}
 	if (IS_DARK(IN_ROOM(ch)) && !CAN_SEE_IN_DARK(ch)) {
 		send_to_char(ch, "It is pitch black...\r\n");
-		release_buffer(buf);
 		return;
 	}
-	/*
-	   if (!IS_NPC(ch) && PRF_FLAGGED(ch, PRF_BRIEF))
-	   {
-	   send_to_char(ch,"You have brief on... what do you care who made the zone???\r\n");
-	   release_buffer(buf);
-	   return;
-	   }
-	 */
 
-	sprintf(buf + strlen(buf), "Zone: %s\r\n",
-		zone_table[world[IN_ROOM(ch)].zone].name);
-	sprintf(buf + strlen(buf), " Author:    %s\r\n",
-		zone_table[world[IN_ROOM(ch)].zone].author);
-	sprintf(buf + strlen(buf), " Editor:    %s\r\n",
-		zone_table[world[IN_ROOM(ch)].zone].editor);
-	sprintf(buf + strlen(buf), " Levels:    %s\r\n",
-		zone_table[world[IN_ROOM(ch)].zone].levels);
-	sprintf(buf + strlen(buf), " Source:    %s\r\n",
-		zone_source[(int)zone_table[world[IN_ROOM(ch)].zone].source]);
-	sprintf(buf + strlen(buf), " Continent: %s\r\n",
-		zone_continent[(int)zone_table[world[IN_ROOM(ch)].zone].
-			       continent][0]);
+	char* whatkind = get_buffer(MAX_INPUT_LENGTH);
+	char* searchstring = get_buffer(MAX_INPUT_LENGTH);
 
-	send_to_char(ch, "%s", buf);
+	two_arguments(argument, whatkind, searchstring);
+
+	if (strlen(whatkind) == 0) {
+		send_to_char(ch, "Zone: %s\r\n", zone_table[world[IN_ROOM(ch)].zone].name);
+		send_to_char(ch, " Author:    %s\r\n", zone_table[world[IN_ROOM(ch)].zone].author);
+		send_to_char(ch, " Editor:    %s\r\n", zone_table[world[IN_ROOM(ch)].zone].editor);
+		send_to_char(ch, " Levels:    %s\r\n", zone_table[world[IN_ROOM(ch)].zone].levels);
+		send_to_char(ch, " Source:    %s\r\n", zone_source[(int)zone_table[world[IN_ROOM(ch)].zone].source]);
+		send_to_char(ch, " Continent: %s\r\n", zone_continent[zone_table[world[IN_ROOM(ch)].zone].continent][0]);
+
+		release_buffer(whatkind);
+		release_buffer(searchstring);
+		return;
+	} 
+
+	int target = 0;
+	if (is_abbrev(whatkind, "zones"))
+		target = 1;
+	else if (is_abbrev(whatkind, "levels"))
+		target = 2;
+	else if (is_abbrev(whatkind, "continent"))
+		target = 3;
+
+	if (target == 0 || strlen(searchstring) == 0) {
+		send_to_char(ch, "Usage:\r\n\r\n  zinfo\r\n   - or -\r\n  zinfo {zones | levels | continent} <target>\r\n");
+
+		release_buffer(whatkind);
+		release_buffer(searchstring);
+		return;
+	}
+
+	char* buf = get_buffer(32750);
+	sprintf(buf, "#   Zone                           Author     Levels     Continent\r\n");
+
+	int found = 0;
+	for (zone_rnum ii=0; ii<=top_of_zone_table; ii++) {
+		char* subject = NULL;
+
+		switch (target) {
+			case 1: //zones
+				subject = strdup(zone_table[ii].name);
+				break;
+			case 2: //levels
+				subject = strdup(zone_table[ii].levels);
+				break;
+			case 3: //continents
+				subject = strdup(zone_continent[zone_table[ii].continent][0]);
+				break;
+		}
+
+		// Is this necessary? Do we actually have color in any of these?
+		strip_color(subject);
+
+		if (!isname(searchstring, subject)) {
+			free(subject);
+			continue;
+		}
+
+		if (strlen(buf) > 32500) {
+			sprintf(buf + strlen(buf), "Buffer limit exceeded, you need to refine your search\r\n");
+			free(subject);
+			break;
+		}
+
+		sprintf(buf + strlen(buf), "%-3d %-30.30s&n %-10.10s %-10.10s %-20.20s\r\n",
+				++found,
+				zone_table[ii].name,
+				zone_table[ii].author,
+				zone_table[ii].levels,
+				zone_continent[zone_table[ii].continent][0]);
+
+		free(subject);
+	}
+
+	if (found == 0)
+		sprintf(buf + strlen(buf), "Please refine your search.\r\n");
+
+	page_string(ch->desc, buf, TRUE, "");
+
+	release_buffer(searchstring);
+	release_buffer(whatkind);
 	release_buffer(buf);
 }
 
