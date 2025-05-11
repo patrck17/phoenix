@@ -164,7 +164,7 @@ void show_obj_i_to_char(struct obj_data *object, struct char_data *ch,
 			else
 				condition =
 				    (GET_OBJ_CSLOTS(object) * 10) /
-				    GET_OBJ_TSLOTS(object);
+				    GET_OBJ_OSLOTS(object); /* out of original, not total */
 
 			if ((GET_OBJ_CSLOTS(object) == 0)
 			    && (GET_OBJ_TSLOTS(object) == 0))
@@ -1403,9 +1403,12 @@ ACMD(do_examine)
 		else
 			condition =
 			    (GET_OBJ_CSLOTS(tmp_object) * 100) /
-			    GET_OBJ_TSLOTS(tmp_object);
+			    GET_OBJ_OSLOTS(tmp_object);
+		
 		if (condition == 0)
 			send_to_char(ch, "This looks indestructable!\r\n");
+		else if (condition < 0)
+			send_to_char(ch, "This looks broken.\r\n");
 		else if (condition <= 10)
 			send_to_char(ch,
 				     "This looks in extremley poor condition.\r\n");
