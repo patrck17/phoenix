@@ -1014,7 +1014,14 @@ void heartbeat()
 /*   if (!(pulse % PASSES_PER_SEC))
       tick_grenade();
 */
- 
+
+   /* Changed skill practice lag from one practice per tic to     **
+   ** two practices per tic -Nomikos 5/22/2025                    */
+   if (!(pulse % ((SECS_PER_MUD_HOUR / 2) * PASSES_PER_SEC))
+      for (i = character_list; i; i = i->next)
+	     if (!IS_NPC(i))
+	        GET_LEARN_TIC(i) = 0;
+	
    if(!(pulse%PULSE_MAGIC))
       for (i = character_list; i; i = i->next)  /* put into event queue */
 	 if (IS_CASTING(i) == TRUE)
