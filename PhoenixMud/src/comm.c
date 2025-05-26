@@ -1017,7 +1017,7 @@ void heartbeat()
 
    /* Changed skill practice lag from one practice per tic to     **
    ** two practices per tic -Nomikos 5/22/2025                    */
-   if (!(pulse % ((SECS_PER_MUD_HOUR / 2) * PASSES_PER_SEC))
+   if (!(pulse % ((SECS_PER_MUD_HOUR / 2) * PASSES_PER_SEC)))
       for (i = character_list; i; i = i->next)
 	     if (!IS_NPC(i))
 	        GET_LEARN_TIC(i) = 0;
