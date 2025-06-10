@@ -1025,7 +1025,7 @@ int weapon_weight_bonus(struct char_data *ch)
    if(!GET_EQ(ch,WEAR_WIELD_1)&&!GET_EQ(ch,WEAR_WIELD_2)) /* no weapon */
       return 3;
    else if(GET_EQ(ch,WEAR_WIELD_2)&&(LAST_HAND_USED(ch)==1)&&
-           (IS_NPC(ch)||GET_SKILL(ch,SKILL_DUAL_WIELD)<=number(1,101)))
+           (IS_NPC(ch)||GET_SKILL(ch,SKILL_DUAL_WIELD) > number(1,101)))
       {
       improve_skill(ch,SKILL_DUAL_WIELD,AUTO_PASS);
       obj=GET_EQ(ch,WEAR_WIELD_2);
