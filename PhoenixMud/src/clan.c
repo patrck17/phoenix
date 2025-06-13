@@ -1307,21 +1307,19 @@ ACMD(do_charter)
          send_to_char(ch,"Format: charter <clan name>\r\n");
          return;
          }
-		 
-      for (i=0;*(clan_name+i)==' ';i++)
-         ;
-      while (cur != NULL)
+      }	 
+
+   for (i=0;*(clan_name+i)==' ';i++)
+      ;
+   while (cur != NULL)
+      {
+      if (!str_cmp(clan_name+i, cur->cl_name) || isname(clan_name+i, cur->cl_name))
          {
-         if (!str_cmp(clan_name+i, cur->cl_name) || isname(clan_name+i, cur->cl_name))
-            {
-            clan_num = cur->cl_number;
-            break;
-            }
-         cur = cur->next;
+         clan_num = cur->cl_number;
+         break;
          }
+      cur = cur->next;
       }
-   else
-      clan_num = GET_CLAN(ch);
 
    release_buffer(clan_name);
 
