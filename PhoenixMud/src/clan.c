@@ -412,10 +412,15 @@ ACMD (do_listmembers)
    int counter = 1;
    cur=clan_list;
 
-   if(GET_CLAN(ch) <= 0 || GET_LEVEL(ch) >= LVL_DGOD)
-      strcpy(clan_name, argument);
+   if (!argument || (*argument == '\0'))
+      {
+      if(GET_CLAN(ch) <= 0 || GET_LEVEL(ch) >= LVL_DGOD)
+          send_to_char(ch, "Usage: claninfo (or listmembers) <clan name>\r\n");
+      else
+         strcpy(clan_name, GET_CLAN_NAME(ch));
+      }
    else
-      strcpy(clan_name, GET_CLAN_NAME(ch));
+      strcpy(clan_name, argument);
 
    for (i=0;*(clan_name+i)==' ';i++)
       ;
