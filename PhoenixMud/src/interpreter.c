@@ -543,7 +543,7 @@ const struct command_info cmd_info[] = {
 	{"close", POS_SITTING, do_gen_door, 0, SCMD_CLOSE},
 	{"cls", POS_DEAD, do_gen_ps, 0, SCMD_CLEAR},
 	{"claninfo", POS_SITTING, do_listmembers, 1, 0},
-	{"clandonation", POS_SITTING, do_clandonation, 1, 0},
+	{"clandonation", POS_SITTING, do_clandonation, LVL_ADMIN, 0},
 	{"clanleader", POS_DEAD, do_clanleader, LVL_SIMP, 0},
 	{"clanpiece", POS_DEAD, do_clanpiece, LVL_SIMP, 0},
 	{"consider", POS_CHANT, do_consider, 0, 0},
