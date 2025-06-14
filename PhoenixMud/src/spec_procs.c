@@ -1512,7 +1512,7 @@ int get_repair_cost(struct obj_data *obj,struct char_data *keeper,
       If not, then it's just the base price. */
       cost = master_base * (1 + (0.5 * reductions));
       }
-   else if (GET_OBJ_CSLOTS(obj) < 1)
+   else
       {
       /* Added in a multiplier for each reduction. Starts at normal, then goes up */
       cost = (reductions + 1) * (GET_OBJ_OSLOTS(obj) + 5 * 
