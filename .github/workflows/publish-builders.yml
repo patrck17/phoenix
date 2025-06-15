@@ -3,7 +3,7 @@ name: Deploy to builders
 on: workflow_dispatch
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
     container:
       image: almalinux:8.9
@@ -18,7 +18,7 @@ jobs:
     - name: Compile code
       run: make
 
-    - name: Upload compiled binary for players
+    - name: Upload compiled binary for builders
       run: |
         echo "${{ secrets.DEV_DEPLOY_KEY }}" > ~/id_ed25519
         chmod 600 ~/id_ed25519

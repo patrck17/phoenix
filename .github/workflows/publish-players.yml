@@ -3,7 +3,7 @@ name: Deploy to players
 on: workflow_dispatch
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
     container:
       image: almalinux:8.9

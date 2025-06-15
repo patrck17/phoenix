@@ -1,4 +1,4 @@
-name: Compile and Deploy using AlmaLinux
+name: Compile using AlmaLinux
 
 on:
   push:
