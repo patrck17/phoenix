@@ -1,7 +1,6 @@
 name: Compile using AlmaLinux
 
-on:
-  push:
+on: push
 
 jobs:
   build:

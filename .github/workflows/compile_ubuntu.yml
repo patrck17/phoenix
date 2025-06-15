@@ -1,7 +1,6 @@
-name: Compile Code on Ubuntu
+name: Compile using on Ubuntu
 
-on:
-  push:
+on: push
 
 jobs:
   build:
