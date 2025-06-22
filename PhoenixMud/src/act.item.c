@@ -864,7 +864,7 @@ ACMD(do_drop)
          return;
          }
       sname = "cdonate";
-      mode = SCMD_DONATE;
+      mode = SCMD_CDONATE;
       RDR = real_room(GET_CLAN_DONATE(ch));
       if (RDR == NOWHERE)
          {
