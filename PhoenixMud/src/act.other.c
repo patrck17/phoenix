@@ -1159,12 +1159,12 @@ ACMD(do_use)
          release_buffer(buf);
          return;
          }
-      if(!IS_NPC(ch) && GET_SKILL(ch,SKILL_READ_MAGIC)<50)
+      if(!IS_NPC(ch) && GET_SKILL(ch,SKILL_READ_MAGIC)<95)
          {
-         GET_SKILL(ch,SKILL_READ_MAGIC)=50;
+         GET_SKILL(ch,SKILL_READ_MAGIC)=95;
          GET_SKILL_LEARN(ch,SKILL_READ_MAGIC)=0;
          }
-      if(!skill_roll(ch,SKILL_READ_MAGIC,0))
+      if(!skill_roll(ch,SKILL_READ_MAGIC,-5))
          {
          send_to_char(ch,"You stumble over the magical incantation and "
                       "the spell fails.\r\n");
