@@ -1100,7 +1100,7 @@ char *sing(int spell)
    case 5:
       return("about a man who lost his hands to the flames of a dragon.");
    case 69:
-      return("a lofty tale of the knights that have conqured this realm.");
+      return("a lofty tale of the knights that have conquered this realm.");
    case 84:
       return("about men who are pure in heart and in mind!\n\r.");
    case 76:
