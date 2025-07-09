@@ -785,12 +785,11 @@ const float race_exp_multipliers[] =
 
 
 struct race_skills_struct race_skills[] = {
-  {RACE_HALFLING, SKILL_SNEAK, 75},
-  {RACE_H_ORC, SKILL_KICK, 10},
-  {RACE_MINOTAUR, SKILL_GORE, 10},
-  {RACE_H_OGRE, SKILL_BERSERK, 20},
-  {RACE_SPRITE,    SPELL_PIXIE_DUST, 10},
-  {RACE_D_ELF,     SPELL_LEVITATE,   15},
+   {RACE_HALFLING,  SKILL_SNEAK,      75},
+   {RACE_H_ORC,     SKILL_KICK,       10},
+   {RACE_H_OGRE,    SKILL_BERSERK,    20},
+   {RACE_SPRITE,    SPELL_PIXIE_DUST, 10},
+   {RACE_D_ELF,     SPELL_LEVITATE,   15},
    {RACE_D_ELF,     SPELL_FAERIE_FIRE,15},
    {RACE_D_ELF,     SKILL_DARKEN,     25},
    {RACE_DRACONIAN, SPELL_LEVITATE,    1},
