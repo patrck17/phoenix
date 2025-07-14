@@ -1250,17 +1250,6 @@ int call_magic(struct char_data * caster, struct char_data * cvict,
 
    if(caster->nr!=real_mobile(DG_CASTER_PROXY))
       {
-      if(casttype !=CAST_BREATH || (casttype==CAST_BREATH && !IS_NPC(caster)))
-         {
-         if (ROOM_FLAGGED(IN_ROOM(caster), ROOM_NOMAGIC)&&
-                 (GET_LEVEL(caster) < LVL_IMPL))
-            {
-            send_to_char(caster,"Your magic fizzles out and dies.\r\n");
-            act("$n's magic fizzles out and dies.",FALSE,caster,0,0,TO_ROOM);
-            CAST_ARG(caster)[0]='\0';
-            return 0;
-            }
-         }
       if (ROOM_FLAGGED(IN_ROOM(caster), ROOM_PEACEFUL) &&
               (SINFO.violent || IS_SET(SINFO.routines, MAG_DAMAGE))&&
               (GET_LEVEL(caster) < LVL_IMPL))
@@ -1272,6 +1261,19 @@ int call_magic(struct char_data * caster, struct char_data * cvict,
          return 0;
          }
       }
+
+      if(casttype !=CAST_BREATH || (casttype==CAST_BREATH && !IS_NPC(caster)))
+         {
+         if (ROOM_FLAGGED(IN_ROOM(caster), ROOM_NOMAGIC)&&
+                 (GET_LEVEL(caster) < LVL_IMPL)&&
+		 (casttype == CAST_SPELL))
+            {
+            send_to_char(caster,"Your magic fizzles out and dies.\r\n");
+            act("$n's magic fizzles out and dies.",FALSE,caster,0,0,TO_ROOM);
+            CAST_ARG(caster)[0]='\0';
+            return 0;
+            }
+         }
    /* determine the type of saving throw */
    if (IS_SET(SINFO.targets, TAR_IGNORE))
       {
