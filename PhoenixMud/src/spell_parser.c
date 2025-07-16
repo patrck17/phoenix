@@ -1260,7 +1260,6 @@ int call_magic(struct char_data * caster, struct char_data * cvict,
          CAST_ARG(caster)[0]='\0';
          return 0;
          }
-      }
 
       if(casttype !=CAST_BREATH || (casttype==CAST_BREATH && !IS_NPC(caster)))
          {
@@ -1274,6 +1273,7 @@ int call_magic(struct char_data * caster, struct char_data * cvict,
             return 0;
             }
          }
+      }
    /* determine the type of saving throw */
    if (IS_SET(SINFO.targets, TAR_IGNORE))
       {
