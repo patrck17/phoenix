@@ -2185,7 +2185,7 @@ void group_gain(struct char_data * ch, struct char_data * victim)
       base=((exp_table[top_level]/1000)*(GET_LEVEL(victim)-killer_level))/(3*tot_levels);
       /*  log ("base: %d",base);  */
       /* base = base + MAX(1, GET_EXP(victim) / (int)((float)0.9 * (float)3 * (float)tot_levels)); */
-      base = base + MAX(1, GET_EXP(victim) / MIN(1, (int)(fight_group_exp_divisor * (float)tot_levels)));
+      base = base + MAX(1, GET_EXP(victim) / MAX(1, (int)(fight_group_exp_divisor * (float)tot_levels)));
       /*  log ("base: %d",base);  */
       }
    else if(tot_members==1)
