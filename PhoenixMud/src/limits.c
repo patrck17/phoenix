@@ -420,7 +420,7 @@ void gain_exp(struct char_data * ch, long gain)
 
 void gain_exp_regardless(struct char_data * ch, long gain, bool show)
    {
-   log tmp_exp;
+   long tmp_exp;
    if (!IS_NPC(ch))
       {
       tmp_exp = GET_EXP_FOR_LEVEL(GET_RACE(ch), GET_CLASS(ch),     GET_LEVEL(ch), REMORT_LEVEL(ch))
