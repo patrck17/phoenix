@@ -420,9 +420,20 @@ void gain_exp(struct char_data * ch, long gain)
 
 void gain_exp_regardless(struct char_data * ch, long gain, bool show)
    {
+   log tmp_exp;
    if (!IS_NPC(ch))
       {
-      GET_EXP(ch) += gain;
+      tmp_exp = GET_EXP_FOR_LEVEL(GET_RACE(ch), GET_CLASS(ch),     GET_LEVEL(ch), REMORT_LEVEL(ch))
+              + GET_EXP_FOR_LEVEL(GET_RACE(ch), GET_CLASS(ch), 1 + GET_LEVEL(ch), REMORT_LEVEL(ch));
+      if ((gain + GET_EXP(ch)) > tmp_exp)
+         {
+         if(GET_LEVEL(ch) < 100)
+            send_to_char(ch, "You must visit your guild before you can gain more experience.\r\n");
+         GET_EXP(ch) = tmp_exp;
+         }
+	  else
+         GET_EXP(ch) += gain;
+		  
       if (GET_EXP(ch) < -1000000)
          GET_EXP(ch) = -1000000;
       }
