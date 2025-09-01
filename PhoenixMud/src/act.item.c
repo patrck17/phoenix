@@ -2208,7 +2208,10 @@ void perform_wear(struct char_data * ch, struct obj_data * obj, int where_pos, i
    if (!((where_pos == WEAR_WIELD_1) || (where_pos == WEAR_WIELD_2) ||
          (where_pos == WEAR_SHIELD) || (where_pos == WEAR_HOLD_1) ||
          (where_pos == WEAR_HOLD_2)))
-      retval = perform_remove(ch, where_pos);
+      {
+      if (GET_EQ(ch, where_pos))
+         retval = perform_remove(ch, where_pos);
+      }
    else if(TWO_HANDED(obj)&&((where_pos==WEAR_WIELD_1)||(where_pos== WEAR_WIELD_2)))
       {
       where_pos=WEAR_WIELD_1;
