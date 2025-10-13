@@ -255,7 +255,7 @@ void perform_tell(struct char_data *ch, struct char_data *vict, char *arg)
    {
    char *buf = get_buffer(MAX_STRING_LENGTH);
 
-   sprintf(buf, "&R$n tells &N, '%s'&n", arg);
+   sprintf(buf, "&R$n tells $N, '%s'&n", arg);
    write_comms(ch, vict, buf, TO_NOTVICT);
    sprintf(buf, "&R$n tells you, '%s'&n", arg);
 
