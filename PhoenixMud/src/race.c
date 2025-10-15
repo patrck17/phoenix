@@ -221,7 +221,7 @@ const struct trait_data trait_info[] = {
      IMM_SLASH, IMM_CHARM|IMM_SLEEP|IMM_COLD|IMM_ACID, 0}, /* Sprite */
    { 1, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 2,
      IMM_ACID, IMM_SLASH, 0}, /* Minotaur */
-   { 1, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 4,
+   { 1, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 4,
      IMM_BLUNT, IMM_POISON|IMM_DRAIN, 0}, /* Avian */
    { 1, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 2, 
      IMM_SLEEP|IMM_POISON, IMM_SLASH, 0}, /* HalfOgre */
