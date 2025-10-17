@@ -8653,7 +8653,7 @@ ACMD(do_distribute) {
             return;
          }
 
-         if (!obj_name) obj_name = GET_OBJ_NAME(obj);
+         if (!obj_name) obj_name = strdup(GET_OBJ_NAME(obj));
 
          room_rnum random_room = -1;
          while(random_room == -1) {
