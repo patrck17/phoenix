@@ -860,7 +860,7 @@ void Board_search(struct char_data *ch, char *arg)
       return;
       }
 
-   buf = get_buffer(MAX_STRING_LENGTH);
+   buf = get_buffer(32768);
 
    send_to_char(ch, "\r\nMessages matching '%s'.\r\n", arg);
    send_to_char(ch,"-----------------------------------\r\n");
@@ -880,11 +880,18 @@ void Board_search(struct char_data *ch, char *arg)
                   release_buffer(buf);
                   return;
                   }
+               if (strlen(buf) > 32000)
+                  {
+                  sprintf(buf + strlen(buf), "***Too many results, refine your search.\r\n");
+                  break;
+                  }
                if (str_str(header, arg) || str_str(msg_storage[MSG_SLOTNUM(j, k)], arg))
                   sprintf(buf + strlen(buf), "%-2d -- %-3d %s\r\n", j + 1, k + 1, header);
                }
             }
          }
+      if (strlen(buf) > 32000)
+         break;
       }
    page_string(ch->desc, buf, TRUE,"");
    release_buffer(buf);
