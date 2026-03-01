@@ -152,6 +152,7 @@ char   *fread_string(FILE *fl, char *error);
 long	get_id_by_name(char *name);
 char   *get_name_by_id(long id);
 int     vnum_room(char *searchname, struct char_data * ch);
+int     vnum_zone(char *searchname, struct char_data *ch);
 
 void	char_to_store(struct char_data *ch, struct char_file_u *st,
 		      int save_time);
