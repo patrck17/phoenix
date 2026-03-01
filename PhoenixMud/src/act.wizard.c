@@ -1159,9 +1159,9 @@ ACMD(do_vnum)
 
 
    if (!*buf || !*buf2 || (!is_abbrev(buf, "mob") && !is_abbrev(buf, "room")
-       && !is_abbrev(buf, "obj")))
+       && !is_abbrev(buf, "obj") && !is_abbrev(buf, "zone")))
       {
-      send_to_char(ch,"Usage: vnum { obj | mob | room } <name>\r\n");
+      send_to_char(ch,"Usage: vnum { obj | mob | room | zone} <name>\r\n");
       }
    else if (is_abbrev(buf, "mob"))
       {
@@ -1177,6 +1177,11 @@ ACMD(do_vnum)
       {
       if (!vnum_room(buf2, ch))
          send_to_char(ch, "No room name containing that word.\r\n");
+      }
+   else if (is_abbrev(buf, "zone"))
+      {
+      if (!vnum_zone(buf2, ch))
+         send_to_char(ch, "No zone name containing that word.\r\n");
       }
    release_buffer(buf2);
    release_buffer(buf);
