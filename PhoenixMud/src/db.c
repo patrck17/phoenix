@@ -2892,7 +2892,46 @@ int vnum_room(char *searchname, struct char_data * ch)
    return (found);
    }
 
+/* Added vnum zone 2/28/2026 Nomikos */
+int vnum_zone(char *searchname, struct char_data *ch)
+   {
+   zone_rnum nr;
+   int found = 0;
+   char *buf = get_buffer(32750);
+   char *tempbuf = get_buffer(MAX_STRING_LENGTH);
 
+   strcpy(buf,"Num  Virtual Description\r\n");   
+   for (nr = 0; nr <= top_of_zone_table; nr++)
+      {
+         if (GET_LEVEL(ch) < VNUM_ROOM_LEVEL && !is_olc_set(ch, zone_table[nr].number)) {
+            continue;
+         }
+
+      sprintf(tempbuf, "%s", zone_table[nr].name);
+      strip_color(tempbuf); 
+      if (isname(searchname, tempbuf))
+         {
+         if(strlen(buf)>32500)
+            {
+            sprintf(buf+strlen(buf),"Buffer limit exceeded, you need to refine your search\r\n");
+            nr=top_of_zone_table;
+            break;
+            }
+         else
+            {
+            sprintf(buf + strlen(buf), "%3d. [%5ld] %s\r\n", ++found,
+                    zone_table[nr].number,
+                    zone_table[nr].name);
+            }
+         }
+      }
+   if (ch->desc)
+      page_string(ch->desc, buf, TRUE, "");
+
+   release_buffer(tempbuf);
+   release_buffer(buf);
+   return (found);
+   }
 
 /* create a character, and add it to the char list */
 struct char_data *create_char(void)
