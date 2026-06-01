@@ -216,7 +216,7 @@ void redit_save_internally(struct descriptor_data *d)
       }
 
 
-   if (rroom_num > 0)  
+   if (rroom_num >= 0)  
       { 
      /*. Room exists: move contents over then free and replace it .*/ 
       OLC_ROOM(d)->contents = world[rroom_num].contents; 
