@@ -2121,6 +2121,11 @@ void handle_gmcp_core_hello(struct descriptor_data* d, char* data) {
 
    const char* client = NULL;
 
+   /* json_parse() returns NULL for malformed input, and payloads are
+    * client-controlled. */
+   if (root == NULL)
+      return;
+
    if (root->type == json_type_object) {
       struct json_object_s* object = (struct json_object_s*)root->payload;
 
@@ -2143,7 +2148,9 @@ void handle_gmcp_core_hello(struct descriptor_data* d, char* data) {
    }
 
    // Send Mudlet package information if the client is Mudlet
-   if (strcmp(client, "Mudlet") == 0) {
+   /* client is NULL when the payload is not an object, or is an object with
+    * no string "client" member, including `Core.Hello {}`. */
+   if (client != NULL && strcmp(client, "Mudlet") == 0) {
       fprintf(stderr, "Sending Mudlet package information\n");
       SEND_TO_Q(d, "%c%c%cClient.GUI ", IAC, SB, GMCP);
       SEND_TO_Q(d, "{ \"version\": \"1.0\", \"url\": \"https://phoenixmud.net/phoenixmud.mpackage\" }");
@@ -2159,6 +2166,12 @@ void handle_gmcp_core_ping(struct descriptor_data* d, char* data) {
 
 void handle_gmcp_core_supports_set(struct descriptor_data* d, char* data) {
    struct json_value_s* root = json_parse(data, strlen(data));
+
+   /* json_parse() returns NULL for ANY malformed input, and GMCP payloads are
+    * client-controlled: without this guard a malformed packet crashes the MUD
+    * on the root->type read below. */
+   if (root == NULL)
+      return;
 
    if (root->type == json_type_array) {
       struct json_array_s* array = (struct json_array_s*)root->payload;
@@ -2183,6 +2196,12 @@ void handle_gmcp_core_supports_set(struct descriptor_data* d, char* data) {
 void handle_gmcp_core_supports_add(struct descriptor_data* d, char* data) {
    struct json_value_s* root = json_parse(data, strlen(data));
 
+   /* json_parse() returns NULL for ANY malformed input, and GMCP payloads are
+    * client-controlled: without this guard a malformed packet crashes the MUD
+    * on the root->type read below. */
+   if (root == NULL)
+      return;
+
    if (root->type == json_type_array) {
       struct json_array_s* array = (struct json_array_s*)root->payload;
 
@@ -2205,6 +2224,12 @@ void handle_gmcp_core_supports_add(struct descriptor_data* d, char* data) {
 
 void handle_gmcp_core_supports_remove(struct descriptor_data* d, char* data) {
    struct json_value_s* root = json_parse(data, strlen(data));
+
+   /* json_parse() returns NULL for ANY malformed input, and GMCP payloads are
+    * client-controlled: without this guard a malformed packet crashes the MUD
+    * on the root->type read below. */
+   if (root == NULL)
+      return;
 
    if (root->type == json_type_array) {
       struct json_array_s* array = (struct json_array_s*)root->payload;
