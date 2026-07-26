@@ -4675,6 +4675,11 @@ void free_char(struct char_data * ch)
             if((struct char_data *)trgev->go == ch)
                {
 		 /*log("FREE: Freeing trigger for %s",GET_NAME(ch));*/
+               if(tmpq == current_processing_event)
+                  /* Skip the entry process_event_queue() is firing: it deletes the
+                   * node when script_driver() returns.  trgev is not freed here or
+                   * below; process_wait_event() owns that free. */
+                  continue;
                del_event_queue(tmpq);
                }
             }
@@ -4761,6 +4766,9 @@ void free_obj(struct obj_data * obj)
                if((struct obj_data *)trgev->go ==obj)
                   {
 		    /*log("FREE: Freeing trigger for %s",obj->name);*/
+                  if(tmpq == current_processing_event)
+                     /* Same guard as free_char(). */
+                     continue;
                   del_event_queue(tmpq);
                   }
                }

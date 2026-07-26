@@ -48,6 +48,10 @@ void process_skills(struct char_data *ch, struct char_data *tch, struct obj_data
 
 /* The command_queue linked list is where all the queue events link to */ 
 struct queue_event *command_queue = NULL; 
+/* The queue entry process_event_queue() is firing, else NULL.  free_char()
+ * checks it so it never deletes the entry process_event_queue() is about to
+ * delete on the same trip through the loop. */
+struct queue_event *current_processing_event = NULL; 
 /* These are for is_same_and_conn() */ 
 extern struct descriptor_data *descriptor_list; 
 extern struct char_data  *character_list; 
@@ -597,6 +601,8 @@ void process_event_queue(void)
    event = command_queue; 
    while (event && event->time <= time(NULL)) 
       { 
+      /* expose the firing entry to free_char() */
+      current_processing_event = event; 
       if (IS_SET(event->flags, QUE_FUNCTION)) 
 	 { 
 	/* is_same_and_conn() is important! Read the */ 
@@ -617,6 +623,7 @@ void process_event_queue(void)
 	 if (is_same_and_conn(event)) 
 	    command_interpreter(event->ch, event->command); 
 	 } 
+      current_processing_event = NULL; 
  
      /* This is a little touchy. Remember, we are starting with */ 
      /* the FIRST queue item first, and if it executes, we DELETE */ 
