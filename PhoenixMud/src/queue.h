@@ -88,3 +88,6 @@ extern struct queue_event *add_function_to_queue(time_t, struct char_data *,
 						 void (*)(), ...);
 extern void	add_command_to_queue(time_t, long, struct char_data *, char *);
 extern int	is_same_and_conn(struct queue_event *);
+
+/* The queue entry process_event_queue() is firing right now, else NULL. */
+extern struct queue_event *current_processing_event;

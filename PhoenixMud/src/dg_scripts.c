@@ -572,10 +572,14 @@ EVENT(trig_wait_event)
    go = wait_event_obj->go;
    type = wait_event_obj->type;
 
-   free(wait_event_obj);
+   /* script_driver() may extract the owner, whose free_char() scans
+    * command_queue, so free wait_event_obj after it returns.  The trigger's
+    * wait pointer is cleared first so the body can queue a new wait. */
    GET_TRIG_WAIT(trig) = NULL;
 
    script_driver(go, trig, type, TRIG_RESTART);
+
+   free(wait_event_obj);
    }
 
 
