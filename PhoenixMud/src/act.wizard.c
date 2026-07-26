@@ -396,7 +396,10 @@ ACMD(do_at)
      release_buffer(command);
      return;
    }
-
+   /* Reachable only when a room resolved.  On a bad vnum `location` holds
+    * find_target_room's negative return, and the two empty-argument paths
+    * never assign it. */
+   else
       {
       /* a location has been found. */
       if (IN_ROOM(ch) != NOWHERE)
