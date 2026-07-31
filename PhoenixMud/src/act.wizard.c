@@ -4097,7 +4097,7 @@ ACMD(do_idle)
       else
          {
          send_to_char(ch,
-                      "You cannot idle zone %ld, is has reset_mode of 0.\r\n",
+                      "You cannot idle zone %ld, it has reset_mode of 0.\r\n",
                       zone_table[i].number);
          }
       }

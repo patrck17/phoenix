@@ -1314,7 +1314,7 @@ void check_killer(struct char_data * ch, struct char_data * vict)
    mudlog(buf, BRF, LVL_IMMORT, TRUE);
    send_to_char(ch,"If you want to be a PLAYER KILLER, so be it...\r\n");
 
-   send_info("[ INFO ] %s has recieved a Player Killer flag for "
+   send_info("[ INFO ] %s has received a Player Killer flag for "
              "attacking %s.\n\r", GET_NAME(ch), GET_NAME(vict));
    send_info("[ INFO ] Everyone in the game now has the right to "
              "kill %s.\n\r",GET_NAME(ch));

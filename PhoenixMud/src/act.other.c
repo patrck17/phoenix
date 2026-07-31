@@ -1345,7 +1345,7 @@ ACMD(do_display)
 
    if (IS_NPC(ch))
       {
-      send_to_char(ch, "Mosters don't need displays.  Go away.\r\n");
+      send_to_char(ch, "Monsters don't need displays.  Go away.\r\n");
       return;
       }
    skip_spaces(&argument);
