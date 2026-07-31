@@ -81,6 +81,13 @@ extern char *npc_race_types[];
 extern int spell_sort_info[];
 extern struct spell_info_type *spells;
 extern char *class_abbrevs[];
+extern char *scr_class_abbrevs[];
+
+/* IS_SCR for a stored record.  IS_SCR() needs a live char_data; these
+ * commands render from a struct char_file_u, so test the same two fields:
+ * a base class below CLASS_KENSAI that has remorted at least once. */
+#define SCR_STORED(cf) ((cf).class < CLASS_KENSAI && \
+                        (cf).player_specials_saved.times_remorted > NON_REMORT)
 extern char *race_abbrevs[];
 extern int total_repair;
 extern int total_recharge;
@@ -3642,7 +3649,8 @@ ACMD(do_last)
          {
          send_to_char(ch, "[%2d][%s] %-12s : %-20s\r\n",
                       chdata.level,
-                      class_abbrevs[(int)chdata.class],
+                      SCR_STORED(chdata) ? scr_class_abbrevs[(int)chdata.class]
+                                         : class_abbrevs[(int)chdata.class],
                       chdata.name, ctime(&chdata.last_logon));
          }
       }
@@ -3656,7 +3664,9 @@ ACMD(do_last)
          {
          send_to_char(ch, "[%5ld] [%2d %s] %-12s : %-18s : %-20s\r\n",
                       chdata.char_specials_saved.idnum, (int) chdata.level,
-                      class_abbrevs[(int) chdata.class], chdata.name, chdata.host,
+                      SCR_STORED(chdata) ? scr_class_abbrevs[(int) chdata.class]
+                                         : class_abbrevs[(int) chdata.class],
+                      chdata.name, chdata.host,
                       ctime(&chdata.last_logon));
          }
       }
@@ -5249,7 +5259,8 @@ ACMD(do_show)
          }
       send_to_char(ch, "Player: %-12s (%s) [%2d %s]\r\n", vbuf.name,
                    genders[(int) vbuf.sex], vbuf.level,
-                   class_abbrevs[(int) vbuf.class]);
+                   SCR_STORED(vbuf) ? scr_class_abbrevs[(int) vbuf.class]
+                                    : class_abbrevs[(int) vbuf.class]);
       send_to_char(ch,
                    "Au: %-8ld  Bal: %-8ld  Exp: %-8ld  Align: %-5d  Last Learnt: %-3d\r\n",
                    vbuf.points.gold[0],vbuf.points.bank_gold[0],vbuf.points.exp,
