@@ -1880,7 +1880,10 @@ void half_chop(char *string, char *arg1, char *arg2)
 
 	temp = any_one_arg(string, arg1);
 	skip_spaces(&temp);
-	strcpy(arg2, temp);
+	/* temp points into string, so a caller passing the source as arg2 gives
+	 * an overlapping copy.  strcpy() is undefined for those, memmove() is
+	 * not. */
+	memmove(arg2, temp, strlen(temp) + 1);
 }
 
 /* Used in specprocs, mostly.  (Exactly) matches "command" to cmd number */
