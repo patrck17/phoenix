@@ -757,7 +757,8 @@ ACMD(do_whois)
 	   char *buf=get_buffer(MAX_STRING_LENGTH);
 	   store_to_char(&tmp_store, victim);
 	   sprintf(buf, "%sLevel %d %s\r\n", buf, GET_LEVEL(victim),
-	   class_abbrevs[(int) GET_CLASS(victim)]);
+	   IS_SCR(victim) ? scr_class_abbrevs[(int) GET_CLASS(victim)]
+			  : class_abbrevs[(int) GET_CLASS(victim)]);
 	   send_to_char(ch,"%s",buf);
 	   release_buffer(buf);
 	   }
