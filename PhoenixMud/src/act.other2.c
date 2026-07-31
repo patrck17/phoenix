@@ -895,7 +895,10 @@ ACMD(do_retool)
 
   char buf[4096];
   sprintf(buf, "(GC) %s (%d %s-%s) adjusted stats from %d/%d/%d/%d/%d/%d to %d/%d/%d/%d/%d/%d.",
-	  GET_NAME(ch), GET_LEVEL(ch), class_abbrevs[(int)GET_CLASS(ch)], race_abbrevs[GET_RACE(ch)],
+	  GET_NAME(ch), GET_LEVEL(ch),
+	  IS_SCR(ch) ? scr_class_abbrevs[(int)GET_CLASS(ch)]
+		     : class_abbrevs[(int)GET_CLASS(ch)],
+	  race_abbrevs[GET_RACE(ch)],
 	  GET_STR(ch), GET_INT(ch), GET_WIS(ch), GET_DEX(ch), GET_CON(ch), GET_CHA(ch),
 	  GET_STR(ch)+add_str, GET_INT(ch)+add_int, GET_WIS(ch)+add_wis, GET_DEX(ch)+add_dex, GET_CON(ch)+add_con, GET_CHA(ch)+add_cha);
   mudlogf(CMP, LVL_IMMORT, TRUE, "%s", buf);
