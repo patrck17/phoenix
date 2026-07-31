@@ -4265,7 +4265,8 @@ ACMD(do_tlist)
          break;
          }
       /* Check <start_vnum> - Must be a positive number */
-      if ((*buf2 != '0') && ((first = atoi(buf2)) == 0))
+      first = atoi(buf2);
+      if ((*buf2 != '0') && (first == 0))
          {
          send_to_char(ch, "%sYou must use a trigger vnum between 0 and %ld as your first parameter. (ex. tlist -o 1000)%s\r\n\r\n",
                       CCRED(ch, C_NRM),
@@ -4303,7 +4304,8 @@ ACMD(do_tlist)
    */
    else
       {
-      if ((*buf != '0') && ((first = atoi(buf)) == 0))
+      first = atoi(buf);
+      if ((*buf != '0') && (first == 0))
          {
          send_to_char(ch, "%sYou must use a trigger vnum between 0 and %ld as your first parameter. (ex. tlist 1000)%s\r\n\r\n",
                       CCRED(ch, C_NRM),
@@ -4318,7 +4320,8 @@ ACMD(do_tlist)
          }
       if (*buf2)
          {
-         if ((*buf2 != '0') && ((last = atoi(buf2)) == 0))
+         last = atoi(buf2);
+         if ((*buf2 != '0') && (last == 0))
             {
             send_to_char(ch, "%sIf present, the last parameter must be a trigger number less or equal to %ld . (ex. tlist 1000 1050)%s\r\n\r\n",
                          CCRED(ch, C_NRM),
