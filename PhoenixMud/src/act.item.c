@@ -796,7 +796,7 @@ int perform_drop(struct char_data * ch, struct obj_data * obj,
        RDR = real_room(1298); /* The old policy room. */
        GET_OBJ_TIMER(obj) = 8064; /* Reset the decay timer. */
        obj_to_room(obj, RDR);
-       act("$p suddenly appears in a puff a smoke!", FALSE,0,obj,0,TO_ROOM);
+       act("$p suddenly appears in a puff of smoke!", FALSE,0,obj,0,TO_ROOM);
        break;
      }
    case SCMD_CDONATE:
@@ -807,7 +807,7 @@ int perform_drop(struct char_data * ch, struct obj_data * obj,
                  GET_NAME(ch), GET_OBJ_NAME(obj), GET_OBJ_VNUM(obj), RDR);
          }
       obj_to_room(obj, RDR);
-      act("$p suddenly appears in a puff a smoke!", FALSE,0,obj,0,TO_ROOM);
+      act("$p suddenly appears in a puff of smoke!", FALSE,0,obj,0,TO_ROOM);
       SET_BIT(GET_OBJ_EXTRA(obj),ITEM_DONATED);
       return (0);
       break;
@@ -980,7 +980,7 @@ ACMD(do_drop)
 			   SET_BIT(GET_OBJ_EXTRA(obj), ITEM_DONATED);
 			   GET_OBJ_TIMER(obj) = 8064; /* Reset the decay timer. */
 			   obj_to_room(obj, real_room(1298)); /* The old policy room. */
-			   act("$p suddenly appears in a puff a smoke!", FALSE,0,obj,0,TO_ROOM);
+			   act("$p suddenly appears in a puff of smoke!", FALSE,0,obj,0,TO_ROOM);
 			 }
 		       }
 		     else
@@ -1053,7 +1053,7 @@ ACMD(do_drop)
 			 SET_BIT(GET_OBJ_EXTRA(obj), ITEM_DONATED);
 			 GET_OBJ_TIMER(obj) = 8064; /* Reset the decay timer. */
 			 obj_to_room(obj, real_room(1298)); /* The old policy room. */
-			 act("$p suddenly appears in a puff a smoke!", FALSE,0,obj,0,TO_ROOM);
+			 act("$p suddenly appears in a puff of smoke!", FALSE,0,obj,0,TO_ROOM);
 		       } else {
 			 obj_to_room(obj, IN_ROOM(ch));
 		       }
@@ -1084,7 +1084,7 @@ ACMD(do_drop)
 			 SET_BIT(GET_OBJ_EXTRA(obj), ITEM_DONATED);
 			 GET_OBJ_TIMER(obj) = 8064; /* Reset the decay timer. */
 			 obj_to_room(obj, real_room(1298)); /* The old policy room. */
-			 act("$p suddenly appears in a puff a smoke!", FALSE,0,obj,0,TO_ROOM);
+			 act("$p suddenly appears in a puff of smoke!", FALSE,0,obj,0,TO_ROOM);
 		       } else {
 			 obj_to_room(obj, RDR);
 		       }

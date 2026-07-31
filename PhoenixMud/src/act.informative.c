@@ -3557,7 +3557,7 @@ ACMD(do_consider)
 			     "Hit points comparison: You could kill them with a glance!\r\n");
 	else if (diff <= -251)
 		send_to_char(ch,
-			     "Hit points comparison: You don't have to anything to fear!\r\n");
+			     "Hit points comparison: You don't have anything to fear!\r\n");
 	else if (diff <= -51)
 		send_to_char(ch,
 			     "Hit points comparison: You don't have much to fear!\r\n");
@@ -3583,7 +3583,7 @@ ACMD(do_consider)
 			     "Hit points comparison: They are just a bit healthier.\r\n");
 	else if (diff == 15)
 		send_to_char(ch,
-			     "Hit points comparison: They are slighty healthier.\r\n");
+			     "Hit points comparison: They are slightly healthier.\r\n");
 	else if (diff == 20)
 		send_to_char(ch,
 			     "Hit points comparison: They are quite a bit healthier.\r\n");
@@ -3592,7 +3592,7 @@ ACMD(do_consider)
 			     "Hit points comparison: They are probably gonna hurt you bad!\r\n");
 	else if (diff <= 100)
 		send_to_char(ch,
-			     "Hit points comparison: You will probably die a painfull death!\r\n");
+			     "Hit points comparison: You will probably die a painful death!\r\n");
 	else if (diff <= 300)
 		send_to_char(ch,
 			     "Hit points comparison: If it takes a beating to teach you...so be it!\r\n");

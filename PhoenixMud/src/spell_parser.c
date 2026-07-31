@@ -1967,7 +1967,7 @@ ACMD(do_cast)
 
    if(!valid_class_align(ch))
       {
-      send_to_char(ch,"You recieve a searing pain from you own magic as your god punishes you for straying from the true path!\r\n");
+      send_to_char(ch,"You receive a searing pain from your own magic as your god punishes you for straying from the true path!\r\n");
       act("The gods punish $n for straying.",TRUE,ch,0,0,TO_ROOM);
       damage(ch,ch,GET_LEVEL(ch)*2,TYPE_SUFFERING,IMM_DRAIN);
       return;
