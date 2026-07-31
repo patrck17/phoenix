@@ -1354,7 +1354,7 @@ void command_interpreter(struct char_data *ch, char *argument)
 				break;
 
 	if (!IS_NPC(ch) && PRF2_FLAGGED(ch, PRF2_AFK)
-	    && (cmd > 0) /*&&!CMD_IS("afk") */ ) {
+	    && (cmd > 0) && !CMD_IS("afk")) {
 		/*
 		   send_to_char(ch,"What are you doing!?! You are AFK!\r\n");
 		   if (GET_LEVEL(ch)<=LVL_SERP)
