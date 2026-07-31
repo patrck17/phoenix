@@ -1929,6 +1929,9 @@ ACMD(do_ignore)
       send_to_char(ch, "You can't ignore anyone.... for now.\r\n");
    else
       {
+      int slot = -1;
+      /* An existing entry anywhere beats the first hole, so scan the whole
+         list before placing. */
       for (i=0; i<5; i++)
          {
          if (GET_IGNORED(ch,i) == GET_IDNUM(vict))
@@ -1937,15 +1940,19 @@ ACMD(do_ignore)
             GET_IGNORED(ch,i) = 0;
             break;
             }
-         else if (GET_IGNORED(ch,i) == 0)
-            {
-            send_to_char(ch, "You start ignoring %s.\r\n", GET_NAME(vict));
-            GET_IGNORED(ch,i) = GET_IDNUM(vict);
-            break;
-            }
+         else if ((slot < 0) && (GET_IGNORED(ch,i) == 0))
+            slot = i;
          }
       if (i == 5)
-         send_to_char(ch, "Perhaps you should turn off all your channels instead!\r\n");
+         {
+         if (slot >= 0)
+            {
+            send_to_char(ch, "You start ignoring %s.\r\n", GET_NAME(vict));
+            GET_IGNORED(ch,slot) = GET_IDNUM(vict);
+            }
+         else
+            send_to_char(ch, "Perhaps you should turn off all your channels instead!\r\n");
+         }
       }
    release_buffer(buf); 
    }
