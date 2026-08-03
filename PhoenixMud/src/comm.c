@@ -2819,6 +2819,15 @@ RETSIGTYPE nasty_signal_handler (int sig)
    return;
 }
 
+/* Sets the game loop's exit flag so main() runs Crash_save_all() +
+ * House_save_all() and stdio flushes, the same path as the in-game
+ * shutdown.  SIGTERM previously reached hupsig -> abort(). */
+RETSIGTYPE graceful_term(int sig)
+{
+   circle_shutdown = 1;
+   log("Received SIGTERM.  Graceful shutdown: saving all players....");
+}
+
  
 /* 
  * This is an implementation of signal() using sigaction() for portability. 
@@ -2887,7 +2896,7 @@ void signal_setup(void)
  
   /* just to be on the safe side: */ 
    my_signal(SIGHUP, nasty_signal_handler); 
-   my_signal(SIGTERM, nasty_signal_handler); 
+   my_signal(SIGTERM, graceful_term); 
    my_signal(SIGINT, ctrlc_signal); 
    my_signal(SIGPIPE, SIG_IGN); 
    my_signal(SIGALRM, SIG_IGN); 
