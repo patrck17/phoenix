@@ -19,6 +19,7 @@ void   perform_to_all(const char *messg, struct char_data *ch, ...) __attribute_
 void	close_socket(struct descriptor_data *d);
 void   gmcp_comm(struct char_data *ch, const char *channel, const char *talker,
 		 const char *text);
+void   json_escape_string(const char *in, char *out, size_t out_size);
 
 void	perform_act(char *orig, struct char_data *ch, struct obj_data *obj,
 		     void *vict_obj, struct char_data *to);

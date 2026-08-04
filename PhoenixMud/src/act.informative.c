@@ -1074,6 +1074,8 @@ void msdp_room(struct char_data* ch) {
 }
 
 void gmcp_exits(struct char_data* ch) {
+	char* esc = get_buffer(MAX_STRING_LENGTH);
+
 	send_to_char(ch, "\"EXITS\":{");
 
 	bool first_exit = TRUE;
@@ -1120,23 +1122,35 @@ void gmcp_exits(struct char_data* ch) {
 		send_to_char(ch, "],");
 
 		// Send the title of the connected room to everyone
-		send_to_char(ch, "\"NAME\":\"%s\"", world[exit->to_room].name);
+		json_escape_string(world[exit->to_room].name, esc, MAX_STRING_LENGTH);
+		send_to_char(ch, "\"NAME\":\"%s\"", esc);
 
 		send_to_char(ch, "}");
 	}
 
 	send_to_char(ch, "}");
+
+	release_buffer(esc);
 }
 
 void gmcp_room(struct char_data* ch) {
+	char* esc = get_buffer(MAX_STRING_LENGTH);
+
 	send_to_char(ch, "%c%c%cRoom.Info {", IAC, SB, GMCP);
 
 	if (PRF_FLAGGED(ch, PRF_ROOMFLAGS)) {
 		send_to_char(ch, "\"VNUM\":\"%ld\",", GET_ROOM_VNUM(IN_ROOM(ch)));
 	}
 
-	send_to_char(ch, "\"NAME\":\"%s\",", world[IN_ROOM(ch)].name);
-	send_to_char(ch, "\"ZONE\":\"%s\",", zone_table[world[IN_ROOM(ch)].zone].name);
+	// Room and zone names are builder-authored and reach the client
+	// verbatim. A name containing a double quote makes the frame
+	// unparseable unless it is escaped.
+	json_escape_string(world[IN_ROOM(ch)].name, esc, MAX_STRING_LENGTH);
+	send_to_char(ch, "\"NAME\":\"%s\",", esc);
+	json_escape_string(zone_table[world[IN_ROOM(ch)].zone].name, esc, MAX_STRING_LENGTH);
+	send_to_char(ch, "\"ZONE\":\"%s\",", esc);
+
+	release_buffer(esc);
 
 	gmcp_exits(ch);
 
