@@ -2334,7 +2334,7 @@ void handle_gmcp_core_supports_remove(struct descriptor_data* d, char* data) {
 /* Escape a string so it can be used as a JSON string value. Channel text is
  * arbitrary player input, and one unescaped quote breaks the client's parse.
  * Writes at most out_size - 1 bytes and always terminates. */
-static void json_escape_string(const char* in, char* out, size_t out_size) {
+void json_escape_string(const char* in, char* out, size_t out_size) {
    size_t o = 0;
 
    for (; *in != '\0'; in++) {
