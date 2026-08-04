@@ -524,6 +524,7 @@
 #define OOB_GMCP (1 << 1)
 #define OOB_REPORT_STATS (1 << 2)
 #define OOB_REPORT_ROOM (1 << 3)
+#define OOB_REPORT_COMM (1 << 4)	/* GMCP only; MSDP has no Comm package */
 
 #define MSDP 69
 #define MSDP_VAR 1

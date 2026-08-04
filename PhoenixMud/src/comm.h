@@ -17,6 +17,8 @@ void   send_to_room(room_rnum room, const char *messg, ...) __attribute__ ((form
 void   send_to_outdoor(const char *messg, ...) __attribute__ ((format (printf, 1, 2)));
 void   perform_to_all(const char *messg, struct char_data *ch, ...) __attribute__ ((format (printf, 1, 3)));
 void	close_socket(struct descriptor_data *d);
+void   gmcp_comm(struct char_data *ch, const char *channel, const char *talker,
+		 const char *text);
 
 void	perform_act(char *orig, struct char_data *ch, struct obj_data *obj,
 		     void *vict_obj, struct char_data *to);

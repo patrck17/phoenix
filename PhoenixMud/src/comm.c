@@ -2172,6 +2172,8 @@ void handle_gmcp_core_supports_set(struct descriptor_data* d, char* data) {
                SET_BIT(d->oob_protocol, OOB_REPORT_STATS);
             } else if (strcmp(string->string, "Room 1") == 0) {
                SET_BIT(d->oob_protocol, OOB_REPORT_ROOM);
+            } else if (strcmp(string->string, "Comm 1") == 0) {
+               SET_BIT(d->oob_protocol, OOB_REPORT_COMM);
             }
          }
       }
@@ -2195,6 +2197,8 @@ void handle_gmcp_core_supports_add(struct descriptor_data* d, char* data) {
                SET_BIT(d->oob_protocol, OOB_REPORT_STATS);
             } else if (strcmp(string->string, "Room 1") == 0) {
                SET_BIT(d->oob_protocol, OOB_REPORT_ROOM);
+            } else if (strcmp(string->string, "Comm 1") == 0) {
+               SET_BIT(d->oob_protocol, OOB_REPORT_COMM);
             }
          }
       }
@@ -2218,12 +2222,79 @@ void handle_gmcp_core_supports_remove(struct descriptor_data* d, char* data) {
                REMOVE_BIT(d->oob_protocol, OOB_REPORT_STATS);
             } else if (strcmp(string->string, "Room 1") == 0) {
                REMOVE_BIT(d->oob_protocol, OOB_REPORT_ROOM);
+            } else if (strcmp(string->string, "Comm 1") == 0) {
+               REMOVE_BIT(d->oob_protocol, OOB_REPORT_COMM);
             }
          }
       }
    }
 
    free(root);
+}
+
+/* Escape a string so it can be used as a JSON string value. Channel text is
+ * arbitrary player input, and one unescaped quote breaks the client's parse.
+ * Writes at most out_size - 1 bytes and always terminates. */
+static void json_escape_string(const char* in, char* out, size_t out_size) {
+   size_t o = 0;
+
+   for (; *in != '\0'; in++) {
+      unsigned char c = (unsigned char)*in;
+      const char* pair = NULL;
+
+      switch (c) {
+      case '"':  pair = "\\\""; break;
+      case '\\': pair = "\\\\"; break;
+      case '\b': pair = "\\b";  break;
+      case '\f': pair = "\\f";  break;
+      case '\n': pair = "\\n";  break;
+      case '\r': pair = "\\r";  break;
+      case '\t': pair = "\\t";  break;
+      }
+
+      if (pair != NULL) {
+         if (o + 2 >= out_size) break;
+         out[o++] = pair[0];
+         out[o++] = pair[1];
+      } else if (c < 0x20) {
+         if (o + 6 >= out_size) break;
+         sprintf(out + o, "\\u%04x", c);
+         o += 6;
+      } else {
+         if (o + 1 >= out_size) break;
+         out[o++] = c;
+      }
+   }
+
+   out[o] = '\0';
+}
+
+/* One frame per channel line delivered, so a client can route chat into its
+ * own windows instead of matching it off the screen with triggers. Sent only
+ * to a descriptor that asked for "Comm 1" in Core.Supports. MSDP has no
+ * equivalent package, so an MSDP client never receives one.
+ *
+ * talker is "You" on the speaker's own copy of the line, matching the text
+ * they see. */
+void gmcp_comm(struct char_data* ch, const char* channel, const char* talker, const char* text) {
+   char* esc_talker;
+   char* esc_text;
+
+   if (ch == NULL || ch->desc == NULL) return;
+   if (!IS_SET(ch->desc->oob_protocol, OOB_GMCP)) return;
+   if (!IS_SET(ch->desc->oob_protocol, OOB_REPORT_COMM)) return;
+
+   esc_talker = get_buffer(MAX_STRING_LENGTH);
+   esc_text = get_buffer(MAX_STRING_LENGTH);
+
+   json_escape_string(talker, esc_talker, MAX_STRING_LENGTH);
+   json_escape_string(text, esc_text, MAX_STRING_LENGTH);
+
+   SEND_TO_Q(ch->desc, "%c%c%cComm.Channel.Text {\"channel\":\"%s\",\"talker\":\"%s\",\"text\":\"%s\"}%c%c",
+             IAC, SB, GMCP, channel, esc_talker, esc_text, IAC, SE);
+
+   release_buffer(esc_text);
+   release_buffer(esc_talker);
 }
 
 void handle_gmcp_subopt(struct descriptor_data* d, unsigned char* subopt_start, unsigned char* subopt_end) {

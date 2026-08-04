@@ -869,6 +869,7 @@ ACMD (do_csay)
    struct descriptor_data *i,*d;
    struct char_data *vict;
    char *buf1;
+   char *ctext;
    int any=0;
    int emote=FALSE; 
    struct clan_data *select_cl;
@@ -1065,6 +1066,11 @@ ACMD (do_csay)
       }
 
    buf1=get_buffer(512);
+
+   /* What a GMCP client is told was said, without the screen framing. */
+   ctext=get_buffer(MAX_STRING_LENGTH);
+   sprintf (ctext, "%s%s", emote?"<--- ":"", argument);
+
    if (PRF_FLAGGED(ch,PRF_NOREPEAT))
       {
       send_to_char(ch, "%s", OK);
@@ -1075,6 +1081,7 @@ ACMD (do_csay)
                emote?"<--- ":"", argument);
 	  write_comms(ch, 0, buf1, TO_CHAR);
       act(buf1, FALSE, ch, 0, 0, TO_CHAR | TO_SLEEP);
+      gmcp_comm(ch, "clan", "You", ctext);
       }
 
    sprintf (buf1,"&Y[%s] $n: %s%s&n", GET_CLAN_NAME(ch),
@@ -1097,10 +1104,14 @@ ACMD (do_csay)
          {
          if(IN_ROOM(vict)&&
                  !ROOM_FLAGGED(IN_ROOM(vict),ROOM_SOUNDPROOF))
+            {
             act(buf1, FALSE, ch, 0, vict, TO_VICT | TO_SLEEP);
+            gmcp_comm(vict, "clan", GET_NAME(ch), ctext);
+            }
 			write_comms(ch, vict, buf1, TO_VICT | TO_SLEEP);
          }
       }
+   release_buffer(ctext);
    release_buffer(buf1);
    }
 
