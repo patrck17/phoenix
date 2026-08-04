@@ -89,6 +89,7 @@ ACMD(do_commune)
 	  sprintf(buf, "You commune, '&M%s&n'", argument);
 	  act(buf, FALSE, ch, 0, 0, TO_CHAR | TO_SLEEP);
 	  write_comms(ch, 0, buf, TO_CHAR);
+	  gmcp_comm(ch, "commune", "You", argument);
 
       if (GET_LEVEL(ch) < LVL_IMMORT)
          {
@@ -116,6 +117,7 @@ ACMD(do_commune)
 			   sprintf(buf,"$n beseeches the gods, '&M%s&n'", argument);
                act(buf, FALSE, ch, 0, i->character, TO_VICT | TO_SLEEP);
 			   write_comms(ch, i->character, buf, TO_VICT);
+			   gmcp_comm(i->character, "commune", GET_NAME(ch), argument);
 			   }
 			}
          else
@@ -128,6 +130,9 @@ ACMD(do_commune)
 				  sprintf(buf,"$n shouts down from above, '&M%s&n'", argument);
                act(buf, FALSE, ch, 0, i->character, TO_VICT | TO_SLEEP);
 			   write_comms(ch, i->character, buf, TO_VICT);
+			   gmcp_comm(i->character, "commune",
+			             (!IS_NPC(ch) && GET_LEVEL(i->character)<GET_INVIS_LEV(ch)) ?
+			             "A god" : GET_NAME(ch), argument);
                }
             }
          }
@@ -173,7 +178,10 @@ ACMD(do_say)
 	  for (struct char_data *to = world[IN_ROOM(ch)].people; to; to = to->next_in_room)
 	     {
 		 if (to != ch)
+		    {
    	   	    write_comms(ch, to, buf, TO_VICT);
+		    gmcp_comm(to, "say", GET_NAME(ch), argument);
+		    }
 	     }
 
       MOBTrigger = FALSE;
@@ -182,6 +190,7 @@ ACMD(do_say)
 	  sprintf(buf, "You say, '&W%s&n'", argument);
       act(buf, FALSE, ch, 0, 0, TO_CHAR);
       write_comms(ch, 0, buf, TO_CHAR);
+      gmcp_comm(ch, "say", "You", argument);
 
       release_buffer(buf);
 
@@ -231,6 +240,7 @@ ACMD(do_gsay)
          {
          act(buf, FALSE, ch, 0, k, TO_VICT | TO_SLEEP);
          write_comms(ch, k, buf, TO_VICT);
+         gmcp_comm(k, "gtell", GET_NAME(ch), argument);
          }
 
       for (f = k->followers; f; f = f->next)
@@ -239,11 +249,13 @@ ACMD(do_gsay)
 		    sprintf(buf, "$n tells the group, '&W%s&n'", argument);
             act(buf, FALSE, ch, 0, f->follower, TO_VICT | TO_SLEEP);
             write_comms(ch, f->follower, buf, TO_VICT);
+            gmcp_comm(f->follower, "gtell", GET_NAME(ch), argument);
             }
 
       sprintf(buf, "You tell the group, '&W%s&n'", argument);
       act(buf, FALSE, ch, 0, 0, TO_CHAR | TO_SLEEP);
       write_comms(ch, 0, buf, TO_CHAR);
+      gmcp_comm(ch, "gtell", "You", argument);
 
       release_buffer(buf);
       }
@@ -262,11 +274,13 @@ void perform_tell(struct char_data *ch, struct char_data *vict, char *arg)
    if (!(!IS_NPC(vict) && ignoring(vict, ch) && GET_LEVEL(vict)<LVL_IMMORT)) {
       act(buf, FALSE, ch, 0, vict, TO_VICT | TO_SLEEP);
       write_comms(ch, vict, buf, TO_VICT);
+      gmcp_comm(vict, "tell", GET_NAME(ch), arg);
       }
 
    sprintf(buf, "&RYou tell $N, '%s'&n", arg);
    act(buf, FALSE, ch, 0, vict, TO_CHAR | TO_SLEEP);
    write_comms(ch, vict, buf, TO_CHAR);
+   gmcp_comm(ch, "tell", "You", arg);
 
    if(!IS_NPC(vict) && !(IS_NPC(ch) && GET_LEVEL(vict)<LVL_IMMORT))
       GET_LAST_TELL(vict) = IS_NPC(ch)?GET_ID(ch):GET_IDNUM(ch);
@@ -725,6 +739,11 @@ ACMD(do_gen_comm)
            "&y"}
       };
 
+   /* GMCP channel names, indexed like com_msgs. A client routes on these,
+    * so they are the channel's name rather than com_msgs' verb form. */
+   char *gmcp_channels[] =
+      {"holler", "shout", "gossip", "auction", "grats", "ooc", "music"};
+
 
    /* to keep pets, etc from being ordered to shout */
    if ((!ch->desc)&&(ch->master))
@@ -811,6 +830,7 @@ ACMD(do_gen_comm)
               (subcmd==SCMD_MUSIC)?"[MUSIC] ":"", 
               com_msgs[subcmd][1], argument);
    act(buf, FALSE, ch, 0, 0, TO_CHAR | TO_SLEEP);
+   gmcp_comm(ch, gmcp_channels[subcmd], "You", argument);
    
    /* Log the communication to the player's comms log */
    write_comms(ch, 0, buf, TO_CHAR);
@@ -857,6 +877,7 @@ ACMD(do_gen_comm)
 				 (subcmd == SCMD_MUSIC) ? "[MUSIC] " : "",
                  com_msgs[subcmd][1], argument);
          act(buf, FALSE, ch, 0, i->character, TO_VICT | TO_SLEEP);
+         gmcp_comm(i->character, gmcp_channels[subcmd], GET_NAME(ch), argument);
 
          /* Write the comms to each player's comms log */
          write_comms(ch, tch, buf, TO_VICT);
