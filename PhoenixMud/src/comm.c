@@ -50,6 +50,12 @@
 #define MSSP_VAR 1
 #define MSSP_VAL 2
 
+/* Advertised over GMCP in Client.GUI.  Mudlet offers the download only
+ * when this version differs from the installed package, so it must match
+ * the package published at MUDLET_PACKAGE_URL. */
+#define MUDLET_PACKAGE_VERSION "1.2"
+#define MUDLET_PACKAGE_URL     "https://phoenixmud.net/phoenixmud.mpackage"
+
 FILE *logfile = NULL;           /* Where to send the log messages. */
 /* externs */ 
 extern int circle_restrict; 
@@ -2146,7 +2152,7 @@ void handle_gmcp_core_hello(struct descriptor_data* d, char* data) {
    if (strcmp(client, "Mudlet") == 0) {
       fprintf(stderr, "Sending Mudlet package information\n");
       SEND_TO_Q(d, "%c%c%cClient.GUI ", IAC, SB, GMCP);
-      SEND_TO_Q(d, "{ \"version\": \"1.0\", \"url\": \"https://phoenixmud.net/phoenixmud.mpackage\" }");
+      SEND_TO_Q(d, "{ \"version\": \"" MUDLET_PACKAGE_VERSION "\", \"url\": \"" MUDLET_PACKAGE_URL "\" }");
       SEND_TO_Q(d, "%c%c", IAC, SE);
    }
 
