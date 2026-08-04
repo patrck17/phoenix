@@ -1100,7 +1100,8 @@ void gmcp_exits(struct char_data* ch) {
 
 		send_to_char(ch, "\"%s\":{",dirs[direction]);
 
-		// Only send VNUMs if the roomflags bit is set. This matches the behavior above for the current room.
+		// Only send VNUMs if the roomflags bit is set. Unlike the room the
+		// character is in, these name rooms they have not been in.
 		if (PRF_FLAGGED(ch, PRF_ROOMFLAGS)) {
 			send_to_char(ch, "\"VNUM\": \"%ld\",", GET_ROOM_VNUM(exit->to_room));
 		}
@@ -1131,9 +1132,12 @@ void gmcp_exits(struct char_data* ch) {
 void gmcp_room(struct char_data* ch) {
 	send_to_char(ch, "%c%c%cRoom.Info {", IAC, SB, GMCP);
 
-	if (PRF_FLAGGED(ch, PRF_ROOMFLAGS)) {
-		send_to_char(ch, "\"VNUM\":\"%ld\",", GET_ROOM_VNUM(IN_ROOM(ch)));
-	}
+	// The vnum of the room the character is standing in goes to every
+	// client. A mapper keys its rooms on it, and room names repeat within a
+	// zone, so without it a mortal's map cannot follow them. The per-exit
+	// vnums in gmcp_exits stay behind the roomflags pref: those name rooms
+	// the character has not been in.
+	send_to_char(ch, "\"VNUM\":\"%ld\",", GET_ROOM_VNUM(IN_ROOM(ch)));
 
 	send_to_char(ch, "\"NAME\":\"%s\",", world[IN_ROOM(ch)].name);
 	send_to_char(ch, "\"ZONE\":\"%s\",", zone_table[world[IN_ROOM(ch)].zone].name);
