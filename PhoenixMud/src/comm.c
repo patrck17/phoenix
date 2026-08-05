@@ -889,6 +889,13 @@ void game_loop(int mother_desc)
 	    else if (perform_alias(d, comm))  /* run it through aliasing system */ 
 	       get_from_q(&d->input, comm, &aliased); 
 	    command_interpreter(d->character, comm); /* send it to interpreter */ 
+	    /* Refresh the GMCP sidebar panels for whoever just acted. Here and
+	     * NOT in process_output: that function snapshots t->output into a
+	     * local at entry and clears the buffer on the way out, so anything
+	     * queued from inside it is discarded outright. Queuing here lands the
+	     * frames in the same flush as the command's own output, which is also
+	     * when the inventory/equipment/affects actually changed. */
+	    gmcp_char_sidebar(d->character);
 	    } 
 	 }
       
@@ -2174,6 +2181,12 @@ void handle_gmcp_core_supports_set(struct descriptor_data* d, char* data) {
                SET_BIT(d->oob_protocol, OOB_REPORT_ROOM);
             } else if (strcmp(string->string, "Comm 1") == 0) {
                SET_BIT(d->oob_protocol, OOB_REPORT_COMM);
+            } else if (strcmp(string->string, "Char.Items 1") == 0) {
+               SET_BIT(d->oob_protocol, OOB_REPORT_ITEMS);
+            } else if (strcmp(string->string, "Char.Worn 1") == 0) {
+               SET_BIT(d->oob_protocol, OOB_REPORT_WORN);
+            } else if (strcmp(string->string, "Char.Afflictions 1") == 0) {
+               SET_BIT(d->oob_protocol, OOB_REPORT_AFF);
             }
          }
       }
@@ -2199,6 +2212,12 @@ void handle_gmcp_core_supports_add(struct descriptor_data* d, char* data) {
                SET_BIT(d->oob_protocol, OOB_REPORT_ROOM);
             } else if (strcmp(string->string, "Comm 1") == 0) {
                SET_BIT(d->oob_protocol, OOB_REPORT_COMM);
+            } else if (strcmp(string->string, "Char.Items 1") == 0) {
+               SET_BIT(d->oob_protocol, OOB_REPORT_ITEMS);
+            } else if (strcmp(string->string, "Char.Worn 1") == 0) {
+               SET_BIT(d->oob_protocol, OOB_REPORT_WORN);
+            } else if (strcmp(string->string, "Char.Afflictions 1") == 0) {
+               SET_BIT(d->oob_protocol, OOB_REPORT_AFF);
             }
          }
       }
@@ -2224,6 +2243,12 @@ void handle_gmcp_core_supports_remove(struct descriptor_data* d, char* data) {
                REMOVE_BIT(d->oob_protocol, OOB_REPORT_ROOM);
             } else if (strcmp(string->string, "Comm 1") == 0) {
                REMOVE_BIT(d->oob_protocol, OOB_REPORT_COMM);
+            } else if (strcmp(string->string, "Char.Items 1") == 0) {
+               REMOVE_BIT(d->oob_protocol, OOB_REPORT_ITEMS);
+            } else if (strcmp(string->string, "Char.Worn 1") == 0) {
+               REMOVE_BIT(d->oob_protocol, OOB_REPORT_WORN);
+            } else if (strcmp(string->string, "Char.Afflictions 1") == 0) {
+               REMOVE_BIT(d->oob_protocol, OOB_REPORT_AFF);
             }
          }
       }
@@ -2295,6 +2320,126 @@ void gmcp_comm(struct char_data* ch, const char* channel, const char* talker, co
 
    release_buffer(esc_text);
    release_buffer(esc_talker);
+}
+
+/* WEAR_x slot labels for the GMCP sidebar.
+ *
+ * NOT constants.c's equipment_types[] ("Worn on body") or where[]
+ * ("<worn on body>"). This mirrors WEAR_NAMES in the TS platform's
+ * lib/types.ts, because the two servers must drive the SAME client panel and
+ * that panel prints these strings verbatim. Divergence here is not a cosmetic
+ * difference, it is two different-looking clients.
+ *
+ * The TS side has no compile-time link to this table -- C cannot import it --
+ * so a drift test pins the two, exactly as the Client.GUI literals are pinned.
+ */
+const char *gmcp_wear_names[] = {
+   "unused",
+   "right finger", "left finger", "neck (1)", "neck (2)", "body",
+   "head", "legs", "feet", "hands", "arms", "shield", "about body",
+   "waist", "right wrist", "left wrist",
+   "wielded (primary)", "wielded (offhand)",
+   "held (primary)", "held (offhand)",
+   "left ear", "right ear", "face", "back", "heart"
+};
+
+/* The inventory / equipment / affect feed, so a GMCP client can draw the same
+ * panels the web client draws.
+ *
+ * Emitted from the same place and on the same cadence as Char.Vitals -- once
+ * per command, after the prompt -- but through SEND_TO_Q rather than by
+ * appending to process_output's fixed MAX_SOCK_BUF scratch buffer, which a
+ * full inventory could overflow.
+ *
+ * Each package is independently gated: a client receives only the ones it
+ * named in Core.Supports, and a client that named none costs nothing but the
+ * three IS_SET tests.
+ *
+ * Field names and shapes match the TS platform's buildInventoryData /
+ * buildEquipmentData / buildAffectsPayload, since one Mudlet package parses
+ * both servers. The TS payloads carry extra fields (instanceId, condition,
+ * flags, a grouped view) that have no analogue here; the client reads only the
+ * common subset, so their absence is not a difference it can see.
+ */
+void gmcp_char_sidebar(struct char_data* ch) {
+   struct descriptor_data* d;
+   struct obj_data* obj;
+   struct affected_type* af;
+   char* esc;
+   int pos;
+   int first;
+
+   if (ch == NULL || IS_NPC(ch)) return;
+   d = ch->desc;
+   if (d == NULL) return;
+   if (!IS_SET(d->oob_protocol, OOB_GMCP)) return;
+
+   esc = get_buffer(MAX_STRING_LENGTH);
+
+   /* Char.Items -- carried objects, and the carry counts the panel heads with.
+    * Only CAN_SEE_OBJ items, matching list_obj_to_char: an item the character
+    * cannot see is not in their inventory as far as the screen is concerned,
+    * and the panel must not disagree with the screen. */
+   if (IS_SET(d->oob_protocol, OOB_REPORT_ITEMS)) {
+      SEND_TO_Q(d, "%c%c%cChar.Items {\"carrying\":%d,\"maxCarry\":%d,\"items\":[",
+                IAC, SB, GMCP, IS_CARRYING_N(ch), CAN_CARRY_N(ch));
+      first = 1;
+      for (obj = ch->carrying; obj; obj = obj->next_content) {
+         if (!CAN_SEE_OBJ(ch, obj)) continue;
+         json_escape_string(obj->short_description ? obj->short_description : "",
+                            esc, MAX_STRING_LENGTH);
+         SEND_TO_Q(d, "%s{\"shortDesc\":\"%s\",\"weight\":%d}",
+                   first ? "" : ",", esc, GET_OBJ_WEIGHT(obj));
+         first = 0;
+      }
+      SEND_TO_Q(d, "]}%c%c", IAC, SE);
+   }
+
+   /* Char.Worn -- every slot, filled or not. The panel lists empty slots too:
+    * the point of an equipment display is seeing what is NOT worn. Slot 0 is
+    * skipped, as it is everywhere else (WEAR_LIGHT is "unused" here). */
+   if (IS_SET(d->oob_protocol, OOB_REPORT_WORN)) {
+      SEND_TO_Q(d, "%c%c%cChar.Worn {\"slots\":[", IAC, SB, GMCP);
+      first = 1;
+      for (pos = 1; pos < NUM_WEARS; pos++) {
+         SEND_TO_Q(d, "%s{\"position\":%d,\"positionName\":\"%s\",\"item\":",
+                   first ? "" : ",", pos, gmcp_wear_names[pos]);
+         first = 0;
+         if (GET_EQ(ch, pos) && CAN_SEE_OBJ(ch, GET_EQ(ch, pos))) {
+            json_escape_string(GET_EQ(ch, pos)->short_description ?
+                               GET_EQ(ch, pos)->short_description : "",
+                               esc, MAX_STRING_LENGTH);
+            SEND_TO_Q(d, "{\"shortDesc\":\"%s\"}}", esc);
+         } else {
+            SEND_TO_Q(d, "null}");
+         }
+      }
+      SEND_TO_Q(d, "]}%c%c", IAC, SE);
+   }
+
+   /* Char.Afflictions -- SECTIONS of pre-formatted lines, matching the TS
+    * AffectsPayload the web panel already consumes, so the two clients group
+    * and word affects the same way instead of inventing two presentations.
+    *
+    * One "Spells" section here: legacy has no equipment/race/flying split to
+    * mirror, and an empty sections array is exactly how the client is told
+    * there is nothing to show. */
+   if (IS_SET(d->oob_protocol, OOB_REPORT_AFF)) {
+      SEND_TO_Q(d, "%c%c%cChar.Afflictions {\"sections\":[", IAC, SB, GMCP);
+      if (ch->affected) {
+         SEND_TO_Q(d, "{\"id\":\"spells\",\"title\":\"Spells\",\"lines\":[");
+         first = 1;
+         for (af = ch->affected; af; af = af->next) {
+            json_escape_string(skill_name(af->type), esc, MAX_STRING_LENGTH);
+            SEND_TO_Q(d, "%s\"%s (%d)\"", first ? "" : ",", esc, af->duration);
+            first = 0;
+         }
+         SEND_TO_Q(d, "]}");
+      }
+      SEND_TO_Q(d, "]}%c%c", IAC, SE);
+   }
+
+   release_buffer(esc);
 }
 
 void handle_gmcp_subopt(struct descriptor_data* d, unsigned char* subopt_start, unsigned char* subopt_end) {
