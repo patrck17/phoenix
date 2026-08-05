@@ -1189,7 +1189,12 @@ int get_number(char **name)
       char *buftmp=get_buffer(256);
       *ppos++ = '\0';
       strcpy(vnumber, *name);
-      strcpy(*name, ppos);
+      /* ppos points INSIDE *name, so this shifts the tail of a buffer onto
+       * itself.  strcpy is undefined for overlapping ranges — AddressSanitizer
+       * reports it as strcpy-param-overlap, and the resulting heap corruption
+       * surfaces later as a SIGSEGV in an unrelated command.  memmove is
+       * defined for overlap.  Same defect, same fix, as half_chop. */
+      memmove(*name, ppos, strlen(ppos) + 1);
       release_buffer(buftmp);
       for (i = 0; *(vnumber + i); i++)
          if (!isdigit((int)*(vnumber + i)))
