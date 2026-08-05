@@ -83,9 +83,10 @@ extern struct spell_info_type *spells;
 extern char *class_abbrevs[];
 extern char *scr_class_abbrevs[];
 
-/* IS_SCR for a stored record.  IS_SCR() needs a live char_data; these
- * commands render from a struct char_file_u, so test the same two fields:
- * a base class below CLASS_KENSAI that has remorted at least once. */
+/* IS_SCR for a STORED record.  IS_SCR() needs a live char_data; do_last and
+ * do_show render straight out of a struct char_file_u, so test the same two
+ * fields it does: a base class below CLASS_KENSAI that has remorted at least
+ * once. */
 #define SCR_STORED(cf) ((cf).class < CLASS_KENSAI && \
                         (cf).player_specials_saved.times_remorted > NON_REMORT)
 extern char *race_abbrevs[];
