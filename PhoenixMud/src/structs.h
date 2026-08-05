@@ -525,6 +525,9 @@
 #define OOB_REPORT_STATS (1 << 2)
 #define OOB_REPORT_ROOM (1 << 3)
 #define OOB_REPORT_COMM (1 << 4)	/* GMCP only; MSDP has no Comm package */
+#define OOB_REPORT_ITEMS (1 << 5)	/* GMCP only; the sidebar feed, see gmcp_char_* */
+#define OOB_REPORT_WORN (1 << 6)	/* GMCP only */
+#define OOB_REPORT_AFF (1 << 7)	/* GMCP only */
 
 #define MSDP 69
 #define MSDP_VAR 1
