@@ -2405,10 +2405,18 @@ void gmcp_char_sidebar(struct char_data* ch) {
          SEND_TO_Q(d, "%s{\"position\":%d,\"positionName\":\"%s\",\"item\":",
                    first ? "" : ",", pos, gmcp_wear_names[pos]);
          first = 0;
-         if (GET_EQ(ch, pos) && CAN_SEE_OBJ(ch, GET_EQ(ch, pos))) {
-            json_escape_string(GET_EQ(ch, pos)->short_description ?
-                               GET_EQ(ch, pos)->short_description : "",
-                               esc, MAX_STRING_LENGTH);
+         if (GET_EQ(ch, pos)) {
+            /* An item the character cannot SEE is still WORN: the slot is
+             * occupied and must read as occupied. Emitting null here made
+             * invisible gear vanish from the panel entirely, while TS renders
+             * it as "Something." (buildEquipmentData). The slot state is the
+             * fact; what the character can make out is the description. */
+            if (CAN_SEE_OBJ(ch, GET_EQ(ch, pos)))
+               json_escape_string(GET_EQ(ch, pos)->short_description ?
+                                  GET_EQ(ch, pos)->short_description : "",
+                                  esc, MAX_STRING_LENGTH);
+            else
+               strcpy(esc, "Something.");
             SEND_TO_Q(d, "{\"shortDesc\":\"%s\"}}", esc);
          } else {
             SEND_TO_Q(d, "null}");
@@ -2421,13 +2429,70 @@ void gmcp_char_sidebar(struct char_data* ch) {
     * AffectsPayload the web panel already consumes, so the two clients group
     * and word affects the same way instead of inventing two presentations.
     *
-    * One "Spells" section here: legacy has no equipment/race/flying split to
-    * mirror, and an empty sections array is exactly how the client is told
-    * there is nothing to show. */
+    * FOUR section kinds, same ids as TS: equipment / race / flying / spells.
+    * The first cut emitted only "spells" (ch->affected), on the mistaken note
+    * that "legacy has no equipment/race/flying split to mirror" -- legacy has
+    * all of it, it is simply not pre-grouped. The result was an effects panel
+    * showing some affects and not others, which is what a player reported and
+    * what the gmcp-surface sweep now pins.
+    *
+    * LINES are worded by each engine; a client renders `title` + `lines`, so
+    * the SECTION SET is the contract, not the prose. */
    if (IS_SET(d->oob_protocol, OOB_REPORT_AFF)) {
+      int sec_first = 1;
+      int pos2;
+
       SEND_TO_Q(d, "%c%c%cChar.Afflictions {\"sections\":[", IAC, SB, GMCP);
+
+      /* EQUIPMENT -- the APPLY_* modifiers carried by worn gear. Legacy keeps
+       * these on the object (obj_affected_type), not on ch->affected, which is
+       * exactly why reading ch->affected alone lost them. */
+      first = 1;
+      for (pos2 = 0; pos2 < NUM_WEARS; pos2++) {
+         struct obj_data *eq = GET_EQ(ch, pos2);
+         int ai;
+         if (!eq || !CAN_SEE_OBJ(ch, eq)) continue;
+         for (ai = 0; ai < MAX_OBJ_AFFECT; ai++) {
+            if (eq->affected[ai].location == APPLY_NONE || eq->affected[ai].modifier == 0) continue;
+            if (first) {
+               SEND_TO_Q(d, "%s{\"id\":\"equipment\",\"title\":\"Equipment\",\"lines\":[",
+                         sec_first ? "" : ",");
+               sec_first = 0;
+            }
+            json_escape_string(apply_types[(int) eq->affected[ai].location], esc, MAX_STRING_LENGTH);
+            SEND_TO_Q(d, "%s\"%+ld %s\"", first ? "" : ",", eq->affected[ai].modifier, esc);
+            first = 0;
+         }
+      }
+      if (!first) SEND_TO_Q(d, "]}");
+
+      /* RACE -- innate bits the character did not get from a spell or an item.
+       * AFF_FLAGGED covers both sources, so this is a plain report of what is
+       * set rather than an attempt to attribute it. */
+      first = 1;
+      if (AFF_FLAGGED(ch, AFF_SNEAK) || AFF_FLAGGED(ch, AFF_INFRAVISION) ||
+          AFF_FLAGGED(ch, AFF_DETECT_INVIS) || AFF_FLAGGED(ch, AFF_WATER_BREATHE)) {
+         SEND_TO_Q(d, "%s{\"id\":\"race\",\"title\":\"Race\",\"lines\":[", sec_first ? "" : ",");
+         sec_first = 0;
+         if (AFF_FLAGGED(ch, AFF_SNEAK))         { SEND_TO_Q(d, "%s\"You can sneak.\"", first ? "" : ","); first = 0; }
+         if (AFF_FLAGGED(ch, AFF_INFRAVISION))   { SEND_TO_Q(d, "%s\"You have infravision.\"", first ? "" : ","); first = 0; }
+         if (AFF_FLAGGED(ch, AFF_DETECT_INVIS))  { SEND_TO_Q(d, "%s\"You can detect invisibility.\"", first ? "" : ","); first = 0; }
+         if (AFF_FLAGGED(ch, AFF_WATER_BREATHE)) { SEND_TO_Q(d, "%s\"You can breathe water.\"", first ? "" : ","); first = 0; }
+         SEND_TO_Q(d, "]}");
+      }
+
+      /* FLYING -- its own section in TS, so its own section here. */
+      if (AFF2_FLAGGED(ch, AFF2_FLYING) || AFF_FLAGGED(ch, AFF_FLY)) {
+         SEND_TO_Q(d, "%s{\"id\":\"flying\",\"title\":\"Flying\",\"lines\":[\"%s\"]}",
+                   sec_first ? "" : ",",
+                   AFF2_FLAGGED(ch, AFF2_FLYING) ? "You are flying." : "You can fly.");
+         sec_first = 0;
+      }
+
+      /* SPELLS -- ch->affected, the timed magical affects. */
       if (ch->affected) {
-         SEND_TO_Q(d, "{\"id\":\"spells\",\"title\":\"Spells\",\"lines\":[");
+         SEND_TO_Q(d, "%s{\"id\":\"spells\",\"title\":\"Spells\",\"lines\":[", sec_first ? "" : ",");
+         sec_first = 0;
          first = 1;
          for (af = ch->affected; af; af = af->next) {
             json_escape_string(skill_name(af->type), esc, MAX_STRING_LENGTH);
@@ -2436,6 +2501,7 @@ void gmcp_char_sidebar(struct char_data* ch) {
          }
          SEND_TO_Q(d, "]}");
       }
+
       SEND_TO_Q(d, "]}%c%c", IAC, SE);
    }
 
