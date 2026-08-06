@@ -68,7 +68,7 @@
  * re-downloads on every connect when it does not match. */
 #include <sys/stat.h>
 
-#define MUDLET_PACKAGE_VERSION_FALLBACK "2.7"
+#define MUDLET_PACKAGE_VERSION_FALLBACK "3.0"
 #define MUDLET_PACKAGE_URL          "https://phoenixmud.net/PhoenixMUD.mpackage"
 #define MUDLET_PACKAGE_VERSION_FILE "/home/ph03n1x/public_html/PhoenixMUD.version"
 
