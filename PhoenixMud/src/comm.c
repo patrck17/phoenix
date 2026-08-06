@@ -2444,41 +2444,203 @@ void gmcp_char_sidebar(struct char_data* ch) {
 
       SEND_TO_Q(d, "%c%c%cChar.Afflictions {\"sections\":[", IAC, SB, GMCP);
 
-      /* EQUIPMENT -- the APPLY_* modifiers carried by worn gear. Legacy keeps
-       * these on the object (obj_affected_type), not on ch->affected, which is
-       * exactly why reading ch->affected alone lost them. */
-      first = 1;
-      for (pos2 = 0; pos2 < NUM_WEARS; pos2++) {
-         struct obj_data *eq = GET_EQ(ch, pos2);
-         int ai;
-         if (!eq || !CAN_SEE_OBJ(ch, eq)) continue;
-         for (ai = 0; ai < MAX_OBJ_AFFECT; ai++) {
-            if (eq->affected[ai].location == APPLY_NONE || eq->affected[ai].modifier == 0) continue;
-            if (first) {
-               SEND_TO_Q(d, "%s{\"id\":\"equipment\",\"title\":\"Equipment\",\"lines\":[",
-                         sec_first ? "" : ",");
-               sec_first = 0;
-            }
-            json_escape_string(apply_types[(int) eq->affected[ai].location], esc, MAX_STRING_LENGTH);
-            SEND_TO_Q(d, "%s\"%+ld %s\"", first ? "" : ",", eq->affected[ai].modifier, esc);
-            first = 0;
-         }
-      }
-      if (!first) SEND_TO_Q(d, "]}");
+      /* EQUIPMENT -- the APPLY_* modifiers carried by worn gear, SUMMED per
+       * location. Legacy keeps these on the object (obj_affected_type), not on
+       * ch->affected, which is why reading ch->affected alone lost them.
+       *
+       * ⚠ SUMMED, not listed per item. Emitting one line per (item, apply)
+       * pair gave "+5 DAMROLL" four times over where TS shows "+20 DAMROLL"
+       * once — same information, unreadable, and different from the other
+       * engine. TS aggregates into a totals map and renders a fixed
+       * STAT_ORDER under a "Stats" sub-header (buildAffectsPayload); this
+       * mirrors that order and format so the two panels read identically.
+       *
+       * Locations 27/28/29 (IMMUNE/RESIST/SUSCEPT) are bitvectors, not
+       * magnitudes, and TS renders them separately — skipped here too. */
+      {
+         static const int STAT_ORDER[] = {
+            1, 2, 3, 4, 5, 25, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+            21, 22, 23, 24, 26, 30, 31
+         };
+         /* Theme buckets and their order, AFF_FLAG_THEME / AFF_THEME_ORDER in
+          * CommandInterpreter.ts. Keyed by the affected_bits[] display name so
+          * the two engines label identically; anything unlisted falls to
+          * "Other", exactly as the TS lookup's ?? does. */
+         static const char *THEME_ORDER[] = {
+            "Movement", "Senses", "Stealth", "Wards", "Other"
+         };
+         static const struct { const char *flag; const char *theme; } FLAG_THEME[] = {
+            { "FLY",        "Movement" }, { "LEVITATE", "Movement" },
+            { "WATERWALK",  "Movement" }, { "PASSDOOR", "Movement" },
+            { "INFRA",      "Senses"   }, { "FOLLOW",   "Senses"   },
+            { "DET-INVIS",  "Senses"   }, { "DET-MAGIC","Senses"   },
+            { "DET-ALIGN",  "Senses"   }, { "SENSE-LIFE","Senses"  },
+            { "SNEAK",      "Stealth"  }, { "HIDE",     "Stealth"  },
+            { "INVIS",      "Stealth"  },
+            { "SANCT",      "Wards"    }, { "PROT-EVIL","Wards"    },
+            { "PROT-GOOD",  "Wards"    },
+            { NULL, NULL }
+         };
+         const int n_order = (int) (sizeof(STAT_ORDER) / sizeof(STAT_ORDER[0]));
+         const int n_theme = (int) (sizeof(THEME_ORDER) / sizeof(THEME_ORDER[0]));
+         /* No NUM_APPLIES constant exists; the highest APPLY_* in structs.h is
+          * 34, so 64 leaves room without tracking a moving target. */
+         #define GMCP_APPLY_MAX 64
+         long totals[GMCP_APPLY_MAX];
+         long eq_imr[3];          /* APPLY 27 / 28 / 29 -- immune, resist, suscept */
+         long eq_bits = 0;        /* union of the worn items' AFF_ bitvectors */
+         char lbuf[MAX_INPUT_LENGTH];
+         int li, ti, bi, ki;
 
-      /* RACE -- innate bits the character did not get from a spell or an item.
-       * AFF_FLAGGED covers both sources, so this is a plain report of what is
-       * set rather than an attempt to attribute it. */
+         for (li = 0; li < GMCP_APPLY_MAX; li++) totals[li] = 0;
+         for (li = 0; li < 3; li++) eq_imr[li] = 0;
+
+         for (pos2 = 0; pos2 < NUM_WEARS; pos2++) {
+            struct obj_data *eq = GET_EQ(ch, pos2);
+            int ai;
+            if (!eq || !CAN_SEE_OBJ(ch, eq)) continue;
+            /* The toggle flags live on the OBJECT, not in ch->affected: wearing
+             * an item ORs its bitvector into AFF_FLAGS. Re-deriving the union
+             * here is what separates gear-granted abilities from racial ones,
+             * which AFF_FLAGGED cannot tell apart. */
+            eq_bits |= eq->obj_flags.bitvector;
+            for (ai = 0; ai < MAX_OBJ_AFFECT; ai++) {
+               int loc = (int) eq->affected[ai].location;
+               if (loc <= 0 || loc >= GMCP_APPLY_MAX) continue;
+               if (loc >= 27 && loc <= 29) {
+                  eq_imr[loc - 27] |= eq->affected[ai].modifier;
+                  continue;
+               }
+               totals[loc] += eq->affected[ai].modifier;
+            }
+         }
+
+         /* One lazy open, then comma-separated lines. `first` means the section
+          * has not been opened yet. */
+         #define GMCP_EQ_LINE(TXT) do { \
+            json_escape_string((TXT), esc, MAX_STRING_LENGTH); \
+            if (first) { \
+               SEND_TO_Q(d, "%s{\"id\":\"equipment\",\"title\":\"Equipment\",\"lines\":[\"%s\"", \
+                         sec_first ? "" : ",", esc); \
+               sec_first = 0; first = 0; \
+            } else { \
+               SEND_TO_Q(d, ",\"%s\"", esc); \
+            } \
+         } while (0)
+
+         first = 1;
+
+         /* 1. Toggle flags, grouped by theme. */
+         for (ti = 0; ti < n_theme; ti++) {
+            int theme_open = 0;
+            for (bi = 0; bi < 32 && *affected_bits[bi] != '\n'; bi++) {
+               const char *theme = "Other";
+               int fi;
+               if (!IS_SET(eq_bits, (long) 1 << bi)) continue;
+               for (fi = 0; FLAG_THEME[fi].flag; fi++) {
+                  if (!strcmp(FLAG_THEME[fi].flag, affected_bits[bi])) {
+                     theme = FLAG_THEME[fi].theme;
+                     break;
+                  }
+               }
+               if (strcmp(theme, THEME_ORDER[ti])) continue;
+               if (!theme_open) { GMCP_EQ_LINE(THEME_ORDER[ti]); theme_open = 1; }
+               snprintf(lbuf, sizeof(lbuf), "  + %s", affected_bits[bi]);
+               GMCP_EQ_LINE(lbuf);
+            }
+         }
+
+         /* 2. APPLY_* modifiers, SUMMED per location under a "Stats" header.
+          *
+          * ⚠ SUMMED, not listed per item. Emitting one line per (item, apply)
+          * pair gave "+5 DAMROLL" four times over where TS shows "+20 DAMROLL"
+          * once — same information, unreadable, and different from the other
+          * engine. */
+         {
+            int stats_open = 0;
+            for (li = 0; li < n_order; li++) {
+               int loc = STAT_ORDER[li];
+               if (loc >= GMCP_APPLY_MAX || totals[loc] == 0) continue;
+               if (!stats_open) { GMCP_EQ_LINE("Stats"); stats_open = 1; }
+               snprintf(lbuf, sizeof(lbuf), "  %+ld %s", totals[loc], apply_types[loc]);
+               GMCP_EQ_LINE(lbuf);
+            }
+         }
+
+         /* 3. IMMUNE / RESIST / SUSCEPT -- bitvectors, not magnitudes, which is
+          * why they are excluded from the totals above and expanded here. */
+         for (ki = 0; ki < 3; ki++) {
+            if (!eq_imr[ki]) continue;
+            GMCP_EQ_LINE(ki == 0 ? "IMMUNE" : ki == 1 ? "RESIST" : "SUSCEPT");
+            for (bi = 0; bi < 32 && *immunity_names[bi] != '\n'; bi++) {
+               if (!IS_SET(eq_imr[ki], (long) 1 << bi)) continue;
+               snprintf(lbuf, sizeof(lbuf), "  %s", immunity_names[bi]);
+               GMCP_EQ_LINE(lbuf);
+            }
+         }
+
+         #undef GMCP_EQ_LINE
+         if (!first) SEND_TO_Q(d, "]}");
+      }
+
+      /* RACE -- what the RACE grants, read from trait_info, not from
+       * AFF_FLAGGED.
+       *
+       * ⚠ AFF_FLAGGED is the LIVE flag set: gear and spells OR into it too, so
+       * testing it reported a worn item's sneak as an innate racial ability.
+       * TS partitions by source (getRacialInnateAffects), and with the
+       * equipment section above now listing gear flags, testing live flags
+       * here would print the same ability in both sections.
+       *
+       * set_racial_traits (race.c:852) is the authority for what a race grants:
+       * the four trait_info booleans, plus DETECT_INVIS for sprites, plus the
+       * immune/resist/susceptible masks. */
       first = 1;
-      if (AFF_FLAGGED(ch, AFF_SNEAK) || AFF_FLAGGED(ch, AFF_INFRAVISION) ||
-          AFF_FLAGGED(ch, AFF_DETECT_INVIS) || AFF_FLAGGED(ch, AFF_WATER_BREATHE)) {
-         SEND_TO_Q(d, "%s{\"id\":\"race\",\"title\":\"Race\",\"lines\":[", sec_first ? "" : ",");
-         sec_first = 0;
-         if (AFF_FLAGGED(ch, AFF_SNEAK))         { SEND_TO_Q(d, "%s\"You can sneak.\"", first ? "" : ","); first = 0; }
-         if (AFF_FLAGGED(ch, AFF_INFRAVISION))   { SEND_TO_Q(d, "%s\"You have infravision.\"", first ? "" : ","); first = 0; }
-         if (AFF_FLAGGED(ch, AFF_DETECT_INVIS))  { SEND_TO_Q(d, "%s\"You can detect invisibility.\"", first ? "" : ","); first = 0; }
-         if (AFF_FLAGGED(ch, AFF_WATER_BREATHE)) { SEND_TO_Q(d, "%s\"You can breathe water.\"", first ? "" : ","); first = 0; }
-         SEND_TO_Q(d, "]}");
+      {
+         int r = GET_RACE(ch);
+         int has_sneak = trait_info[r].auto_sneak;
+         int has_infra = trait_info[r].infravision;
+         int has_swim  = trait_info[r].can_swim;
+         int has_dinv  = (r == RACE_SPRITE);
+         long r_imm = IS_NPC(ch) ? 0 : trait_info[r].immune;
+         long r_res = IS_NPC(ch) ? 0 : trait_info[r].resist;
+         long r_sus = IS_NPC(ch) ? 0 : trait_info[r].susceptible;
+
+         if (has_sneak || has_infra || has_swim || has_dinv || r_imm || r_res || r_sus) {
+            SEND_TO_Q(d, "%s{\"id\":\"race\",\"title\":\"Race\",\"lines\":[", sec_first ? "" : ",");
+            sec_first = 0;
+            /* Themed like the equipment flags, same sub-header vocabulary. */
+            if (has_swim) {
+               SEND_TO_Q(d, "%s\"Movement\"", first ? "" : ","); first = 0;
+               SEND_TO_Q(d, ",\"  You can breathe water.\"");
+            }
+            if (has_infra || has_dinv) {
+               SEND_TO_Q(d, "%s\"Senses\"", first ? "" : ","); first = 0;
+               if (has_infra) SEND_TO_Q(d, ",\"  You have infravision.\"");
+               if (has_dinv)  SEND_TO_Q(d, ",\"  You can detect invisibility.\"");
+            }
+            if (has_sneak) {
+               SEND_TO_Q(d, "%s\"Stealth\"", first ? "" : ","); first = 0;
+               SEND_TO_Q(d, ",\"  You can sneak.\"");
+            }
+            if (r_imm || r_res || r_sus) {
+               int bi2, k2;
+               long masks[3];
+               masks[0] = r_imm; masks[1] = r_res; masks[2] = r_sus;
+               SEND_TO_Q(d, "%s\"Resistances\"", first ? "" : ","); first = 0;
+               for (k2 = 0; k2 < 3; k2++) {
+                  if (!masks[k2]) continue;
+                  SEND_TO_Q(d, ",\"  %s\"",
+                            k2 == 0 ? "IMMUNE" : k2 == 1 ? "RESIST" : "SUSCEPT");
+                  for (bi2 = 0; bi2 < 32 && *immunity_names[bi2] != '\n'; bi2++) {
+                     if (!IS_SET(masks[k2], (long) 1 << bi2)) continue;
+                     json_escape_string(immunity_names[bi2], esc, MAX_STRING_LENGTH);
+                     SEND_TO_Q(d, ",\"    %s\"", esc);
+                  }
+               }
+            }
+            SEND_TO_Q(d, "]}");
+         }
       }
 
       /* FLYING -- its own section in TS, so its own section here. */
