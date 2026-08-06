@@ -53,7 +53,7 @@
 /* Advertised over GMCP in Client.GUI.  Mudlet offers the download only
  * when this version differs from the installed package, so it must match
  * the package published at MUDLET_PACKAGE_URL. */
-#define MUDLET_PACKAGE_VERSION "2.4"
+#define MUDLET_PACKAGE_VERSION "2.6"
 #define MUDLET_PACKAGE_URL     "https://phoenixmud.net/PhoenixMUD.mpackage"
 
 FILE *logfile = NULL;           /* Where to send the log messages. */
