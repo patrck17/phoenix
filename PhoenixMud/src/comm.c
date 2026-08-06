@@ -50,11 +50,79 @@
 #define MSSP_VAR 1
 #define MSSP_VAL 2
 
-/* Advertised over GMCP in Client.GUI.  Mudlet offers the download only
- * when this version differs from the installed package, so it must match
- * the package published at MUDLET_PACKAGE_URL. */
-#define MUDLET_PACKAGE_VERSION "2.6"
-#define MUDLET_PACKAGE_URL     "https://phoenixmud.net/PhoenixMUD.mpackage"
+/* Advertised over GMCP in Client.GUI.
+ *
+ * READ FROM A FILE, not compiled in.  Mudlet offers the download only when
+ * the advertised version differs from the installed package, so this must be
+ * whatever the URL currently serves.  Compiling it in meant every package
+ * release required rebuilding and restarting a server whose BEHAVIOUR had not
+ * changed -- it only relays a string -- and the two drifted in practice (the
+ * host advertised 1.9 while the published package was 2.6).
+ *
+ * The version file is published next to the .mpackage.  Ship both and the
+ * advertisement follows, with no rebuild and no restart.  The literal below is
+ * only the fallback for a host that has no published file.
+ *
+ * The URL's filename must still match the package name in that package's
+ * config.lua: Mudlet looks the filename up in its installed list and
+ * re-downloads on every connect when it does not match. */
+#include <sys/stat.h>
+
+#define MUDLET_PACKAGE_VERSION_FALLBACK "2.7"
+#define MUDLET_PACKAGE_URL          "https://phoenixmud.net/PhoenixMUD.mpackage"
+#define MUDLET_PACKAGE_VERSION_FILE "/home/ph03n1x/public_html/PhoenixMUD.version"
+
+/* First line of the version file, trimmed and validated, memoised on mtime.
+ * mtime rather than a one-shot read so a publish is picked up without a
+ * restart, which is the whole point of reading it.
+ *
+ * Every failure path returns the fallback rather than failing: a missing or
+ * malformed file must not take the GMCP handshake down, and advertising an
+ * empty string would make Mudlet re-download on every single connect. */
+static const char *mudlet_package_version(void)
+{
+   static char cached[32];
+   static time_t cached_mtime = 0;
+   const char *pathname;
+   struct stat st;
+   FILE *fp;
+   char buf[32];
+   size_t i;
+
+   pathname = getenv("PHOENIX_MUDLET_VERSION_FILE");
+   if (!pathname || !*pathname)
+      pathname = MUDLET_PACKAGE_VERSION_FILE;
+
+   if (stat(pathname, &st) != 0)
+      return MUDLET_PACKAGE_VERSION_FALLBACK;
+   if (cached[0] && cached_mtime == st.st_mtime)
+      return cached;
+
+   if (!(fp = fopen(pathname, "r")))
+      return MUDLET_PACKAGE_VERSION_FALLBACK;
+   if (!fgets(buf, sizeof(buf), fp)) {
+      fclose(fp);
+      return MUDLET_PACKAGE_VERSION_FALLBACK;
+   }
+   fclose(fp);
+
+   for (i = 0; buf[i]; i++)
+      if (buf[i] == '\n' || buf[i] == '\r') {
+         buf[i] = '\0';
+         break;
+      }
+   if (!buf[0])
+      return MUDLET_PACKAGE_VERSION_FALLBACK;
+   for (i = 0; buf[i]; i++)
+      if (!isalnum((unsigned char) buf[i]) && buf[i] != '.'
+          && buf[i] != '_' && buf[i] != '-')
+         return MUDLET_PACKAGE_VERSION_FALLBACK;
+
+   strncpy(cached, buf, sizeof(cached) - 1);
+   cached[sizeof(cached) - 1] = '\0';
+   cached_mtime = st.st_mtime;
+   return cached;
+}
 
 FILE *logfile = NULL;           /* Where to send the log messages. */
 /* externs */ 
@@ -2152,7 +2220,7 @@ void handle_gmcp_core_hello(struct descriptor_data* d, char* data) {
    if (strcmp(client, "Mudlet") == 0) {
       fprintf(stderr, "Sending Mudlet package information\n");
       SEND_TO_Q(d, "%c%c%cClient.GUI ", IAC, SB, GMCP);
-      SEND_TO_Q(d, "{ \"version\": \"" MUDLET_PACKAGE_VERSION "\", \"url\": \"" MUDLET_PACKAGE_URL "\" }");
+      SEND_TO_Q(d, "{ \"version\": \"%s\", \"url\": \"%s\" }", mudlet_package_version(), MUDLET_PACKAGE_URL);
       SEND_TO_Q(d, "%c%c", IAC, SE);
    }
 
