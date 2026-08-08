@@ -872,6 +872,15 @@ void id_obj_to_char(struct char_data *ch, struct obj_data *obj)
   char *buf2=get_buffer(2048);
   int i, found, condition,percent;
   int wcondition,wpercent;
+
+  /* Persistent identify (4.2): seeing the identify block teaches the
+   * player this object for good — every caller (spell, scroll, shop,
+   * player shop, auction) funnels through here. PCs only; prototype
+   * vnums only (clones/money carry -1). Draws no RNG. */
+  if (!IS_NPC(ch) && ch->player_specials != NULL &&
+      GET_OBJ_VNUM(obj) >= 0 && GET_OBJ_VNUM(obj) <= KNOWN_TOP_VNUM)
+    ch->player_specials->known_vnums[GET_OBJ_VNUM(obj)/8] |= (1 << (GET_OBJ_VNUM(obj)%8));
+
   
   sprinttype(GET_OBJ_TYPE(obj), item_types, buf2);
   send_to_char(ch, "Object '%s', Item type: %s\r\n",
