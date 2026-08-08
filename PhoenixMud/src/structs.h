@@ -1093,6 +1093,12 @@ struct obj_material_affs
 #define EXPLORED_BYTES (1+EXPLORED_TOP_VNUM/8)
 #define EXPLORED_FILE "etc/explored"
 
+/* Persistent identify (4.2): once a player has seen an item's identify
+ * block, the object vnum is remembered in a per-player bitmap saved to
+ * <name>.known beside <name>.explored. */
+#define KNOWN_TOP_VNUM 40000
+#define KNOWN_BYTES (1+KNOWN_TOP_VNUM/8)
+
 #define BACKUP_TMP_DIR "/home/lucas/phoenix/e-mail"
 #define BUILDERS_DIR "/home/lucas/phoenix/builders/circle/lib/world"
 
@@ -1661,6 +1667,7 @@ struct player_special_data {
 
   int explored_total;
   char explored_vnums[EXPLORED_BYTES];
+  char known_vnums[KNOWN_BYTES];
   char email[256];
 
   bool is_being_reimbd;
@@ -1775,6 +1782,7 @@ struct char_file_u {
 
   /* This gets written to name.explored */
   char explored_vnums[EXPLORED_BYTES];
+  char known_vnums[KNOWN_BYTES];
   char email[256];
   /* End name.explored */
 };

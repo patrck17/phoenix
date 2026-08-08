@@ -29,6 +29,7 @@
 
 /* extern variables */
 extern struct zone_data *zone_table;
+extern struct index_data *obj_index;
 extern struct room_data *world;
 extern struct descriptor_data *descriptor_list;
 extern struct room_data *world;
@@ -391,7 +392,24 @@ ACMD(do_identify)
          send_to_char(ch,"What do you wish to identify?\r\n");
       }
    else
-      send_to_char(ch, "Sorry, but you need a scroll to identify things!\r\n");
+      {
+      /* Persistent identify (4.2): a mortal recalls any object they have
+       * seen identified before; everything else answers the original
+       * refusal byte-for-byte. Objects only — never characters. */
+      skip_spaces(&argument);
+      bits = generic_find(argument, FIND_OBJ_INV | FIND_OBJ_ROOM | FIND_OBJ_EQUIP,
+                          ch, &found_char, &found_obj);
+      if (bits && found_obj != NULL && ch->player_specials != NULL &&
+          GET_OBJ_VNUM(found_obj) >= 0 && GET_OBJ_VNUM(found_obj) <= KNOWN_TOP_VNUM &&
+          (ch->player_specials->known_vnums[GET_OBJ_VNUM(found_obj)/8] &
+           (1 << (GET_OBJ_VNUM(found_obj)%8))))
+         {
+         send_to_char(ch, "You recall what you have learned:\r\n");
+         id_obj_to_char(ch, found_obj);
+         }
+      else
+         send_to_char(ch, "Sorry, but you need a scroll to identify things!\r\n");
+      }
    }
 /**4/11/97 Anduin recall function **/
 ACMD(do_recall)

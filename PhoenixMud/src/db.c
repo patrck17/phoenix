@@ -4143,6 +4143,16 @@ void load_char_ascii(struct char_file_u *ch, char *name)
   }
   fread(&ch->explored_vnums, sizeof(char), EXPLORED_BYTES, fp);
   fclose(fp);
+
+  /* read known-item data (persistent identify). Absent file = empty
+   * memory (pre-feature player), silently. */
+  memset(&ch->known_vnums, 0, KNOWN_BYTES*sizeof(char));
+  sprintf(filename, "etc/players_ascii/%c/%s.known", toupper(ch->name[0]), ch->name);
+  fp = fopen(filename, "r");
+  if (fp) {
+    fread(&ch->known_vnums, sizeof(char), KNOWN_BYTES, fp);
+    fclose(fp);
+  }
 }
 
 void save_char_ascii(struct char_file_u *ch)
@@ -4288,6 +4298,16 @@ void save_char_ascii(struct char_file_u *ch)
   }
   fwrite(&ch->explored_vnums, sizeof(char), EXPLORED_BYTES, fp);
   fclose(fp);
+
+  /* write known-item data (persistent identify) */
+  sprintf(filename, "etc/players_ascii/%c/%s.known", toupper(ch->name[0]), ch->name);
+  fp = fopen(filename, "w");
+  if (!fp) {
+    log("SYSERR: Could not open %s for writing.", filename);
+    return;
+  }
+  fwrite(&ch->known_vnums, sizeof(char), KNOWN_BYTES, fp);
+  fclose(fp);
 }
 
 
@@ -4367,6 +4387,7 @@ void store_to_char(struct char_file_u * st, struct char_data * ch)
       }
 
    memcpy(ch->player_specials->explored_vnums, st->explored_vnums, EXPLORED_BYTES*sizeof(char));
+   memcpy(ch->player_specials->known_vnums, st->known_vnums, KNOWN_BYTES*sizeof(char));
    GET_EXPLORED(ch) = 0;
    for (i = 0; i < 8*EXPLORED_BYTES; i++) {
      if (ch->player_specials->explored_vnums[i/8] & (1 << (i%8))) {
@@ -4507,6 +4528,9 @@ void char_to_store(struct char_data * ch, struct char_file_u * st,
 
    /* copy explored data. */
    memcpy(st->explored_vnums, ch->player_specials->explored_vnums, EXPLORED_BYTES*sizeof(char));
+
+   /* copy known-item data (persistent identify). */
+   memcpy(st->known_vnums, ch->player_specials->known_vnums, KNOWN_BYTES*sizeof(char));
 
    strcpy(st->email, ch->player_specials->email);
 
