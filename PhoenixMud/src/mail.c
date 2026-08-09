@@ -533,6 +533,9 @@ SPECIAL(postmaster)
    if (!ch->desc || IS_NPC(ch)) 
       return FALSE;   /* so mobs don't get caught here */ 
  
+   if (cmd <= 0)
+      return FALSE;   /* arrival, not a command; CMD_IS matches anything at cmd <= 0 */
+ 
    if (!CMD_IS("mail") && !CMD_IS("check") && !CMD_IS("receive"))
       return FALSE; 
  

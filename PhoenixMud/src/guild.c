@@ -1030,9 +1030,9 @@ int improve_skill(struct char_data *ch, int skill, int passcheck)
       GET_SKILL(ch,skill)++;
       }
 
+    /* skill mastery only - a spell's last rank comes from practice, never use */
     if(GET_SKILL_LEARN(ch,skill)==100 &&
-        (((spells[skill].is_spell==IS_SPELL)&&(GET_SKILL(ch,skill)>=10)) ||
-         ((spells[skill].is_spell==IS_SKILL)&&(GET_SKILL(ch,skill)>=95))))
+        (spells[skill].is_spell==IS_SKILL)&&(GET_SKILL(ch,skill)>=95))
       {
       send_to_char(ch, "&MYou have mastered %s!&n\r\n",
                    spells[skill].spell_name);

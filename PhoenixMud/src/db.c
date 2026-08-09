@@ -4135,7 +4135,7 @@ void load_char_ascii(struct char_file_u *ch, char *name)
 
   /* read explored data */
   char filename[MAX_STRING_LENGTH];
-  sprintf(filename, "etc/players_ascii/%c/%s.explored", toupper(ch->name[0]), ch->name);
+  sprintf(filename, "etc/players_ascii/%c/%s.explored", buf2[0], buf2);
   fp = fopen(filename, "r");
   if (!fp) {
     log("SYSERR: Could not open %s for reading.  New player?", filename);
@@ -4165,8 +4165,17 @@ void save_char_ascii(struct char_file_u *ch)
     return;
   }
 
+  /* Title-case the name exactly as load_char_ascii does, so save and load
+   * always use the same file path (interior capitals: McKane vs Mckane). */
+  char fname[MAX_NAME_LENGTH+1];
+  fname[0] = toupper(ch->name[0]);
+  for (i = 1; i < strlen(ch->name); i++) {
+    fname[i] = tolower(ch->name[i]);
+  }
+  fname[i] = '\x0';
+
   char filename[MAX_STRING_LENGTH];
-  sprintf(filename, "etc/players_ascii/%c/%s", toupper(ch->name[0]), ch->name);
+  sprintf(filename, "etc/players_ascii/%c/%s", fname[0], fname);
   FILE *fp = fopen(filename, "w");
   if (!fp) {
     char cmd[MAX_STRING_LENGTH];
@@ -4290,7 +4299,7 @@ void save_char_ascii(struct char_file_u *ch)
   fclose(fp);
 
   /* write explored data */
-  sprintf(filename, "etc/players_ascii/%c/%s.explored", toupper(ch->name[0]), ch->name);
+  sprintf(filename, "etc/players_ascii/%c/%s.explored", fname[0], fname);
   fp = fopen(filename, "w");
   if (!fp) {
     log("SYSERR: Could not open %s for writing.", filename);
@@ -4361,8 +4370,9 @@ void store_to_char(struct char_file_u * st, struct char_data * ch)
    strcpy(ch->player.name, st->name);
    strcpy(ch->player.passwd, st->pwd);
 
-   /* Add all spell effects */
-   for (i = 0; i < MAX_AFFECT; i++)
+   /* Add all spell effects.  Walk the array in reverse: affect_to_char
+    * head-inserts, so a forward walk would rebuild the list reversed. */
+   for (i = MAX_AFFECT - 1; i >= 0; i--)
       {
       if (st->affected[i].type)
          affect_to_char(ch, &st->affected[i]);
@@ -4500,8 +4510,10 @@ void char_to_store(struct char_data * ch, struct char_file_u * st,
    strcpy(st->name, GET_NAME(ch));
    strcpy(st->pwd, GET_PASSWD(ch));
 
-   /* add spell and eq affections back in now */
-   for (i = 0; i < MAX_AFFECT; i++)
+   /* add spell and eq affections back in now.  Walk the array in reverse:
+    * affect_to_char head-inserts, so a forward walk reversed ch->affected
+    * on every save_char call. */
+   for (i = MAX_AFFECT - 1; i >= 0; i--)
       {
       if (st->affected[i].type)
          affect_to_char(ch, &st->affected[i]);

@@ -43,7 +43,7 @@ void another_hour(int mode)
       { 
       switch (time_info.hours) 
 	 { 
-	  case 0:
+	  case 24: /* midnight: hours is the pre-rollover 23+1; it wraps to 0 below */
 	     weather_info.moonlight = MOON_LIGHT;
 	     break;
 	  case 5: 

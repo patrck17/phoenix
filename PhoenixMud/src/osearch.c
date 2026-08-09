@@ -117,6 +117,7 @@ void concatenate_list(const char *list[], char *output)
       strcat(output, line);
       strcat(output, "\r\n");
       line[0] = '\x0';
+      strcat(line, list[i]);
     }
     first = 0;
   }

@@ -1464,7 +1464,10 @@ void obj_to_objt(struct obj_data * obj, struct obj_data * obj_to,
    obj->in_obj = obj_to;
 
    for (tmp_obj = obj->in_obj; tmp_obj->in_obj; tmp_obj = tmp_obj->in_obj)
+      {
       GET_OBJ_WEIGHT(tmp_obj) += GET_OBJ_WEIGHT(obj);
+      GET_OBJ_VAL(tmp_obj,5)  += GET_OBJ_WEIGHT(obj);
+      }
 
    /* top level object.  Subtract weight from inventory if necessary. */
    GET_OBJ_WEIGHT(tmp_obj) += GET_OBJ_WEIGHT(obj);
@@ -1493,7 +1496,10 @@ void obj_from_obj(struct obj_data * obj)
 
    /* Subtract weight from containers container */
    for (temp = obj->in_obj; temp->in_obj; temp = temp->in_obj)
+      {
       GET_OBJ_WEIGHT(temp) -= GET_OBJ_WEIGHT(obj);
+      GET_OBJ_VAL(temp,5)  -= GET_OBJ_WEIGHT(obj);
+      }
 
    /* Subtract weight from char that carries the object */
    GET_OBJ_WEIGHT(temp) -= GET_OBJ_WEIGHT(obj);

@@ -585,9 +585,9 @@ ACMD(do_control_battle)
             }
          else if ((low > LVL_IMPL) || (high < 1))
             {
-            send_to_char(ch,"The lowest level possible is 1, highest is 125.\r\n");
+            send_to_char(ch,"The lowest level possible is 1, highest is 127.\r\n");
             }
-         else if ((low < high) || (high > low))
+         else if (low < high) /* vars are swapped: low = high bound, high = low bound */
             {
             send_to_char(ch,"Usage: bcontrol <open/close/lock> <low level> <high level>\r\n");
             }
@@ -608,7 +608,7 @@ ACMD(do_control_battle)
             battle.high_level = low;  /* The highest level that can enter the battle */
             battle.locked = FALSE;
             log("(BATTLE) %s has opened the bfield for levels %d through %d.",
-                GET_NAME(ch),low,high);
+                GET_NAME(ch),battle.low_level,battle.high_level);
             }
          }
       release_buffer(lowlevel);
@@ -655,8 +655,8 @@ ACMD(do_who_battle)
          }
       }
 
-   send_to_char(ch,"  Battle Levels -> %d to %d\r\n",battle.high_level,
-                battle.low_level);
+   send_to_char(ch,"  Battle Levels -> %d to %d\r\n",battle.low_level,
+                battle.high_level);
    }
 
 
@@ -6874,6 +6874,18 @@ ACMD(do_set)
    if (fields[l].type == DUAL_NUM)
       {
       half_chop(buf, val_arg, val_arg1);
+      if (!is_number(val_arg) || !is_number(val_arg1))
+         {
+         send_to_char(ch,"Both values must be numeric.\r\n");
+         release_buffer(buf);
+         release_buffer(field);
+         release_buffer(val_arg1);
+         release_buffer(val_arg);
+         release_buffer(name);
+         if (is_file)
+            free_char(vict);
+         return;
+         }
       value = atoi(val_arg);
       value1 = atoi(val_arg1);
       }
@@ -6900,6 +6912,18 @@ ACMD(do_set)
    else if (fields[l].type == NUMBER)
       {
       strcpy(val_arg, buf);
+      if (!is_number(val_arg))
+         {
+         send_to_char(ch,"Value must be numeric.\r\n");
+         release_buffer(buf);
+         release_buffer(field);
+         release_buffer(val_arg1);
+         release_buffer(val_arg);
+         release_buffer(name);
+         if (is_file)
+            free_char(vict);
+         return;
+         }
       value = atoi(val_arg);
       }
    else
@@ -7380,6 +7404,18 @@ ACMD(do_set)
             return;
             }
          }
+      if(i>top_of_zone_table)
+         {
+         send_to_char(ch, "Zone %d doesn't exist.\r\n", value);
+         release_buffer(buf);
+         release_buffer(field);
+         release_buffer(val_arg1);
+         release_buffer(val_arg);
+         release_buffer(name);
+         if (is_file)
+            free_char(vict);
+         return;
+         }
       if((GET_LEVEL(ch)<LVL_ADMIN)&&(zone_table[i].status>=4))
          {
          send_to_char(ch,"You do not have permission to set olc to an active or finished zone.  Please contact a ADMIN+.\r\n");
@@ -7455,6 +7491,18 @@ ACMD(do_set)
                free_char(vict);
             return;
             }
+         }
+      if(i>top_of_zone_table)
+         {
+         send_to_char(ch, "Zone %d doesn't exist.\r\n", value1);
+         release_buffer(buf);
+         release_buffer(field);
+         release_buffer(val_arg1);
+         release_buffer(val_arg);
+         release_buffer(name);
+         if (is_file)
+            free_char(vict);
+         return;
          }
       if((GET_LEVEL(ch)<LVL_ADMIN)&&(zone_table[i].status>=4))
          {
