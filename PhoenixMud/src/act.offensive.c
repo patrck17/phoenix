@@ -295,7 +295,7 @@ ACMD(do_smite)
             raw_kill(ch,victim);
             }
         else if (GET_LEVEL(ch) < GET_LEVEL(victim))
-            send_to_char(ch, "I pity the fool who tries to plink above their level.\r\n");
+            send_to_char(ch, "I pity the fool who tries to smite above their level.\r\n");
         else if (ch == victim)
             send_to_char(ch, "Stop trying to smite yourself and do some work, you lazy sloth!\r\n");
         else

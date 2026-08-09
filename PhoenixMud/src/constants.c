@@ -2022,7 +2022,7 @@ const char *spell_wear_off_msg[] = {
   "Your magic has been dispelled.",
   "You feel like yourself again.",
   "You feel like yourself again.",
-  "You dont feel inspired anymore.",
+  "You don't feel inspired anymore.",
   "You do not feel as aware of your surroundings.",  /* 70 */
   "!ENCHANT ARMOR!",
   "!GROUP REFRESH!",

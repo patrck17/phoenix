@@ -895,7 +895,7 @@ SPECIAL(cityguard)
          if(GET_LEVEL(tch) > GET_LEVEL(subj)+20)
             {
             char *buf=get_buffer(512);
-            sprintf(buf,"Alert!! %s has the Plague!!! Send Help!!.",GET_NAME(tch));
+            sprintf(buf,"Alert!! %s has the Plague!!! Send Help!!",GET_NAME(tch));
             do_gen_comm(subj,buf,0,SCMD_SHOUT);
             release_buffer(buf);
             }
@@ -3568,7 +3568,7 @@ SPECIAL(bank)
          {
          if(pxClan->cl_bank<amount)
             {
-            send_to_char(ch,"You clan doesn't have that much cash.\r\n");
+            send_to_char(ch,"Your clan doesn't have that much cash.\r\n");
             return TRUE;
             }
          GET_GOLD(ch)+=amount;

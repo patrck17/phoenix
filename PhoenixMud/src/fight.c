@@ -3088,35 +3088,35 @@ int damage(struct char_data * ch, struct char_data * victim, int dam,
             case SKILL_BREW:
                mudlogf(BRF, LVL_IMMORT, TRUE,"RIP: %s has died brewing: %s[%ld]",
                        GET_NAME(victim), world[IN_ROOM(victim)].name,
-                       world[IN_ROOM(ch)].number);
+                       world[IN_ROOM(victim)].number);
                send_info("[ INFO ] %s has just been blown to pieces while "
                          "attempting to brew.\n\r", GET_NAME(victim));
                break;
             case SKILL_SCRIBE:
                mudlogf(BRF, LVL_IMMORT, TRUE,"RIP: %s has died scribing: %s[%ld]",
                        GET_NAME(victim), world[IN_ROOM(victim)].name,
-                       world[IN_ROOM(ch)].number);
+                       world[IN_ROOM(victim)].number);
                send_info("[ INFO ] %s has died a fiery death in a failed "
                          "attempt at scribing.\n\r", GET_NAME(victim));
                break;
             case SPELL_SUNBURN:
                mudlogf(BRF, LVL_IMMORT, TRUE,"RIP: %s has died from sun damage: %s[%ld]",
                        GET_NAME(victim), world[IN_ROOM(victim)].name,
-                       world[IN_ROOM(ch)].number);
+                       world[IN_ROOM(victim)].number);
                send_info("[ INFO ] %s has died from sun damage too great to "
                          "overcome.\n\r", GET_NAME(victim));
                break;
             case SPELL_POISON:
                mudlogf(BRF, LVL_IMMORT, TRUE,"RIP: %s has died from poison: %s[%ld]",
                        GET_NAME(victim), world[IN_ROOM(victim)].name,
-                       world[IN_ROOM(ch)].number);
+                       world[IN_ROOM(victim)].number);
                send_info("[ INFO ] %s has died from systemic poisoning.\n\r", 
                          GET_NAME(victim));          
                break;
             case SPELL_DROWN:
                mudlogf(BRF, LVL_IMMORT, TRUE,"RIP: %s has died of drowning: %s[%ld]",    
                        GET_NAME(victim), world[IN_ROOM(victim)].name,
-                       world[IN_ROOM(ch)].number);
+                       world[IN_ROOM(victim)].number);
                send_info("[ INFO ] %s has drowned!  Someone should teach that "
                          "%s how to swim.\n\r", GET_NAME(victim),
                          pc_race_types[GET_RACE(victim)]);
@@ -3124,7 +3124,7 @@ int damage(struct char_data * ch, struct char_data * victim, int dam,
             case TYPE_SUFFERING:
                mudlogf(BRF, LVL_IMMORT, TRUE,"RIP: %s has died a lingering death(suffering): %s[%ld]",
                        GET_NAME(victim), world[IN_ROOM(victim)].name,
-                       world[IN_ROOM(ch)].number);
+                       world[IN_ROOM(victim)].number);
                send_info("[ INFO ] %s has died from mortal wounds too great to "
                        "overcome.\n\r", GET_NAME(victim));
                break;
@@ -3150,7 +3150,7 @@ int damage(struct char_data * ch, struct char_data * victim, int dam,
                      mudlogf(BRF, LVL_IMMORT, TRUE,"RIP: %s killed by %s at %s[%ld]",
                              GET_NAME(victim), 
                              GET_NAME(MOB2_FLAGGED(ch,MOB2_COMPONENT)?ch->master:ch),
-                             world[IN_ROOM(victim)].name, world[IN_ROOM(ch)].number);
+                             world[IN_ROOM(victim)].name, world[IN_ROOM(victim)].number);
                      send_info("[ INFO ] %s has been killed by %s.\n\r", GET_NAME(victim),
                              GET_NAME(MOB2_FLAGGED(ch,MOB2_COMPONENT)?ch->master:ch));
                      }

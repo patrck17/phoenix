@@ -513,7 +513,7 @@ void Board_display_msg(int board_type, struct char_data *ch, char *arg)
       }
    if (msg < 1 || msg > num_of_msgs[board_type])
       {
-      send_to_char(ch,"That message number exists only in your imagination..\r\n");
+      send_to_char(ch,"That message number exists only in your imagination.\r\n");
       return;
       }
 
@@ -581,7 +581,7 @@ void Board_remove_msg(int board_type, struct char_data *ch, char *arg)
 
    if (msg < 1 || msg > num_of_msgs[board_type])
       {
-      send_to_char(ch,"That message number exists only in your imagination..\r\n");
+      send_to_char(ch,"That message number exists only in your imagination.\r\n");
       return;
       }
 

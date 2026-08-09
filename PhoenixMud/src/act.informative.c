@@ -136,7 +136,7 @@ void show_obj_i_to_char(struct obj_data *object, struct char_data *ch,
 				send_to_char(ch, "It's blank.");
 			return;
 		} else if (GET_OBJ_TYPE(object) != ITEM_DRINKCON) {
-			strcpy(buf, "You see nothing special..");
+			strcpy(buf, "You see nothing special.");
 		} else		/* ITEM_TYPE == ITEM_DRINKCON||FOUNTAIN */
 			strcpy(buf, "It looks like a drink container.");
 	}
@@ -146,7 +146,7 @@ void show_obj_i_to_char(struct obj_data *object, struct char_data *ch,
 		}
 		if (IS_OBJ_STAT(object, ITEM_BLESS)
 		    && AFF_FLAGGED(ch, AFF_DETECT_ALIGN)) {
-			strcat(buf, "(Glowing blue!)");
+			strcat(buf, " (Glowing blue!)");
 		}
 		if (IS_OBJ_STAT(object, ITEM_MAGIC)
 		    && AFF_FLAGGED(ch, AFF_DETECT_MAGIC)) {
@@ -2280,7 +2280,9 @@ ACMD(do_time)
 
 	day = time_info.day + 1;	/* day in [1..35] */
 
-	if ((day % 10) == 1)
+	if (day >= 11 && day <= 13)
+		suf = "th";
+	else if ((day % 10) == 1)
 		suf = "st";
 	else if ((day % 10) == 2)
 		suf = "nd";

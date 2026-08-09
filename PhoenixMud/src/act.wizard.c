@@ -1267,7 +1267,7 @@ void do_stat_room(struct char_data * ch)
          strcat(buf, " ");
          strcat(buf, desc->keyword);
          }
-      send_to_char(ch,"%s%s",buf,NNRM);
+      send_to_char(ch,"%s%s\r\n",buf,NNRM);
       }
    sprintf(buf, "Chars present:%s", NYEL);
    for (found = 0, k = rm->people; k; k = k->next_in_room)
@@ -1745,7 +1745,7 @@ void do_stat_object(struct char_data * ch, struct obj_data * j)
          else if(j->affected[i].location==APPLY_SUSC)
             {
             sprintbit(j->affected[i].modifier,immunity_names,buf2);
-            send_to_char(ch,"%s Makes Susceptable to %s%s%s",found++?",":"",
+            send_to_char(ch,"%s Makes Susceptible to %s%s%s",found++?",":"",
                          NCYN,buf2,NNRM);
             }
          else
@@ -2269,7 +2269,7 @@ void do_stat_character(struct char_data * ch, struct char_data * k)
          else if(aff->location==APPLY_SUSC)
             {
             sprintbit(aff->modifier,immunity_names,buf2);
-            send_to_char(ch, "Susceptable to %s%s%s",NCYN,buf2,NNRM);
+            send_to_char(ch, "Susceptible to %s%s%s",NCYN,buf2,NNRM);
             }
          else if (aff->modifier)
             {
@@ -5341,7 +5341,7 @@ ACMD(do_show)
                    " %6d buf cache hits  %6d buf cache misses\r\n",
                    buffer_cache_stat[BUFFER_CACHE_HITS],
                    buffer_cache_stat[BUFFER_CACHE_MISSES]);
-      send_to_char(ch, "  %5ldk Total Bytes writen to players\r\n",
+      send_to_char(ch, "  %5ldk Total Bytes written to players\r\n",
                    total_bytes_written/1024);
       send_to_char(ch, "  %5d charged for repairs   %5d charged for recharges\r\n",total_repair,total_recharge);
       break;
@@ -7382,7 +7382,7 @@ ACMD(do_set)
             zone_found = 1;
       if (zone_found == 1) /* We found the bugger */
          {
-         send_to_char(ch, "%s has allready that zone set.\r\n",
+         send_to_char(ch, "%s already has that zone set.\r\n",
                       GET_NAME(vict));
          release_buffer(buf);
          release_buffer(field);
@@ -8114,8 +8114,8 @@ ACMD(do_rlist)
 
    if (!*buf)
       {
-      send_to_char(ch,"Usage: rlist <begining number> <ending number>\r\n");
-      send_to_char(ch,"Usage: rlist <begining number>\r\n");
+      send_to_char(ch,"Usage: rlist <beginning number> <ending number>\r\n");
+      send_to_char(ch,"Usage: rlist <beginning number>\r\n");
       send_to_char(ch,"Usage: rlist -h\r\n\r\n");
 
 
@@ -8243,7 +8243,7 @@ ACMD(do_mlist)
 
    if (!*buf)
       {
-      send_to_char(ch,"Usage: mlist <begining number> <ending number>\r\n");
+      send_to_char(ch,"Usage: mlist <beginning number> <ending number>\r\n");
       release_buffer(buf2);
       release_buffer(buf);
       return;
@@ -8561,7 +8561,7 @@ ACMD(do_distribute) {
    int amount = atoi(b5);
 
    if (vnum <= 0) {
-      send_to_char(ch, "Invalid vnum");
+      send_to_char(ch, "Invalid vnum.\r\n");
       return;
    }
 
@@ -8587,7 +8587,7 @@ ACMD(do_distribute) {
    }
 
    if (amount <= 0) {
-      send_to_char(ch, "Invalid amount");
+      send_to_char(ch, "Invalid amount.\r\n");
       return;
    }
 
@@ -8686,7 +8686,7 @@ ACMD(do_olist)
 
    if (!*buf)
       {
-      send_to_char(ch,"Usage: olist <begining number> <ending number>\r\n");
+      send_to_char(ch,"Usage: olist <beginning number> <ending number>\r\n");
       release_buffer(buf2);
       release_buffer(buf);
       return;
@@ -8767,8 +8767,8 @@ ACMD(do_plist)
 
    if (!*buf)
       {
-      send_to_char(ch,"Usage: plist <begining number> <ending number>\r\n");
-      send_to_char(ch,"Usage: plist <begining number>\r\n");
+      send_to_char(ch,"Usage: plist <beginning number> <ending number>\r\n");
+      send_to_char(ch,"Usage: plist <beginning number>\r\n");
       release_buffer(buf2);
       release_buffer(buf);
       return;
