@@ -703,7 +703,8 @@ void shopping_buy(char *arg, struct char_data * ch,
       do_tell(keeper, buf, cmd_tell, 0);
       }
 
-   GET_GOLD(keeper) += goldamt;
+   if (!IS_GOD(ch))
+      GET_GOLD(keeper) += goldamt;
 
    times_message(ch->carrying, 0, bought,tempstr);
    sprintf(buf, "$n buys %s.", tempstr);

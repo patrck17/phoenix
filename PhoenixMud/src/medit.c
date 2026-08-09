@@ -2191,7 +2191,7 @@ void medit_parse(struct descriptor_data * d, char *arg)
 #if defined(OASIS_MPROG)
 
    case MEDIT_MPROG_TYPE:
-      OLC_MPROG(d)->type = (1 << MAX(0, MIN(atoi(arg), NUM_PROGS)));
+      OLC_MPROG(d)->type = (1 << MAX(0, MIN(atoi(arg), NUM_PROGS-1)));
       OLC_VAL(d) = 1;
       medit_change_mprog(d);
       return;

@@ -2845,7 +2845,7 @@ ACMD(do_old_reimb)
     int i;
     int matches[10], tot_match = 0;
     memset(matches, 0, 10*sizeof(int));
-    for (i = 0; i < top_of_objt; i++) {
+    for (i = 0; i <= top_of_objt; i++) {
       struct obj_data* obj = &obj_proto[i];
       int znum = GET_OBJ_VNUM(obj)/100;
       if (znum == 0 || znum == 7 || znum == 8 || znum == 12 || znum == 69 || znum == 219) {
@@ -2877,10 +2877,7 @@ ACMD(do_old_reimb)
       ch->player_specials->reimb_obj_vnums[islot] = matches[0];
       send_to_char(ch, "Added equipment \"%s\" in slot %s.\r\n", GET_OBJ_NAME(&obj_proto[matches[0]]), slots[islot]);
     } else {
-      send_to_char(ch, "%s", "Possible matches:\r\n");
-      for (i = 0; i < tot_match; i++) {
-	send_to_char(ch, "  %s\r\n", GET_OBJ_NAME(&obj_proto[matches[i]]));
-      }
+      send_to_char(ch, "%s", "No matches found.\r\n");
     }
   } else if (starts_with("skills", reimb_type)) {
     char *skill = strtok(NULL, "");

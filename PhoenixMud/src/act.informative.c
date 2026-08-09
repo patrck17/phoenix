@@ -1811,7 +1811,7 @@ ACMD(do_score)
 	       "*****************************************************************************\r\n");
 	sprintf(buf_temp1, "* Armor Class   : You are %s (%d)",
 		acstr(compute_armor_class(ch)), compute_armor_class(ch));
-	sprintf(buf + strlen(buf), "%-53.53s                       *\r\n",
+	sprintf(buf + strlen(buf), "%-54.54s                      *\r\n",
 		buf_temp1);
 
 	if (GET_LEVEL(ch) > 19) {
@@ -1985,13 +1985,13 @@ ACMD(do_explored)
 	char *buf2 = get_buffer(MAX_STRING_LENGTH);
 	sprintf(buf, "Here are the places you have visited:\r\n");
 
-    struct zone_data* sorted_ztable = malloc(sizeof(struct zone_data)*top_of_zone_table);
-    memcpy(sorted_ztable, zone_table, sizeof(struct zone_data)*top_of_zone_table);
+    struct zone_data* sorted_ztable = malloc(sizeof(struct zone_data)*(top_of_zone_table + 1));
+    memcpy(sorted_ztable, zone_table, sizeof(struct zone_data)*(top_of_zone_table + 1));
 
-    qsort(sorted_ztable, top_of_zone_table, sizeof(struct zone_data), compare_zone_by_name);
+    qsort(sorted_ztable, top_of_zone_table + 1, sizeof(struct zone_data), compare_zone_by_name);
 
 	int ii, jj, rnum;
-	for (ii = 0; ii < top_of_zone_table; ii++) {
+	for (ii = 0; ii <= top_of_zone_table; ii++) {
         struct zone_data* zone = &sorted_ztable[ii];
 		for (jj = 0; jj < 100; jj++) {
 			int vnum = 100 * zone->number + jj;
@@ -3575,16 +3575,16 @@ ACMD(do_consider)
 			     "Hit points comparison: Its gonna be close!\r\n");
 	else if (diff == 0)
 		send_to_char(ch, "Hit points comparison: A perfect match!\r\n");
-	else if (diff == 5)
+	else if (diff <= 5)
 		send_to_char(ch,
 			     "Hit points comparison: Its gonna be close!\r\n");
-	else if (diff == 10)
+	else if (diff <= 10)
 		send_to_char(ch,
 			     "Hit points comparison: They are just a bit healthier.\r\n");
-	else if (diff == 15)
+	else if (diff <= 15)
 		send_to_char(ch,
 			     "Hit points comparison: They are slighty healthier.\r\n");
-	else if (diff == 20)
+	else if (diff <= 20)
 		send_to_char(ch,
 			     "Hit points comparison: They are quite a bit healthier.\r\n");
 	else if (diff <= 50)

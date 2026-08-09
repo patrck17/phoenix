@@ -465,6 +465,7 @@ ACMD(do_shop)
       mudlogf(CMP, LVL_IMMORT, TRUE,
               "PLAYER_SHOP: %s set sales tax to %f.",
               GET_NAME(ch), sales_tax);
+      return;
     } else if (str_cmp(command, "rent") == 0) {
       if (strlen(arg1) == 0 || strlen(arg2) == 0) {
 	send_to_char(ch, "Usage: shop rent <player> <amount>\r\n");

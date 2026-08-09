@@ -2068,14 +2068,7 @@ void perform_group_gain(struct char_data * ch, int base,
    int share,max_gain;
    int exp_after_lim;
 
-   if (REMORT_LEVEL(ch) == TRIPLE_REMORT)
-   {
-     min_kills = 20;
-   }
-   else
-   {
-     min_kills = 20;
-   }
+   min_kills = 20;
 
    if (GET_LEVEL(ch) < 16)
    {
