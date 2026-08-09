@@ -134,14 +134,16 @@ char *CAP_LINE(char *txt)
       for (ii = 1; (ii <= glen) && (!isalpha(*(txt+ii))); ii++)
          ;
       ii++; /* get past the m */
-      *(txt + ii) = UPPER(*(txt + ii));
+      if (ii < glen)
+         *(txt + ii) = UPPER(*(txt + ii));
    }
    else if (*txt == '&')
    {
 	  /* cycle until there are no more '&' codes */
 	  for (ii = 2; (ii <= glen) && (*(txt + ii) == '&'); ii += 2) 
 		 ;
- 	  *(txt + ii) = UPPER(*(txt + ii));
+ 	  if (ii < glen)
+ 	     *(txt + ii) = UPPER(*(txt + ii));
    }
    else
  	  *txt = UPPER(*txt);
@@ -1266,8 +1268,8 @@ int price_adjust (struct char_data * ch, struct char_data * vendor, int price)
 char *stolower (char * string) {
    char* ptr = string;
 
-   while (*ptr) {
-      *ptr++ = tolower(*ptr);
+   for (; *ptr; ptr++) {
+      *ptr = tolower(*ptr);
    }
 
    return string;

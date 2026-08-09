@@ -844,6 +844,7 @@ ASPELL(spell_charm)
       add_follower(victim, ch);
 
       af.type = SPELL_CHARM;
+      af.spell_level = level;
 
       if (GET_INT(victim))
          af.duration = 24 * 18 / GET_INT(victim);

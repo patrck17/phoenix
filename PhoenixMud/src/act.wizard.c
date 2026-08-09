@@ -433,7 +433,7 @@ ACMD(do_control_battle)
    char  *buf2;
    char  *tag;
    struct descriptor_data *d;
-   struct obj_data *o;
+   struct obj_data *o, *next_o;
    struct char_data *victim = 0;
    int i;
 
@@ -486,8 +486,11 @@ ACMD(do_control_battle)
                check in containers, and just drop them on the ground */
 
                /* items being carried */
-               for (o = victim->carrying; o != NULL; o = o->next_content)
+               for (o = victim->carrying; o != NULL; o = next_o)
                   {
+                  /* obj_to_room relinks o into the room chain, so o->next_content
+                   * no longer walks the carried list once the item moves. */
+                  next_o = o->next_content;
                   if (IS_OBJ_STAT(o, ITEM_BATTLE_ITEM))
                      {
                      obj_from_char(o);

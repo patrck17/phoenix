@@ -4281,7 +4281,8 @@ ACMD(do_tlist)
       /* Check <stop_number>, if any */
       if (*remaining)
          {
-         if ((*remaining != '0') && ((last = atoi(remaining)) == 0))
+         last = atoi(remaining);
+         if ((*remaining != '0') && (last == 0))
             {
             send_to_char(ch, "%sIf present, the last parameter must be a trigger number less or equal to %ld . (ex. tlist -o 1000 1050)%s\r\n\r\n",
                          CCRED(ch, C_NRM),
