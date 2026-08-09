@@ -628,6 +628,7 @@ void point_update(void)
                mudlogf(BRF,LVL_IMMORT,FALSE,"core_dump being called because %s is NOWHERE",
                        GET_OBJ_NAME(j));
                core_dump();
+               extract_obj(jj); /* nowhere to place it; free it instead of leaking */
                  }
             }
          extract_obj(j);

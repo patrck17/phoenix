@@ -1459,7 +1459,9 @@ const int exp_table[] =
     60000020,
     60000030,
     60000040,
-    60000050   /* 125 */
+    60000050,  /* 125 */
+    60000060,
+    60000070   /* 127 = LVL_IMPL; consumers index exp_table[LVL_IMPL] */
 
   }
   ;
