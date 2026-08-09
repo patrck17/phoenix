@@ -2170,7 +2170,7 @@ ACMD(do_battle)
 
    if (FIGHTING(ch))
       {
-      send_to_char(ch,"You cant enter battle while fighting!!.\n\r");
+      send_to_char(ch,"You can't enter battle while fighting!!\n\r");
       return;
       }
 
@@ -2285,7 +2285,7 @@ ACMD (do_tag)
                TAGGED(ch) = FALSE;
                TAGGED(victim) = TRUE;
                GET_WAIT_STATE(victim) = 3 RL_SEC;
-               send_battle("[ BATTLE ] %s has been tagged by %s!  %s is now IT!!!.\n\r",
+               send_battle("[ BATTLE ] %s has been tagged by %s!  %s is now IT!!!\n\r",
                            GET_NAME(victim), GET_NAME(ch), GET_NAME(victim));
                }
             else if (TAGGED(victim))

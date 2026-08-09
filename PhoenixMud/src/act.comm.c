@@ -1267,14 +1267,14 @@ ACMD(do_bid)
 
    if (bid < aauction.selling_price)
       {
-      send_to_char(ch, "You must at least the asking price!\r\n");
+      send_to_char(ch, "You must bid at least the asking price!\r\n");
       return;
       }
 
 
    if (bid > get_char_gold(ch))
       {
-      send_to_char(ch, "You dont have that many coins on hand!!\r\n");
+      send_to_char(ch, "You don't have that many coins on hand!!\r\n");
       return;
       }
 
@@ -1559,10 +1559,10 @@ void do_auction_update(void)
                {
                if (get_char_gold(target) < aauction.last_bid)
                   {
-                  send_auction_god("[AUCTION] Sale Cancelled because %s doesnt"
+                  send_auction_god("[AUCTION] Sale Cancelled because %s doesn't"
                                    " have the cash! \r\n",GET_NAME(target));
                   send_auction_mort("[AUCTION] Sale Cancelled because bidder "
-                                    "doesnt have the cash! \r\n");
+                                    "doesn't have the cash! \r\n");
                   save_char(target, IN_ROOM(target));
                   aauction.in_progress = FALSE;
                   aauction.bid_on = FALSE;

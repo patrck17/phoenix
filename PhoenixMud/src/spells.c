@@ -439,7 +439,7 @@ ASPELL(spell_gate)
 
    if (victim == NULL || IS_NPC(victim))
       {
-      send_to_char(ch,"You dont seem to be able to open a gate to this person.\n\r");
+      send_to_char(ch,"You don't seem to be able to open a gate to this person.\n\r");
       return FALSE;
       }
 
@@ -1090,7 +1090,7 @@ void id_obj_to_char(struct char_data *ch, struct obj_data *obj)
          else if(obj->affected[i].location==APPLY_SUSC)
             {
             sprintbit(obj->affected[i].modifier,immunity_names,buf2);
-            send_to_char(ch,"   Makes Susceptable to %s%s%s\r\n",
+            send_to_char(ch,"   Makes Susceptible to %s%s%s\r\n",
                          NCYN,buf2,NNRM);
             }
          else

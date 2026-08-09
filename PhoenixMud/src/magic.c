@@ -617,7 +617,7 @@ void mag_affects(int level, struct char_data * ch, struct char_data * victim,
 	  af[1].modifier = -1*(level/5+1);
 	  accum_duration=FALSE; 
 	  to_vict = "Your skin turns hard and rough like bark"; 
-	  to_room = "$n's skin has turned into bark!!."; 
+	  to_room = "$n's skin has turned into bark!!"; 
 	  break; 
  
        case SPELL_BLESS: 

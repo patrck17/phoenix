@@ -3752,7 +3752,7 @@ int process_return(trig_data *trig, char *cmd)
                         }
                      else
                         {
-                        sprintf(buf, "Trigger: %s, VNum %ld. remote: uid '%ld' invalid",
+                        sprintf(buf, "Trigger: %s, VNum %ld. rdelete: uid '%ld' invalid",
                                 GET_TRIG_NAME(trig), GET_TRIG_VNUM(trig), uid);
                         script_log(buf);
                         release_buffer(buf2);
@@ -4233,7 +4233,7 @@ ACMD(do_tlist)
    /* No arguments given */
    if (!*buf)
       {
-      send_to_char(ch, "%sUsage: tlist [-<[o|m|w]>] <begining trigger number> [<ending trigger number>]%s\r\n\r\n",
+      send_to_char(ch, "%sUsage: tlist [-<[o|m|w]>] <beginning trigger number> [<ending trigger number>]%s\r\n\r\n",
                    CCRED(ch, C_NRM),
                    CCNRM(ch, C_NRM));
       release_buffer(pagebuf);

@@ -151,7 +151,7 @@ void parse_action(int command, char *string, struct descriptor_data *d)
 		  "/r 'a' 'b' -  replace 1st occurance of text <a> in buffer with text <b>\r\n" 
 		  "/ra 'a' 'b'-  replace all occurances of text <a> within buffer with text <b>\r\n" 
 		  "              usage: /r[a] 'pattern' 'replacement'\r\n" 
-                  "              NOTE: use \\' to replace apostraphe(ex. /r 'cant' 'can\\'t')\r\n"
+                  "              NOTE: use \\' to replace apostrophe(ex. /r 'cant' 'can\\'t')\r\n"
 		  "/s         -  saves text\r\n"); 
 	  break; 
        case PARSE_FORMAT:  
@@ -1168,7 +1168,7 @@ ACMD(do_skillset)
 #define PAGE_WIDTH      90 
  
 /*
- * Traverse down the string until the begining of the next page has been 
+ * Traverse down the string until the beginning of the next page has been 
  * reached.  Return NULL if this is the last page of the string. 
  */ 
 /* 
@@ -1187,7 +1187,7 @@ char *next_page(char *str, int page_length)
       else if (line > page_length) 
 	 return str; 
  
-     /* Check for the begining of an ANSI color code block. */ 
+     /* Check for the beginning of an ANSI color code block. */ 
       else if (*str == '\x1B' && !spec_code) 
 	 {
 	 spec_code = TRUE; 
@@ -1208,7 +1208,7 @@ char *next_page(char *str, int page_length)
 	    line++; 
  
 	/* We need to check here and see if we are over the page width, 
-	 * and if so, compensate by going to the begining of the next line. 
+	 * and if so, compensate by going to the beginning of the next line. 
 	 */ 
 	 else if (col++ > PAGE_WIDTH) 
 	    { 

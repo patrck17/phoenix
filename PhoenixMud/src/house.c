@@ -813,7 +813,7 @@ ACMD(do_house)
          }
       else
          {
-         send_to_char(ch, "You cannot have any more guests");
+         send_to_char(ch, "You cannot have any more guests.\r\n");
          }
       }
    release_buffer(arg);

@@ -965,7 +965,7 @@ ACMD(do_mexp)
    char *name;
    char *amount;
 
-   mob_log(ch, "WARNING: mexp command is depracated! Use: %actor.exp(amount-to-add)%");
+   mob_log(ch, "WARNING: mexp command is deprecated! Use: %actor.exp(amount-to-add)%");
 
    if (!MOB_OR_IMPL(ch))
       {
@@ -1028,7 +1028,7 @@ ACMD(do_mgold)
    char *name;
    char *amount;
 
-   mob_log(ch, "WARNING: mgold command is depracated! Use: %actor.gold(amount-to-add)%");
+   mob_log(ch, "WARNING: mgold command is deprecated! Use: %actor.gold(amount-to-add)%");
 
    if (!MOB_OR_IMPL(ch))
       {
@@ -1467,7 +1467,7 @@ ACMD(do_mdoor)
 
    if ((fd = search_block(field, door_field, FALSE)) == -1)
       {
-      mob_log(ch, "odoor: invalid field");
+      mob_log(ch, "mdoor: invalid field");
       release_buffer(field);
       release_buffer(direction);
       release_buffer(target);

@@ -2934,9 +2934,9 @@ ACMD(do_recharge)
       }
 
    GET_OBJ_VAL(recharge,2)=GET_OBJ_VAL(recharge,1);
-   act("You recharge $s and it looks in excellent condition again!",
+   act("You recharge $p and it looks in excellent condition again!",
        FALSE, ch, recharge, 0, TO_CHAR);
-   act("$n recharge $p, making it as good as new again!", TRUE, ch,
+   act("$n recharges $p, making it as good as new again!", TRUE, ch,
        recharge, 0, TO_ROOM);
    }
 
@@ -2988,7 +2988,9 @@ ACMD(do_assemble)
    act(buf, FALSE, ch, pObject, NULL, TO_CHAR);
 
    /* Tell the room the character made something. */
-   sprintf(buf, "$n %ss $p.", CMD_NAME);
+   sprintf(buf, "$n %s%s $p.", CMD_NAME,
+           (CMD_NAME[strlen(CMD_NAME) - 1] == 'x'
+            || CMD_NAME[strlen(CMD_NAME) - 1] == 'h') ? "es" : "s");
    act(buf, FALSE, ch, pObject, NULL, TO_ROOM);
    release_buffer(buf);
    }

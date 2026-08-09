@@ -627,7 +627,7 @@ void oedit_disp_prompt_apply_menu(struct descriptor_data * d)
 	    {
 	    sprintbit(OLC_OBJ(d)->affected[counter].modifier,
 		      immunity_names,buf2);
-	    send_to_char(d->character, " %s%d%s) Makes Susceptable to %s\r\n",
+	    send_to_char(d->character, " %s%d%s) Makes Susceptible to %s\r\n",
 			 grn,counter + 1, nrm,buf2);
 	    }
 	 else

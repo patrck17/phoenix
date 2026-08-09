@@ -1056,7 +1056,7 @@ ACMD (do_csay)
       }
    if(GET_CLAN(ch)==0)
       {
-      send_to_char(ch,"You can only snoop the channel");
+      send_to_char(ch,"You can only snoop the channel.\r\n");
       return;
       }
    if (ROOM_FLAGGED(IN_ROOM(ch), ROOM_SOUNDPROOF))

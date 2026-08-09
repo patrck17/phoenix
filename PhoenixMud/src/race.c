@@ -1060,7 +1060,7 @@ void show_race(struct char_data * ch, char *value)
 		    "  Resistant to:   %s\r\n",buf2);
 	    sprintbit(trait_info[i].susceptible,immunity_names,buf2);
 	    sprintf(buf+strlen(buf),
-		    "  Susceptable to: %s\r\n",buf2);
+		    "  Susceptible to: %s\r\n",buf2);
 
 	    strcat(buf,"\r\n  (1) These are percentages vs human stats.\r\n");
 	    break;
