@@ -3688,8 +3688,8 @@ void hit(struct char_data * ch, struct char_data * victim, int type)
             {
             if(((((float)GET_OBJ_VAL(wielded,2)+1)/2.0)*
                     (float)GET_OBJ_VAL(wielded,1))>
-                    (((float)(ch->mob_specials.damnodice+1)/2.0)*
-                     (float)ch->mob_specials.damsizedice))
+                    (((float)(ch->mob_specials.damsizedice+1)/2.0)*
+                     (float)ch->mob_specials.damnodice))
                {
                dam += dice(GET_OBJ_VAL(wielded, 1), GET_OBJ_VAL(wielded, 2));
                }
