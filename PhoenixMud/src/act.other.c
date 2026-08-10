@@ -103,9 +103,9 @@ ACMD(do_quit)
 
    if (subcmd == SCMD_QUI && GET_LEVEL(ch) < LVL_IMMORT)
       send_to_char(ch,"  You have to type <quit!> if you really want to quit"
-                   " the mud,\n\r  and have all of your equipment fall "
-                   "onto the ground. I suggest you\n\r  use the <camp> "
-                   "command, see <help camp> for more information.\n\r");
+                   " the mud,\r\n  and have all of your equipment fall "
+                   "onto the ground. I suggest you\r\n  use the <camp> "
+                   "command, see <help camp> for more information.\r\n");
    else if (GET_POS(ch) == POS_FIGHTING)
       send_to_char(ch, "No way!  You're fighting for your life!\r\n");
    else if (GET_POS(ch) < POS_STUNNED)
@@ -223,7 +223,7 @@ ACMD(do_quit)
                  "%s has left the game using %s.", GET_NAME(ch),
                  ztquit[subcmd]);
          if (GET_INVIS_LEV(ch) == 0) {
-            send_info("[ INFO ] %s has left the game.\n\r", GET_NAME(ch));
+            send_info("[ INFO ] %s has left the game.\r\n", GET_NAME(ch));
          }
          send_to_char(ch, "Goodbye, friend.. Come back soon!\r\n");
          /*
@@ -1603,8 +1603,8 @@ ACMD(do_gen_tog)
          {"AutoGold disabled.\r\n",
           "AutoGold enabled.\r\n"
          } ,
-         { "Welcome back!! You are no longer AFK.\n\r",
-           "You are now away from the keyboard! Come back soon:)\n\r"
+         { "Welcome back!! You are no longer AFK.\r\n",
+           "You are now away from the keyboard! Come back soon:)\r\n"
          },
          {"You can now hear ooc.\r\n",
           "You are now deaf to ooc.\r\n"
@@ -2152,20 +2152,20 @@ ACMD(do_battle)
 
    if (FIGHTING(ch))
       {
-      send_to_char(ch,"You cant enter battle while fighting!!.\n\r");
+      send_to_char(ch,"You cant enter battle while fighting!!.\r\n");
       return;
       }
 
 
    if (battle.zone_state == FALSE)
       {
-      send_to_char(ch,"The battle field is not open at this time.\n\r");
+      send_to_char(ch,"The battle field is not open at this time.\r\n");
       return;
       }
 
    if (battle.locked == TRUE)
       {
-      send_to_char(ch,"The battle field is not open to new contestants now.\n\r");
+      send_to_char(ch,"The battle field is not open to new contestants now.\r\n");
       return;
       }
 
@@ -2178,21 +2178,21 @@ ACMD(do_battle)
 
    if (GET_LEVEL(ch) < battle.low_level)
       {
-      send_to_char(ch, "You must be above level %d to enter the battle!\n\r",
+      send_to_char(ch, "You must be above level %d to enter the battle!\r\n",
                    battle.low_level);
       return;
       }
 
    if (GET_BATTLE(ch) == TRUE)
       {
-      send_to_char(ch, "You are already in battle!! Watch out!\n\r");
+      send_to_char(ch, "You are already in battle!! Watch out!\r\n");
       return;
       }
 
 
    if (GET_LEVEL(ch) > battle.high_level)
       {
-      send_to_char(ch, "You must be below level %d to enter the battle!\n\r",
+      send_to_char(ch, "You must be below level %d to enter the battle!\r\n",
                    battle.high_level);
       return;
       }
@@ -2202,7 +2202,7 @@ ACMD(do_battle)
    /*    GET_MOVE(ch) = GET_MAX_MOVE(ch); */
    GET_BATTLE(ch) = TRUE;
 
-   send_to_char(ch,"Entering the Battle Field... Good Luck!!!\n\r");
+   send_to_char(ch,"Entering the Battle Field... Good Luck!!!\r\n");
    char_from_room(ch);
 
    /* This is for the random location in the bfield code. */
@@ -2220,7 +2220,7 @@ ACMD(do_battle)
       }
    char_to_room(ch, tmp);
    do_look(ch, "", 0, 0);
-   send_battle("[ BATTLE ] %s has entered the battle field.\n\r",GET_NAME(ch));
+   send_battle("[ BATTLE ] %s has entered the battle field.\r\n",GET_NAME(ch));
    if ((battle.do_tag == TRUE) && (battle.tagged == FALSE))
       {
       send_battle("[ BATTLE ] %s is now IT!!!\r\n",GET_NAME(ch));
@@ -2267,7 +2267,7 @@ ACMD (do_tag)
                TAGGED(ch) = FALSE;
                TAGGED(victim) = TRUE;
                GET_WAIT_STATE(victim) = 3 RL_SEC;
-               send_battle("[ BATTLE ] %s has been tagged by %s!  %s is now IT!!!.\n\r",
+               send_battle("[ BATTLE ] %s has been tagged by %s!  %s is now IT!!!.\r\n",
                            GET_NAME(victim), GET_NAME(ch), GET_NAME(victim));
                }
             else if (TAGGED(victim))

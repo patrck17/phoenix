@@ -977,10 +977,10 @@ ACMD(do_enter)
             log("SYSERR: obj: %ld has an destination room %ld",
                 GET_OBJ_VNUM(entrance),GET_OBJ_VAL(entrance,0));
             if(GET_LEVEL(ch)<LVL_IMMORT)
-               send_to_char(ch,"A mysterious force blocks your way\n\r");
+               send_to_char(ch,"A mysterious force blocks your way\r\n");
             else
                send_to_char(ch,"Some nitwit builder set the destination value "
-                            "wrong!\n\rGo whap them!\n\r");
+                            "wrong!\r\nGo whap them!\r\n");
             release_buffer(tmp);
             release_buffer(buf);
             return;

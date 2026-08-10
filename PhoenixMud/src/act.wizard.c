@@ -3410,18 +3410,18 @@ ACMD(do_poofset)
          {
       case SCMD_POOFIN :
          sprintf(POOFIN(ch),"%s",argument);
-         send_to_char(ch,"Your poofin is now...\n\r");
-         send_to_char(ch, "%s %s\n\r", GET_NAME(ch), POOFIN(ch));
+         send_to_char(ch,"Your poofin is now...\r\n");
+         send_to_char(ch, "%s %s\r\n", GET_NAME(ch), POOFIN(ch));
          break;
       case SCMD_POOFOUT:
          sprintf(POOFOUT(ch),"%s",argument);
-         send_to_char(ch,"Your poofout is now...\n\r");
-         send_to_char(ch, "%s %s\n\r", GET_NAME(ch), POOFOUT(ch));
+         send_to_char(ch,"Your poofout is now...\r\n");
+         send_to_char(ch, "%s %s\r\n", GET_NAME(ch), POOFOUT(ch));
          break;
       default:
-         send_to_char(ch, "Your goto messages are:\n\r");
-         send_to_char(ch, "Poofin: %s %s\n\r", GET_NAME(ch), POOFIN(ch));
-         send_to_char(ch, "Poofout: %s %s\n\r", GET_NAME(ch), POOFOUT(ch));
+         send_to_char(ch, "Your goto messages are:\r\n");
+         send_to_char(ch, "Poofin: %s %s\r\n", GET_NAME(ch), POOFIN(ch));
+         send_to_char(ch, "Poofout: %s %s\r\n", GET_NAME(ch), POOFOUT(ch));
          break;
          }
       }
@@ -3430,19 +3430,19 @@ ACMD(do_poofset)
       switch (subcmd)
          {
       case SCMD_POOFIN :
-         send_to_char(ch, "Clearing poofin... it used to be:\n\r");
-         send_to_char(ch, "%s %s\n\r", GET_NAME(ch), POOFIN(ch));
+         send_to_char(ch, "Clearing poofin... it used to be:\r\n");
+         send_to_char(ch, "%s %s\r\n", GET_NAME(ch), POOFIN(ch));
          strcpy(POOFIN(ch),"\0");
          break;
       case SCMD_POOFOUT :
-         send_to_char(ch, "Clearing poofout... it used to be:\n\r");
-         send_to_char(ch, "%s %s\n\r", GET_NAME(ch), POOFOUT(ch));
+         send_to_char(ch, "Clearing poofout... it used to be:\r\n");
+         send_to_char(ch, "%s %s\r\n", GET_NAME(ch), POOFOUT(ch));
          strcpy(POOFOUT(ch),"\0");
          break;
       default :
-         send_to_char(ch, "Your goto messages are:\n\r");
-         send_to_char(ch, "Poofin: %s %s\n\r", GET_NAME(ch), POOFIN(ch));
-         send_to_char(ch, "Poofout: %s %s\n\r", GET_NAME(ch), POOFOUT(ch));
+         send_to_char(ch, "Your goto messages are:\r\n");
+         send_to_char(ch, "Poofin: %s %s\r\n", GET_NAME(ch), POOFIN(ch));
+         send_to_char(ch, "Poofout: %s %s\r\n", GET_NAME(ch), POOFOUT(ch));
          break;
          }
       }
@@ -3888,10 +3888,10 @@ ACMD(do_wiznet)
       break;
    case '-':
       if (PRF_FLAGGED(ch, PRF_NOWIZ))
-         send_to_char(ch,"You are already offline!\n\r");
+         send_to_char(ch,"You are already offline!\r\n");
       else
          {
-         send_to_char(ch,"You will no longer hear the wizline.\n\r");
+         send_to_char(ch,"You will no longer hear the wizline.\r\n");
          SET_BIT(PRF_FLAGS(ch), PRF_NOWIZ);
          }
       release_buffer(buf1);
@@ -3899,10 +3899,10 @@ ACMD(do_wiznet)
       break;
    case '+':
       if (!PRF_FLAGGED(ch, PRF_NOWIZ))
-         send_to_char(ch,"You are already online!\n\r");
+         send_to_char(ch,"You are already online!\r\n");
       else
          {
-         send_to_char(ch,"You can now hear the wizline again.\n\r");
+         send_to_char(ch,"You can now hear the wizline again.\r\n");
          REMOVE_BIT(PRF_FLAGS(ch), PRF_NOWIZ);
          }
       release_buffer(buf1);
@@ -4153,7 +4153,7 @@ ACMD(do_wizutil)
          mudlogf(BRF, MAX(LVL_IMMORT, GET_INVIS_LEV(ch)), TRUE,
                  "(GC) %s pardoned by %s", GET_NAME(vict), GET_NAME(ch));
          if (GET_LEVEL(vict) < LVL_IMPL)
-            send_info("[ INFO ] %s has been pardoned and is no longer a Player Killer.\n\r",
+            send_info("[ INFO ] %s has been pardoned and is no longer a Player Killer.\r\n",
                       (GET_INVIS_LEV(vict)>=LVL_IMMORT) ? "An immortal" : GET_NAME(vict));
          break;
       case SCMD_NOTITLE:
@@ -8840,12 +8840,12 @@ ACMD(do_gremort)
       }
    else if(!(victim = get_char(argument)))
       {
-      send_to_char(ch,"That player is not here.\n\r");
+      send_to_char(ch,"That player is not here.\r\n");
       return;
       }
    else if(IS_NPC(victim))
       {
-      send_to_char(ch,"You can't Hero a mob!!\n\r");
+      send_to_char(ch,"You can't Hero a mob!!\r\n");
       return;
       }
    else if(GET_LEVEL(victim)!=(LVL_HERO-1))
@@ -9251,14 +9251,14 @@ ACMD(do_addpoint)
 
    if (!*arg)
       {
-      send_to_char(ch,"Usage: addpoint <player>\n\r");
+      send_to_char(ch,"Usage: addpoint <player>\r\n");
       release_buffer(arg);
       return;
       }
 
    if (!(victim = get_char_vis(ch, arg,FIND_CHAR_WORLD)))
       {
-      send_to_char(ch,"No such person around.\n\r");
+      send_to_char(ch,"No such person around.\r\n");
       release_buffer(arg);
       return;
       }
@@ -9266,14 +9266,14 @@ ACMD(do_addpoint)
 
    if (IS_NPC(victim))
       {
-      send_to_char(ch,"Mobs can't have quest points.\n\r");
+      send_to_char(ch,"Mobs can't have quest points.\r\n");
       return;
       }
    buf=get_buffer(512);
    GET_QPOINTS(victim)++;
-   send_to_char(ch, "A point has been added to %s's Quest points.\n\r",
+   send_to_char(ch, "A point has been added to %s's Quest points.\r\n",
                 GET_NAME(victim));
-   send_to_char(ch, "%s now has %d Quest points...\n\r", GET_NAME(victim),
+   send_to_char(ch, "%s now has %d Quest points...\r\n", GET_NAME(victim),
                 GET_QPOINTS(victim));
    send_to_char(victim, "You have been rewarded with a quest point.\r\n");
    mudlogf(BRF, GOD_LOG(ch), TRUE, "(GC) %s has added a quest point to %s",
@@ -9293,14 +9293,14 @@ ACMD(do_delpoint)
 
    if (!*arg)
       {
-      send_to_char(ch,"Usage: delpoint <player>\n\r");
+      send_to_char(ch,"Usage: delpoint <player>\r\n");
       release_buffer(arg);
       return;
       }
 
    if (!(victim = get_char_vis(ch, arg,FIND_CHAR_WORLD)))
       {
-      send_to_char(ch,"No such person around.\n\r");
+      send_to_char(ch,"No such person around.\r\n");
       release_buffer(arg);
       return;
       }
@@ -9308,14 +9308,14 @@ ACMD(do_delpoint)
 
    if (IS_NPC(victim))
       {
-      send_to_char(ch,"Mobs can't have quest points.\n\r");
+      send_to_char(ch,"Mobs can't have quest points.\r\n");
       return;
       }
    buf=get_buffer(512);
    GET_QPOINTS(victim)--;
-   send_to_char(ch, "A point has been removed from %s's Quest points.\n\r",
+   send_to_char(ch, "A point has been removed from %s's Quest points.\r\n",
                 GET_NAME(victim));
-   send_to_char(ch, "%s now has %d Quest points...\n\r", GET_NAME(victim),
+   send_to_char(ch, "%s now has %d Quest points...\r\n", GET_NAME(victim),
                 GET_QPOINTS(victim));
    send_to_char(victim,"You have been charged a quest point.\r\n");
    mudlogf(BRF, GOD_LOG(ch), TRUE, "(GC) %s has removed a quest point from %s",

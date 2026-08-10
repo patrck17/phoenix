@@ -433,13 +433,13 @@ ASPELL(spell_gate)
 
    if (GET_LEVEL(victim) >= LVL_IMMORT)
       {
-      send_to_char(ch,"Gating to immortals can be hazardous to your health!\n\r");
+      send_to_char(ch,"Gating to immortals can be hazardous to your health!\r\n");
       return FALSE;
       }
 
    if (victim == NULL || IS_NPC(victim))
       {
-      send_to_char(ch,"You dont seem to be able to open a gate to this person.\n\r");
+      send_to_char(ch,"You dont seem to be able to open a gate to this person.\r\n");
       return FALSE;
       }
 
@@ -1220,7 +1220,7 @@ ASPELL(spell_enchant_weapon)
 
    if (GET_OBJ_TYPE(obj) != ITEM_WEAPON || OBJ_FLAGGED(obj, ITEM_MAGIC))
       {
-      send_to_char(ch,"This weapon can't be enchanted!\n\r");
+      send_to_char(ch,"This weapon can't be enchanted!\r\n");
       return FALSE;
       }
 
@@ -1270,14 +1270,14 @@ ASPELL(spell_enchant_armor)
 
    if (GET_OBJ_TYPE(obj) != ITEM_ARMOR || OBJ_FLAGGED(obj, ITEM_MAGIC))
       {
-      send_to_char(ch,"This armor can't be enchanted!\n\r");
+      send_to_char(ch,"This armor can't be enchanted!\r\n");
       return FALSE;
       }
 
    for (i = 0; i < MAX_OBJ_AFFECT; i++)
       if (obj->affected[i].location != APPLY_NONE)
          {
-         send_to_char(ch,"This armor can't be enchanted!\n\r");
+         send_to_char(ch,"This armor can't be enchanted!\r\n");
          return FALSE;
          }
 

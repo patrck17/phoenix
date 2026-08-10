@@ -448,10 +448,10 @@ void trigedit_save(struct descriptor_data *d)
       s = OLC_STORAGE(d);
 
       CREATE(trig->cmdlist, struct cmdlist_element, 1);
-      trig->cmdlist->cmd = str_dup(strtok(s, "\n\r"));
+      trig->cmdlist->cmd = str_dup(strtok(s, "\r\n"));
       cmd = trig->cmdlist;
 
-      while ((s = strtok(NULL, "\n\r")))
+      while ((s = strtok(NULL, "\r\n")))
 	 {
 	 CREATE(cmd->next, struct cmdlist_element, 1);
 	 cmd = cmd->next;
@@ -508,10 +508,10 @@ void trigedit_save(struct descriptor_data *d)
       s = OLC_STORAGE(d);
          
       CREATE(trig->cmdlist, struct cmdlist_element, 1);
-      trig->cmdlist->cmd = str_dup(strtok(s, "\n\r"));
+      trig->cmdlist->cmd = str_dup(strtok(s, "\r\n"));
       cmd = trig->cmdlist;
                                 
-      while ((s = strtok(NULL, "\n\r"))) 
+      while ((s = strtok(NULL, "\r\n"))) 
 	 {
 	 CREATE(cmd->next, struct cmdlist_element, 1);
 	 cmd = cmd->next;

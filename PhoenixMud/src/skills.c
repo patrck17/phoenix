@@ -256,7 +256,7 @@ ACMD(do_bandage)
       return;
    if(FIGHTING(ch))
       {
-      send_to_char(ch,"You are too busy to bandage.\n\r");
+      send_to_char(ch,"You are too busy to bandage.\r\n");
       return;
       }
    if (!IS_NPC(ch)&&(!SCR_SKILLCHECK(ch, SKILL_BANDAGE)||GET_SKILL(ch, SKILL_BANDAGE) <= 0))
@@ -272,7 +272,7 @@ ACMD(do_bandage)
       band_self = TRUE;
    else if (!(vict = get_char_vis(ch, arg,FIND_CHAR_ROOM)))
       {
-      send_to_char(ch,"Whom do you wish to heal???\n\r");
+      send_to_char(ch,"Whom do you wish to heal???\r\n");
       release_buffer(arg);
       return;
       }
@@ -298,7 +298,7 @@ ACMD(do_bandage)
       else
          {
          send_to_char(ch,"You must not be standing or fighting for "
-                      "this to work.\n\r");
+                      "this to work.\r\n");
          return;
          }
       }
@@ -314,7 +314,7 @@ ACMD(do_bandage)
       if (!band_self)
          {
          send_to_char(ch,"You don't seem to be able to wrap the bandages "
-                      "correctly.\n\r");
+                      "correctly.\r\n");
          act("$n tries to bandage you, but fumbles the wrappings.",FALSE,
              ch,0,vict,TO_VICT);
          act("$n tries to bandage $N, but just fumbles around.",FALSE,ch,
@@ -323,7 +323,7 @@ ACMD(do_bandage)
       else
          {
          send_to_char(ch,"You don't seem to be able to wrap the bandages "
-                      "correctly.\n\r");
+                      "correctly.\r\n");
          act("$n tries to bandage $mself, but just fumbles around.",FALSE,
              ch,0,vict,TO_NOTVICT);
          }
@@ -341,7 +341,7 @@ ACMD(do_bandage)
          }
       else
          {
-         send_to_char(ch,"You bandage your own wounds.\n\r");
+         send_to_char(ch,"You bandage your own wounds.\r\n");
          act("$n bandages $s wounds.",FALSE,ch,0,vict,TO_NOTVICT);
          GET_POS(vict)=POS_BANDAGE;
          }
@@ -769,13 +769,13 @@ ACMD(do_darken)
 
    if (GET_MANA(ch) < 20)
       {
-      send_to_char(ch,"You do not have the energy to darken.\n\r");
+      send_to_char(ch,"You do not have the energy to darken.\r\n");
       return;
       }
 
    if (!skill_roll(ch,SKILL_DARKEN,0))
       {
-      send_to_char(ch,"You fail to darken the room.\n\r");
+      send_to_char(ch,"You fail to darken the room.\r\n");
       GET_WAIT_STATE(ch) = 1 RL_SEC;
       return;
       }
@@ -798,7 +798,7 @@ ACMD(do_darken)
    af.duration =(int)(GET_LEVEL(ch)/10);
    af.modifier = (-1*VALUE_LIGHT);
    af.location = APPLY_LIGHT;
-   send_to_char(ch,"The room darkens.\n\r");
+   send_to_char(ch,"The room darkens.\r\n");
    affect_join_room(rm, &af, FALSE, FALSE, FALSE, FALSE);
    return;
    }
@@ -1392,13 +1392,13 @@ ACMD(do_lighten)
 
    if (GET_MANA(ch) < 20)
       {
-      send_to_char(ch,"You do not have the energy to lighten.\n\r");
+      send_to_char(ch,"You do not have the energy to lighten.\r\n");
       return;
       }
 
    if (!skill_roll(ch,SKILL_LIGHTEN,0))
       {
-      send_to_char(ch,"You fail to lighten the room.\n\r");
+      send_to_char(ch,"You fail to lighten the room.\r\n");
       GET_WAIT_STATE(ch) = 1 RL_SEC;
       return;
       }
@@ -1421,7 +1421,7 @@ ACMD(do_lighten)
    af.duration =(int)(GET_LEVEL(ch)/10);
    af.modifier = (VALUE_LIGHT);
    af.location = APPLY_LIGHT;
-   send_to_char(ch,"The room brightens.\n\r");
+   send_to_char(ch,"The room brightens.\r\n");
    act("$n lightens the room.",FALSE,ch,0,0,TO_ROOM);
    affect_join_room(rm, &af, FALSE, FALSE, FALSE, FALSE);
    return;
@@ -3052,7 +3052,7 @@ ACMD(do_draw)
       send_to_char(ch, "Draw what?\r\n");
    else if ((GET_EQ(ch, WEAR_WIELD_1) && OBJ_FLAGGED(GET_EQ(ch, WEAR_WIELD_1), ITEM_TWO_HAND)) || 
             (GET_EQ(ch, WEAR_WIELD_1) && GET_EQ(ch, WEAR_WIELD_2)))
-      send_to_char (ch, "You are already wielding weapons in both hands.\n\r");
+      send_to_char (ch, "You are already wielding weapons in both hands.\r\n");
    else if (FIGHTING(ch))
       send_to_char(ch, "You are too busy fighting to attempt that!\r\n");
    else 

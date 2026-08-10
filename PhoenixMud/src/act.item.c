@@ -2470,7 +2470,7 @@ ACMD(do_wield)
    one_argument(argument, arg);
    if(IS_MONK(ch)&&GET_LEVEL(ch)<LVL_IMMORT)
       {
-      send_to_char(ch,"Monks do not need weapons, only their bare hands!\n\r");
+      send_to_char(ch,"Monks do not need weapons, only their bare hands!\r\n");
       release_buffer(arg);
       return;
       }

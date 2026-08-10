@@ -115,7 +115,7 @@ ACMD(do_mpasound)
 
    if (!IS_NPC(ch) || AFF_FLAGGED(ch, AFF_CHARM) || ch->desc)
       {
-      send_to_char(ch,"Huh?\n\r");
+      send_to_char(ch,"Huh?\r\n");
       return;
       }
 
@@ -158,7 +158,7 @@ ACMD(do_mpkill)
 
    if (!IS_NPC(ch) || AFF_FLAGGED(ch, AFF_CHARM) || ch->desc)
       {
-      send_to_char(ch,"Huh?\n\r");
+      send_to_char(ch,"Huh?\r\n");
       return;
       }
 
@@ -221,7 +221,7 @@ ACMD(do_mpjunk)
 
    if (!IS_NPC(ch) || AFF_FLAGGED(ch, AFF_CHARM) || ch->desc) 
       {
-      send_to_char(ch,"Huh?\n\r");
+      send_to_char(ch,"Huh?\r\n");
       return;
       }
 
@@ -279,7 +279,7 @@ ACMD(do_mpechoaround)
 
    if (!IS_NPC(ch) || AFF_FLAGGED(ch, AFF_CHARM) || ch->desc)
       {
-      send_to_char(ch,"Huh?\n\r");
+      send_to_char(ch,"Huh?\r\n");
       return;
       }
 
@@ -317,7 +317,7 @@ ACMD(do_mpechoat)
 
    if (!IS_NPC(ch) || AFF_FLAGGED(ch, AFF_CHARM) || ch->desc)
       {
-      send_to_char(ch,"Huh?\n\r");
+      send_to_char(ch,"Huh?\r\n");
       return;
       }
 
@@ -354,7 +354,7 @@ ACMD(do_mpecho)
 
    if (!IS_NPC(ch) || AFF_FLAGGED(ch, AFF_CHARM) || ch->desc)
       {
-      send_to_char(ch,"Huh?\n\r");
+      send_to_char(ch,"Huh?\r\n");
       return;
       }
 
@@ -384,7 +384,7 @@ ACMD(do_mpmload)
 
    if (!IS_NPC(ch) || AFF_FLAGGED(ch, AFF_CHARM) || ch->desc)
       {
-      send_to_char(ch,"Huh?\n\r");
+      send_to_char(ch,"Huh?\r\n");
       return;
       }
 
@@ -421,7 +421,7 @@ ACMD(do_mpoload)
 
    if (!IS_NPC(ch) || AFF_FLAGGED(ch, AFF_CHARM) || ch->desc)
       {
-      send_to_char(ch,"Huh?\n\r");
+      send_to_char(ch,"Huh?\r\n");
       return;
       }
 
@@ -472,7 +472,7 @@ ACMD(do_mppurge)
 
    if (!IS_NPC(ch) || AFF_FLAGGED(ch, AFF_CHARM) || ch->desc)
       {
-      send_to_char(ch,"Huh?\n\r");
+      send_to_char(ch,"Huh?\r\n");
       return;
       } 
  
@@ -538,7 +538,7 @@ ACMD(do_mpgoto)
 
    if (!IS_NPC(ch) || AFF_FLAGGED(ch, AFF_CHARM) || ch->desc)
       {
-      send_to_char(ch,"Huh?\n\r");
+      send_to_char(ch,"Huh?\r\n");
       return;
       }
  
@@ -579,7 +579,7 @@ ACMD(do_mpat)
 
    if (!IS_NPC(ch) || AFF_FLAGGED(ch, AFF_CHARM) || ch->desc)
       {
-      send_to_char(ch,"Huh?\n\r");
+      send_to_char(ch,"Huh?\r\n");
       return;
       }
  
@@ -632,7 +632,7 @@ ACMD(do_mptransfer)
 
    if (!IS_NPC(ch) || AFF_FLAGGED(ch, AFF_CHARM) || ch->desc)
       {
-      send_to_char(ch,"Huh?\n\r");
+      send_to_char(ch,"Huh?\r\n");
       return;
       }
 
@@ -734,7 +734,7 @@ ACMD(do_mpforce)
 
    if (!IS_NPC(ch) || AFF_FLAGGED(ch, AFF_CHARM) || ch->desc)
       {
-      send_to_char(ch,"Huh?\n\r");
+      send_to_char(ch,"Huh?\r\n");
       return;
       }
 
