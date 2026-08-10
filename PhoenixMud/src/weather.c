@@ -140,10 +140,6 @@ void another_hour(int mode)
       time_info.hours -= 24; 
       time_info.day++; 
  
-      if (time_info.day > 34) 
-	 { 
-	 time_info.day = 0; 
-	 time_info.month++; 
 	 if (!(time_info.day % 4)) 
 	    {
 	    weather_info.moon_phase++;
@@ -154,7 +150,11 @@ void another_hour(int mode)
 	    if (weather_info.moon_phase == 9) 
 	       weather_info.moon_phase = 6;
 	    }
-	 
+
+      if (time_info.day > 34) 
+	 { 
+	 time_info.day = 0; 
+	 time_info.month++; 
 	 if (time_info.month > 16) 
 	    { 
 	    time_info.month = 0; 
