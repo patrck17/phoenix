@@ -4342,7 +4342,7 @@ void store_to_char(struct char_file_u * st, struct char_data * ch)
    strcpy(ch->player.passwd, st->pwd);
 
    /* Add all spell effects */
-   for (i = 0; i < MAX_AFFECT; i++)
+   for (i = MAX_AFFECT - 1; i >= 0; i--)
       {
       if (st->affected[i].type)
          affect_to_char(ch, &st->affected[i]);
@@ -4480,7 +4480,7 @@ void char_to_store(struct char_data * ch, struct char_file_u * st,
    strcpy(st->pwd, GET_PASSWD(ch));
 
    /* add spell and eq affections back in now */
-   for (i = 0; i < MAX_AFFECT; i++)
+   for (i = MAX_AFFECT - 1; i >= 0; i--)
       {
       if (st->affected[i].type)
          affect_to_char(ch, &st->affected[i]);
