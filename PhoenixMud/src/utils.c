@@ -222,7 +222,7 @@ void log_death_trap(struct char_data * ch)
 { 
    mudlogf(BRF, LVL_IMMORT, TRUE, "DeathTrap: %s has hit a death trap #%ld (%s)", 
 	  GET_NAME(ch), GET_ROOM_VNUM(IN_ROOM(ch)), world[IN_ROOM(ch)].name); 
-   send_info("[ INFO ] %s hit a death trap.\n\r", GET_NAME(ch));
+   send_info("[ INFO ] %s hit a death trap.\r\n", GET_NAME(ch));
 } 
 
 

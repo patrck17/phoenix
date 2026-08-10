@@ -1833,20 +1833,20 @@ ACMD(do_remortnet)
       break;
    case '-':
       if (PRF2_FLAGGED(ch, PRF2_NOREMO))
-         send_to_char(ch,"You are already offline!\n\r");
+         send_to_char(ch,"You are already offline!\r\n");
       else
          {
-         send_to_char(ch,"You will no longer hear the remortnet.\n\r");
+         send_to_char(ch,"You will no longer hear the remortnet.\r\n");
          SET_BIT(PRF2_FLAGS(ch), PRF2_NOREMO);
          }
       return;
       break;
    case '+':
       if (!PRF2_FLAGGED(ch, PRF2_NOREMO))
-         send_to_char(ch, "You are already online!\n\r");
+         send_to_char(ch, "You are already online!\r\n");
       else
          {
-         send_to_char(ch, "You can now hear the remortnet again.\n\r");
+         send_to_char(ch, "You can now hear the remortnet again.\r\n");
          REMOVE_BIT(PRF2_FLAGS(ch), PRF2_NOREMO);
          }
       return;

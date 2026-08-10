@@ -3570,7 +3570,7 @@ ACMD(do_consider)
 		send_to_char(ch,
 			     "Levels comparison: You are insane, and basically dead already!\r\n");
 	else
-		send_to_char(ch, "Levels comparison: Death is inevitable\n\r");
+		send_to_char(ch, "Levels comparison: Death is inevitable\r\n");
 
 	diff = (GET_HIT(victim) - GET_HIT(ch));
 	if (diff <= -601)
@@ -3640,7 +3640,7 @@ ACMD(do_consider)
 			     "Hit points comparison: Death is waiting for you, don't dawdle!\r\n");
 	else
 		send_to_char(ch,
-			     "Hit points comparison: Death is all I can say.\n\r");
+			     "Hit points comparison: Death is all I can say.\r\n");
 }
 
 ACMD(do_diagnose)

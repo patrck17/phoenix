@@ -1102,7 +1102,7 @@ char *sing(int spell)
    case 69:
       return("a lofty tale of the knights that have conquered this realm.");
    case 84:
-      return("about men who are pure in heart and in mind!\n\r.");
+      return("about men who are pure in heart and in mind!\r\n.");
    case 76:
       return("a wrenching song filled with pain and sorrow.");
    case 83:

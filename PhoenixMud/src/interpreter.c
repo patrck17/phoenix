@@ -2984,7 +2984,7 @@ void nanny(struct descriptor_data *d, char *argu)
 			save_char(d->character, IN_ROOM(d->character));
 
             if (GET_INVIS_LEV(d->character) == 0) {
-                send_info("[ INFO ] %s has entered the game.\n\r", GET_NAME(d->character));
+                send_info("[ INFO ] %s has entered the game.\r\n", GET_NAME(d->character));
             }
 
 			act("$n has entered the game.", TRUE, d->character, 0,
@@ -3022,7 +3022,7 @@ void nanny(struct descriptor_data *d, char *argu)
 				send_to_char(d->character, "%s", START_MESSG);
 				send_info
 				    ("[ INFO ] We have a new player coming to "
-				     "the mud named %s.\n\r",
+				     "the mud named %s.\r\n",
 				     GET_NAME(d->character));
 
 				/* New code: send new players' base stats to remortnet. */
@@ -3151,9 +3151,9 @@ void nanny(struct descriptor_data *d, char *argu)
 			break;
 
 		case '6':
-			SEND_TO_Q(d, "\n\r");
+			SEND_TO_Q(d, "\r\n");
 			who_to_menu(d->character, "", 0, 0);
-			SEND_TO_Q(d, "\n\r\n\r*** PRESS RETURN:%c%c", IAC, GA);
+			SEND_TO_Q(d, "\r\n\r\n*** PRESS RETURN:%c%c", IAC, GA);
 			STATE(d) = CON_RMOTD;
 			break;
 

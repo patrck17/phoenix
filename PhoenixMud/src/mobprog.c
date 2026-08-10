@@ -80,7 +80,7 @@ void	mprog_driver		(char* com_list, struct char_data* mob,
   * Local function code and brief comments.
   */
  
- /* Used to get sequential lines of a multi line string (separated by "\n\r")
+ /* Used to get sequential lines of a multi line string (separated by "\r\n")
   * Thus its like one_argument(), but a trifle different. It is destructive
   * to the multi line string argument, and thus clist must not be shared.
   */

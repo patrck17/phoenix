@@ -250,7 +250,7 @@ ACMD(do_plink)
                     !PLR_FLAGGED(current, PLR_WRITING))
                     {
                     send_to_char(current, "\x1B[1;37m[ PLINK! ] %s has just been "
-                                 "\x1B[1;31mplinked\x1B[1;37m by %s.\x1B[0m\n\r",
+                                 "\x1B[1;31mplinked\x1B[1;37m by %s.\x1B[0m\r\n",
                                  CAN_SEE(current, victim)?GET_NAME(victim):"Someone",
                                  CAN_SEE(current, ch)?GET_NAME(ch):"Someone");
                     }
@@ -315,7 +315,7 @@ ACMD(do_smite)
                     !PLR_FLAGGED(current, PLR_WRITING))
                     {
                     send_to_char(current, "\x1B[1;31m[ SMITE! ]\x1B[1;37m %s has just been " 
-                                 "\x1B[1;31mSMITTEN\x1B[1;37m by %s.\x1B[0m\n\r",
+                                 "\x1B[1;31mSMITTEN\x1B[1;37m by %s.\x1B[0m\r\n",
                                  CAN_SEE(current, victim)?GET_NAME(victim):"Someone",
                                  CAN_SEE(current, ch)?GET_NAME(ch):"Someone");
                     }
@@ -372,10 +372,10 @@ ACMD(do_slay)
             sprintf(buf, "%s has been slain by %s",GET_NAME(victim),GET_NAME(ch));
             mudlog(buf, NRM, MAX(LVL_IMMORT, GET_INVIS_LEV(ch)), TRUE);
             if (!IS_NPC(victim) && (GET_LEVEL(victim) < LVL_IMMORT) && (GET_INVIS_LEV(ch) >= LVL_IMMORT)) {
-            	send_info("[ INFO ] %s has been chopped into little pieces by an Immortal.\n\r", GET_NAME(victim)); 
+            	send_info("[ INFO ] %s has been chopped into little pieces by an Immortal.\r\n", GET_NAME(victim)); 
                }
             if (!IS_NPC(victim) && (GET_LEVEL(victim) < LVL_IMMORT) && (GET_INVIS_LEV(ch) <= LVL_AVATAR)) {
-                send_info("[ INFO ] %s has been chopped into little pieces by %s.\n\r", GET_NAME(victim), 
+                send_info("[ INFO ] %s has been chopped into little pieces by %s.\r\n", GET_NAME(victim), 
                    GET_NAME(ch));
                }
             raw_kill(victim,ch);

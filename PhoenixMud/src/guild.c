@@ -813,8 +813,8 @@ void list_all_gms(struct char_data *ch)
     {
     if (!(gm_nr % 20))
       {
-      strcat(buf, "Virtual G.Master Charge Min Max Members\n\r");
-      strcat(buf, "------------------------------------------------------------------\n\r");
+      strcat(buf, "Virtual G.Master Charge Min Max Members\r\n");
+      strcat(buf, "------------------------------------------------------------------\r\n");
       }
     sprintf(buf2, " %6d  ", GM_NUM(gm_nr));
     if (GM_TRAINER(gm_nr) < 0)
@@ -824,7 +824,7 @@ void list_all_gms(struct char_data *ch)
     sprintf(buf2+strlen(buf2), "%s %5.2f %3d %3d ", buf1,
             GM_CHARGE(gm_nr),GM_MINLVL(gm_nr),GM_MAXLVL(gm_nr));
     strcat(buf2, customer_string2(gm_nr, FALSE));
-    sprintf(buf+strlen(buf), "%s\n\r", buf2);
+    sprintf(buf+strlen(buf), "%s\r\n", buf2);
     }
 
   release_buffer(buf2);
@@ -898,7 +898,7 @@ void show_gm(struct char_data * ch, char *arg)
 
       if ((gm_num < 0) || (gm_nr >= top_guild))
         {
-        send_to_char(ch,"Illegal guild master number.\n\r");
+        send_to_char(ch,"Illegal guild master number.\r\n");
         return;
         }
       list_detailed_gm(ch, gm_nr);

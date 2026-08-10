@@ -1315,9 +1315,9 @@ void check_killer(struct char_data * ch, struct char_data * vict)
    send_to_char(ch,"If you want to be a PLAYER KILLER, so be it...\r\n");
 
    send_info("[ INFO ] %s has received a Player Killer flag for "
-             "attacking %s.\n\r", GET_NAME(ch), GET_NAME(vict));
+             "attacking %s.\r\n", GET_NAME(ch), GET_NAME(vict));
    send_info("[ INFO ] Everyone in the game now has the right to "
-             "kill %s.\n\r",GET_NAME(ch));
+             "kill %s.\r\n",GET_NAME(ch));
    release_buffer(buf);
    }
 
@@ -1980,17 +1980,17 @@ void raw_kill(struct char_data * ch, struct char_data *killer)
       {
 	if (ch == killer)
 	  send_to_char(current, "\x1B[1;36m[ BATTLE ] %s has died in "
-		       "the battlefield.\x1B[0m\n\r",
+		       "the battlefield.\x1B[0m\r\n",
 		       CAN_SEE(current, ch)?GET_NAME(ch):"Someone");
 	else
 	  send_to_char(current, "\x1B[1;36m[ BATTLE ] %s has been " 
-		       "killed by %s in battle.\x1B[0m\n\r",
+		       "killed by %s in battle.\x1B[0m\r\n",
 		       CAN_SEE(current, ch)?GET_NAME(ch):"Someone",
 		       CAN_SEE(current, killer)?GET_NAME(killer):"Someone");
 	
 	if (!IS_NPC(ch) && TAGGED(ch))
 	  send_to_char(current, "\x1B[1;36m[ BATTLE ] The battle field "
-		       "has been scoured of would-be taggers!\x1B[0m\n\r");
+		       "has been scoured of would-be taggers!\x1B[0m\r\n");
       }
     }
     if (!IS_NPC(ch) && !IS_NPC(killer) && (GET_PKILLS(killer) < 30000) &&
@@ -3083,27 +3083,27 @@ int damage(struct char_data * ch, struct char_data * victim, int dam,
                        GET_NAME(victim), world[IN_ROOM(victim)].name,
                        world[IN_ROOM(victim)].number);
                send_info("[ INFO ] %s has just been blown to pieces while "
-                         "attempting to brew.\n\r", GET_NAME(victim));
+                         "attempting to brew.\r\n", GET_NAME(victim));
                break;
             case SKILL_SCRIBE:
                mudlogf(BRF, LVL_IMMORT, TRUE,"RIP: %s has died scribing: %s[%ld]",
                        GET_NAME(victim), world[IN_ROOM(victim)].name,
                        world[IN_ROOM(victim)].number);
                send_info("[ INFO ] %s has died a fiery death in a failed "
-                         "attempt at scribing.\n\r", GET_NAME(victim));
+                         "attempt at scribing.\r\n", GET_NAME(victim));
                break;
             case SPELL_SUNBURN:
                mudlogf(BRF, LVL_IMMORT, TRUE,"RIP: %s has died from sun damage: %s[%ld]",
                        GET_NAME(victim), world[IN_ROOM(victim)].name,
                        world[IN_ROOM(victim)].number);
                send_info("[ INFO ] %s has died from sun damage too great to "
-                         "overcome.\n\r", GET_NAME(victim));
+                         "overcome.\r\n", GET_NAME(victim));
                break;
             case SPELL_POISON:
                mudlogf(BRF, LVL_IMMORT, TRUE,"RIP: %s has died from poison: %s[%ld]",
                        GET_NAME(victim), world[IN_ROOM(victim)].name,
                        world[IN_ROOM(victim)].number);
-               send_info("[ INFO ] %s has died from systemic poisoning.\n\r", 
+               send_info("[ INFO ] %s has died from systemic poisoning.\r\n", 
                          GET_NAME(victim));          
                break;
             case SPELL_DROWN:
@@ -3111,7 +3111,7 @@ int damage(struct char_data * ch, struct char_data * victim, int dam,
                        GET_NAME(victim), world[IN_ROOM(victim)].name,
                        world[IN_ROOM(victim)].number);
                send_info("[ INFO ] %s has drowned!  Someone should teach that "
-                         "%s how to swim.\n\r", GET_NAME(victim),
+                         "%s how to swim.\r\n", GET_NAME(victim),
                          pc_race_types[GET_RACE(victim)]);
                break;
             case TYPE_SUFFERING:
@@ -3119,7 +3119,7 @@ int damage(struct char_data * ch, struct char_data * victim, int dam,
                        GET_NAME(victim), world[IN_ROOM(victim)].name,
                        world[IN_ROOM(victim)].number);
                send_info("[ INFO ] %s has died from mortal wounds too great to "
-                       "overcome.\n\r", GET_NAME(victim));
+                       "overcome.\r\n", GET_NAME(victim));
                break;
             default:
                if (ch == victim) /* killed yourself, ya fool! */
@@ -3127,7 +3127,7 @@ int damage(struct char_data * ch, struct char_data * victim, int dam,
                   mudlogf(BRF, LVL_IMMORT, TRUE,"RIP: %s has died by self-inflicted wounds: %s[%ld]",
                           GET_NAME(victim), world[IN_ROOM(victim)].name,
                           world[IN_ROOM(ch)].number);
-                  send_info("[ INFO ] %s has died of self-inflicted wounds.\n\r",
+                  send_info("[ INFO ] %s has died of self-inflicted wounds.\r\n",
                             GET_NAME(victim));
                   }
                else /* component mobs */
@@ -3135,7 +3135,7 @@ int damage(struct char_data * ch, struct char_data * victim, int dam,
                   if (!IS_NPC(ch) && (PLR_FLAGGED(ch,PLR_PK) && PLR_FLAGGED(victim,PLR_PK) &&
                             abs(GET_LEVEL(ch)-GET_LEVEL(victim))<=10))
                      {
-                     send_info("[ INFO ] %s has been killed by %s.\n\r", GET_NAME(victim),
+                     send_info("[ INFO ] %s has been killed by %s.\r\n", GET_NAME(victim),
                             GET_NAME(MOB2_FLAGGED(ch,MOB2_COMPONENT)?ch->master:ch));
                      }
                   else
@@ -3144,7 +3144,7 @@ int damage(struct char_data * ch, struct char_data * victim, int dam,
                              GET_NAME(victim), 
                              GET_NAME(MOB2_FLAGGED(ch,MOB2_COMPONENT)?ch->master:ch),
                              world[IN_ROOM(victim)].name, world[IN_ROOM(victim)].number);
-                     send_info("[ INFO ] %s has been killed by %s.\n\r", GET_NAME(victim),
+                     send_info("[ INFO ] %s has been killed by %s.\r\n", GET_NAME(victim),
                              GET_NAME(MOB2_FLAGGED(ch,MOB2_COMPONENT)?ch->master:ch));
                      }
                   }
