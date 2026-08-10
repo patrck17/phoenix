@@ -2412,9 +2412,9 @@ ACMD(do_steal)
 
             if ((IS_CARRYING_N(ch) + 1 < CAN_CARRY_N(ch)))
                {
-               improve_skill(ch,SKILL_STEAL,USE_PASS);
                if ((IS_CARRYING_W(ch) + GET_OBJ_WEIGHT(obj)) < CAN_CARRY_W(ch))
                   {
+                  improve_skill(ch,SKILL_STEAL,USE_PASS);
                   obj_from_char(obj);
                   obj_to_char(obj, ch);
                   send_to_char(ch,"Got it!\r\n");
@@ -2422,6 +2422,8 @@ ACMD(do_steal)
 		    act("You seem to be missing something.", TRUE, ch, 0, vict, TO_VICT);
 		  }
                   }
+               else
+                  send_to_char(ch,"You cannot carry that much.\r\n");
                }
             else
                send_to_char(ch,"You cannot carry that much.\r\n");
