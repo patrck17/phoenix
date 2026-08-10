@@ -2810,7 +2810,7 @@ ACMD(do_tame)
       }
    else
       {
-	  WAIT_STATE(ch,PULSE_VIOLENCE/4);
+	  WAIT_STATE(ch,(PULSE_VIOLENCE/4));
       if (vict->master)
          stop_follower(vict);
       add_follower(vict, ch);
