@@ -311,12 +311,6 @@ ASPELL(spell_recall)
       return FALSE;
       }
 
-   if (FIGHTING(victim)&&IS_NPC(FIGHTING(victim)))
-      {
-      if(num_fighting(victim)<2)
-         if(GET_HIT(FIGHTING(victim))<(GET_MAX_HIT(FIGHTING(victim))/2))
-            GET_HIT(FIGHTING(victim))=GET_MAX_HIT(FIGHTING(victim))/2;
-      }
 
    act("$n disappears.", TRUE, victim, 0, 0, TO_ROOM);
    dismount_char(victim);
@@ -401,12 +395,6 @@ ASPELL(spell_crecall)
       return FALSE;
       }
 
-   if (FIGHTING(victim)&&IS_NPC(FIGHTING(victim)))
-      {
-      if(num_fighting(victim)<2)
-         if(GET_HIT(FIGHTING(victim))<(GET_MAX_HIT(FIGHTING(victim))/2))
-            GET_HIT(FIGHTING(victim))=GET_MAX_HIT(FIGHTING(victim))/2;
-      }
 
 
    act("$n disappears.", TRUE, victim, 0, 0, TO_ROOM);
@@ -645,9 +633,6 @@ ASPELL(spell_summon)
    if (FIGHTING(victim)&&IS_NPC(FIGHTING(victim)))
       {
       iEscapeFromFight=1;
-      if(num_fighting(victim)<2)
-         if(GET_HIT(FIGHTING(victim))<(GET_MAX_HIT(FIGHTING(victim))/2))
-            GET_HIT(FIGHTING(victim))=GET_MAX_HIT(FIGHTING(victim))/2;
       }
    act("$n disappears suddenly.", TRUE, victim, 0, 0, TO_ROOM);
    if(victim!=ch)
