@@ -3943,6 +3943,7 @@ int script_driver(void *go, trig_data *trig, int type, int mode)
    {
    static int depth = 0;
    int ret_val = 1;
+   int saved_owner_purged = dg_owner_purged;  /* UNI-6: reentrancy-safe */
    struct cmdlist_element *cl;
    char *cmd=get_buffer(MAX_INPUT_LENGTH);
    char *p;
@@ -3954,6 +3955,7 @@ int script_driver(void *go, trig_data *trig, int type, int mode)
       {
       script_log("Triggers recursed beyond maximum allowed depth (10).");
       release_buffer(cmd);
+      dg_owner_purged = saved_owner_purged;
       return ret_val;
       }
 
@@ -4042,6 +4044,7 @@ int script_driver(void *go, trig_data *trig, int type, int mode)
                process_wait(go, trig, type, "wait 1", cl);
                depth--;
                release_buffer(cmd);
+               dg_owner_purged = saved_owner_purged;
                return ret_val;
                }
             if (GET_TRIG_LOOPS(trig) == 500)
@@ -4132,6 +4135,7 @@ int script_driver(void *go, trig_data *trig, int type, int mode)
             process_wait(go, trig, type, cmd, cl);
             depth--;
             release_buffer(cmd);
+            dg_owner_purged = saved_owner_purged;
             return ret_val;
             }
 
@@ -4166,6 +4170,7 @@ int script_driver(void *go, trig_data *trig, int type, int mode)
                {
                depth--;
                release_buffer(cmd);
+               dg_owner_purged = saved_owner_purged;
                return ret_val;
                }
             }
@@ -4178,6 +4183,7 @@ int script_driver(void *go, trig_data *trig, int type, int mode)
 
    depth--;
    release_buffer(cmd);
+   dg_owner_purged = saved_owner_purged;
    return ret_val;
    }
 
