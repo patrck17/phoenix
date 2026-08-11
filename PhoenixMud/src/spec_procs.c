@@ -331,7 +331,7 @@ SPECIAL(mayor)
          }
       }
    if (cmd || !move || (GET_POS(ch) < POS_SLEEPING) ||
-           (GET_POS(ch) == POS_FIGHTING)||(cmd<1))
+           (GET_POS(ch) == POS_FIGHTING))
       return FALSE;
 
    switch (path[mindex])
