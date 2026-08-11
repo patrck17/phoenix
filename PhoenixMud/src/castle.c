@@ -424,7 +424,7 @@ SPECIAL(king_welmar)
        case '3': 
        case '4': 
        case '5': 
-	  perform_move(ch, path[mindex] - 0, 1,0); 
+	  perform_move(ch, path[mindex] - '0', 1,0); 
 	  break; 
        case 'A': 
        case 'B': 
