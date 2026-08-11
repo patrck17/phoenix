@@ -1011,7 +1011,7 @@ struct obj_material_affs
 #define PULSE_MOBILE    (1  RL_SEC)
 #define PULSE_OBJECT    (10 RL_SEC)
 #define PULSE_BUFFER    (5  RL_SEC)
-#define PULSE_VIOLENCE  (1  RL_SEC) / 2
+#define PULSE_VIOLENCE  ((1  RL_SEC) / 2)
 #define PULSE_MAGIC     (1  RL_SEC)
 #define MOBILE_PERCENT 10
 
