@@ -2366,12 +2366,71 @@ int is_help(const char *str, const char *namelist)
 	}
 }
 
+/* Match str against ONLY the first name on namelist (same walk as
+ * is_help's inner loop, including the quote skip) — the pass-1 matcher
+ * for find_help. A multi-word entry like "ENHANCED STRENGTH" must not
+ * shadow the bare STRENGTH entry on its second word: the quoted line
+ * sorts before the bare one ('"' < 'S'), so the any-word scan returned
+ * the wrong topic for `help strength`. */
+static int is_help_first(const char *str, const char *namelist)
+{
+	const char *curname, *curstr;
+	int in_quote = FALSE;
+
+	if (*str == '\0')
+		return 0;
+
+	curname = namelist;
+	for (curstr = str;; curstr++, curname++) {
+		if (!*curstr)
+			return (1);
+		if (*curstr == '.' && !isalpha((int)*curname))
+			return (1);
+		if (*curname == '"') {
+			if (in_quote == TRUE) {
+				if (*curstr == '"')
+					return (1);
+				in_quote = FALSE;
+			} else {
+				if (*curstr != '"')
+					curstr--;
+				in_quote = TRUE;
+			}
+			continue;
+		}
+
+		if (!*curname)
+			return (0);
+
+		/* end of the FIRST name — later names are pass 2's business */
+		if ((*curname == ' ') && !in_quote)
+			return (0);
+
+		if (LOWER(*curstr) != LOWER(*curname))
+			return (0);
+	}
+}
+
 struct help_index_element *find_help(char *keyword, int times)
 {
 	int i;
 
+	/* pass 1: entries whose FIRST keyword matches — `help strength`
+	 * finds STRENGTH even though "ENHANCED STRENGTH" sorts earlier */
 	for (i = 0; i < top_of_helpt; i++) {
-		if (is_help(keyword, help_table[i].keywords)) {
+		if (is_help_first(keyword, help_table[i].keywords)) {
+			times--;
+			if (!times) {
+				return (help_table + i);
+			}
+		}
+	}
+
+	/* pass 2: the historical any-word scan, minus pass-1 hits;
+	 * `times` (help N word) keeps counting across both passes */
+	for (i = 0; i < top_of_helpt; i++) {
+		if (!is_help_first(keyword, help_table[i].keywords) &&
+		    is_help(keyword, help_table[i].keywords)) {
 			times--;
 			if (!times) {
 				return (help_table + i);
