@@ -220,8 +220,13 @@ void redit_save_internally(struct descriptor_data *d)
       }
 
 
-   if (rroom_num > 0)  
-      { 
+   /* Upstream d53f966 ("Fix index to room 0 in redit_save_internally"),
+    * committed 2026-05-31, one day after the deployed pin 5a0939f.  rnum 0 is
+    * a VALID room (the first room in the world table); `> 0` sent it down the
+    * "room doesn't exist, add it" branch, which re-inserts a duplicate instead
+    * of replacing in place. */
+   if (rroom_num >= 0)
+      {
      /*. Room exists: move contents over then free and replace it .*/ 
       OLC_ROOM(d)->contents = world[rroom_num].contents; 
       OLC_ROOM(d)->people = world[rroom_num].people; 
