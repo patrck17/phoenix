@@ -24,6 +24,7 @@
 #include "handler.h"
 #include "mail.h"
 #include "screen.h"
+#include "capture.h"   /* record-replay capture (live recorder) */
 #include "olc.h"
 #include "queue.h"		/*  begin add - Bon 07/25/97 */
 #include "constants.h"
@@ -1279,6 +1280,10 @@ void command_interpreter(struct char_data *ch, char *argument)
 
 	if (!IS_NPC(ch))
 		REMOVE_BIT(AFF_FLAGS(ch), AFF_HIDE);
+
+	/* record-replay capture: pulse-tagged player command journal */
+	if (!IS_NPC(ch) && cap_active())
+		cap_cmd(GET_IDNUM(ch), argument);
 
 	if (AFF2_FLAGGED(ch, AFF2_DIGGING)) {
 		REMOVE_BIT(AFF2_FLAGS(ch), AFF2_DIGGING);
@@ -3080,6 +3085,9 @@ void nanny(struct descriptor_data *d, char *argu)
 			}
 			d->has_prompt = 0;
 			init_clan_vari(d);
+			/* record-replay: journal this login with the loaded char state */
+			if (!IS_NPC(d->character) && cap_active())
+				cap_connect(d->character);
 			if ((table_pos =
 			     find_id(GET_IDNUM(d->character))) != -1) {
 				player_table[table_pos].level =

@@ -56,27 +56,36 @@
 **   = a(z%q)- rz/q+ m(z/q) - az 
 */ 
  
-static unsigned long seed; 
- 
-void circle_srandom(unsigned long initial_seed) 
-{ 
-   seed = initial_seed;  
-} 
- 
- 
-unsigned long circle_random(void) 
-{ 
-   register int lo, hi, test; 
- 
-   hi   = seed/q; 
-   lo   = seed%q; 
- 
-   test = a*lo - r*hi; 
- 
-   if (test > 0) 
-      seed = test; 
-   else 
-      seed = test+ m; 
- 
-   return seed; 
-} 
+static unsigned long seed;
+
+/* record-replay (T5): draw counter + state accessors. The LCG `seed` IS the
+   full PRNG state, so circle_set_rng_state() restores an exact stream for
+   replay. circle_rng_calls is informational (cross-check). Zero gameplay
+   effect — the counter does not touch the seed math. */
+unsigned long circle_rng_calls = 0;
+unsigned long circle_get_rng_state(void) { return seed; }
+void circle_set_rng_state(unsigned long s) { seed = s; }
+
+void circle_srandom(unsigned long initial_seed)
+{
+   seed = initial_seed;
+}
+
+
+unsigned long circle_random(void)
+{
+   register int lo, hi, test;
+
+   circle_rng_calls++;
+   hi   = seed/q;
+   lo   = seed%q;
+
+   test = a*lo - r*hi;
+
+   if (test > 0)
+      seed = test;
+   else
+      seed = test+ m;
+
+   return seed;
+}

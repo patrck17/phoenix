@@ -23,7 +23,8 @@
 #include <stdarg.h> 
 
 
-#include "structs.h" 
+#include "structs.h"
+#include "capture.h"   /* record-replay capture (live recorder) */
 #include "buffer.h"
 #include "utils.h" 
 #include "comm.h" 
@@ -472,9 +473,11 @@ void init_game()
    remove(KILLSCRIPT_FILE);
    log("Removing KILLSCRIPT_FILE: %s",KILLSCRIPT_FILE);
 
-   log("Entering game loop."); 
- 
-   game_loop(mother_desc); 
+   log("Entering game loop.");
+
+   cap_init();   /* record-replay: snapshot world + open journal if PHX_CAP_FILE set */
+   game_loop(mother_desc);
+   cap_close();
 
    Crash_save_all();
 
@@ -950,7 +953,15 @@ void game_loop(int mother_desc)
 	 * page_string  function in the editor 
 	 */ 
 	 if (d->showstr_count) /* reading something w/ pager     */ 
+	    {
+	    /* record-replay O2b: journal the page-turn as its own kind. Input
+	     * consumed here never reaches command_interpreter, so cap_cmd
+	     * cannot see it; without this every page-turn vanished from the
+	     * journal and a replayed pager waited on input that never came. */
+	    if (d->character && !IS_NPC(d->character) && cap_active())
+	       cap_pager(GET_IDNUM(d->character), comm);
 	    show_string(d, comm); 
+	    }
 	 else if (d->str)  /* writing boards, mail, etc.     */ 
 	    string_add(d, comm); 
 	 else if (STATE(d) != CON_PLAYING) /* in menus, etc. */ 
@@ -3192,6 +3203,7 @@ void close_socket(struct descriptor_data *d)
 	 if(!IS_NPC(d->character))
 	    {
 	    save_char(d->character,NOWHERE);
+	    if (cap_active()) cap_disconnect(d->character);  /* record-replay: journal logout */
 	    sprintf(buf, "Closing link to: %s in room %ld.", GET_NAME(d->character),
        GET_ROOM_VNUM(IN_ROOM(d->character))); 
 	    mudlog(buf, NRM, MAX(LVL_IMMORT,GET_INVIS_LEV(d->character)),TRUE);
