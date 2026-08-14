@@ -1177,6 +1177,7 @@ int json_get_number_size(struct json_parse_state_s *state) {
   size_t offset = state->offset;
   const size_t size = state->size;
   int had_leading_digits = 0;
+  size_t hexadecimal_digits_start = 0;
   const char *const src = state->src;
 
   state->dom_size += sizeof(struct json_number_s);
@@ -1187,11 +1188,22 @@ int json_get_number_size(struct json_parse_state_s *state) {
     /* skip the leading 0x that identifies a hexadecimal number. */
     offset += 2;
 
+    /* record where the hexadecimal digits start so that we can reject a
+     * '0x' that is not followed by at least one digit. */
+    hexadecimal_digits_start = offset;
+
     /* consume hexadecimal digits. */
     while ((offset < size) && (('0' <= src[offset] && src[offset] <= '9') ||
                                ('a' <= src[offset] && src[offset] <= 'f') ||
                                ('A' <= src[offset] && src[offset] <= 'F'))) {
       offset++;
+    }
+
+    if (offset == hexadecimal_digits_start) {
+      /* a '0x' prefix must be followed by at least one hexadecimal digit! */
+      state->error = json_parse_error_invalid_number_format;
+      state->offset = offset;
+      return 1;
     }
   } else {
     int found_sign = 0;
@@ -1266,7 +1278,11 @@ int json_get_number_size(struct json_parse_state_s *state) {
           case '9':
           case 'e':
           case 'E':
-            /* cannot follow an inf or nan with digits! */
+          case '.':
+            /* cannot follow an inf or nan with digits or a decimal point!
+             * (json_parse_number stops at the end of the keyword, so anything
+             * this size pass consumed past it would desynchronise the two
+             * passes and overrun the allocation - heap overflow on [NaN.0]). */
             state->error = json_parse_error_invalid_number_format;
             state->offset = offset;
             return 1;
@@ -1601,14 +1617,11 @@ void json_parse_string(struct json_parse_state_s *state,
         data[bytes_written++] = '\t';
         break;
       case '\r':
+        /* NOTE: json_get_string_size never accepts an ESCAPED newline (its
+         * escape switch rejects a backslash followed by a literal CR/LF), so
+         * this two-byte path is unreachable; keep it to the single byte the
+         * size pass accounts for so it can never become an undersize. */
         data[bytes_written++] = '\r';
-
-        /* check if we have a "\r\n" sequence. */
-        if ('\n' == src[offset]) {
-          data[bytes_written++] = '\n';
-          offset++;
-        }
-
         break;
       case '\n':
         data[bytes_written++] = '\n';
@@ -1918,7 +1931,9 @@ void json_parse_number(struct json_parse_state_s *state,
   number->number = data;
 
   if (json_parse_flags_allow_hexadecimal_numbers & flags_bitset) {
-    if (('0' == src[offset]) &&
+    /* NOTE: the (offset + 1 < size) guard mirrors json_get_number_size -
+     * without it src[offset + 1] reads one byte past the input buffer. */
+    if ((offset + 1 < size) && ('0' == src[offset]) &&
         (('x' == src[offset + 1]) || ('X' == src[offset + 1]))) {
       /* consume hexadecimal digits. */
       while ((offset < size) &&
@@ -2541,12 +2556,14 @@ int json_write_get_number_size(const struct json_number_s *number,
        * output. */
       parsed_number = json_strtoumax(number->number, json_null, 0);
 
+      /* NOTE: a do/while (and not a while) so that the value 0 correctly
+       * counts as one digit instead of none. */
       i = 0;
 
-      while (0 != parsed_number) {
+      do {
         parsed_number /= 10;
         i++;
-      }
+      } while (0 != parsed_number);
 
       *size += i;
       return 0;
@@ -2783,12 +2800,15 @@ char *json_write_number(const struct json_number_s *number, char *data) {
       /* We need a copy of parsed number twice, so take a backup of it. */
       backup = parsed_number;
 
+      /* NOTE: a do/while (and not a while) so that the value 0 correctly
+       * counts as one digit instead of none - a zero digit count would make
+       * the (data + i - 1) store below write one byte BEFORE the buffer. */
       i = 0;
 
-      while (0 != parsed_number) {
+      do {
         parsed_number /= 10;
         i++;
-      }
+      } while (0 != parsed_number);
 
       /* Restore parsed_number to its original value stored in the backup. */
       parsed_number = backup;
