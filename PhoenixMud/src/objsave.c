@@ -17,6 +17,7 @@
 #include "structs.h"
 #include "comm.h"
 #include "handler.h"
+#include "tsplayer.h"
 #include "db.h"
 #include "interpreter.h"
 #include "buffer.h"
@@ -753,6 +754,20 @@ int Crash_load(struct char_data * ch)
    struct obj_data *obj1;
    struct obj_data *cont_row[MAX_BAG_ROW];
    int counter=0;
+
+   /* Prefer the TypeScript record when one exists, so equipment and inventory
+    * come from the state repository with no conversion step. Returns 0 when
+    * there is no record, and the original rent-file path below runs unchanged.
+    *
+    * Returning 0 here means "keep the char in the rent room", which is the
+    * same code the rent path returns on a clean load.
+    *
+    * NOTE: keep this file ASCII - a non-ASCII byte written through a latin-1
+    * encoder truncates it to zero length. */
+   if (tsplayer_load_objects(ch, GET_NAME(ch))) {
+      release_buffer(Fname);
+      return 0;
+   }
 
    /*
    // Wipe the explored bitvector and reset the total when a player is loaded.

@@ -28,6 +28,7 @@
 #include "spec_assign.h"
 #include "path.h"
 #include "dg_scripts.h"
+#include "tsplayer.h"
 #include "constants.h"
 #include "assemblies.h"
 #include "gremort_exam.h"
@@ -3849,7 +3850,15 @@ long load_char(char *name, struct char_file_u * char_element)
       fseek(player_fl, (long) (player_i * sizeof(struct char_file_u)), SEEK_SET);
       fread(char_element, sizeof(struct char_file_u), 1, player_fl);
 	*/
-	load_char_ascii(char_element, name);
+	/* Prefer a TypeScript record when one exists, so a deployment can pull
+	 * the state repository and run with no conversion step. Falls back to
+	 * the ASCII pfile when there is none, which keeps an existing lib
+	 * working unchanged.
+	 *
+	 * NOTE: keep this file ASCII. A non-ASCII byte written through a
+	 * latin-1 encoder truncates it to zero length. */
+	if (!tsplayer_load(char_element, name))
+	   load_char_ascii(char_element, name);
       return (player_i);
       }
    else {
