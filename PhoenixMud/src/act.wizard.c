@@ -7746,7 +7746,9 @@ ACMD(do_set)
 
    if (is_file)
       {
-      char *buf2=get_buffer(64);
+      /* MAX_PWD_LENGTH+1, not 64: the field now holds a 161-char scrypt hash
+       * and a 64-byte buffer would overflow on the password-change path. */
+      char *buf2=get_buffer(MAX_PWD_LENGTH+1);
       if(password_change==1)
          strcpy(buf2,tmp_store.pwd);
       char_to_store(vict, &tmp_store,FALSE);

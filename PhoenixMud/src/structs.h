@@ -1033,7 +1033,13 @@ struct obj_material_affs
 #define MAX_MESSAGES		100
 #define MAX_NAME_LENGTH		20  /* Used in char_file_u *DO*NOT*CHANGE* */
 #define MAX_CLAN_NAME_LENGTH    20  /* Used in char_file_u *DO*NOT*CHANGE* */
-#define MAX_PWD_LENGTH		10  /* Used in char_file_u *DO*NOT*CHANGE* */
+#define MAX_PWD_LENGTH		200 /* was 10. The *DO*NOT*CHANGE* warning was
+                                 * about the BINARY char_file_u file, and
+                                 * every binary read/write of it is now
+                                 * commented out (db.c:3849/3892/3944,
+                                 * act.wizard.c:7757) in favour of
+                                 * save_char_ascii/load_char_ascii. Widened
+                                 * to hold a TS scrypt hash (161 chars). */
 #define MAX_TITLE_LENGTH	80  /* Used in char_file_u *DO*NOT*CHANGE* */
 #define HOST_LENGTH		60  /* Used in char_file_u *DO*NOT*CHANGE* */
 #define IDENT_LENGTH		8

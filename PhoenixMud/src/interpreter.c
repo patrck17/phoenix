@@ -19,6 +19,7 @@
 #include "utils.h"
 #include "comm.h"
 #include "interpreter.h"
+#include "tsauth.h"
 #include "db.h"
 #include "spells.h"
 #include "handler.h"
@@ -2417,7 +2418,24 @@ void nanny(struct descriptor_data *d, char *argu)
 		if (!*argu)
 			STATE(d) = CON_CLOSE;
 		else {
-			if (strncmp
+			/* A TS-platform credential is scrypt, stored as
+			 * "salt:hash" (32 + 1 + 128 chars). Legacy is NOCRYPT
+			 * and compares plaintext, so it could never verify one,
+			 * which is why a stage had to carry a plaintext password
+			 * forward in the interchange sidecar.
+			 *
+			 * ADDITIVE: an ordinary plaintext pfile still takes the
+			 * original branch, so nothing that works today stops
+			 * working. Only a stored value that LOOKS like a TS
+			 * hash is routed to scrypt.
+			 *
+			 * NOTE: keep this comment ASCII. A latin-1 write of a
+			 * non-ASCII character truncates this file to 0 bytes,
+			 * and the build then fails with a misleading
+			 * "undefined reference to send_to_char". */
+			if (tsauth_is_ts_hash(GET_PASSWD(d->character))
+			    ? !tsauth_verify(argu, GET_PASSWD(d->character))
+			    : strncmp
 			    (CRYPT(argu, GET_PASSWD(d->character)),
 			     GET_PASSWD(d->character), MAX_PWD_LENGTH)) {
 				mudlogf(BRF,
