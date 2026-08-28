@@ -1684,6 +1684,19 @@ struct player_special_data {
   int explored_total;
   char explored_vnums[EXPLORED_BYTES];
   char known_vnums[KNOWN_BYTES];
+  /*
+   * 4.2 fern window: absolute unix time this character's fern expires,
+   * 0 when none. IN-MEMORY ONLY — it lives in a `<name>.fernexp` sidecar
+   * beside `.known`, deliberately NOT in char_file_u, because affected_type
+   * and char_file_u sit inside the pfile-sensitive block and widening them
+   * would invalidate every existing save.
+   *
+   * WHY A WALL CLOCK AT ALL, when the duration is already combat-denominated:
+   * a character who never fights never burns a combat-denominated tick, so
+   * without an absolute ceiling fern would be permanent for exactly the
+   * players who camp it. This is the "gone whether you use it or not" bound.
+   */
+  time_t fern_expiry;
   char email[256];
 
   bool is_being_reimbd;
@@ -1799,6 +1812,8 @@ struct char_file_u {
   /* This gets written to name.explored */
   char explored_vnums[EXPLORED_BYTES];
   char known_vnums[KNOWN_BYTES];
+  /* 4.2 fern window -- carried alongside known_vnums; see player_special_data. */
+  time_t fern_expiry;
   char email[256];
   /* End name.explored */
 };

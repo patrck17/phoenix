@@ -205,6 +205,25 @@ static int is_combat_buff(int spellnum)
 }
 
 /*
+ * 4.2: how long a gifted fern may be held, in days, whatever the holder does
+ * with it. Owner ruling 2026-08-22. The in-combat duration (6*level ticks) is
+ * the VALUE cap; this is the SHELF LIFE.
+ */
+#define FERN_WINDOW_DAYS 14
+
+/** Has this affect outlived the fern window? Non-fern affects never have. */
+int fern_expired(struct char_data *i, struct affected_type *af)
+{
+   if (af->type != SPELL_FERN)
+      return FALSE;
+   if (IS_NPC(i) || !i->player_specials)
+      return FALSE;
+   if (i->player_specials->fern_expiry <= 0)
+      return FALSE;
+   return time(0) >= i->player_specials->fern_expiry;
+}
+
+/*
  * Hold this affect's duration this tick? (4.2)
  *
  * PLAYERS ONLY. Mobs share affect_update's loop, and 21+ load/random triggers
@@ -240,6 +259,14 @@ void affect_update(void)
 	 next = af->next; 
 	 if (af->duration >= 1) 
 	    {
+	    /* 4.2 fern window: the absolute ceiling outranks everything below,
+	       so a fern that has run out of wall-clock lapses even while its
+	       combat-denominated duration still has ticks left. */
+	    if (fern_expired(i, af))
+	       {
+	       affect_remove(i, af);
+	       continue;
+	       }
 	    /* 4.2: a player's combat buffs do not burn down out of combat. */
 	    if (affect_frozen(i, af))
 	       continue;
@@ -889,12 +916,28 @@ void mag_affects(int level, struct char_data * ch, struct char_data * victim,
        case SPELL_FERN:
           if (GET_LEVEL(ch) >= LVL_GRGOD)
              {
+             /*
+              * 4.2: fern is denominated in COMBAT time, not wall time. It used
+              * to be 24*level ticks -- 3,048 at an immortal 127, i.e. over a
+              * real day of holding it, spent whether or not the holder ever
+              * fought. Combat buffs no longer burn out of combat
+              * (is_combat_buff), so leaving it wall-denominated would have
+              * made it permanent for anyone who simply stopped fighting.
+              * 6*level = 762 ticks is about 15.9 hours of actual combat.
+              */
              af[0].location = APPLY_HITROLL;
-             af[0].duration = 24*level; /* 30 minutes per level. */
+             af[0].duration = 6*level;
              af[0].modifier = 10*level; /* 10hr/dr per level. */
              af[1].location = APPLY_DAMROLL;
-             af[1].duration = 24*level;
+             af[1].duration = 6*level;
              af[1].modifier = 10*level;
+             /*
+              * ...and a wall-clock ceiling on top, because a character who
+              * never fights never burns a combat tick. This is the bound that
+              * is spent whether the fern is used or not.
+              */
+             victim->player_specials->fern_expiry =
+                time(0) + (time_t)FERN_WINDOW_DAYS * 24 * 60 * 60;
              to_vict = "You feel incredibly more powerful as you are blessed with FERN!!";
              to_room = "$n begins to radiate with incredible power!!";
              }
