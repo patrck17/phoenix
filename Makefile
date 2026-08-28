@@ -35,3 +35,12 @@ build:
 
 clean:
 	rm -rf build
+
+# Unit checks for the pure prototype-vs-instance rules (obj_instance.c)
+build/obj_instance_test: PhoenixMud/tests/obj_instance_test.c build/obj_instance.o | build
+	$(CC) $(CFLAGS) $^ -o $@
+
+test: build/obj_instance_test
+	./build/obj_instance_test
+
+.PHONY: test clean
