@@ -977,6 +977,11 @@ void do_start(struct char_data * ch, bool from_scratch)
  * This function controls the change to maxmove, maxmana, and maxhp for
  * each class every time they gain a level.
  */
+/* 4.2 gear compensation, percent of shortfall made up by grant number.
+ * See structs.h for what these numbers mean and why they are the only knob. */
+const int gear_comp_curve[GEAR_COMP_STEPS] = { 100, 75, 50, 25, 0 };
+
+
 void advance_level(struct char_data * ch, bool show)
   {
   int add_hp = 0, add_mana = 0, add_move = 0, i;
@@ -1015,6 +1020,85 @@ void advance_level(struct char_data * ch, bool show)
     if (show) {
       mudlogf(CMP, LVL_IMMORT, TRUE, "Levels: %s gained with actual stats %d int, %d wis, %d dex, %d con using the newbie stat bonuses",
 	      GET_NAME(ch), intel, wis, dex, con);
+    }
+  }
+
+  /*
+   * 4.2 guildmaster gear compensation.
+   *
+   * The bonuses above stop dead at 40 and the next help is the +25 gremort
+   * bonus at 100. Between them a player who has never been told what level
+   * equipment is levels at rolled stats and banks a deficit into max_hit at
+   * every gain that no amount of later play recovers.
+   *
+   * So from 75 to 99, non-remort, the guildmaster names the shortfall, makes
+   * it up - in full the first time, by a shrinking share afterwards, and
+   * eventually not at all - and tells the player what to do about it. The
+   * window sits strictly between the two existing bonuses, so stat_bonus is
+   * always 0 here and the two corrections can never stack.
+   *
+   * Draw-inert: no number() call on any path.
+   */
+  if (show && !IS_NPC(ch) && REMORT_LEVEL(ch) == NON_REMORT &&
+      GET_LEVEL(ch) >= GEAR_COMP_MIN_LEVEL && GET_LEVEL(ch) <= GEAR_COMP_MAX_LEVEL) {
+    static const char *gc_stat_word[4] = { "constitution", "intelligence", "wisdom", "dexterity" };
+    int *gc_stat[4];
+    int gc_missing[4], gc_n = 0, gc_i, gc_idx, gc_pct;
+    char gc_lacked[MAX_STRING_LENGTH];
+
+    gc_stat[0] = &con; gc_stat[1] = &intel; gc_stat[2] = &wis; gc_stat[3] = &dex;
+    for (gc_i = 0; gc_i < 4; gc_i++) {
+      gc_missing[gc_i] = OPTIMAL_STAT - *gc_stat[gc_i];
+      if (gc_missing[gc_i] < 0) gc_missing[gc_i] = 0;
+      if (gc_missing[gc_i] > 0) gc_n++;
+    }
+
+    /* Levelled at 25s across the board: nothing to say, nothing spent. */
+    if (gc_n > 0) {
+      gc_idx = GET_GEAR_COMP(ch);
+      if (gc_idx < 0) gc_idx = 0;
+      if (gc_idx > GEAR_COMP_STEPS - 1) gc_idx = GEAR_COMP_STEPS - 1;
+      gc_pct = gear_comp_curve[gc_idx];
+
+      /* Integer percent, truncating, so a partial grant never rounds UP into
+       * a point the curve did not give. At 100 this is exact and the gain
+       * equals a perfect-stat gain, which is what the message promises. */
+      for (gc_i = 0; gc_i < 4; gc_i++)
+        *gc_stat[gc_i] += (gc_missing[gc_i] * gc_pct) / 100;
+
+      /* "7 dexterity and 3 wisdom" */
+      gc_lacked[0] = '\0';
+      {
+        int gc_seen = 0;
+        for (gc_i = 0; gc_i < 4; gc_i++) {
+          if (!gc_missing[gc_i]) continue;
+          gc_seen++;
+          if (gc_seen > 1)
+            strcat(gc_lacked, (gc_seen == gc_n) ? " and " : ", ");
+          sprintf(gc_lacked + strlen(gc_lacked), "%d %s", gc_missing[gc_i], gc_stat_word[gc_i]);
+        }
+      }
+
+      send_to_char(ch, "Your guildmaster tells you 'You lacked %s for optimal improvement.'\r\n", gc_lacked);
+      if (gc_pct <= 0) {
+        send_to_char(ch, "Your guildmaster tells you 'I have told you before, and I will make up no more. This gain is'\r\n");
+        send_to_char(ch, "Your guildmaster tells you 'yours as you earned it. Find equipment that raises those stats'\r\n");
+        send_to_char(ch, "Your guildmaster tells you 'before you train with me again.'\r\n");
+      } else if (GET_GEAR_COMP(ch) == 0) {
+        send_to_char(ch, "Your guildmaster tells you 'This time I have given you the gain as though your stats were'\r\n");
+        send_to_char(ch, "Your guildmaster tells you 'perfect. Seek out equipment that raises them before you train.'\r\n");
+        send_to_char(ch, "Your guildmaster tells you 'Next time I will not be so generous.'\r\n");
+      } else {
+        send_to_char(ch, "Your guildmaster tells you 'I warned you. This time I have made up only %d%% of what you'\r\n", gc_pct);
+        send_to_char(ch, "Your guildmaster tells you 'lacked, and less again the next time you come to me unprepared.'\r\n");
+      }
+
+      /* Spent even when the curve has run out: the counter records how many
+       * times the player has been TOLD, and drives the final message. */
+      GET_GEAR_COMP(ch) = GET_GEAR_COMP(ch) + 1;
+
+      mudlogf(CMP, LVL_IMMORT, TRUE, "Levels: %s compensated %d%% of a gear shortfall (grant %d)",
+              GET_NAME(ch), gc_pct, GET_GEAR_COMP(ch));
     }
   }
 

@@ -4173,6 +4173,18 @@ void load_char_ascii(struct char_file_u *ch, char *name)
       ch->fern_expiry = (time_t) v;
     fclose(fp);
   }
+
+/* 4.2 gear compensation counter. Absent = never compensated, silently, so
+   * every pre-feature player starts with a full allowance. */
+  ch->gear_comp = 0;
+  sprintf(filename, "etc/players_ascii/%c/%s.gearcomp", toupper(ch->name[0]), ch->name);
+  fp = fopen(filename, "r");
+  if (fp) {
+    int gv = 0;
+    if (fscanf(fp, "%d", &gv) == 1 && gv > 0)
+      ch->gear_comp = gv;
+    fclose(fp);
+  }
 }
 
 void save_char_ascii(struct char_file_u *ch)
@@ -4347,6 +4359,16 @@ void save_char_ascii(struct char_file_u *ch)
   } else {
     remove(filename);
   }
+
+/* 4.2 gear compensation counter. It only ever grows, so zero means the
+   * player has never been compensated and the file is simply absent. */
+  sprintf(filename, "etc/players_ascii/%c/%s.gearcomp", fname[0], fname);
+  if (ch->gear_comp > 0) {
+    fp = fopen(filename, "w");
+    if (fp) { fprintf(fp, "%d\n", ch->gear_comp); fclose(fp); }
+  } else {
+    remove(filename);
+  }
 }
 
 
@@ -4429,7 +4451,11 @@ void store_to_char(struct char_file_u * st, struct char_data * ch)
    memcpy(ch->player_specials->explored_vnums, st->explored_vnums, EXPLORED_BYTES*sizeof(char));
    memcpy(ch->player_specials->known_vnums, st->known_vnums, KNOWN_BYTES*sizeof(char));
    st->fern_expiry = ch->player_specials->fern_expiry;   /* 4.2 fern window */
+   st->gear_comp = ch->player_specials->gear_comp;       /* 4.2 gear compensation */
+   st->gear_comp = ch->player_specials->gear_comp;       /* 4.2 gear compensation */
    ch->player_specials->fern_expiry = st->fern_expiry;   /* 4.2 fern window */
+   ch->player_specials->gear_comp = st->gear_comp;       /* 4.2 gear compensation */
+   ch->player_specials->gear_comp = st->gear_comp;       /* 4.2 gear compensation */
    GET_EXPLORED(ch) = 0;
    for (i = 0; i < 8*EXPLORED_BYTES; i++) {
      if (ch->player_specials->explored_vnums[i/8] & (1 << (i%8))) {

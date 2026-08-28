@@ -1105,6 +1105,24 @@ struct obj_material_affs
 #define KNOWN_TOP_VNUM 40000
 #define KNOWN_BYTES (1+KNOWN_TOP_VNUM/8)
 
+/*
+ * 4.2 guildmaster gear compensation (advance_level, class.c).
+ *
+ * Window: the levels between the newbie stat bonus, which stops at 40, and
+ * the gremort bonus at 100-103. Non-remort only - a remort has reached 100
+ * at least once and knows what level equipment is.
+ *
+ * gear_comp_curve is the share of the shortfall the guildmaster makes up, as
+ * a percentage, indexed by how many times it has already done so. OWNER-
+ * TUNABLE: these five numbers are the whole balance decision. Changing them
+ * changes the length of the grace period and how hard the withdrawal bites,
+ * and nothing else.
+ */
+#define GEAR_COMP_MIN_LEVEL 75
+#define GEAR_COMP_MAX_LEVEL 99
+#define OPTIMAL_STAT        25
+#define GEAR_COMP_STEPS     5
+
 #define BACKUP_TMP_DIR "/home/lucas/phoenix/e-mail"
 #define BUILDERS_DIR "/home/lucas/phoenix/builders/circle/lib/world"
 
@@ -1697,6 +1715,13 @@ struct player_special_data {
    * players who camp it. This is the "gone whether you use it or not" bound.
    */
   time_t fern_expiry;
+  /*
+   * 4.2 guildmaster gear compensation: how many times the guildmaster has
+   * made up a stat shortfall at level-up (see advance_level). It is a record
+   * of how often the player has been TOLD about level equipment, not a
+   * resource they spend. Same sidecar reasoning as fern_expiry above.
+   */
+  int gear_comp;
   char email[256];
 
   bool is_being_reimbd;
@@ -1814,6 +1839,8 @@ struct char_file_u {
   char known_vnums[KNOWN_BYTES];
   /* 4.2 fern window -- carried alongside known_vnums; see player_special_data. */
   time_t fern_expiry;
+  /* 4.2 guildmaster gear compensation - see player_special_data. */
+  int gear_comp;
   char email[256];
   /* End name.explored */
 };

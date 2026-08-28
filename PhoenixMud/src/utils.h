@@ -460,6 +460,9 @@ char	*str_dup(const char *source);
 //#define SCR_SKILLCHECK(ch, i)        ((!IS_SCR(ch) || GET_LEVEL(ch) >= min_level(ch, i)))
 #define SCR_SKILLCHECK(ch, i)        (!(IS_SCR(ch)||REMORT_LEVEL(ch) >= DOUBLE_REMORT) || GET_LEVEL(ch) >= min_level(ch, i))
 
+/* 4.2: times the guildmaster has made up a level-up stat shortfall. */
+#define GET_GEAR_COMP(ch)  ((ch)->player_specials->gear_comp)
+
 #define GET_SKILL_LEARN(ch, i)	CHECK_PLAYER_SPECIAL((ch),(ch)->player_specials->saved.skills_learn[i])
 
 #define GET_KILLS_VNUM(ch,i)    CHECK_PLAYER_SPECIAL((ch),(ch)->player_specials->saved.kills_vnum[i])
