@@ -420,6 +420,10 @@ int mag_damage(int level, struct char_data *ch, struct char_data *victim,
 int mag_check(int level, struct char_data *ch, struct char_data *victim,
 	       struct obj_data *ovict, int spellnum, int savetype);
 
+/* 4.2: may the carrier drop this affect at will? Defined in magic.c beside
+ * is_combat_buff so the two lists stay adjacent. */
+int is_removable_buff(int type);
+
 void mag_affects(int level, struct char_data *ch, struct char_data *victim,
 		 int spellnum, int savetype);
 

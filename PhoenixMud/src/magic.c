@@ -224,6 +224,46 @@ int fern_expired(struct char_data *i, struct affected_type *af)
 }
 
 /*
+ * is_removable_buff (4.2): may the CARRIER drop this affect at will?
+ *
+ * `unaffect` was an immortal tool that stripped everything. A player has no
+ * way to end a buff they no longer want -- sneak past a shopkeeper, then walk
+ * into a bar still sneaking; take a bless before a fight that never happens.
+ * The buff is theirs, the cost was theirs, and ending it early only ever
+ * costs them.
+ *
+ * The set is deliberately the OUT-OF-COMBAT-PERSISTENT one -- exactly
+ * is_combat_buff() -- plus the self-applied skill affects, which behave the
+ * same way from the player's side. Kept adjacent to that list on purpose: two
+ * lists in two files drift, and the drift would be silent.
+ *
+ * NOT here, and each for a reason:
+ *   - Every debuff. Being able to cancel poison, blind or curse at will is
+ *     not a convenience, it is an immunity.
+ *   - SKILL_RAGE. Rage is a bargain -- its downside is the price of its
+ *     upside. Cancelling it on demand keeps the damage and refunds the cost.
+ *     (Legacy already strips it on the idle-void, limits.c:503; that is a
+ *     timeout, not a player choice.)
+ *   - SKILL_TAME / SKILL_MOUNTED_ATTACK. State shared with another creature;
+ *     removing one side leaves the other holding a relationship.
+ *   - SKILL_DARKEN / SKILL_LIGHTEN. Room affects, not carried by a character.
+ *   - invisibility. It already has its own off switch in `visible`
+ *     (do_visible); a second one would be two doors to the same room.
+ */
+int is_removable_buff(int type)
+{
+   switch (type)
+      {
+      case SKILL_SNEAK:
+      case SKILL_SHADOW:
+      case SKILL_ROVE:
+         return TRUE;
+      default:
+         return is_combat_buff(type);
+      }
+}
+
+/*
  * Hold this affect's duration this tick? (4.2)
  *
  * PLAYERS ONLY. Mobs share affect_update's loop, and 21+ load/random triggers
