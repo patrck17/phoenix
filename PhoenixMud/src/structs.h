@@ -1634,6 +1634,16 @@ struct char_special_data {
 /*   int  wait;	*/		/* Delay before can attack 		*/
    int	timer;			/* Timer for update			*/
    bool in_battle;		/* Whether in battle or not		*/
+   /* 4.2: violence pulses this character owes against its combat buffs,
+      carried across fights. PULSE_VIOLENCE is 0.5s and SECS_PER_MUD_HOUR
+      is 75, so 150 pulses = one buff hour; affect_update spends them 150
+      at a time and carries the remainder. set_fighting charges 1 on
+      engagement, so a mob killed before the first violence tick still
+      costs half a second.
+      IN-MEMORY: char_special_data, not char_special_data_saved - the
+      remainder is under a minute and widening the saved struct would
+      invalidate every pfile. */
+   int combat_pulses;
    room_rnum was_in_room;	/* storage of location for linkdead people */
    int invis_level;             /* level of invisibility                */
    int light;                   /* number of lights carried by the char */

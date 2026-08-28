@@ -148,6 +148,87 @@ int mag_savingthrow(struct char_data * ch, int type,int level,int modifier)
  
  
 /* affect_update: called from comm.c (causes spells to wear off) */ 
+/*
+ * is_combat_buff (4.2): the affects that a PLAYER keeps while out of combat.
+ *
+ * A combat buff you have to re-cast after every walk across a zone is not a
+ * tactical choice, it is an upkeep tax, and the tax is paid entirely in
+ * out-of-combat time. Debuffs are deliberately NOT here: freezing those would
+ * mean a poisoned player could never wait it out, which inverts the game
+ * rather than smoothing it.
+ *
+ * Judgement calls worth stating, since a list like this is where they hide:
+ *   - invisibility DECAYS. Mechanically a buff, but it is stealth, and a
+ *     permanent out-of-combat invis is a different game.
+ *   - The detects, fly, levitate, waterwalk, pass door and water breathe all
+ *     DECAY. They are exploration tools; their whole cost is the clock.
+ *   - Both ward id ranges are covered (#174-180 plus ward evil #34 / ward
+ *     good #181) so half the family cannot behave differently from the other.
+ */
+static int is_combat_buff(int spellnum)
+{
+   switch (spellnum)
+      {
+      case SPELL_ARMOR:                 /* 1   */
+      case SPELL_BLESS:                 /* 3   */
+      case SPELL_PROT_FROM_EVIL:        /* 34  ward evil  */
+      case SPELL_SANCTUARY:             /* 36  */
+      case SPELL_STRENGTH:              /* 39  */
+      case SPELL_HASTE:                 /* 52  */
+      case SPELL_SHIELD:                /* 62  */
+      case SPELL_STONE_SKIN:            /* 63  */
+      case SPELL_DRAGON:                /* 67  */
+      case SPELL_BARK_SKIN:             /* 75  */
+      case SPELL_BLUR:                  /* 78  */
+      case SPELL_EAGLE_CLAW:            /* 79  */
+      case SPELL_ENHANCED:              /* 86  */
+      case SPELL_PROT_FIRE:             /* 174 */
+      case SPELL_PROT_COLD:             /* 175 */
+      case SPELL_PROT_ELEC:             /* 176 */
+      case SPELL_PROT_ENERGY:           /* 177 */
+      case SPELL_PROT_ACID:             /* 178 */
+      case SPELL_PROT_POISON:           /* 179 */
+      case SPELL_PROT_DRAIN:            /* 180 */
+      case SPELL_PROT_FROM_GOOD:        /* 181 ward good  */
+      case SPELL_FIRESHIELD:            /* 196 */
+      /*
+       * FERN (53) is here for the same reason as the rest: it does nothing
+       * outside combat, so that is where it should be spent. Its duration was
+       * re-denominated to combat time when it was added (6*level) -- listing it
+       * here without that change would have made it effectively permanent.
+       */
+      case SPELL_FERN:                  /* 53  */
+         return TRUE;
+      default:
+         return FALSE;
+      }
+}
+
+/*
+ * Hold this affect's duration this tick? (4.2)
+ *
+ * PLAYERS ONLY. Mobs share affect_update's loop, and 21+ load/random triggers
+ * self-cast armor/bless/sanctuary — freezing those would let every idle mob in
+ * the world ratchet its buffs permanently, which is a world change rather than
+ * a quality-of-life one.
+ */
+static int affect_frozen(struct char_data *i, struct affected_type *af)
+{
+   if (IS_NPC(i))
+      return FALSE;
+   if (FIGHTING(i))
+      return FALSE;
+   /* 4.2: frozen unless a whole buff hour of combat has accrued. The counter
+      carries across fights, so 150 half-seconds cost an hour however they are
+      sliced -- and anything short of that is carried, not forgiven. Sampling
+      FIGHTING alone made a buff free whenever the window boundary happened to
+      miss the fight. */
+   if (COMBAT_PULSES(i) >= PULSES_PER_BUFF_HOUR)
+      return FALSE;
+   return is_combat_buff(af->type);
+}
+
+/* affect_update: called from comm.c (causes spells to wear off) */ 
 void affect_update(void) 
 { 
    static struct affected_type *af, *next; 
@@ -158,7 +239,12 @@ void affect_update(void)
 	 { 
 	 next = af->next; 
 	 if (af->duration >= 1) 
+	    {
+	    /* 4.2: a player's combat buffs do not burn down out of combat. */
+	    if (affect_frozen(i, af))
+	       continue;
 	    af->duration--; 
+	    }
 	 else if (af->duration == -1) /* No action */ 
 	    af->duration = -1; /* GODs only! unlimited */ 
 	 else 
@@ -172,6 +258,17 @@ void affect_update(void)
 		     } 
 	    affect_remove(i, af); 
 	    } 
+
+      /* 4.2: spend one buff hour's worth and CARRY the remainder - the
+         half-seconds a short fight bought are not forgiven, they wait for
+         the next one. Done for EVERY character after its affects have been
+         walked: not inside the loop, or the first frozen affect would spend
+         the pulses and the rest would ride free; and not only for buff
+         holders, or the count would run away while nothing consumed it.
+         affect_update runs every SECS_PER_MUD_HOUR, so at most one hour's
+         worth can accrue per window and this subtracts at most once. */
+      if (COMBAT_PULSES(i) >= PULSES_PER_BUFF_HOUR)
+         COMBAT_PULSES(i) -= PULSES_PER_BUFF_HOUR;
 	 } 
 } 
  
