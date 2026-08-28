@@ -390,6 +390,10 @@ char	*str_dup(const char *source);
 #define IS_CARRYING_W(ch)  ((ch)->char_specials.carry_weight)
 #define IS_CARRYING_N(ch)  ((ch)->char_specials.carry_items)
 #define FIGHTING(ch)	   ((ch)->char_specials.fighting)
+
+/* Violence pulses owed against combat buffs. 150 = one buff hour. */
+#define COMBAT_PULSES(ch) ((ch)->char_specials.combat_pulses)
+#define PULSES_PER_BUFF_HOUR (SECS_PER_MUD_HOUR * PASSES_PER_SEC / PULSE_VIOLENCE)
 #define LAST_HAND_USED(ch) ((ch)->char_specials.last_hand_used)
 #define NEXT_HIT(ch)       ((ch)->char_specials.speed)
 #define TIMER(ch)	   ((ch)->char_specials.timer)

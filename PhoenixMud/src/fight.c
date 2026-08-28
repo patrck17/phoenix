@@ -1336,6 +1336,14 @@ void set_fighting(struct char_data * ch, struct char_data * vict)
       return;
       }
 
+   /* 4.2: sticky for the current affect window. Both sides of the engagement
+      are marked -- being attacked costs the same tick as attacking, which is
+      what makes the rule "you were in combat", not "you started it". A mob
+      killed inside this same command dispatch never reaches perform_violence,
+      so without charging here a one-shot would cost nothing. */
+   COMBAT_PULSES(ch) += 1;
+   COMBAT_PULSES(vict) += 1;
+
    if (PLR_FLAGGED(ch, PLR_FISHING))
       REMOVE_BIT(PLR_FLAGS(ch), PLR_FISHING | PLR_FISH_ON);
    if (PLR_FLAGGED(vict, PLR_FISHING))
@@ -3765,6 +3773,9 @@ void perform_violence(void)
    for (ch = combat_list; ch; ch = next_combat_list)
       {
       next_combat_list = ch->next_fighting;
+
+      /* Half a second of combat, carried. Spent by affect_update. */
+      COMBAT_PULSES(ch) += 1;
 
       /*
        * SANITY
