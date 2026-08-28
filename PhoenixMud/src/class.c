@@ -1012,15 +1012,36 @@ void advance_level(struct char_data * ch, bool show)
 	    GET_NAME(ch), intel, wis, dex, con);
   }
 
-  if (stat_bonus > 0) {
-    con = MIN(25, con+stat_bonus);
-    wis = MIN(25, wis+stat_bonus);
-    intel = MIN(25, intel+stat_bonus);
-    dex = MIN(25, dex+stat_bonus);
-    if (show) {
-      mudlogf(CMP, LVL_IMMORT, TRUE, "Levels: %s gained with actual stats %d int, %d wis, %d dex, %d con using the newbie stat bonuses",
-	      GET_NAME(ch), intel, wis, dex, con);
-    }
+  /*
+   * 4.2: 25 IS THE CAP, ALWAYS.
+   *
+   * This clamp used to live inside `if (stat_bonus > 0)`, so wherever the
+   * bonus was zero -- levels 40-99 non-remort, and EVERY level for a remort --
+   * the raw stat reached stat_index() unclamped and indexed higher con_app
+   * rows (con 43 -> 9, con 50 -> 11, against 6 at the cap). The world ships a
+   * +25 con/int/wis "special leveling object", so that was reachable in
+   * ordinary play: a character levelling in real level equipment was paid for
+   * stats above the design cap.
+   *
+   * No stat may contribute gains beyond 25, however it got there. Clamping
+   * unconditionally makes that true at every level and for every remort tier,
+   * and matches the TS engine.
+   *
+   * The overpay WAS banked, and it shows in move points. Measured across all
+   * three pools on 3,031 live characters: 2 sit above a 25-stat run on max_hit
+   * (both level 0-1 administrative artifacts), and 6 more on max_move --
+   * dex-driven, and dex gear reaches +50 where con/int/wis top out at +25.
+   * Those 6 are flagged for owner review and left alone.
+   *
+   * Draws no RNG.
+   */
+  con = MIN(25, con+stat_bonus);
+  wis = MIN(25, wis+stat_bonus);
+  intel = MIN(25, intel+stat_bonus);
+  dex = MIN(25, dex+stat_bonus);
+  if (show && stat_bonus > 0) {
+    mudlogf(CMP, LVL_IMMORT, TRUE, "Levels: %s gained with actual stats %d int, %d wis, %d dex, %d con using the newbie stat bonuses",
+	    GET_NAME(ch), intel, wis, dex, con);
   }
 
   /*
