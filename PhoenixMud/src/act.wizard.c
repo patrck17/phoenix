@@ -4137,7 +4137,7 @@ ACMD(do_idle)
  * changed is how a player concludes the command is broken; a player carrying
  * only debuffs has to be told that is why.
  */
-static void remove_own_buffs(struct char_data *ch)
+static void remove_own_buffs(struct char_data *ch, int spellnum)
 {
    struct affected_type *af, *next_af;
    int removed = 0, kept = 0;
@@ -4145,6 +4145,8 @@ static void remove_own_buffs(struct char_data *ch)
    for (af = ch->affected; af; af = next_af)
       {
       next_af = af->next;
+      if (spellnum >= 0 && af->type != spellnum)
+         continue;
       if (is_removable_buff(af->type))
          {
          affect_remove(ch, af);
@@ -4160,7 +4162,9 @@ static void remove_own_buffs(struct char_data *ch)
       act("The magic about $n fades away.", TRUE, ch, 0, 0, TO_ROOM);
       }
    else if (kept)
-      send_to_char(ch,"Nothing you are carrying is yours to shed.\r\n");
+      send_to_char(ch,"That is not yours to shed.\r\n");
+   else if (spellnum >= 0)
+      send_to_char(ch,"You are not affected by that.\r\n");
    else
       send_to_char(ch,"You are not affected by anything.\r\n");
 }
@@ -4172,18 +4176,30 @@ ACMD(do_wizutil)
    long result;
    char *arg=get_buffer(MAX_INPUT_LENGTH);
    char *buf=get_buffer(MAX_INPUT_LENGTH);
+   char *rest;
 
-   one_argument(argument, arg);
+   /* The remainder after the victim: the spell name, or `all`. Taken from
+    * one_argument's return rather than a second buffer, because `buf` is
+    * scratch for the other subcmds in this function. */
+   rest = one_argument(argument, arg);
+   if (rest)
+      skip_spaces(&rest);
 
 
-   /* 4.2: `unaffect` is no longer immortals-only -- a player may drop their
-    * own beneficial buffs (is_removable_buff, magic.c). Below LVL_DGOD the
-    * command is SELF-ONLY and takes no argument, so the whole wizutil target
-    * chain below (world-wide lookup, level compare) is never reached by a
-    * mortal. Naming someone else is refused here rather than falling through
-    * to a lookup a mortal has no business running. */
+   /* 4.2: `unaffect` is no longer immortals-only. A player may shed their own
+    * beneficial buffs (is_removable_buff, magic.c). Below LVL_DGOD the command
+    * is SELF-ONLY, so the wizutil target chain below -- world-wide lookup,
+    * level compare -- is never reached by a mortal.
+    *
+    * NAMING SOMETHING IS REQUIRED. A bare `unaffect` asks which spell rather
+    * than dropping everything: the destructive reading of a one-word command
+    * should not be the default one. `all` is the explicit way to say it.
+    * Immortals share the same shape (see SCMD_UNAFFECT below); the only
+    * difference is scope -- they may take anything, from anyone. */
    if (GET_LEVEL(ch) < LVL_DGOD)
       {
+      int sn;
+
       if (subcmd != SCMD_UNAFFECT)
          {
          send_to_char(ch,"Huh?!?\r\n");
@@ -4191,15 +4207,20 @@ ACMD(do_wizutil)
          release_buffer(arg);
          return;
          }
-      if (*arg && str_cmp(arg, GET_NAME(ch)) && str_cmp(arg, "self")
-          && str_cmp(arg, "me"))
+      skip_spaces(&argument);
+      if (!*argument)
          {
-         send_to_char(ch,"You can only shed your own magic.\r\n");
+         send_to_char(ch,"Shed which spell? (`unaffect all` for everything.)\r\n");
          release_buffer(buf);
          release_buffer(arg);
          return;
          }
-      remove_own_buffs(ch);
+      if (!str_cmp(argument, "all"))
+         remove_own_buffs(ch, -1);
+      else if ((sn = find_skill_num(argument)) < 0)
+         send_to_char(ch,"You never heard of such a thing.\r\n");
+      else
+         remove_own_buffs(ch, sn);
       release_buffer(buf);
       release_buffer(arg);
       return;
@@ -4320,24 +4341,61 @@ ACMD(do_wizutil)
              0, TO_ROOM);
          break;
       case SCMD_UNAFFECT:
-         mudlogf(BRF,MAX(LVL_IMMORT,GET_INVIS_LEV(ch)),TRUE,
-                 "(GC) %s has unaffected %s.",GET_NAME(ch),GET_NAME(vict));
+         {
+         /* 4.2: same shape as the mortal form above -- name the spell, or say
+          * `all`. An immortal's scope is wider (anything, from anyone), but a
+          * bare `unaffect <victim>` no longer wipes a character's entire
+          * affect list on one word. */
+         struct affected_type *af, *next_af;
+         int sn = -1, removed = 0;
 
-         if (vict->affected)
+         if (!rest || !*rest)
             {
-            while (vict->affected)
-               affect_remove(vict, vict->affected);
-            send_to_char(vict,"There is a brief flash of light!\r\n"
-                         "You feel slightly different.\r\n");
-            send_to_char(ch,"All spells removed.\r\n");
-            }
-         else
-            {
-            send_to_char(ch,"Your victim does not have any affections!\r\n");
+            send_to_char(ch,"Remove which spell from %s? "
+                         "(`unaffect %s all` for everything.)\r\n",
+                         GET_NAME(vict), GET_NAME(vict));
             release_buffer(buf);
             release_buffer(arg);
             return;
             }
+         if (str_cmp(rest, "all") && (sn = find_skill_num(rest)) < 0)
+            {
+            send_to_char(ch,"You never heard of such a thing.\r\n");
+            release_buffer(buf);
+            release_buffer(arg);
+            return;
+            }
+
+         mudlogf(BRF,MAX(LVL_IMMORT,GET_INVIS_LEV(ch)),TRUE,
+                 "(GC) %s has unaffected %s (%s).",GET_NAME(ch),GET_NAME(vict),
+                 sn < 0 ? "all" : spells[sn].spell_name);
+
+         for (af = vict->affected; af; af = next_af)
+            {
+            next_af = af->next;
+            if (sn >= 0 && af->type != sn)
+               continue;
+            affect_remove(vict, af);
+            removed++;
+            }
+
+         if (removed)
+            {
+            send_to_char(vict,"There is a brief flash of light!\r\n"
+                         "You feel slightly different.\r\n");
+            send_to_char(ch, sn < 0 ? "All spells removed.\r\n"
+                                    : "Removed.\r\n");
+            }
+         else
+            {
+            send_to_char(ch, sn < 0
+                         ? "Your victim does not have any affections!\r\n"
+                         : "Your victim is not affected by that.\r\n");
+            release_buffer(buf);
+            release_buffer(arg);
+            return;
+            }
+         }
          break;
       default:
          log("SYSERR: Unknown subcmd: %d passed to do_wizutil (act.wizard.c)", subcmd);
