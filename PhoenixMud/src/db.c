@@ -4162,6 +4162,17 @@ void load_char_ascii(struct char_file_u *ch, char *name)
     fread(&ch->known_vnums, sizeof(char), KNOWN_BYTES, fp);
     fclose(fp);
   }
+
+  /* 4.2 fern window: absolute expiry, as text. Absent = no fern, silently. */
+  ch->fern_expiry = 0;
+  sprintf(filename, "etc/players_ascii/%c/%s.fernexp", toupper(ch->name[0]), ch->name);
+  fp = fopen(filename, "r");
+  if (fp) {
+    long v = 0;
+    if (fscanf(fp, "%ld", &v) == 1 && v > 0)
+      ch->fern_expiry = (time_t) v;
+    fclose(fp);
+  }
 }
 
 void save_char_ascii(struct char_file_u *ch)
@@ -4326,6 +4337,16 @@ void save_char_ascii(struct char_file_u *ch)
   }
   fwrite(&ch->known_vnums, sizeof(char), KNOWN_BYTES, fp);
   fclose(fp);
+
+  /* 4.2 fern window. Written every save so the ceiling survives a crash;
+   * removed when it lapses so the directory does not accumulate dead files. */
+  sprintf(filename, "etc/players_ascii/%c/%s.fernexp", toupper(ch->name[0]), ch->name);
+  if (ch->fern_expiry > 0) {
+    fp = fopen(filename, "w");
+    if (fp) { fprintf(fp, "%ld\n", (long) ch->fern_expiry); fclose(fp); }
+  } else {
+    remove(filename);
+  }
 }
 
 
@@ -4407,6 +4428,8 @@ void store_to_char(struct char_file_u * st, struct char_data * ch)
 
    memcpy(ch->player_specials->explored_vnums, st->explored_vnums, EXPLORED_BYTES*sizeof(char));
    memcpy(ch->player_specials->known_vnums, st->known_vnums, KNOWN_BYTES*sizeof(char));
+   st->fern_expiry = ch->player_specials->fern_expiry;   /* 4.2 fern window */
+   ch->player_specials->fern_expiry = st->fern_expiry;   /* 4.2 fern window */
    GET_EXPLORED(ch) = 0;
    for (i = 0; i < 8*EXPLORED_BYTES; i++) {
      if (ch->player_specials->explored_vnums[i/8] & (1 << (i%8))) {
@@ -4552,6 +4575,8 @@ void char_to_store(struct char_data * ch, struct char_file_u * st,
 
    /* copy known-item data (persistent identify). */
    memcpy(st->known_vnums, ch->player_specials->known_vnums, KNOWN_BYTES*sizeof(char));
+   st->fern_expiry = ch->player_specials->fern_expiry;   /* 4.2 fern window */
+   ch->player_specials->fern_expiry = st->fern_expiry;   /* 4.2 fern window */
 
    strcpy(st->email, ch->player_specials->email);
 
