@@ -33,7 +33,10 @@ extern room_rnum top_of_world;
 #define CUR_CLAN_VER    3 /* V3 - Nomikos 6/2/25 */
 
 /* player data file versions */
-#define CUR_POBJ_VER    2
+/* v3 appends per-instance fact lines after the two numeric lines and
+ * loads as prototype + facts (obj_instance.c); v1/v2 snapshots migrate
+ * through the same rules on read.  The reader accepts all three. */
+#define CUR_POBJ_VER    3
 
 /* names of various files and directories */
 #define INDEX_FILE	"index"		/* index of world files		*/

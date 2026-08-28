@@ -15,6 +15,7 @@
 
 
 #include "structs.h"
+#include "obj_instance.h"
 #include "comm.h"
 #include "handler.h"
 #include "tsplayer.h"
@@ -1899,6 +1900,7 @@ int parse_xap_obj(char *filename, struct obj_data **obj,char *line,
    int zwei = 0;
    int j = 0;
    struct extra_descr_data *new_descr;
+   struct obj_instance_facts facts;
    long lVector;
    obj_vnum nr=NOTHING;
    /* first, we get the number. Not too hard. */
@@ -2080,6 +2082,129 @@ int parse_xap_obj(char *filename, struct obj_data **obj,char *line,
          }      /* exit our for loop */
       release_buffer(buf2);
       }   /* exit our xap loop */
+
+   obj_facts_init(&facts);
+   if(version >= 3)
+      {  /* the fact lines: what happened to this copy */
+      char *buf3=get_buffer(2048);
+      struct extra_descr_data *new_ex, *ex_tail = NULL;
+      int fslot;
+      long fa, fb;
+
+      sprintf(buf3,"fact lines, file: %s obj: %ld",filename,nr);
+      while (!feof(fl) && *line != '#' && *line != '$')
+         {
+         if(!strncmp(line,"VD ",3))
+            {
+            if(sscanf(line,"VD %d %ld",&fslot,&fa)==2 &&
+               fslot>=0 && fslot<NUM_OBJ_VAL_POSITIONS)
+               {
+               facts.val_kind[fslot]=SLOT_DELTA;
+               facts.val_num[fslot]=fa;
+               }
+            }
+         else if(!strncmp(line,"VA ",3))
+            {
+            if(sscanf(line,"VA %d %ld",&fslot,&fa)==2 &&
+               fslot>=0 && fslot<NUM_OBJ_VAL_POSITIONS)
+               {
+               facts.val_kind[fslot]=SLOT_ABS;
+               facts.val_num[fslot]=fa;
+               }
+            }
+         else if(!strncmp(line,"VM ",3))
+            {
+            if(sscanf(line,"VM %d %ld %ld",&fslot,&fa,&fb)==3 &&
+               fslot>=0 && fslot<NUM_OBJ_VAL_POSITIONS)
+               {
+               facts.val_kind[fslot]=SLOT_MASK;
+               facts.val_mask[fslot]=fa;
+               facts.val_num[fslot]=fb;
+               }
+            }
+         else if(!strncmp(line,"FE ",3))
+            sscanf(line,"FE %ld %ld",&facts.extra_set,&facts.extra_clear);
+         else if(!strncmp(line,"F2 ",3))
+            sscanf(line,"F2 %ld %ld",&facts.extra2_set,&facts.extra2_clear);
+         else if(!strncmp(line,"F3 ",3))
+            sscanf(line,"F3 %ld %ld",&facts.extra3_set,&facts.extra3_clear);
+         else if(!strncmp(line,"FA ",3))
+            sscanf(line,"FA %ld %ld",&facts.anti_set,&facts.anti_clear);
+         else if(!strncmp(line,"FB ",3))
+            sscanf(line,"FB %ld %ld",&facts.bitv_set,&facts.bitv_clear);
+         else if(!strncmp(line,"IA ",3))
+            {
+            if(sscanf(line,"IA %d %ld",&fslot,&fa)==2 &&
+               facts.num_applies < MAX_OBJ_AFFECT)
+               {
+               facts.applies[facts.num_applies].location=fslot;
+               facts.applies[facts.num_applies].modifier=fa;
+               facts.num_applies++;
+               }
+            }
+         else if(!strncmp(line,"D ",2))
+            {
+            if(sscanf(line,"D %d %d",&facts.cond_wear,&facts.cond_dmg)==2)
+               facts.has_cond=TRUE;
+            }
+         else if(!strncmp(line,"T ",2))
+            {
+            if(sscanf(line,"T %d",&facts.saved_type)==1)
+               facts.has_type=TRUE;
+            }
+         else if(!strcmp(line,"XN"))
+            facts.name=fread_string(fl,buf3);
+         else if(!strcmp(line,"XS"))
+            facts.short_desc=fread_string(fl,buf3);
+         else if(!strcmp(line,"XD"))
+            facts.long_desc=fread_string(fl,buf3);
+         else if(!strcmp(line,"XC"))
+            facts.action_desc=fread_string(fl,buf3);
+         else if(!strcmp(line,"XE"))
+            {
+            CREATE(new_ex, struct extra_descr_data, 1);
+            new_ex->keyword=fread_string(fl,buf3);
+            new_ex->description=fread_string(fl,buf3);
+            new_ex->next=NULL;
+            if(ex_tail)
+               ex_tail->next=new_ex;
+            else
+               facts.exdesc=new_ex;
+            ex_tail=new_ex;
+            facts.has_exdesc=TRUE;
+            }
+         /* unknown tags fall through: a later version's facts */
+         if(!get_line(fl,line))
+            break;
+         }
+      release_buffer(buf3);
+      }
+
+   if(nr != NOTHING && !obj_full_snapshot_vnum(nr))
+      {  /* prototype + facts; a version-1/2 snapshot derives its facts
+          * against the current prototype through the same rules a save
+          * uses, so old files migrate along the path new ones take */
+      struct obj_data *pr = &obj_proto[GET_OBJ_RNUM(*obj)];
+
+      if(version < 3)
+         obj_derive_instance_facts(*obj, pr, &facts);
+      if(facts.applies_dropped)
+         log("OBJLOAD: #%ld in %s carries applies that are neither the "
+             "prototype's nor an enchant's; reverting to the prototype.",
+             nr, filename);
+      if(facts.has_type && facts.saved_type != GET_OBJ_TYPE(pr))
+         {
+         /* the vnum was repurposed since the save; the saved state
+          * describes an item that no longer exists */
+         log("OBJLOAD: #%ld in %s was saved as type %d, prototype is "
+             "now type %d; reset to the prototype.",
+             nr, filename, facts.saved_type, GET_OBJ_TYPE(pr));
+         obj_facts_free(&facts);
+         obj_facts_init(&facts);
+         }
+      obj_apply_instance_facts(*obj, pr, &facts);
+      }
+   obj_facts_free(&facts);
    return TRUE;
    }
 
