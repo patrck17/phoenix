@@ -15,6 +15,7 @@
 
 
 #include "structs.h"
+#include "obj_instance.h"
 #include "buffer.h"
 #include "utils.h"
 #include "db.h"
@@ -5245,6 +5246,98 @@ obj_rnum real_object(obj_vnum vnum)
    }
 
 
+/* The version-3 tail of a rent record: what happened to this copy.
+ * The two snapshot lines above it stay as written -- an old binary
+ * skims past these lines and still gets its version-2 read. */
+static int obj_save_fact_lines(FILE *fp, struct obj_data *obj,
+                               struct obj_data *proto)
+   {
+   struct obj_instance_facts f;
+   struct extra_descr_data *ex;
+   char *buf1 = get_buffer(MAX_STRING_LENGTH + 1);
+   int slot, err = 0;
+
+   obj_derive_instance_facts(obj, proto, &f);
+   if (f.applies_dropped)
+      log("OBJSAVE: #%ld %s carries applies that are neither the "
+          "prototype's nor an enchant's; dropped.",
+          GET_OBJ_VNUM(obj),
+          obj->short_description ? obj->short_description : "<none>");
+
+   if (fprintf(fp, "T %d\n", f.saved_type) < 0)
+      err = -1;
+   for (slot = 0; slot < NUM_OBJ_VAL_POSITIONS; slot++)
+      switch (f.val_kind[slot])
+         {
+         case SLOT_DELTA:
+            if (fprintf(fp, "VD %d %ld\n", slot, f.val_num[slot]) < 0)
+               err = -1;
+            break;
+         case SLOT_ABS:
+            if (fprintf(fp, "VA %d %ld\n", slot, f.val_num[slot]) < 0)
+               err = -1;
+            break;
+         case SLOT_MASK:
+            if (fprintf(fp, "VM %d %ld %ld\n", slot, f.val_mask[slot],
+                        f.val_num[slot]) < 0)
+               err = -1;
+            break;
+         }
+   if (f.extra_set || f.extra_clear)
+      if (fprintf(fp, "FE %ld %ld\n", f.extra_set, f.extra_clear) < 0)
+         err = -1;
+   if (f.extra2_set || f.extra2_clear)
+      if (fprintf(fp, "F2 %ld %ld\n", f.extra2_set, f.extra2_clear) < 0)
+         err = -1;
+   if (f.extra3_set || f.extra3_clear)
+      if (fprintf(fp, "F3 %ld %ld\n", f.extra3_set, f.extra3_clear) < 0)
+         err = -1;
+   if (f.anti_set || f.anti_clear)
+      if (fprintf(fp, "FA %ld %ld\n", f.anti_set, f.anti_clear) < 0)
+         err = -1;
+   if (f.bitv_set || f.bitv_clear)
+      if (fprintf(fp, "FB %ld %ld\n", f.bitv_set, f.bitv_clear) < 0)
+         err = -1;
+   if (f.has_cond)
+      if (fprintf(fp, "D %d %d\n", f.cond_wear, f.cond_dmg) < 0)
+         err = -1;
+   for (slot = 0; slot < f.num_applies; slot++)
+      if (fprintf(fp, "IA %d %ld\n", f.applies[slot].location,
+                  f.applies[slot].modifier) < 0)
+         err = -1;
+   if (f.name)
+      if (fprintf(fp, "XN\n%s~\n", f.name) < 0)
+         err = -1;
+   if (f.short_desc)
+      if (fprintf(fp, "XS\n%s~\n", f.short_desc) < 0)
+         err = -1;
+   if (f.long_desc)
+      if (fprintf(fp, "XD\n%s~\n", f.long_desc) < 0)
+         err = -1;
+   if (f.action_desc)
+      {
+      strcpy(buf1, f.action_desc);
+      strip_string(buf1);
+      if (fprintf(fp, "XC\n%s~\n", buf1) < 0)
+         err = -1;
+      }
+   if (f.has_exdesc)
+      for (ex = f.exdesc; ex; ex = ex->next)
+         {
+         if (!ex->keyword || !*ex->keyword ||
+             !ex->description || !*ex->description)
+            continue;
+         strcpy(buf1, ex->description);
+         strip_string(buf1);
+         if (fprintf(fp, "XE\n%s~\n%s~\n", ex->keyword, buf1) < 0)
+            err = -1;
+         }
+
+   obj_facts_free(&f);
+   release_buffer(buf1);
+   return err;
+   }
+
 int my_obj_save_to_disk(FILE *fp, struct obj_data *obj, int locate)
    {
    int i;
@@ -5315,6 +5408,21 @@ int my_obj_save_to_disk(FILE *fp, struct obj_data *obj, int locate)
                  GET_OBJ_SHOP_ORDER(obj));
    if(error<0)
       reterror=error;
+
+   if(GET_OBJ_VNUM(obj) != NOTHING &&
+      !obj_full_snapshot_vnum(GET_OBJ_VNUM(obj)))
+      {
+      /* prototype-backed: record the facts for this copy and stop; the
+       * text and applies of an enchanted or restrung item travel as
+       * facts now, not as an XAP block */
+      error = obj_save_fact_lines(fp, obj, &obj_proto[GET_OBJ_RNUM(obj)]);
+      if(error<0)
+         reterror=error;
+      release_buffer(buf1);
+      if(reterror<0)
+         return reterror;
+      return 1;
+      }
 
    if(!(IS_OBJ_STAT(obj,ITEM_UNIQUE_SAVE)))
       {

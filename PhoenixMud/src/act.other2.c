@@ -120,6 +120,11 @@ void load_player_shop(struct player_shop* shop)
 
   if(!feof(fp))
     get_line(fp, line);
+  if (*line == '@') {
+    sscanf(line, "@Version: %d", &version);
+    if(!feof(fp))
+      get_line(fp, line);
+  }
   while (!feof(fp)) {
     temp = NULL;
     int amount = atoi(line);
@@ -266,6 +271,7 @@ void save_player_shop(struct player_shop* shop)
     mudlogf(CMP, LVL_IMMORT, TRUE, "SYSERR: Could not save %s's shop.", shop->player_name);
     return;
   }
+  fprintf(fp, "@Version: %d\n", CUR_POBJ_VER);
   struct shop_item* item = shop->contents;
   for (; item; item = item->next) {
     fprintf(fp, "%d\n", item->amount);
