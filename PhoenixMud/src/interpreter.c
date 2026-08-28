@@ -935,7 +935,9 @@ const struct command_info cmd_info[] = {
 	{"unlock", POS_SITTING, do_gen_door, 0, SCMD_UNLOCK},
 	{"ungroup", POS_DEAD, do_ungroup, 0, 0},
 	{"unban", POS_DEAD, do_unban, LVL_DGOD, 0},
-	{"unaffect", POS_DEAD, do_wizutil, LVL_DGOD, SCMD_UNAFFECT},
+	/* 4.2: mortals may shed their OWN beneficial buffs; do_wizutil gates
+	 * everything else to LVL_DGOD internally. */
+	{"unaffect", POS_DEAD, do_wizutil, 1, SCMD_UNAFFECT},
 	{"unused", POS_DEAD, do_spellhelp, LVL_GRGOD, SCMD_UNUSED},
 	{"uptime", POS_DEAD, do_date, 108, SCMD_UPTIME},
 	{"use", POS_SITTING, do_use, 1, SCMD_USE},

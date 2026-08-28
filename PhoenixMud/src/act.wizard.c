@@ -4125,6 +4125,47 @@ ACMD(do_idle)
 */
 
 
+/*
+ * remove_own_buffs (4.2): the mortal half of `unaffect`.
+ *
+ * Walks the affect list and drops only what is_removable_buff() allows, so a
+ * debuff cannot be shed. affect_remove() rebuilds the list as it goes, so the
+ * next pointer is taken BEFORE the removal -- the obvious loop frees the node
+ * it is standing on.
+ *
+ * Says what actually happened. "You feel slightly different" after nothing
+ * changed is how a player concludes the command is broken; a player carrying
+ * only debuffs has to be told that is why.
+ */
+static void remove_own_buffs(struct char_data *ch)
+{
+   struct affected_type *af, *next_af;
+   int removed = 0, kept = 0;
+
+   for (af = ch->affected; af; af = next_af)
+      {
+      next_af = af->next;
+      if (is_removable_buff(af->type))
+         {
+         affect_remove(ch, af);
+         removed++;
+         }
+      else
+         kept++;
+      }
+
+   if (removed)
+      {
+      send_to_char(ch,"You let your magic go, and it fades from you.\r\n");
+      act("The magic about $n fades away.", TRUE, ch, 0, 0, TO_ROOM);
+      }
+   else if (kept)
+      send_to_char(ch,"Nothing you are carrying is yours to shed.\r\n");
+   else
+      send_to_char(ch,"You are not affected by anything.\r\n");
+}
+
+
 ACMD(do_wizutil)
    {
    struct char_data *vict;
@@ -4134,6 +4175,35 @@ ACMD(do_wizutil)
 
    one_argument(argument, arg);
 
+
+   /* 4.2: `unaffect` is no longer immortals-only -- a player may drop their
+    * own beneficial buffs (is_removable_buff, magic.c). Below LVL_DGOD the
+    * command is SELF-ONLY and takes no argument, so the whole wizutil target
+    * chain below (world-wide lookup, level compare) is never reached by a
+    * mortal. Naming someone else is refused here rather than falling through
+    * to a lookup a mortal has no business running. */
+   if (GET_LEVEL(ch) < LVL_DGOD)
+      {
+      if (subcmd != SCMD_UNAFFECT)
+         {
+         send_to_char(ch,"Huh?!?\r\n");
+         release_buffer(buf);
+         release_buffer(arg);
+         return;
+         }
+      if (*arg && str_cmp(arg, GET_NAME(ch)) && str_cmp(arg, "self")
+          && str_cmp(arg, "me"))
+         {
+         send_to_char(ch,"You can only shed your own magic.\r\n");
+         release_buffer(buf);
+         release_buffer(arg);
+         return;
+         }
+      remove_own_buffs(ch);
+      release_buffer(buf);
+      release_buffer(arg);
+      return;
+      }
 
    if (!*arg)
       send_to_char(ch,"Yes, but for whom?!?\r\n");
