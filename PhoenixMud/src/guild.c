@@ -87,8 +87,11 @@ const int prac_slots[] =
  * at the top instead would put the silent visit on the dearest one in the
  * game (~155 uses at 91-95), which is precisely the case this fixes.
  *
- * "superb+" ends at 95, where the practice list's "Completely Knowledgable"
- * takes over, so the ceiling still reads as a distinct state.
+ * The last window is the only one that moves the label twice, and that is
+ * deliberate: "superb+" at 91-94, then "mastered" on landing exactly on the
+ * 95 cap. Reaching the ceiling is the one moment in the climb worth marking
+ * in the label itself. The practice list's "Completely Knowledgable" marker
+ * is unchanged and still fires at 95 alongside it.
  *
  * NOT a difficulty change. improve_skill's chance curve, the 5-per-visit
  * grant and the 19 visits are all untouched: effort still runs 5 uses for the
@@ -134,8 +137,10 @@ char *how_good(int percent)
     strcpy(buf, " (very good+)");
   else if (percent <= 90)
     strcpy(buf, " (superb)");
-  else
+  else if (percent <= 94)
     strcpy(buf, " (superb+)");
+  else
+    strcpy(buf, " (mastered)");
 
   return (buf);
   }
