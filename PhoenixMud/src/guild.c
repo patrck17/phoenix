@@ -71,31 +71,29 @@ const int prac_slots[] =
 
 
 /*
- * 4.2: one label per practice, by splitting each word with a '+'.
+ * 4.2: one label per practice, and the bands divide the range exactly.
  *
- * A skill rises 5 points per visit (prac_params "max per prac"), so the climb
- * to the 95 ceiling is 19 visits -- but there were only nine words, and they
- * did not divide the range evenly. "just starting" alone covered 1-29, which
- * is SIX visits showing the same text, while the top two words covered 42% of
- * the total effort between them and changed once each. A player could not tell
- * from the display whether a trip to the guildmaster had done anything.
+ * A skill rises 5 points per visit (prac_params "max per prac") and the
+ * ceiling is 95, so the climb is 19 windows of 5. There were nine words, and
+ * they did not divide that: "just starting" alone covered 1-29 -- six visits
+ * printing identical text -- while the top two words held 42% of the total
+ * effort between them and changed once each. A player could not tell from the
+ * display whether a trip to the guildmaster had done anything.
  *
- * The words are unchanged and no new ones are invented: each now has a '+'
- * half, giving 18 labels for the same nine tiers. 18 into 19 visits leaves
- * exactly one label spanning two, and that is "just starting" at 1-10 --
- * deliberately the CHEAPEST pair on the board (5 uses each). Doubling a band
- * at the top instead would put the silent visit on the dearest one in the
- * game (~155 uses at 91-95), which is precisely the case this fixes.
+ * The nine words are unchanged and none are invented: each now has a '+'
+ * half, and "mastered" names the last window. 18 + 1 = 19 labels against 19
+ * windows of 5, which lands exactly on 95 -- every practice moves the label,
+ * and no band spans two visits.
  *
- * The last window is the only one that moves the label twice, and that is
- * deliberate: "superb+" at 91-94, then "mastered" on landing exactly on the
- * 95 cap. Reaching the ceiling is the one moment in the climb worth marking
- * in the label itself. The practice list's "Completely Knowledgable" marker
- * is unchanged and still fires at 95 alongside it.
+ * "mastered" is 91-95, the final climb. The practice list's "Completely
+ * Knowledgable" marker is untouched and still fires at exactly 95: one is the
+ * tier reached, the other is the list's note that there is nothing left to
+ * buy.
  *
  * NOT a difficulty change. improve_skill's chance curve, the 5-per-visit
  * grant and the 19 visits are all untouched: effort still runs 5 uses for the
- * first visit to 155 for the last. Only the wording keeps up with it.
+ * first window to 155 for the last, the same super-linear shape the XP curve
+ * has. Only the wording keeps up with it.
  */
 char *how_good(int percent)
   {
@@ -103,41 +101,41 @@ char *how_good(int percent)
 
   if (percent == 0)
     strcpy(buf, " (not learned)");
-  else if (percent <= 10)
+  else if (percent <= 5)
     strcpy(buf, " (just starting)");
-  else if (percent <= 15)
+  else if (percent <= 10)
     strcpy(buf, " (just starting+)");
-  else if (percent <= 20)
+  else if (percent <= 15)
     strcpy(buf, " (newbie)");
-  else if (percent <= 25)
+  else if (percent <= 20)
     strcpy(buf, " (newbie+)");
-  else if (percent <= 30)
+  else if (percent <= 25)
     strcpy(buf, " (bad)");
-  else if (percent <= 35)
+  else if (percent <= 30)
     strcpy(buf, " (bad+)");
-  else if (percent <= 40)
+  else if (percent <= 35)
     strcpy(buf, " (poor)");
-  else if (percent <= 45)
+  else if (percent <= 40)
     strcpy(buf, " (poor+)");
-  else if (percent <= 50)
+  else if (percent <= 45)
     strcpy(buf, " (average)");
-  else if (percent <= 55)
+  else if (percent <= 50)
     strcpy(buf, " (average+)");
-  else if (percent <= 60)
+  else if (percent <= 55)
     strcpy(buf, " (fair)");
-  else if (percent <= 65)
+  else if (percent <= 60)
     strcpy(buf, " (fair+)");
-  else if (percent <= 70)
+  else if (percent <= 65)
     strcpy(buf, " (good)");
-  else if (percent <= 75)
+  else if (percent <= 70)
     strcpy(buf, " (good+)");
-  else if (percent <= 80)
+  else if (percent <= 75)
     strcpy(buf, " (very good)");
-  else if (percent <= 85)
+  else if (percent <= 80)
     strcpy(buf, " (very good+)");
-  else if (percent <= 90)
+  else if (percent <= 85)
     strcpy(buf, " (superb)");
-  else if (percent <= 94)
+  else if (percent <= 90)
     strcpy(buf, " (superb+)");
   else
     strcpy(buf, " (mastered)");
