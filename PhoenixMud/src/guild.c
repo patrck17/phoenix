@@ -70,30 +70,72 @@ const int prac_slots[] =
   };
 
 
+/*
+ * 4.2: one label per practice, by splitting each word with a '+'.
+ *
+ * A skill rises 5 points per visit (prac_params "max per prac"), so the climb
+ * to the 95 ceiling is 19 visits -- but there were only nine words, and they
+ * did not divide the range evenly. "just starting" alone covered 1-29, which
+ * is SIX visits showing the same text, while the top two words covered 42% of
+ * the total effort between them and changed once each. A player could not tell
+ * from the display whether a trip to the guildmaster had done anything.
+ *
+ * The words are unchanged and no new ones are invented: each now has a '+'
+ * half, giving 18 labels for the same nine tiers. 18 into 19 visits leaves
+ * exactly one label spanning two, and that is "just starting" at 1-10 --
+ * deliberately the CHEAPEST pair on the board (5 uses each). Doubling a band
+ * at the top instead would put the silent visit on the dearest one in the
+ * game (~155 uses at 91-95), which is precisely the case this fixes.
+ *
+ * "superb+" ends at 95, where the practice list's "Completely Knowledgable"
+ * takes over, so the ceiling still reads as a distinct state.
+ *
+ * NOT a difficulty change. improve_skill's chance curve, the 5-per-visit
+ * grant and the 19 visits are all untouched: effort still runs 5 uses for the
+ * first visit to 155 for the last. Only the wording keeps up with it.
+ */
 char *how_good(int percent)
   {
   static char buf[256];
 
   if (percent == 0)
     strcpy(buf, " (not learned)");
-  else if (percent <= 29)
+  else if (percent <= 10)
     strcpy(buf, " (just starting)");
-  else if (percent <= 34)
+  else if (percent <= 15)
+    strcpy(buf, " (just starting+)");
+  else if (percent <= 20)
     strcpy(buf, " (newbie)");
-  else if (percent <= 39)
+  else if (percent <= 25)
+    strcpy(buf, " (newbie+)");
+  else if (percent <= 30)
     strcpy(buf, " (bad)");
-  else if (percent <= 49)
+  else if (percent <= 35)
+    strcpy(buf, " (bad+)");
+  else if (percent <= 40)
     strcpy(buf, " (poor)");
-  else if (percent <= 59)
+  else if (percent <= 45)
+    strcpy(buf, " (poor+)");
+  else if (percent <= 50)
     strcpy(buf, " (average)");
-  else if (percent <= 69)
+  else if (percent <= 55)
+    strcpy(buf, " (average+)");
+  else if (percent <= 60)
     strcpy(buf, " (fair)");
-  else if (percent <= 79)
+  else if (percent <= 65)
+    strcpy(buf, " (fair+)");
+  else if (percent <= 70)
     strcpy(buf, " (good)");
-  else if (percent < 89)
+  else if (percent <= 75)
+    strcpy(buf, " (good+)");
+  else if (percent <= 80)
     strcpy(buf, " (very good)");
-  else
+  else if (percent <= 85)
+    strcpy(buf, " (very good+)");
+  else if (percent <= 90)
     strcpy(buf, " (superb)");
+  else
+    strcpy(buf, " (superb+)");
 
   return (buf);
   }
