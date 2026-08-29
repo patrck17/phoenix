@@ -1117,10 +1117,17 @@ struct obj_material_affs
  * TUNABLE: these five numbers are the whole balance decision. Changing them
  * changes the length of the grace period and how hard the withdrawal bites,
  * and nothing else.
+ *
+ * OPTIMAL_STAT is 24, not 25, because 24 is where the gain stops improving:
+ * advance_level indexes con_app[] for all four stats (hp from con, mana from
+ * int and wis, move from dex), and con_app[24] and con_app[25] are the same
+ * row, {6, 99}. A character at 24 already gains what a character at 25 gains,
+ * so counting 25 as optimal reported a shortfall that does not exist and
+ * spent a compensation step buying a point worth nothing.
  */
 #define GEAR_COMP_MIN_LEVEL 75
 #define GEAR_COMP_MAX_LEVEL 99
-#define OPTIMAL_STAT        25
+#define OPTIMAL_STAT        24
 #define GEAR_COMP_STEPS     5
 
 #define BACKUP_TMP_DIR "/home/lucas/phoenix/e-mail"
