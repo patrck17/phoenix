@@ -991,12 +991,28 @@ void advance_level(struct char_data * ch, bool show)
   int intel = GET_INT(ch);
   int dex = GET_DEX(ch);
   int stat_bonus = 0;
-  if (!IS_NPC(ch) && REMORT_LEVEL(ch) == 0 && GET_LEVEL(ch) < 40) {
-    if (GET_LEVEL(ch) <= 15) {
+  /*
+   * 4.2: the newbie stat window is 0-74, not 0-39.
+   *
+   * It used to stop dead at 40, and the next help was the +25 gremort bonus at
+   * 100 -- so 40-74 had NO compensation at all, and those are the largest
+   * per-level gains in the game. A player who had never been told what level
+   * equipment is banked the worst of the deficit there, permanently.
+   *
+   * The guildmaster's compensation runs 75-99, so this window ends exactly
+   * where that one begins and the two can never stack: at 75+ stat_bonus is 0,
+   * which is the precondition that code is built on.
+   *
+   * Tiers are the old shape scaled by 74/39 -- 15/30/39 becomes 28/57/74 --
+   * so the ramp-down still spends the same three steps over a longer window.
+   * Draws no RNG.
+   */
+  if (!IS_NPC(ch) && REMORT_LEVEL(ch) == 0 && GET_LEVEL(ch) < 75) {
+    if (GET_LEVEL(ch) <= 28) {
       stat_bonus = 15;
-    } else if (GET_LEVEL(ch) <= 30) {
+    } else if (GET_LEVEL(ch) <= 57) {
       stat_bonus = 10;
-    } else if (GET_LEVEL(ch) <= 40) {
+    } else {
       stat_bonus = 5;
     }
   }
@@ -1047,7 +1063,7 @@ void advance_level(struct char_data * ch, bool show)
   /*
    * 4.2 guildmaster gear compensation.
    *
-   * The bonuses above stop dead at 40 and the next help is the +25 gremort
+   * The bonuses above stop dead at 74 and the next help is the +25 gremort
    * bonus at 100. Between them a player who has never been told what level
    * equipment is levels at rolled stats and banks a deficit into max_hit at
    * every gain that no amount of later play recovers.
