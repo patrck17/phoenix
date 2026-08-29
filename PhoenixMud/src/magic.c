@@ -165,7 +165,7 @@ int mag_savingthrow(struct char_data * ch, int type,int level,int modifier)
  *   - Both ward id ranges are covered (#174-180 plus ward evil #34 / ward
  *     good #181) so half the family cannot behave differently from the other.
  */
-static int is_combat_buff(int spellnum)
+int is_combat_buff(int spellnum)
 {
    switch (spellnum)
       {

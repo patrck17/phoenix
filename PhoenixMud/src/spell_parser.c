@@ -1933,7 +1933,24 @@ int cast_spell(struct char_data * ch, struct char_data * tch,
       if(PRF_FLAGGED(ch,PRF_NOHASSLE))
          CAST_TIME(ch) = min_time;
       else if(cast_level<=GET_SKILL(ch,spellnum))
-         CAST_TIME(ch) = MAX(min_time,spells[spellnum].cast_time-(GET_SKILL(ch,spellnum)-cast_level));
+         {
+         /*
+          * 4.2: a BUFF's cast time follows the PRACTICE LEVEL alone, one
+          * tick per level from its own base -- practice 1 casts at the
+          * full base, practice 6 and up is instant. Undercasting still
+          * gives the weaker effect, but no longer shortens the cast: the
+          * reward for practising a buff should be that you stop standing
+          * still to put it on, not that you learn to type `c 9'armor'`.
+          *
+          * Everything else keeps the undercast shaving, so a damage spell
+          * or debuff cast below your practice level still buys a tick.
+          */
+         if(is_combat_buff(spellnum))
+            CAST_TIME(ch) = MAX(min_time,
+                                spells[spellnum].cast_time-(GET_SKILL(ch,spellnum)-1));
+         else
+            CAST_TIME(ch) = MAX(min_time,spells[spellnum].cast_time-(GET_SKILL(ch,spellnum)-cast_level));
+         }
       else
          CAST_TIME(ch) =spells[spellnum].cast_time + ((cast_level-GET_SKILL(ch,spellnum))*3);
       }
