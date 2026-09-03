@@ -528,6 +528,11 @@
 #define OOB_REPORT_ITEMS (1 << 5)	/* GMCP only; the sidebar feed, see gmcp_char_* */
 #define OOB_REPORT_WORN (1 << 6)	/* GMCP only */
 #define OOB_REPORT_AFF (1 << 7)	/* GMCP only */
+#define OOB_REPORT_STATUS (1 << 8)	/* GMCP only; Char.Status, see below */
+#define OOB_REPORT_ROOMVIEW (1 << 9)	/* GMCP only; Char.RoomView, the room panel */
+#define OOB_REPORT_WHO (1 << 10)	/* GMCP only; Char.Who */
+#define OOB_REPORT_SKILLS (1 << 11)	/* GMCP only; Char.Skills */
+#define OOB_REPORT_COMBAT (1 << 12)	/* GMCP only; Char.Combat, event-driven */
 
 #define MSDP 69
 #define MSDP_VAR 1

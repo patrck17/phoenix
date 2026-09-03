@@ -10,6 +10,7 @@
 
 #include "../localHeader/conf.h"
 #include "../localHeader/sysdep.h"
+#include <arpa/telnet.h>   /* IAC/SB/SE, for the Char.Skills GMCP frame */
 
 #include "structs.h"
 #include "comm.h"
@@ -333,6 +334,57 @@ void what_does_gm_know(int guild_nr, struct char_data * ch,int learn)
 
 /* List current skills, spells, or both (default). 
    Added ability to see skills or spells -Nomikos 9-17-2025 */
+/* Char.Skills -- what `spells` and `skills` print, as data.
+ *
+ * Shape is { "skills": [...], "spells": [...] }, each row { name, prof,
+ * howGood }. Two lists, not one: `prof` is 0-100 for a skill and the 0-10
+ * Spell Level `practice` prints for a spell, so they cannot share a banding.
+ *
+ * spell_sort_info order, list_skills' level gate, proficiency reported at zero
+ * as the screen does. */
+void gmcp_char_skills(struct char_data* ch)
+  {
+  int i, sortpos, t;
+  bool first;
+  char* esc;
+
+  if (ch == NULL || IS_NPC(ch) || ch->desc == NULL) return;
+  if (!IS_SET(ch->desc->oob_protocol, OOB_GMCP)) return;
+  if (!IS_SET(ch->desc->oob_protocol, OOB_REPORT_SKILLS)) return;
+
+  esc = get_buffer(MAX_STRING_LENGTH);
+  send_to_char(ch, "%c%c%cChar.Skills {", IAC, SB, GMCP);
+
+  for (t = IS_SPELL; t <= IS_SKILL; t++)
+    {
+    send_to_char(ch, "%s\"%s\":[", t == IS_SPELL ? "" : ",",
+                 t == IS_SPELL ? "spells" : "skills");
+    first = TRUE;
+    for (sortpos = 1; sortpos < MAX_SPELLS; sortpos++)
+      {
+      i = spell_sort_info[sortpos];
+      if (spells[i].spell_name == NULL) continue;
+      if (spells[i].is_spell != t) continue;
+      if (GET_LEVEL(ch) < min_level(ch, i)) continue;
+
+      json_escape_string(spells[i].spell_name, esc, MAX_STRING_LENGTH);
+      send_to_char(ch, "%s{\"name\":\"%s\",\"prof\":%d",
+                   first ? "" : ",", esc, GET_SKILL(ch, i));
+      if (t == IS_SKILL)
+        {
+        json_escape_string(how_good(GET_SKILL(ch, i)), esc, MAX_STRING_LENGTH);
+        send_to_char(ch, ",\"howGood\":\"%s\"", esc);
+        }
+      send_to_char(ch, "}");
+      first = FALSE;
+      }
+    send_to_char(ch, "]");
+    }
+
+  send_to_char(ch, "}%c%c", IAC, SE);
+  release_buffer(esc);
+  }
+
 void list_skills(struct char_data * ch, int type)
   {
   int i, t, sortpos, lvl, type_skill = 0, type_spell = 0;
@@ -518,6 +570,7 @@ SPECIAL(guild)
       {
       log("SYSERR: Tried to practice IS_UNUSED #%d",skill_num);
       }
+    gmcp_char_skills(ch);
     return 1;
     }
   else if(CMD_IS("practice"))
@@ -636,6 +689,7 @@ SPECIAL(guild)
       if (GET_SKILL(ch, skill_num) >= LEARNED(ch))
         send_to_char(ch,"You are now learned in that area.\r\n");
       }
+    gmcp_char_skills(ch);
     return 1;
     }
   else if (CMD_IS("gain"))

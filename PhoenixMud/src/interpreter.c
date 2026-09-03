@@ -3014,6 +3014,9 @@ void nanny(struct descriptor_data *d, char *argu)
 
 			act("$n has entered the game.", TRUE, d->character, 0,
 			    0, TO_ROOM);
+
+			/* The who list just changed for everyone. */
+			gmcp_who_broadcast();
 			/* with the copyover patch, this
 			 * next line goes in enter_player_game() */
 			read_saved_vars(d->character);

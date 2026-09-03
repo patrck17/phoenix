@@ -633,7 +633,7 @@ ACMD(do_practice)
    else
       list_skills(ch, IS_UNUSED);
    release_buffer(arg);
-   }
+}
 
 
 
