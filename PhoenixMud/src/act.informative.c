@@ -1162,6 +1162,139 @@ void gmcp_room(struct char_data* ch) {
 	send_to_char(ch, "}%c%c", IAC, SE);
 }
 
+/* Char.RoomView -- the room panel's payload. Not Room.Info, which is fixed by
+ * what clients parse; this adds description, sector and autoexit.
+ *
+ * Exit visibility is gmcp_exits' rule, not a second copy of it. */
+void gmcp_char_roomview(struct char_data* ch) {
+	char* esc;
+	bool first_exit = TRUE;
+	int direction;
+
+	if (ch == NULL || IS_NPC(ch) || ch->desc == NULL) return;
+	if (!IS_SET(ch->desc->oob_protocol, OOB_GMCP)) return;
+	if (!IS_SET(ch->desc->oob_protocol, OOB_REPORT_ROOMVIEW)) return;
+	if ((IN_ROOM(ch) < 0) || (IN_ROOM(ch) > top_of_world)) return;
+
+	esc = get_buffer(MAX_STRING_LENGTH);
+
+	send_to_char(ch, "%c%c%cChar.RoomView {", IAC, SB, GMCP);
+	send_to_char(ch, "\"vnum\":%ld,", GET_ROOM_VNUM(IN_ROOM(ch)));
+
+	json_escape_string(world[IN_ROOM(ch)].name, esc, MAX_STRING_LENGTH);
+	send_to_char(ch, "\"name\":\"%s\",", esc);
+
+	json_escape_string(world[IN_ROOM(ch)].description ?
+	                   world[IN_ROOM(ch)].description : "", esc, MAX_STRING_LENGTH);
+	send_to_char(ch, "\"description\":\"%s\",", esc);
+
+	send_to_char(ch, "\"sector\":%d,", SECT(IN_ROOM(ch)));
+	send_to_char(ch, "\"autoExit\":%s,",
+	             PRF_FLAGGED(ch, PRF_AUTOEXIT) ? "true" : "false");
+
+	/* The occupant lists are the whole reason this is not Room.Info, which
+	 * carries none. CAN_SEE / CAN_SEE_OBJ throughout: the panel must not show
+	 * what the screen would hide. */
+	send_to_char(ch, "\"players\":[");
+	{
+		struct char_data* tch;
+		bool f = TRUE;
+		for (tch = world[IN_ROOM(ch)].people; tch; tch = tch->next_in_room) {
+			if (tch == ch || IS_NPC(tch)) continue;
+			if (!CAN_SEE(ch, tch)) continue;
+			json_escape_string(GET_NAME(tch) ? GET_NAME(tch) : "", esc, MAX_STRING_LENGTH);
+			send_to_char(ch, "%s{\"name\":\"%s\"}", f ? "" : ",", esc);
+			f = FALSE;
+		}
+	}
+	send_to_char(ch, "],\"mobs\":[");
+	{
+		struct char_data* tch;
+		bool f = TRUE;
+		for (tch = world[IN_ROOM(ch)].people; tch; tch = tch->next_in_room) {
+			if (!IS_NPC(tch)) continue;
+			if (!CAN_SEE(ch, tch)) continue;
+			json_escape_string(tch->player.short_descr ? tch->player.short_descr : "",
+			                   esc, MAX_STRING_LENGTH);
+			send_to_char(ch, "%s{\"shortDesc\":\"%s\"}", f ? "" : ",", esc);
+			f = FALSE;
+		}
+	}
+	send_to_char(ch, "],\"items\":[");
+	{
+		struct obj_data* obj;
+		bool f = TRUE;
+		for (obj = world[IN_ROOM(ch)].contents; obj; obj = obj->next_content) {
+			if (!CAN_SEE_OBJ(ch, obj)) continue;
+			json_escape_string(obj->short_description ? obj->short_description : "",
+			                   esc, MAX_STRING_LENGTH);
+			send_to_char(ch, "%s{\"shortDesc\":\"%s\"}", f ? "" : ",", esc);
+			f = FALSE;
+		}
+	}
+	send_to_char(ch, "],\"exits\":[");
+	for (direction = 0; direction < NUM_OF_DIRS; direction++) {
+		struct room_direction_data* exit = EXIT(ch, direction);
+
+		if (exit == NULL) continue;
+		if (exit->to_room == NOWHERE) continue;
+		if (GET_LEVEL(ch) < LVL_IMMORT) {
+			if (EXIT_FLAGGED(exit, EX_NOPASS)) continue;
+			if (EXIT_FLAGGED(exit, EX_HIDDEN)) continue;
+			if (EXIT_FLAGGED(exit, EX_CLOSED) && EXIT_FLAGGED(exit, EX_SECRET)) continue;
+		}
+
+		send_to_char(ch, "%s{\"direction\":\"%s\"", first_exit ? "" : ",", dirs[direction]);
+		if (EXIT_FLAGGED(exit, EX_CLOSED)) send_to_char(ch, ",\"doorClosed\":true");
+		if (EXIT_FLAGGED(exit, EX_LOCKED)) send_to_char(ch, ",\"doorLocked\":true");
+		if (EXIT_FLAGGED(exit, EX_SECRET)) send_to_char(ch, ",\"doorSecret\":true");
+		if (EXIT_FLAGGED(exit, EX_HIDDEN)) send_to_char(ch, ",\"doorHidden\":true");
+		if (EXIT_FLAGGED(exit, EX_NOPASS)) send_to_char(ch, ",\"nopass\":true");
+		send_to_char(ch, "}");
+		first_exit = FALSE;
+	}
+	send_to_char(ch, "]}%c%c", IAC, SE);
+
+	release_buffer(esc);
+}
+
+/* Char.Who -- the who list as data. do_who's population and CAN_SEE gate;
+ * nothing here that the text screen hides. */
+void gmcp_char_who(struct char_data* ch) {
+	struct descriptor_data* d;
+	struct char_data* tch;
+	char* esc;
+	bool first = TRUE;
+
+	if (ch == NULL || IS_NPC(ch) || ch->desc == NULL) return;
+	if (!IS_SET(ch->desc->oob_protocol, OOB_GMCP)) return;
+	if (!IS_SET(ch->desc->oob_protocol, OOB_REPORT_WHO)) return;
+
+	esc = get_buffer(MAX_STRING_LENGTH);
+
+	send_to_char(ch, "%c%c%cChar.Who [", IAC, SB, GMCP);
+	for (d = descriptor_list; d; d = d->next) {
+		if (STATE(d) != CON_PLAYING) continue;
+		tch = d->original ? d->original : d->character;
+		if (tch == NULL) continue;
+		if (!CAN_SEE(ch, tch)) continue;
+
+		json_escape_string(GET_NAME(tch) ? GET_NAME(tch) : "", esc, MAX_STRING_LENGTH);
+		send_to_char(ch, "%s{\"name\":\"%s\",\"level\":%d,\"className\":\"%s\"",
+		             first ? "" : ",", esc, GET_LEVEL(tch), CLASS_ABBR(tch));
+		if (GET_CLAN(tch) > 0) {
+			json_escape_string(GET_CLAN_NAME(tch) ? GET_CLAN_NAME(tch) : "",
+			                   esc, MAX_STRING_LENGTH);
+			send_to_char(ch, ",\"clanName\":\"%s\"", esc);
+		}
+		send_to_char(ch, "}");
+		first = FALSE;
+	}
+	send_to_char(ch, "]%c%c", IAC, SE);
+
+	release_buffer(esc);
+}
+
 void look_at_room(struct char_data *ch, int ignore_brief)
 {
 	if (!ch->desc)

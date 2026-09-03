@@ -33,7 +33,8 @@
 #include "db.h" 
 #include "house.h" 
 #include "olc.h" 
-#include "ident.h" 
+#include "ident.h"
+#include "clan.h"   /* GET_CLAN, for the Comm.Channel.List clan gate */ 
 /** 2/24/97 , Anduin -- including screen for auction **/ 
 #include "screen.h" 
 #include "queue.h" 
@@ -981,6 +982,9 @@ void game_loop(int mother_desc)
 	     * frames in the same flush as the command's own output, which is also
 	     * when the inventory/equipment/affects actually changed. */
 	    gmcp_char_sidebar(d->character);
+	    /* RoomView only. Who is O(players^2) per command and Skills walks 206
+	     * rows; both fire from the edges that change them. */
+	    gmcp_char_roomview(d->character);
 	    } 
 	 }
       
@@ -1986,6 +1990,18 @@ int process_output(struct descriptor_data *t)
 
          sprintf(i + strlen(i), "}%c%c", IAC, SE);
       }
+
+      /* Char.Status: status-strip fields Char.Vitals does not carry.
+       * Separate package because clients already parse Vitals. Own token. */
+      if (IS_SET(t->oob_protocol, OOB_GMCP) && IS_SET(t->oob_protocol, OOB_REPORT_STATUS)) {
+         sprintf(i + strlen(i), "%c%c%cChar.Status {", IAC, SB, GMCP);
+         sprintf(i + strlen(i), "\"LEVEL\":%d,", GET_LEVEL(t->character));
+         sprintf(i + strlen(i), "\"AC\":%d,", GET_AC(t->character));
+         sprintf(i + strlen(i), "\"GOLD\":%d,", GET_GOLD(t->character));
+         sprintf(i + strlen(i), "\"ALIGNMENT\":%d,", GET_ALIGNMENT(t->character));
+         sprintf(i + strlen(i), "\"MUD_HOUR\":%d", time_info.hours);
+         sprintf(i + strlen(i), "}%c%c", IAC, SE);
+      }
    }
 
   /* 
@@ -2285,6 +2301,16 @@ void handle_gmcp_core_supports_set(struct descriptor_data* d, char* data) {
                SET_BIT(d->oob_protocol, OOB_REPORT_WORN);
             } else if (strcmp(string->string, "Char.Afflictions 1") == 0) {
                SET_BIT(d->oob_protocol, OOB_REPORT_AFF);
+            } else if (strcmp(string->string, "Char.Status 1") == 0) {
+               SET_BIT(d->oob_protocol, OOB_REPORT_STATUS);
+            } else if (strcmp(string->string, "Char.RoomView 1") == 0) {
+               SET_BIT(d->oob_protocol, OOB_REPORT_ROOMVIEW);
+            } else if (strcmp(string->string, "Char.Who 1") == 0) {
+               SET_BIT(d->oob_protocol, OOB_REPORT_WHO);
+            } else if (strcmp(string->string, "Char.Skills 1") == 0) {
+               SET_BIT(d->oob_protocol, OOB_REPORT_SKILLS);
+            } else if (strcmp(string->string, "Char.Combat 1") == 0) {
+               SET_BIT(d->oob_protocol, OOB_REPORT_COMBAT);
             }
          }
       }
@@ -2322,6 +2348,16 @@ void handle_gmcp_core_supports_add(struct descriptor_data* d, char* data) {
                SET_BIT(d->oob_protocol, OOB_REPORT_WORN);
             } else if (strcmp(string->string, "Char.Afflictions 1") == 0) {
                SET_BIT(d->oob_protocol, OOB_REPORT_AFF);
+            } else if (strcmp(string->string, "Char.Status 1") == 0) {
+               SET_BIT(d->oob_protocol, OOB_REPORT_STATUS);
+            } else if (strcmp(string->string, "Char.RoomView 1") == 0) {
+               SET_BIT(d->oob_protocol, OOB_REPORT_ROOMVIEW);
+            } else if (strcmp(string->string, "Char.Who 1") == 0) {
+               SET_BIT(d->oob_protocol, OOB_REPORT_WHO);
+            } else if (strcmp(string->string, "Char.Skills 1") == 0) {
+               SET_BIT(d->oob_protocol, OOB_REPORT_SKILLS);
+            } else if (strcmp(string->string, "Char.Combat 1") == 0) {
+               SET_BIT(d->oob_protocol, OOB_REPORT_COMBAT);
             }
          }
       }
@@ -2359,6 +2395,16 @@ void handle_gmcp_core_supports_remove(struct descriptor_data* d, char* data) {
                REMOVE_BIT(d->oob_protocol, OOB_REPORT_WORN);
             } else if (strcmp(string->string, "Char.Afflictions 1") == 0) {
                REMOVE_BIT(d->oob_protocol, OOB_REPORT_AFF);
+            } else if (strcmp(string->string, "Char.Status 1") == 0) {
+               REMOVE_BIT(d->oob_protocol, OOB_REPORT_STATUS);
+            } else if (strcmp(string->string, "Char.RoomView 1") == 0) {
+               REMOVE_BIT(d->oob_protocol, OOB_REPORT_ROOMVIEW);
+            } else if (strcmp(string->string, "Char.Who 1") == 0) {
+               REMOVE_BIT(d->oob_protocol, OOB_REPORT_WHO);
+            } else if (strcmp(string->string, "Char.Skills 1") == 0) {
+               REMOVE_BIT(d->oob_protocol, OOB_REPORT_SKILLS);
+            } else if (strcmp(string->string, "Char.Combat 1") == 0) {
+               REMOVE_BIT(d->oob_protocol, OOB_REPORT_COMBAT);
             }
          }
       }
@@ -2402,6 +2448,123 @@ void json_escape_string(const char* in, char* out, size_t out_size) {
    }
 
    out[o] = '\0';
+}
+
+/* Push Char.Who to every subscriber. Called on enter-game and close_socket
+ * only: the list walks every player, so per command it is O(players^2). */
+void gmcp_who_broadcast(void) {
+   struct descriptor_data* d;
+
+   for (d = descriptor_list; d; d = d->next) {
+      if (STATE(d) != CON_PLAYING) continue;
+      if (d->character == NULL) continue;
+      gmcp_char_who(d->character);
+   }
+}
+
+/* Char.Combat -- one frame per combat event. Event-driven, not state on a
+ * prompt. `s` orders and de-duplicates across a reconnect.
+ *
+ * Participants only, and only one that negotiated the token.
+ *
+ * vhp is a PERCENTAGE, not the pool: a bar needs the fraction, and the
+ * absolute would expose a mob's stat block. */
+static long gmcp_combat_seq = 0;
+
+void gmcp_combat_event(struct char_data* ch, struct char_data* victim,
+                       const char* kind, int amt, const char* cause) {
+   struct char_data* side[2];
+   char* esc_a;
+   char* esc_v;
+   int i;
+   int vhp = -1;
+
+   if (ch == NULL || victim == NULL) return;
+   if (ch->desc == NULL && victim->desc == NULL) return;   /* nobody to tell */
+
+   gmcp_combat_seq++;
+
+   if (GET_MAX_HIT(victim) > 0) {
+      vhp = (GET_HIT(victim) * 100) / GET_MAX_HIT(victim);
+      if (vhp < 0) vhp = 0;
+      if (vhp > 100) vhp = 100;
+   }
+
+   esc_a = get_buffer(MAX_STRING_LENGTH);
+   esc_v = get_buffer(MAX_STRING_LENGTH);
+   json_escape_string(GET_NAME(ch) ? GET_NAME(ch) : "", esc_a, MAX_STRING_LENGTH);
+   json_escape_string(GET_NAME(victim) ? GET_NAME(victim) : "", esc_v, MAX_STRING_LENGTH);
+
+   side[0] = ch;
+   side[1] = victim;
+   for (i = 0; i < 2; i++) {
+      struct descriptor_data* d;
+
+      if (side[i] == NULL || IS_NPC(side[i])) continue;
+      d = side[i]->desc;
+      if (d == NULL) continue;
+      if (!IS_SET(d->oob_protocol, OOB_GMCP)) continue;
+      if (!IS_SET(d->oob_protocol, OOB_REPORT_COMBAT)) continue;
+      if (i == 1 && victim == ch) continue;   /* self-inflicted: one frame */
+
+      SEND_TO_Q(d, "%c%c%cChar.Combat {", IAC, SB, GMCP);
+      SEND_TO_Q(d, "\"s\":%ld,", gmcp_combat_seq);
+      SEND_TO_Q(d, "\"k\":\"%s\",", kind);
+      SEND_TO_Q(d, "\"a\":{\"id\":\"%ld\",\"n\":\"%s\"},",
+                (long)GET_ID(ch), esc_a);
+      SEND_TO_Q(d, "\"v\":{\"id\":\"%ld\",\"n\":\"%s\"},",
+                (long)GET_ID(victim), esc_v);
+      SEND_TO_Q(d, "\"amt\":%d,", amt);
+      if (vhp >= 0) SEND_TO_Q(d, "\"vhp\":%d,", vhp);
+      SEND_TO_Q(d, "\"c\":\"%s\"", cause);
+      SEND_TO_Q(d, "}%c%c", IAC, SE);
+   }
+
+   release_buffer(esc_a);
+   release_buffer(esc_v);
+}
+
+/* Comm.Channel.List -- channels this character has, in tab order, with mute
+ * state. Rides the "Comm 1" opt-in.
+ *
+ * The gates here decide the TAB. wiznet still narrows per message by #level. */
+void gmcp_comm_channel_list(struct char_data* ch) {
+   struct descriptor_data* d;
+   int first = 1;
+
+   if (ch == NULL || IS_NPC(ch)) return;
+   d = ch->desc;
+   if (d == NULL) return;
+   if (!IS_SET(d->oob_protocol, OOB_GMCP)) return;
+   if (!IS_SET(d->oob_protocol, OOB_REPORT_COMM)) return;
+
+#define CHAN(id, label, avail, muted)                                        \
+   do {                                                                      \
+      if (avail) {                                                           \
+         SEND_TO_Q(d, "%s{\"id\":\"%s\",\"label\":\"%s\",\"muted\":%s}",           \
+                   first ? "" : ",", id, label, (muted) ? "true" : "false"); \
+         first = 0;                                                          \
+      }                                                                      \
+   } while (0)
+
+   SEND_TO_Q(d, "%c%c%cComm.Channel.List [", IAC, SB, GMCP);
+   CHAN("gossip", "Gossip", 1, PRF_FLAGGED(ch, PRF_NOGOSS));
+   CHAN("ooc",    "OOC",    1, PRF2_FLAGGED(ch, PRF2_NOOOC));
+   CHAN("shout",  "Shout",  1, PRF_FLAGGED(ch, PRF_DEAF));
+   CHAN("grats",  "Grats",  1, PRF_FLAGGED(ch, PRF_NOGRATZ));
+   CHAN("holler", "Holler", 1, 0);
+   CHAN("music",  "Music",  1, PRF2_FLAGGED(ch, PRF2_NOMUSIC));
+   CHAN("auction","Auction",1, PRF_FLAGGED(ch, PRF_NOAUCT));
+   CHAN("tell",   "Tells",  1, 0);
+   CHAN("gtell",  "Group",  1, 0);
+   CHAN("clan",   "Clan",   GET_CLAN(ch) > 0, PRF2_FLAGGED(ch, PRF2_NOCSAY));
+   CHAN("remortnet", "Remort",
+        GET_LEVEL(ch) >= LVL_HERO || REMORT_LEVEL(ch) > 0,
+        PRF2_FLAGGED(ch, PRF2_NOREMO));
+   CHAN("wiznet", "Wiznet", GET_LEVEL(ch) >= LVL_IMMORT, PRF_FLAGGED(ch, PRF_NOWIZ));
+   SEND_TO_Q(d, "]%c%c", IAC, SE);
+
+#undef CHAN
 }
 
 /* One frame per channel line delivered, so a client can route chat into its
@@ -2471,6 +2634,53 @@ const char *gmcp_wear_names[] = {
  * flags, a grouped view) that have no analogue here; the client reads only the
  * common subset, so their absence is not a difference it can see.
  */
+extern struct spell_info_type *spells;
+int find_race_skill(int race, int spell_num);
+
+/* A hand slot the character can never fill: handless race, no free hand, a
+ * mortal monk's wield/shield (bare hands, act.item.c:2435), the off-hand wield
+ * without a one-handed primary and dual wield, the second held slot before the
+ * first is in use.
+ *
+ * The engine does not FILTER on this. Every slot ships either way and the
+ * judgement rides along as `hideIfEmpty`, so the two engines report the same
+ * slot set for the same character and a renderer decides. */
+static int gmcp_hide_if_empty(struct char_data* ch, int pos)
+{
+   int hands_used = 0, i;
+   static const int hand_pos[] = { WEAR_SHIELD, WEAR_WIELD_1, WEAR_WIELD_2,
+                                   WEAR_HOLD_1, WEAR_HOLD_2 };
+
+   for (i = 0; i < 5; i++) {
+      if (!GET_EQ(ch, hand_pos[i]))
+         continue;
+      hands_used += ((hand_pos[i] == WEAR_WIELD_1 || hand_pos[i] == WEAR_WIELD_2)
+                     && TWO_HANDED(GET_EQ(ch, hand_pos[i]))) ? 2 : 1;
+   }
+
+   if (!trait_info[(int) GET_RACE(ch)].has_hands || hands_used >= 2)
+      return TRUE;
+
+   switch (pos) {
+   case WEAR_WIELD_1:
+   case WEAR_SHIELD:
+      return IS_MONK(ch) && GET_LEVEL(ch) < LVL_IMMORT;
+   case WEAR_WIELD_2:
+      if (IS_MONK(ch) && GET_LEVEL(ch) < LVL_IMMORT)
+         return TRUE;
+      if (!GET_EQ(ch, WEAR_WIELD_1) || TWO_HANDED(GET_EQ(ch, WEAR_WIELD_1)))
+         return TRUE;
+      /* "could EVER learn it", not "knows it": the slot is class/race gated,
+       * not level gated, so a young warrior still sees it. */
+      return spells[SKILL_DUAL_WIELD].min_level[(int) GET_CLASS(ch)] > LVL_IMPL
+          && find_race_skill(GET_RACE(ch), SKILL_DUAL_WIELD) > LVL_IMPL;
+   case WEAR_HOLD_2:
+      return !GET_EQ(ch, WEAR_HOLD_1);
+   default:
+      return FALSE;
+   }
+}
+
 void gmcp_char_sidebar(struct char_data* ch) {
    struct descriptor_data* d;
    struct obj_data* obj;
@@ -2529,7 +2739,10 @@ void gmcp_char_sidebar(struct char_data* ch) {
                strcpy(esc, "Something.");
             SEND_TO_Q(d, "{\"shortDesc\":\"%s\"}}", esc);
          } else {
-            SEND_TO_Q(d, "null}");
+            SEND_TO_Q(d, "null");
+            if (gmcp_hide_if_empty(ch, pos))
+               SEND_TO_Q(d, ",\"hideIfEmpty\":true");
+            SEND_TO_Q(d, "}");
          }
       }
       SEND_TO_Q(d, "]}%c%c", IAC, SE);
@@ -3154,6 +3367,10 @@ void close_socket(struct descriptor_data *d)
    REMOVE_FROM_LIST(d,descriptor_list,next);
    CLOSE_SOCKET(d->descriptor); 
    flush_queues(d); 
+
+   /* Who changed. After the removal above, so the leaver is off the list. */
+   gmcp_who_broadcast();
+
  
    if (d->ident_sock != -1) 
       CLOSE_SOCKET(d->ident_sock); 

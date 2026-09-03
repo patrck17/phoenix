@@ -16,7 +16,8 @@
 #include "structs.h" 
 #include "buffer.h"
 #include "utils.h" 
-#include "comm.h" 
+#include "comm.h"
+#include <arpa/telnet.h>   /* IAC/SB/SE, for the Char.Combat heal frame */ 
 #include "spells.h" 
 #include "handler.h" 
 #include "db.h" 
@@ -2141,6 +2142,12 @@ void mag_points(int level, struct char_data * ch, struct char_data * victim,
    GET_HIT(victim) = MIN(GET_MAX_HIT(victim), GET_HIT(victim) + hitp); 
    GET_MOVE(victim) = MIN(GET_MAX_MOVE(victim), GET_MOVE(victim) + move); 
    GET_MANA(victim) = MIN(GET_MAX_MANA(victim), GET_MANA(victim) + energy); 
+
+   /* What was RESTORED, not what was rolled: old_hit is captured above, so a
+    * heal into a full bar reports nothing. */
+   if (GET_HIT(victim) != old_hit)
+      gmcp_combat_event(ch, victim, "heal", GET_HIT(victim) - old_hit, "spell");
+
    if(hitp>0)
       if((savetype==SAVING_SPELL)&&FIGHTING(ch))
 	 gain_exp(ch,(GET_HIT(victim)-old_hit)*4);

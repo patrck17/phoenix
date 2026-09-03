@@ -16,6 +16,7 @@
 #include "buffer.h"
 #include "utils.h"
 #include "comm.h"
+#include <arpa/telnet.h>   /* IAC/SB/SE, for the Char.Combat frames */
 #include "handler.h"
 #include "interpreter.h"
 #include "db.h"
@@ -2909,6 +2910,10 @@ int damage(struct char_data * ch, struct char_data * victim, int dam,
    /*    log("%-20.20s did %5d dam to %s",GET_NAME(ch),dam,GET_NAME(victim)); */
    GET_HIT(victim) -= dam;
 
+   /* APPLIED amount, after the clamp above. Zero is a miss. */
+   gmcp_combat_event(ch, victim, dam > 0 ? "dam" : "miss", dam,
+                     attacktype == TYPE_HIT ? "melee" : "skill");
+
    if((ch != victim) &&(dam>0) && (!(PLR_FLAGGED(ch, PLR_PK) && PLR_FLAGGED(victim, PLR_PK) &&
       abs(GET_LEVEL(ch)-GET_LEVEL(victim))<=10))) {
       int exp_after_lim = 0;
@@ -3214,6 +3219,8 @@ int damage(struct char_data * ch, struct char_data * victim, int dam,
       **           GET_NAME(ch),GET_NAME(victim),GET_ROOM_VNUM(IN_ROOM(ch)));
       */
       if (!getOutOfDeathFree) {
+	/* Before die(), while the victim's descriptor is still attached. */
+	gmcp_combat_event(ch, victim, "death", 0, "kill");
 	die(victim,ch);
       }
 

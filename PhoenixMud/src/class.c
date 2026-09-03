@@ -1298,7 +1298,10 @@ void advance_level(struct char_data * ch, bool show)
     mudlogf(BRF, MAX(LVL_IMMORT, GET_INVIS_LEV(ch)), TRUE,
             "Levels: %s has advanced to level %d.", GET_NAME(ch),GET_LEVEL(ch));
     }
-  }
+  
+   /* A level can unlock rows. */
+   gmcp_char_skills(ch);
+}
 
 
 /*
