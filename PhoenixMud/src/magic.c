@@ -170,6 +170,7 @@ int is_combat_buff(int spellnum)
 {
    switch (spellnum)
       {
+      case SPELL_ZEAL:                  /* 206 activity reward */
       case SPELL_ARMOR:                 /* 1   */
       case SPELL_BLESS:                 /* 3   */
       case SPELL_PROT_FROM_EVIL:        /* 34  ward evil  */
@@ -954,6 +955,24 @@ void mag_affects(int level, struct char_data * ch, struct char_data * victim,
 	  to_room = "$n begins to move so fast that $e blurs!!"; 
 	  break; 
  
+       case SPELL_ZEAL:
+          /*
+           * Duration is fixed, not level-scaled: the potion is earned for
+           * playing rather than bought or cast, so the reward must not read
+           * differently to a level 5 and a level 100. 60 ticks is 1.25 hours
+           * of actual combat -- it is combat-denominated (is_combat_buff), so
+           * a character who logs off holding it still has it.
+           *
+           * No location or modifier. The experience bonus is read off the
+           * affect's PRESENCE in gain_exp, so there is no stat for a display
+           * to show and nothing for score to double-count.
+           */
+          af[0].duration = ZEAL_COMBAT_TICKS;
+          accum_duration = FALSE;
+          to_vict = "Fervour takes you. Your victories will teach you more.";
+          to_room = "$n burns with a quiet fervour.";
+          break;
+
        case SPELL_FERN:
           if (GET_LEVEL(ch) >= LVL_GRGOD)
              {
