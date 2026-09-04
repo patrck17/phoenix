@@ -17,6 +17,13 @@ void	affect_remove(struct char_data *ch, struct affected_type *af);
 void    affect_remove_all(struct char_data *ch);
 void	affect_from_char(struct char_data *ch, int type);
 bool	affected_by_spell(struct char_data *ch, int type);
+/*
+ * Declared because magic.c calls it. Without this the compiler assumes a
+ * function returning int, and the returned pointer survives only because the
+ * build is -m32 and int and pointer are both 32 bits there. It would truncate
+ * on any 64-bit build.
+ */
+struct affected_type* get_affected_by_spell(struct char_data *ch, int type);
 void	affect_join(struct char_data *ch, struct affected_type *af,
 		    bool add_dur, bool avg_dur, bool add_mod, bool avg_mod);
 
