@@ -255,28 +255,6 @@
 #define SKILL_ROVE                   203
 #define SKILL_PECK                   204
 #define SKILL_GUARD                  205
-/*
- * ZEAL (4.2) -- the activity-reward affect. Not castable by anything: no
- * class table lists it and no guild teaches it. It arrives by quaffing a
- * potion, and grants a flat experience bonus for its duration.
- *
- * 206 is the LAST id at or below MAX_SPELLS. spelledit's loader exits on
- * nr > MAX_SPELLS, and spells and skills share one id space (top used was
- * 205), so this is the only free slot that loads. Adding another needs
- * MAX_SPELLS raised, which widens the listing loops in act.informative.c
- * and act.other.c -- output-neutral but bench-visible, so it is a change
- * to make deliberately rather than in passing.
- */
-#define SPELL_ZEAL                   206
-
-/*
- * How long a quaffed zeal lasts, in COMBAT ticks (is_combat_buff), and what
- * it multiplies experience by. Here rather than in magic.c because gain_exp
- * (limits.c) reads the bonus and mag_affects reads the duration.
- */
-#define ZEAL_COMBAT_TICKS            60
-#define ZEAL_EXP_BONUS               1.10f
-
 #define MAX_SPELLS                   206
 
 #define TOP_SPELL_DEFINE	     600
