@@ -371,20 +371,6 @@ void gain_exp(struct char_data * ch, long gain)
         multiplier *= 4;
       }
 
-      /*
-       * ZEAL (4.2): the activity-reward potion. Multiplicative with the
-       * class/race multipliers rather than added after, so it is worth the
-       * same PROPORTION to every class -- a flat addition would be worth
-       * least to exactly the classes that already gain slowest.
-       *
-       * Inside the (level < LVL_IMMORT && gain > 0) arm on purpose: it can
-       * never soften a loss, and staff do not earn progression.
-       */
-      if (affected_by_spell(ch, SPELL_ZEAL))
-      {
-        multiplier *= ZEAL_EXP_BONUS;
-      }
-
       if (gain > 0)
          {
          if(GET_LEVEL(ch)<16)
